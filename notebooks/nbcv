@@ -1,0 +1,221 @@
+#!/usr/bin/env python
+
+import subprocess
+import os
+import argparse
+import re
+import tempfile
+import socket
+from flask import Flask, request, send_from_directory
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--slides", action="store_true", default=False, help="Convert to slides."
+)
+parser.add_argument(
+    "--file", dest="file_name", type=str, help="Name of the jupyter notebook."
+)
+parser.add_argument("--bib", dest="bib_name", type=str, help="Name of the bibtex file.")
+parser.add_argument(
+    "-c", action="store_false", help="Skip cleanup and convert to html.", default=True
+)
+parser.add_argument(
+    "-l", action="store_true", help="Keep the citation label.", default=False
+)
+parser.add_argument(
+    "-r", action="store_true", help="Serve the file on a local server.", default=False
+)
+parser.add_argument(
+    "-o", action="store_true", help="Open the file in a browser.", default=False
+)
+
+parser.add_argument(
+    "--reveal-prefix",
+    dest="reveal_prefix",
+    type=str,
+    help="reveal.js prefix.",
+    default="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0",
+)
+
+args = parser.parse_args()
+
+static_path = "./"
+
+
+def clean_html(html_file):
+    """Remove unnecessary tags from slides."""
+    clean_file = (
+        html_file.replace("<section><section><image>", "")
+        .replace("</image></section></section>", "")
+        .replace("</image><image></section>", "")
+    )
+    return clean_file
+
+
+def add_ref(doc_name, bib_name, keep_label=False, slides=False):
+    """Add citation at the end of the html notebook or at the bottom
+     of the current slide."""
+    bib_path = bib_name  # os.path.join(static_path, "tex", bib_name)
+    if not slides:
+        keep_label = True
+    with open(doc_name, "r") as f:
+        _file = f.read()
+    # find citations
+    match = re.findall(r"\[@.*?\]", _file)
+    references = []
+    for cit in match:
+        tmp_cite_html = tempfile.NamedTemporaryFile(suffix=".html", delete=True)
+        tmp = tempfile.NamedTemporaryFile(suffix=".md", delete=True)
+        with open(tmp.name, "w") as md_file:
+            # Open the file for writing.
+            md_file.write(cit)
+
+        pandoc_command = [
+            "pandoc",
+            "--filter",
+            "pandoc-citeproc",
+            tmp.name,
+            "--bibliography",
+            bib_path,
+            "-o",
+            tmp_cite_html.name,
+        ]
+        if not slides:
+            for tag in ["--metadata", "link-citations=true"]:
+                pandoc_command.append(tag)
+        output = subprocess.check_output(
+            pandoc_command, stderr=subprocess.STDOUT
+        ).decode("utf-8")
+        print(output.rstrip())
+        tmp.close()
+        with open(tmp_cite_html.name, "r") as cite_html:
+            # Open the file for writing.
+            cit_new = cite_html.read()
+            if not keep_label:
+                # remove first line
+                cit_new = "\n".join(cit_new.splitlines()[1:])
+            else:
+                lines = cit_new.splitlines()
+                # remove the <p> tags
+                lines[0] = lines[0][3:-4]
+                cit_new = "\n".join(lines)
+            if slides:
+                _file = _file.replace(cit, cit_new)
+            else:
+                _file = _file.replace(cit, lines[0])
+                # collect the references
+                references.append("<p>")
+                references.append("\n".join(lines))
+                references.append("</p>")
+                # paste_refs_end()
+        tmp_cite_html.close()
+        if slides:
+            with open(doc_name, "w") as f:
+                f.write(_file)
+    if not slides:
+        _file = _file.replace("<bibliography-placeholder>", "\n".join(references))
+        with open(doc_name, "w") as f:
+            f.write(_file)
+    return
+
+
+def main_convert(args):
+    """Convert the notebook to slides and then do some cleaning."""
+    try:
+        file_path = args.file_name  # os.path.join(static_path, args.file_name)
+        if args.slides:
+            config_path = os.path.join(static_path, "config", "slides_config.py")
+            output = subprocess.check_output(
+                [
+                    "jupyter",
+                    "nbconvert",
+                    file_path,
+                    "--to",
+                    "slides",
+                    "--reveal-prefix",
+                    args.reveal_prefix,
+                    "--config",
+                    config_path,
+                ],
+                stderr=subprocess.STDOUT,
+            ).decode("utf-8")
+        else:
+            config_path = os.path.join(static_path, "config", "nb_config.py")
+            output = subprocess.check_output(
+                ["jupyter", "nbconvert", file_path, "--config", config_path],
+                stderr=subprocess.STDOUT,
+            ).decode("utf-8")
+        print(output.rstrip())
+        _name = output.split(" ")[-1].rstrip()
+        if args.c:
+            with open(_name, "r") as f:
+                clean_file = clean_html(f.read())
+            with open(_name, "w") as f:
+                f.write(clean_file)
+        if args.bib_name is not None:
+            add_ref(_name, args.bib_name, keep_label=args.l, slides=args.slides)
+    except IndexError:
+        print("Provide the name of the notebook.")
+
+
+app = Flask(__name__, static_folder="./")
+
+
+@app.route("/<path:path>")
+def serve_page(path):
+    return send_from_directory("./", path)
+
+
+def get_out_name(args):
+    nb_name = args.file_name.split("/")[-1]
+    if args.slides:
+        _name = nb_name.split(".")[0] + ".slides.html"
+    else:
+        _name = nb_name.split(".")[0] + ".html"
+    return _name
+
+
+@app.route("/")
+def main():
+    """Adjust the name if you rename the jupyter notebook."""
+    _name = get_out_name(args)
+    return app.send_static_file(_name)
+
+
+def find_free_port():
+    s = socket.socket()
+    s.bind(("", 0))  # Bind to a free port provided by the host.
+    return s.getsockname()[1]  # Return the port number assigned.
+
+
+os.environ["BROWSER"] = "google-chrome-stable"
+# host = "127.0.0.1"
+port = find_free_port()
+host = "0.0.0.0"
+url = "http://" + host + ":{0}".format(port)
+
+
+def open_browser(url):
+    print("Opening browser")
+    # command = os.environ["BROWSER"] + " --incognito --app={0}".format(url)
+    command = "firefox --new-window {0}".format(url)
+    subprocess.call(command, shell=True)
+    return
+
+
+import threading
+
+if __name__ == "__main__":
+    path0 = os.path.dirname(os.path.abspath(args.file_name))
+    print(os.path.abspath(args.file_name))
+    if args.c:
+        main_convert(args)
+        print("Successfull conversion.")
+    if args.r:
+        if args.o:
+            threading.Timer(0.5, lambda: open_browser(url)).start()
+        app.run(host=host, port=port, debug=False)
+    else:
+        if args.o:
+            url = os.path.join(path0, get_out_name(args))
+            open_browser(url)

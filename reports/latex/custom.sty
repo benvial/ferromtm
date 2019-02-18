@@ -1,0 +1,424 @@
+
+
+\PassOptionsToPackage{dvipsnames,cmyk}{xcolor}
+\usepackage{xcolor} % [dvipsnames]
+
+
+\definecolor{designcolor1}{HTML}{1a428a}  %%% frame title and rule
+\definecolor{designcolor2}{HTML}{F1B33C}
+\definecolor{designcolor3}{HTML}{000000}  %%% normal text
+\definecolor{designcolor4}{HTML}{c70151}
+\definecolor{designcolor5}{HTML}{888888}
+\definecolor{designcolor6}{HTML}{1E1E1E}
+
+
+
+
+\usepackage[english]{babel}
+\usepackage{lipsum} %%% dummy text
+
+\usepackage{graphicx}
+\graphicspath{ {img/} }
+
+\usepackage{multicol} %%  columns
+\setlength\columnsep{2em}
+\usepackage[absolute,showboxes,overlay]{textpos}  %% textblocks
+
+\TPshowboxestrue
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{authoraftertitle}
+\usepackage{authblk}
+
+
+\DeclareCaptionLabelSeparator{bar}{ | }
+\DeclareCaptionFont{captionlabelfont}{\headingfont}
+\DeclareCaptionFont{captionfont}{\bodyfont}
+\captionsetup{singlelinecheck=on,justification=justified,  format=plain,
+labelfont={color=designcolor1,captionlabelfont},
+font = {captionfont, small},labelsep=bar,
+}
+
+%%%%%%%%   pgfplots and tikz for awesome drawings %%%%%%%%%%%
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\pgfplotsset{plot coordinates/math parser=false}
+\usepgfplotslibrary{patchplots}
+\usepackage{tikz}
+\usetikzlibrary{%
+decorations.pathreplacing,%
+decorations.pathmorphing,%
+shapes%
+}
+
+
+\usepackage{siunitx}
+\sisetup{inter-unit-product = \ensuremath { { } \cdot { } },exponent-product = \times}
+
+
+%% FOR figure BOXES
+\fboxsep=0pt%padding thickness
+\fboxrule=2pt%border thickness
+
+
+%%%%%%%%   Fonts %%%%%%%%%%%
+\usepackage[math]{iwona}% math font
+\usepackage[no-math]{fontspec}
+% \fontspec [ Path = fonts/]
+\usepackage{xunicode} %Unicode extras!
+\usepackage[no-sscript]{xltxtra}  %Fixes
+\usepackage{fontawesome}
+
+\usepackage{geometry}
+\geometry{left=1.6cm,top=1.6cm,right=1.6cm,bottom=2.cm}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newfontfamily\bodyfont[Path = ./fonts/, Ligatures=TeX,Scale=1]{OpenSans-Regular}
+\newfontfamily\headingfont[Path = ./fonts/, Ligatures=TeX,Scale=1]{Oswald-SemiBold}
+\newfontfamily\semiboldfont[Path = ./fonts/, Ligatures=TeX,Scale=1]{Oswald-Regular}
+% \newfontfamily\condensedfont[Path = ./fonts/, Ligatures=TeX,Scale=1]{Oswald-Regular}
+
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[Path = ./fonts/, Mapping=tex-text, Color=textcolor,Ligatures=TeX,
+BoldFont =OpenSans-Bold,
+ItalicFont = OpenSans-Italic,
+BoldItalicFont = OpenSans-BoldItalic,
+Scale=1]{OpenSans-Regular}
+
+
+
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ic}{i}
+
+\newcommand*\conj[1]{
+\vbox{
+\hrule height 0.3pt
+\kern0.5ex
+\hbox{
+\kern-0.4em
+\ifmmode#1\else\ensuremath{#1}\fi
+\kern-0.em
+}
+}
+}
+
+
+\renewcommand{\B}{\boldsymbol}
+\newcommand{\tens}[1]{\B{#1}}
+\newcommand{\re}{\mathrm{Re}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\curl}{\B{\mathrm{\nabla\times}}}
+\newcommand{\grad}{\B{\mathrm{grad}}}
+\renewcommand{\div}{\B{\mathrm{\nabla\cdotp}}}
+\newcommand{\ddroit}{\mathrm{d}}
+\newcommand{\bra}{\ensuremath{\left\langle}}
+\newcommand{\ket}{\ensuremath{\right\rangle}}
+\newcommand{\mb}{\ensuremath{\,\middle| \,}}
+\newcommand\abs[1]{\left|#1\right|}
+\newcommand{\fig}[1]{Fig.~(\ref{#1})}
+\newcommand{\equ}[1]{Eq.~(\ref{#1})}
+
+
+
+%%%   biblio, biblatex, biber   %%%%%%%%%%%%%%
+%
+\usepackage{csquotes}
+
+%%%%%%%%%%%%%%%%
+% Title %
+%%%%%%%%%%%%%%%%
+
+
+\renewcommand\Affilfont{\color{designcolor3}\semiboldfont \large }
+\renewcommand\Authfont{\color{designcolor4} \semiboldfont \Large  }
+\renewcommand\Authands{ and }
+
+\makeatletter
+    \def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\color{designcolor1} \semiboldfont\Huge \bfseries  \@title \par}%
+    \vskip 1.5em%
+    {
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+         \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    % \semiboldfont \small  \@affil \par
+    {\semiboldfont \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
+\makeatletter
+\newcommand*{\authors}{%
+  \begingroup
+    \let\footnote\@gobble% ignore \footnote
+    \let\textsuperscript\@gobble% ignore protected \textsuperscript
+    \expandafter\let\csname textsuperscript \endcsname\@gobble
+    \let\Authfont\relax% do not use a special font
+    % \def\Authand{, }% separate list of authors by ,
+    \ifnum\value{authors}<3 % one ore two authors
+      \AB@authlist% show them all
+    \else% 3 or more authors
+      % show only the first one followed by "et.~al"
+      \expandafter\@firstof@authlist\AB@authlist\@nil\ et.~al%
+    \fi
+  \endgroup
+}
+\def\@firstof@authlist#1\footnote#2\@nil{#1}% skip all from the first footnote
+\makeatother
+
+
+%%%%%%%%%%%%%%%%
+% Abstract %
+%%%%%%%%%%%%%%%%
+\providecommand\abstractname{Abstract}
+\def\abstract{}
+\def\endabstract{}
+\renewenvironment{abstract}{%
+  \centering\small
+  % \noindent \itshape
+  \textbf\abstractname
+  \itshape
+  \list{}{\leftmargin2cm \rightmargin\leftmargin}
+  \item\relax
+}{%
+  \endlist \par\bigskip
+}
+
+
+
+
+%%%%%%%%%%%%%%%%
+% Bibliography %
+%%%%%%%%%%%%%%%%
+
+\RequirePackage{keyval}
+\RequirePackage[maxnames=1, sorting=chronological, backend=biber, giveninits]{biblatex}%defernumbers=true ,
+
+
+\DeclareFieldFormat[article]{title}{#1 \addperiod\space}
+\DeclareFieldFormat[book]{title}{#1 \addperiod\space}
+\DeclareFieldFormat[inproceedings]{title}{#1 \addperiod\space}
+\DeclareFieldFormat[misc]{title}{#1 \addperiod\space}
+\DeclareFieldFormat[report]{title}{#1 \addperiod\space}
+
+
+
+\DeclareBibliographyDriver{article}{%
+    \printnames{author}%
+    \addperiod\space
+  % \newblock%
+  % \itshape\printfield{title}%
+  \newblock%
+  {%
+    \addfontfeature{Color=designcolor3}\itshape%
+    \usebibmacro{journal+issuetitle}%
+    \setunit{\space}%
+    \printfield{pages}%
+  }
+  \par\vspace{-0.3\baselineskip}
+}
+
+
+\DeclareBibliographyDriver{book}{%
+    \printnames{author}%
+    \addperiod\space
+  \newblock%
+  \itshape\printfield{title}%
+  \newblock%
+  {%
+    \addfontfeature{Color=designcolor3}\itshape%
+    \printlist{publisher}%
+    \setunit*{\addcomma\space}%
+    \printfield{note}%
+    \setunit*{\addcomma\space}%
+    \printfield{year}%
+    \setunit{\addcomma\space}%
+    \printlist{location}%
+%     \newunit%
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+
+\DeclareBibliographyDriver{inproceedings}{%
+    \printnames{author}%
+    \addperiod\space
+  \newblock%
+  \itshape\printfield{title}%
+  \newblock%
+  {%
+   \addfontfeature{Color=designcolor3}%
+    \printfield{booktitle}%
+    \setunit{\addcomma\space}%
+    \printfield{year}%
+    \setunit{\addcomma\space}%
+    \printlist{location}%
+    %\newunit%
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+\DeclareBibliographyDriver{misc}{%
+  \printnames{author}%
+    \addperiod\space
+  \newblock%
+  \itshape\printfield{title}%
+  \newblock%
+  {%
+    \addfontfeature{Color=designcolor3}\itshape%
+    \printfield{booktitle}%
+    \setunit*{\addcomma\space}%
+    \printfield{note}%
+    \setunit*{\addcomma\space}%
+    \printfield{year}%
+    \setunit{\addcomma\space}%
+    \printlist{location}%
+%     \newunit%
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+\DeclareBibliographyDriver{report}{%
+  \printnames{author}%
+    \addperiod\space
+  \newblock%
+  \itshape\printfield{title}%
+  \newblock%
+  {%
+   \addfontfeature{Color=designcolor3}\itshape%
+    \printfield{type}%
+    \setunit{\space}%
+    \printfield{number}%
+    \setunit{\addcomma\space}%
+    \printfield{year}%
+%     \newunit%
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+
+
+\DeclareSortingScheme{chronological}{
+  \sort[direction=descending]{\field{year}}
+  \sort[direction=descending]{\field{month}}
+}
+
+
+\newcommand{\printbibsection}[2]{
+  \begin{refsection}
+    \nocite{*}
+    \printbibliography[type={#1}, title={#2}, heading=subbibliography]
+  \end{refsection}
+}
+
+
+\usepackage[titletoc,title]{appendix}
+
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+\fancyhf{}%
+\fancyfoot[r]{\color{designcolor5}\footnotesize \thepage\ / \pageref{LastPage}}%
+\fancyfoot[l]{\color{designcolor5}\footnotesize \authors, {\itshape \MyTitle}.}
+
+
+\fancypagestyle{plain}{%
+\fancyfoot[r]{\color{designcolor5}\footnotesize \thepage\ / \pageref{LastPage}}%
+\fancyfoot[l]{\color{designcolor5}\footnotesize \authors, {\itshape \MyTitle}.}
+}
+
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setcounter{tocdepth}{1}
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{\vspace*{2em}}
+\makeatother
+
+\addto\captionsenglishbb{% Replace "english" with the language you use
+\renewcommand{\contentsname}%
+{}%
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+% List environment %
+%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\tabcolsep}{0pt}
+\newenvironment{entrylist}{
+\noindent
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+}{%
+\end{tabular*}
+}
+
+\newcommand{\entry}[4]{%
+\parbox[t]{2cm}{#1\hfill}&\parbox[t]{15.5cm}{%
+\textbf{#2}%
+\hfill%
+{\color{designcolor5}\footnotesize #3}\\%
+#4\vspace{\parsep}%
+}\\}
+
+\newcommand{\lrentry}[2]{%
+\parbox[t]{7cm}{#1\hfill}&\parbox[t]{10cm}{%
+#2
+\hfill%
+}\\}
+
+\newcommand{\lrentryequal}[2]{%
+\parbox[t]{8.5cm}{#1\hfill}&\parbox[t]{8.5cm}{%
+#2
+\hfill%
+}\\}
+
+
+\usepackage{titlesec}
+
+\titleformat*{\section}{\Large\semiboldfont\color{designcolor1}}
+\titleformat*{\subsection}{\semiboldfont\large\bfseries\color{designcolor4}}
+
+\titlespacing{\section}{0pt}{10pt}{10pt}
+\titlespacing{\subsection}{0pt}{8pt}{3pt}
+
+
+\RequirePackage[unicode]{hyperref}% unicode is required for unicode pdf metadata
+
+\def\FileSubject{Article}
+\def\FileAuthor{}
+\def\FileTitle{}
+
+\hypersetup{
+breaklinks,
+baseurl       = http://,
+pdfborder     = 0 0 0,
+pdfpagemode   = UseNone,% do not show thumbnails or bookmarks on opening
+pdfstartpage  = 1,
+   % pdfproducer   = {\LaTeX{}},% will/should be set automatically to the correct TeX engine used
+bookmarksopen = true,
+bookmarksdepth= 2,% to show sections and subsections
+pdfauthor   = {\FileAuthor},%
+pdftitle    = {\FileTitle},%
+pdfsubject  = {\FileSubject},%
+% pdfkeywords = {\FileKeyWords},%
+% pdfcreator  = {\LaTeX},%
+% pdfproducer = {\LaTeX}
+}
