@@ -16,10 +16,27 @@ from ferromtm.tools.utils import *
 from pytheas.material import genmat
 import os
 import tempfile
-
+from ferromtm.models.bst import epsilonr_ferroelectric
 from aotomat.tools.parallelize import *
 
 rootdir = os.path.dirname(os.path.dirname(__file__))
+#
+#
+#
+# from aotomat.material.bst import epsi_bst_norma
+#
+#
+# def epsilonr_ferroelectric_(E_applied, tandelta=1e-2, eps00=120, sample=4):
+#     return epsi_bst_norma(E_applied, sample) * eps00 * (1 - tandelta * 1j)
+#
+#
+# E_applied_i = np.linspace(-10, 10, 1001)
+# epsilonr_ferroelectric_i = epsilonr_ferroelectric_(E_applied_i)
+#
+# def epsilonr_ferroelectric(E_applied, tandelta=1e-2, eps00=120, sample=4, dc=False):
+#     return np.interp(E_applied, E_applied_i, epsilonr_ferroelectric_i)
+#
+#
 
 
 # importlib.reload(model_es)
@@ -28,7 +45,7 @@ rootdir = os.path.dirname(os.path.dirname(__file__))
 pi = np.pi
 eps_incl = 3
 data_folder = os.path.join(rootdir, "data", "results")
-mat_folder = "../data/mat/"
+mat_folder = "../data/mat/random/"
 
 
 def ellipse(Rinclx, Rincly, rot_incl, x0, y0):
@@ -110,8 +127,8 @@ def init_es(f, E_bias, incl=True, mat=None):
     fem_es.getdp_verbose = 0  #: str: GetDP verbose (int between 0 and 4)
     fem_es.python_verbose = 0
     #: str: GetDP verbose (int between 0 and 1)
-    fem_es.parmesh = 30
-    fem_es.parmesh_incl = 30
+    fem_es.parmesh = 11
+    fem_es.parmesh_incl = 11
     fem_es.type_des = "elements"
     fem_es.inclusion_flag = incl
     # if not incl:
@@ -176,7 +193,7 @@ def init_hom(fem_es):
     return fem_hom
 
 
-def compute_hom_pb(fem_hom, epsi):
+def compute_hom_pb(fem_hom, epsi, verbose=False):
     """Computes the homogenization problem.
 
     Parameters
@@ -200,6 +217,9 @@ def compute_hom_pb(fem_hom, epsi):
     make_pos_tensor_eps(fem_hom, epsi, interp=interp)
     fem_hom.compute_solution()
     eps_hom = fem_hom.compute_epsilon_eff()
+    if verbose:
+        print("eps_hom")
+        matprint(eps_hom)
     return eps_hom, fem_hom
 
 
@@ -209,6 +229,7 @@ def compute_elstat_pb(fem_es, epsi):
     make_pos_tensor_eps(fem_es, epsi, interp=interp)
     fem_es.compute_solution()
     E = fem_es.postpro_electrostatic_field()
+    E = np.real(E)
     return E, fem_es
 
 
@@ -225,7 +246,7 @@ def coupling_loop(fem_es, epsi, tol=1e-2, verbose=False):
     while not conv:
         # if fem_es.inclusion_flag:
         E, fem_es = compute_elstat_pb(fem_es, epsi)
-        epsi = epsilonr_ferroelectric(E.real)
+        epsi = epsilonr_ferroelectric(E.real, dc=True)
         if not fem_es.inclusion_flag:
             id = mat2des(fem_es)
             epsi_ = np.ones_like(E.real, dtype=complex)
@@ -249,11 +270,12 @@ def coupling_loop(fem_es, epsi, tol=1e-2, verbose=False):
 def main(f, E_bias, coupling=True, incl=True, mat=None, verbose=True, rmtmpdir=True):
     fem_es = init_es(f, E_bias, incl=incl, mat=mat)
     nvar = len(fem_es.des[0])
-    eps_f = epsilonr_ferroelectric(E_bias)
-    eps_f0 = epsilonr_ferroelectric(0)
+    eps_f = epsilonr_ferroelectric(E_bias, dc=True)
+    eps_f0 = epsilonr_ferroelectric(0, dc=True)
     id = np.ones(nvar)
     if incl:
         epsi = id * eps_f, id * eps_f0, id * eps_f0
+
     else:
         id = mat2des(fem_es)
         epsi_xx = np.ones_like(id, dtype=complex) * eps_incl
@@ -263,12 +285,13 @@ def main(f, E_bias, coupling=True, incl=True, mat=None, verbose=True, rmtmpdir=T
         epsi_yy[id == 0] = eps_f0
         epsi_zz[id == 0] = eps_f0
         epsi = epsi_xx, epsi_yy, epsi_zz
-    E = E_bias * id
+    E = E_bias * id, 0 * id, 0 * id
     if E_bias != 0:
         if coupling:
             E, epsi, fem_es = coupling_loop(fem_es, epsi, verbose=verbose)
     fem_hom = init_hom(fem_es)
-    eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi)
+    epsi = epsilonr_ferroelectric(E)
+    eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi, verbose=verbose)
     if rmtmpdir:
         fem_hom.rm_tmp_dir()
         fem_es.rm_tmp_dir()
@@ -359,14 +382,14 @@ def normvec(E):
     return np.sqrt(n)
 
 
-# f_parallel = parallel(main_circle, partype="scoop")
-f_parallel = parallel(main_circle_pattern, partype="scoop")
+f_parallel = parallel(main_circle, partype="scoop")
+# f_parallel = parallel(main_circle_pattern, partype="scoop")
 
 # f_parallel = parallel(main_rand, partype="scoop")
 
-nE = 11
+nE = 2
 Ebias = np.linspace(0, 2, nE)
-nF = 5
+nF = 1
 Fincl = np.linspace(0.1, 0.5, nF)
 E1, F1 = np.meshgrid(Ebias, Fincl)
 params = np.vstack((E1.ravel(), F1.ravel())).T
@@ -375,7 +398,12 @@ params = np.vstack((E1.ravel(), F1.ravel())).T
 if __name__ == "__main__":
 
     f_parallel(params, save=True)
-    f_parallel(params, save=True, coupling=False)
+    # f_parallel(params, save=True, coupling=False)
+
+    eps_f = epsilonr_ferroelectric(Ebias[-1], dc=False)
+    eps_f0 = epsilonr_ferroelectric(0, dc=False)
+
+    print(eps_f0 / eps_f)
 
 #
 #

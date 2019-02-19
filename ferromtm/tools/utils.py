@@ -1,19 +1,6 @@
 #!/usr/bin/env python
 
 import numpy as np
-from aotomat.material.bst import epsi_bst_norma
-
-
-def epsilonr_ferroelectric_(E_applied, tandelta=1e-2, eps00=120, sample=4):
-    return epsi_bst_norma(E_applied, sample) * eps00 * (1 - tandelta * 1j)
-
-
-E_applied_i = np.linspace(-10, 10, 1001)
-epsilonr_ferroelectric_i = epsilonr_ferroelectric_(E_applied_i)
-
-
-def epsilonr_ferroelectric(E_applied, tandelta=1e-2, eps00=120, sample=4):
-    return np.interp(E_applied, E_applied_i, epsilonr_ferroelectric_i)
 
 
 def make_pos_tensor_eps(fem, epsi, interp=False):
