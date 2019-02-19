@@ -11,27 +11,37 @@ rootdir = os.path.dirname(os.path.dirname(__file__))
 eps0 = const.epsilon_0
 
 
-def eps_norma_model(E0, alpha):
+def eps_norma_model(E0, alpha, beta):
     E0_ = np.asarray(E0)
     E_ = E0_.ravel()
     out = []
     for E in E_:
         poly = [alpha / 3, 0, 1, -E]
+        poly = [beta / 5, 0, alpha / 3, 0, 1, -E]
         x = np.roots(poly)
         P0 = x[np.isreal(x)][0].real
         D = 1 + alpha * P0 ** 2
+        D = 1 + alpha * P0 ** 2 + beta * P0 ** 4
         out.append(1 / D * (1 - 0 * 1j))
     return np.asarray(out).reshape(E0_.shape)
 
 
-def fun_fit(alpha, E, eps_meas_n):
-    eps_model = eps_norma_model(E, alpha)
+# def fun_fit(alpha, E, eps_meas_n):
+#     eps_model = eps_norma_model(E, alpha)
+#     err = np.abs(eps_model - eps_meas_n) ** 2
+#     return np.mean(err) ** 0.5
+
+
+def fun_fit(par, E, eps_meas_n):
+    alpha, beta = par
+    eps_model = eps_norma_model(E, alpha, beta)
     err = np.abs(eps_model - eps_meas_n) ** 2
     return np.mean(err) ** 0.5
 
 
 def retrieve_params(E, eps_meas_n):
     alpha0 = 1
+    alpha0 = 1, 1
     cons = {"type": "ineq", "fun": lambda x: np.array([x[0]])}
     opt = sc.optimize.minimize(
         fun_fit, alpha0, args=(E, eps_meas_n), options={"disp": True}, constraints=cons
@@ -54,16 +64,22 @@ def fit():
     return fit_params
 
 
+#
 def epsf_real(E_applied, dc=False):
     if dc:
         eps00 = 3050
         alpha = 0.16184928
+        # eps00 = 165
+        alpha = [0.11957429, 0.02415848]
     else:
         eps00 = 165
         alpha = 0.35251572
-    eps00 = 120
-    alpha = 0.35251572
-    return eps_norma_model(E_applied, alpha) * eps00
+        alpha = [0.2403613, 0.07910162]
+
+    # eps00 = 120
+    # alpha = 0.9
+
+    return eps_norma_model(E_applied, *alpha) * eps00
 
 
 E_applied_i = np.linspace(-10, 10, 1001)
@@ -87,12 +103,12 @@ if __name__ == "__main__":
     eps_norm_exp = meas["eps_norm_exp"]
     eps_exp_0 = meas["eps_exp_0"]
 
-    E_fit = np.linspace(-4, 4, 101)
+    E_fit = np.linspace(-10, 10, 101)
     eps_norm_fit = []
     for i in range(2):
         alpha_opt = fit_params[i]
         epsf0 = eps_exp_0[i]
-        eps_fit = eps_norma_model(E_fit, alpha_opt)
+        eps_fit = eps_norma_model(E_fit, *alpha_opt)
         eps_norm_fit.append(eps_fit)
 
     plt.close("all")

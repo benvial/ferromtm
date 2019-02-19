@@ -22,22 +22,23 @@ from aotomat.tools.parallelize import *
 rootdir = os.path.dirname(os.path.dirname(__file__))
 #
 #
-#
-# from aotomat.material.bst import epsi_bst_norma
-#
-#
-# def epsilonr_ferroelectric_(E_applied, tandelta=1e-2, eps00=120, sample=4):
-#     return epsi_bst_norma(E_applied, sample) * eps00 * (1 - tandelta * 1j)
-#
-#
-# E_applied_i = np.linspace(-10, 10, 1001)
-# epsilonr_ferroelectric_i = epsilonr_ferroelectric_(E_applied_i)
-#
-# def epsilonr_ferroelectric(E_applied, tandelta=1e-2, eps00=120, sample=4, dc=False):
-#     return np.interp(E_applied, E_applied_i, epsilonr_ferroelectric_i)
-#
-#
 
+from aotomat.material.bst import epsi_bst_norma
+
+
+def epsilonr_ferroelectric_(E_applied, tandelta=1e-2, eps00=120, sample=4):
+    return epsi_bst_norma(E_applied, sample) * eps00 * (1 - tandelta * 1j)
+
+
+E_applied_i = np.linspace(-10, 10, 1001)
+epsilonr_ferroelectric_i = epsilonr_ferroelectric_(E_applied_i)
+
+
+def epsilonr_ferroelectric_old(E_applied, tandelta=1e-2, eps00=120, sample=4, dc=False):
+    return np.interp(E_applied, E_applied_i, epsilonr_ferroelectric_i)
+
+
+# epsilonr_ferroelectric = epsilonr_ferroelectric_old
 
 # importlib.reload(model_es)
 # importlib.reload(model_hom)
@@ -319,6 +320,7 @@ def main_circle(params, save=False, coupling=True):
             epsi=epsi,
             E=E,
         )
+    return eps_hom, epsi, E, fem_hom, fem_es
 
 
 def main_circle_pattern(params, save=False, coupling=True):
@@ -387,181 +389,38 @@ f_parallel = parallel(main_circle, partype="scoop")
 
 # f_parallel = parallel(main_rand, partype="scoop")
 
-nE = 2
+nE = 11
 Ebias = np.linspace(0, 2, nE)
 nF = 1
-Fincl = np.linspace(0.1, 0.5, nF)
+Fincl = np.linspace(0.5, 0.5, nF)
 E1, F1 = np.meshgrid(Ebias, Fincl)
 params = np.vstack((E1.ravel(), F1.ravel())).T
 
 
 if __name__ == "__main__":
 
-    f_parallel(params, save=True)
+    from aotomat.tools.plottools import *
+
+    E_applied_i = np.linspace(-10, 10, 1001)
+
+    en_old = epsilonr_ferroelectric_old(E_applied_i) / epsilonr_ferroelectric_old(0)
+    en = epsilonr_ferroelectric(E_applied_i) / epsilonr_ferroelectric(0)
+    plt.clf()
+    plt.plot(E_applied_i, en_old)
+    plt.plot(E_applied_i, en, "--")
+
+    out = f_parallel(params, save=True)
+    eh = [_[0] for _ in out]
+    e = [_[0, 0] for _ in eh]
     # f_parallel(params, save=True, coupling=False)
 
-    eps_f = epsilonr_ferroelectric(Ebias[-1], dc=False)
+    eps_f = epsilonr_ferroelectric(Ebias, dc=False)
     eps_f0 = epsilonr_ferroelectric(0, dc=False)
 
-    print(eps_f0 / eps_f)
+    tunbulk = eps_f0 / eps_f
+    tun = e[0] / e
 
-#
-#
-# if __name__ == "__main__":
-#     incl = False
-#     f = 0.4
-#     nbias = 7
-#     bias = np.linspace(0, 2, nbias)
-#     eps_f = epsilonr_ferroelectric(bias)
-#     eps_f0 = epsilonr_ferroelectric(0)
-#     eps_harm = harmonic_mean(f, eps_incl, eps_f)
-#     eps_ar = arithmetic_mean(f, eps_incl, eps_f)
-#
-#     eps_c, eps_s = [], []
-#     epsilon_c, epsilon_s = [], []
-#     E_c, E_s = [], []
-#
-#     mat = make_pattern(f)
-#     for E_bias in bias:
-#         print("")
-#         print("*" * 33)
-#         print("Bias = {} MV/m".format(E_bias))
-#         print("*" * 33)
-#         print("")
-#         print("Coupled --------------")
-#         eps_hom, epsi, E, fem_hom, fem_es = main(
-#             f, E_bias, coupling=True, incl=incl, mat=mat
-#         )
-#         print("eps_hom")
-#         matprint(eps_hom)
-#         print("Uncoupled ------------")
-#         eps_hom_uc, epsi_uc, E_uc, fem_hom, fem_es = main(
-#             f, E_bias, coupling=False, incl=incl, mat=mat
-#         )
-#         print("eps_hom_uc")
-#         matprint(eps_hom_uc)
-#         eps_c.append(eps_hom)
-#         eps_s.append(eps_hom_uc)
-#         epsilon_c.append(epsi)
-#         epsilon_s.append(epsi_uc)
-#         E_c.append(E)
-#         E_s.append(E_uc)
-#
-#     eps_bias_c, eps_bias_s = (
-#         np.zeros((2, nbias), dtype=complex),
-#         np.zeros((2, nbias), dtype=complex),
-#     )
-#     eps_bias_c_mean, E_bias_c_mean = (
-#         np.zeros((2, nbias), dtype=complex),
-#         np.zeros((2, nbias), dtype=complex),
-#     )
-#     for i in range(2):
-#         eps_bias_c[i, :] = np.array([_[i, i] for _ in eps_c])
-#         eps_bias_s[i, :] = np.array([_[i, i] for _ in eps_s])
-#         eps_bias_c_mean[i, :] = np.array([np.mean(_[i]) for _ in epsilon_c])
-#         # E_bias_c_mean[i,:] = np.array([np.mean(_[i]) for _ in E_c])
-#
-#     eps_mg = [maxwell_garnett(f, eps_incl, eps_f)]
-#     eps_mg.append(np.ones(nbias) * eps_mg[0][0])
-#     eps_mg_mean = maxwell_garnett(f, eps_incl, eps_bias_c_mean)
-#
-#     # eps_ana_c, E_ana_c = [], []
-#     # for E in bias:
-#     #     eps_ = epsilonr_ferroelectric(E)
-#     #     E, eps_ = coupling_loop_analytical(E, f, eps_incl, eps_)
-#     #     eps_ana_c.append(eps_)
-#     #     E_ana_c.append(E)
-#     # eps_ana_c = np.array(eps_ana_c)
-#     # eps_mg_ana_c = [maxwell_garnett(f, eps_incl, eps_ana_c)]
-#     # eps_mg_ana_c.append(np.ones(nbias) * eps_mg_ana_c[0][0])
-#
-#     plt.close("all")
-#     fig, ax = plt.subplots(2, figsize=(4, 8))
-#     ax[0].plot(bias, eps_bias_c[0], "-r", label="coupled $\parallel$")
-#     ax[0].plot(bias, eps_bias_s[0], "-b", label="uncoupled $\parallel$")
-#     # ax[0].plot(bias, eps_mg[0], "-g", label="Maxwell-Garnett $\parallel$")
-#     # ax[0].plot(bias, eps_mg_mean[0], "-m", label="numerical mean epsi MG $\parallel$")
-#     # ax[0].plot(bias, eps_mg_ana_c[0], "-c", label="analytical mean epsi MG $\parallel$")
-#
-#     ax[0].legend()
-#     ax[1].plot(bias, eps_bias_c[1], "-r", label="coupled $\perp$")
-#     ax[1].plot(bias, eps_bias_s[1], "-b", label="uncoupled $\perp$")
-#     # ax[1].plot(bias, eps_mg[1], "-g", label="Maxwell-Garnett $\perp$")
-#     # ax[1].plot(bias, eps_mg_mean[1], "-m", label="numerical mean epsi MG $\perp$")
-#     # ax[1].plot(bias, eps_mg_ana_c[1], "-c", label="analytical mean epsi MG $\perp$")
-#
-#     ax[1].legend()
-#     ax[1].set_xlabel("Bias field $E$ (MV/m)")
-#     ax[0].set_title("effective permittivity, $f = {}$".format(f))
-#
-#     ## loss tangent
-#     tand_bias_c = losstan(eps_bias_c)
-#     tand_bias_s = losstan(eps_bias_s)
-#
-#     fig, ax = plt.subplots(2, figsize=(4, 8))
-#     ax[0].plot(bias, tand_bias_c[0], "-r", label="coupled $\parallel$")
-#     ax[0].plot(bias, tand_bias_s[0], "-b", label="uncoupled $\parallel$")
-#
-#     ax[0].legend()
-#     ax[1].plot(bias, tand_bias_c[1], "-r", label="coupled $\perp$")
-#     ax[1].plot(bias, tand_bias_s[1], "-b", label="uncoupled $\perp$")
-#
-#     ax[1].legend()
-#     ax[1].set_xlabel("Bias field $E$ (MV/m)")
-#     ax[0].set_title("effective loss tangent, $f = {}$".format(f))
-#
-#     ## tunabilities
-#
-#     tunability_c = []
-#     for e in eps_bias_c:
-#         tunability_c.append(tunability(e, e[0]))
-#     tunability_s = []
-#     for e in eps_bias_s:
-#         tunability_s.append(tunability(e, e[0]))
-#
-#     tunability_bulk = [tunability(eps_f, eps_f0)]
-#     tbx = [1 for _ in range(nbias)]
-#     tunability_bulk.append(tbx)
-#     tunability_bulk.append(tbx)
-#
-#     fig, ax = plt.subplots(2, figsize=(4, 8))
-#     ax[0].plot(bias, tunability_c[0], "-r", label="coupled $\parallel$")
-#     ax[0].plot(bias, tunability_s[0], "-b", label="uncoupled $\parallel$")
-#
-#     ax[0].plot(bias, tunability_bulk[0], "-k", label="bulk $\parallel$")
-#     ax[0].legend()
-#     ax[1].plot(bias, tunability_c[1], "-r", label="coupled $\perp$")
-#     ax[1].plot(bias, tunability_s[1], "-b", label="uncoupled $\perp$")
-#
-#     ax[1].plot(bias, tunability_bulk[1], "-k", label="bulk $\perp$")
-#     ax[1].legend()
-#     ax[1].set_xlabel("Bias field $E$ (MV/m)")
-#     ax[0].set_title("tunability, $f = {}$".format(f))
-#
-#     # commutation quality factor
-#
-#     K_c = []
-#     for e in eps_bias_c:
-#         K_c.append(cqf(e, e[0]))
-#     K_s = []
-#     for e in eps_bias_s:
-#         K_s.append(cqf(e, e[0]))
-#
-#     K_bulk = [cqf(eps_f, eps_f0)]
-#     Ktmp = [0 for _ in range(nbias)]
-#     K_bulk.append(Ktmp)
-#     K_bulk.append(Ktmp)
-#
-#     fig, ax = plt.subplots(2, figsize=(4, 8))
-#     ax[0].plot(bias, K_c[0], "-r", label="coupled $\parallel$")
-#     ax[0].plot(bias, K_s[0], "-b", label="uncoupled $\parallel$")
-#
-#     ax[0].plot(bias, K_bulk[0], "-k", label="bulk $\parallel$")
-#     ax[0].legend()
-#     ax[1].plot(bias, K_c[1], "-r", label="coupled $\perp$")
-#     ax[1].plot(bias, K_s[1], "-b", label="uncoupled $\perp$")
-#
-#     ax[1].plot(bias, K_bulk[1], "-k", label="bulk $\perp$")
-#     ax[1].legend()
-#     ax[1].set_xlabel("Bias field $E$ (MV/m)")
-#     ax[0].set_title("commutation quality factor, $f = {}$".format(f))
+    plt.clf()
+
+    plt.plot(Ebias, tun / tunbulk, "--k")
+    # plt.plot(Ebias, tun, "--k")
