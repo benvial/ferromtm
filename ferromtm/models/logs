@@ -1,0 +1,389 @@
+/bin/sh: module: line 1: syntax error: unexpected end of file
+/bin/sh: error importing function definition for `BASH_FUNC_module'
+Running on host: ant-hpc06.eecs.qmul.ac.uk.
+In directory: /homes/benjaminv/Code/ferromtm/ferromtm/models
+Log file is here: /homes/benjaminv/Code/ferromtm/ferromtm/models/./logs
+Number of slots used: 110
+Starting on: Tue Feb 26 18:43:57 GMT 2019
+[2019-02-26 18:43:57,358] launcher  INFO    SCOOP 0.7 2.0 on linux using Python 3.7.1 (default, Dec 14 2018, 19:28:38) [GCC 7.3.0], API: 1013
+[2019-02-26 18:43:57,358] launcher  INFO    Detected SGE environment.
+[2019-02-26 18:43:57,358] launcher  INFO    Deploying 110 worker(s) over 7 host(s).
+[2019-02-26 18:43:57,358] launcher  INFO    Worker d--istribution: 
+[2019-02-26 18:43:57,358] launcher  INFO       ant-hpc06.eecs.qmul.ac.uk:	15 + origin
+[2019-02-26 18:43:57,358] launcher  INFO       ant-hpc07.eecs.qmul.ac.uk:	16 
+[2019-02-26 18:43:57,358] launcher  INFO       ant-hpc03.eecs.qmul.ac.uk:	16 
+[2019-02-26 18:43:57,359] launcher  INFO       ant-hpc09.eecs.qmul.ac.uk:	16 
+[2019-02-26 18:43:57,359] launcher  INFO       ant-hpc11.eecs.qmul.ac.uk:	16 
+[2019-02-26 18:43:57,359] launcher  INFO       ant-hpc02.eecs.qmul.ac.uk:	16 
+[2019-02-26 18:43:57,359] launcher  INFO       ant-hpc08.eecs.qmul.ac.uk:	14 
+Warning: Permanently added 'ant-hpc07.eecs.qmul.ac.uk,138.37.89.146' (RSA) to the list of known hosts.
+Warning: Permanently added 'ant-hpc03.eecs.qmul.ac.uk,138.37.89.142' (RSA) to the list of known hosts.
+Warning: Permanently added 'ant-hpc06.eecs.qmul.ac.uk,138.37.89.145' (RSA) to the list of known hosts.
+Warning: Permanently added 'ant-hpc09.eecs.qmul.ac.uk,138.37.89.148' (RSA) to the list of known hosts.
+tcgetattr: Invalid argument
+Warning: Permanently added 'ant-hpc11.eecs.qmul.ac.uk,138.37.89.150' (RSA) to the list of known hosts.
+tcgetattr: Invalid argument
+Warning: Permanently added 'ant-hpc02.eecs.qmul.ac.uk,138.37.89.141' (RSA) to the list of known hosts.
+tcgetattr: Invalid argument
+Warning: Permanently added 'ant-hpc08.eecs.qmul.ac.uk,138.37.89.147' (RSA) to the list of known hosts.
+tcgetattr: Invalid argument
+Launching 16 worker(s) using /bin/bash.
+tcgetattr: Invalid argument
+tcgetattr: Invalid argument
+tcgetattr: Invalid argument
+Launching 16 worker(s) using /bin/bash.
+Launching 16 worker(s) using /bin/bash.
+Launching 16 worker(s) using /bin/bash.
+Launching 16 worker(s) using /bin/bash.
+Launching 16 worker(s) using /bin/bash.
+Launching 14 worker(s) using /bin/bash.
+[2.  0.5]
+Resource temporarily unavailable (src/thread.cpp:191)
+Resource temporarily unavailable (src/thread.cpp:191)
+Resource temporarily unavailable (src/thread.cpp:191)
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+[0.  0.1]
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+[0.2 0.1]
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+[0.4 0.1]
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+    "__main__", mod_spec)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py", line 85, in _run_code
+[0.6 0.1]
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+    exec(code, run_globals)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 298, in <module>
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+    b.main()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 92, in main
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+[0.8 0.1]
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+    self.run()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 285, in run
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    futures_startup()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/bootstrap/__main__.py", line 266, in futures_startup
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+    run_name="__main__"
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/futures.py", line 65, in _startup
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    result = _controller.switch(rootFuture, *args, **kargs)
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_control.py", line 199, in runController
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+    execQueue = FutureQueue()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 271, in __init__
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    self.socket = Communicator()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_comm/scoopzmq.py", line 162, in __init__
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+    self.status_update_thread.start()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/threading.py", line 847, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+[1.  0.1]
+[1.2 0.1]
+[1.4 0.1]
+[1.6 0.1]
+[1.8 0.1]
+[2.  0.1]
+[0.  0.2]
+[0.2 0.2]
+[0.4 0.2]
+[0.6 0.2]
+[0.8 0.2]
+[1.  0.2]
+[1.2 0.2]
+[1.4 0.2]
+[1.6 0.2]
+[2.  0.2]
+[0.  0.3]
+[0.2 0.3]
+[0.4 0.3]
+[0.6 0.3]
+[0.8 0.3]
+[1.  0.3]
+[1.2 0.3]
+[1.8 0.2]
+[1.4 0.3]
+[1.8 0.3]
+[1.6 0.3]
+[2.  0.3]
+[0.2 0.4]
+[0.  0.4]
+[0.6 0.4]
+[0.4 0.4]
+[0.8 0.4]
+[1.  0.4]
+Exception ignored in: <function FutureQueue.__del__ at 0x7fe09aef92f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+Exception ignored in: <function FutureQueue.__del__ at 0x7f9af45132f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+Exception ignored in: <function FutureQueue.__del__ at 0x7fa4bba182f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+Exception ignored in: <function FutureQueue.__del__ at 0x7f98cd5dc2f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+Exception ignored in: <function FutureQueue.__del__ at 0x7f2a332b42f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+[1.2 0.4]
+[1.4 0.4]
+Exception ignored in: <function FutureQueue.__del__ at 0x7eff5fd252f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+[1.6 0.4]
+[1.8 0.4]
+[2.  0.4]
+Exception ignored in: <function FutureQueue.__del__ at 0x7fd4f193b2f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+[0.  0.5]
+Exception ignored in: <function FutureQueue.__del__ at 0x7f9375d142f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+[0.2 0.5]
+[0.4 0.5]
+[0.6 0.5]
+[0.8 0.5]
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+[1.  0.5]
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+[1.2 0.5]
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+[1.8 0.5]
+[1.4 0.5]
+[1.6 0.5]
+Exception ignored in: <function FutureQueue.__del__ at 0x7f503efe22f0>
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 283, in __del__
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+    self.shutdown()
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/scoop/_types.py", line 420, in shutdown
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+    self.socket.shutdown()
+AttributeError: 'FutureQueue' object has no attribute 'socket'
+Connection to ant-hpc06.eecs.qmul.ac.uk closed.
+[2019-02-26 18:44:23,781] launcher  INFO    Root process is done.
+Killed by signal 15.
+Warning: Permanently added 'ant-hpc06.eecs.qmul.ac.uk,138.37.89.145' (RSA) to the list of known hosts.
+tcgetattr: Inappropriate ioctl for device
+Connection to ant-hpc06.eecs.qmul.ac.uk closed.
+Killed by signal 15.
+Killed by signal 15.
+Killed by signal 15.
+Killed by signal 15.
+Killed by signal 15.
+[2019-02-26 18:44:23,794] launcher  INFO    Finished cleaning spawned subprocesses.
+Ending on: Tue Feb 26 18:44:23 GMT 2019

@@ -128,8 +128,8 @@ def init_es(f, E_bias, incl=True, mat=None):
     fem_es.getdp_verbose = 0  #: str: GetDP verbose (int between 0 and 4)
     fem_es.python_verbose = 0
     #: str: GetDP verbose (int between 0 and 1)
-    fem_es.parmesh = 11
-    fem_es.parmesh_incl = 11
+    fem_es.parmesh = 25
+    fem_es.parmesh_incl = 25
     fem_es.type_des = "elements"
     fem_es.inclusion_flag = incl
     # if not incl:
@@ -384,43 +384,26 @@ def normvec(E):
     return np.sqrt(n)
 
 
-f_parallel = parallel(main_circle, partype="scoop")
-# f_parallel = parallel(main_circle_pattern, partype="scoop")
+def main_dummy(params):
+    print(params)
 
+
+f_parallel = parallel(main_dummy, partype="scoop")
+
+# f_parallel = parallel(main_circle, partype="scoop")
+# f_parallel = parallel(main_circle_pattern, partype="scoop")
 # f_parallel = parallel(main_rand, partype="scoop")
 
 nE = 11
 Ebias = np.linspace(0, 2, nE)
-nF = 1
-Fincl = np.linspace(0.5, 0.5, nF)
+nF = 5
+Fincl = np.linspace(0.1, 0.5, nF)
 E1, F1 = np.meshgrid(Ebias, Fincl)
 params = np.vstack((E1.ravel(), F1.ravel())).T
 
 
 if __name__ == "__main__":
 
-    from aotomat.tools.plottools import *
-
-    E_applied_i = np.linspace(-10, 10, 1001)
-
-    en_old = epsilonr_ferroelectric_old(E_applied_i) / epsilonr_ferroelectric_old(0)
-    en = epsilonr_ferroelectric(E_applied_i) / epsilonr_ferroelectric(0)
-    plt.clf()
-    plt.plot(E_applied_i, en_old)
-    plt.plot(E_applied_i, en, "--")
-
-    out = f_parallel(params, save=True)
-    eh = [_[0] for _ in out]
-    e = [_[0, 0] for _ in eh]
+    f_parallel(params)
+    # f_parallel(params, save=True)
     # f_parallel(params, save=True, coupling=False)
-
-    eps_f = epsilonr_ferroelectric(Ebias, dc=False)
-    eps_f0 = epsilonr_ferroelectric(0, dc=False)
-
-    tunbulk = eps_f0 / eps_f
-    tun = e[0] / e
-
-    plt.clf()
-
-    plt.plot(Ebias, tun / tunbulk, "--k")
-    # plt.plot(Ebias, tun, "--k")

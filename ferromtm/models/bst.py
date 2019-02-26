@@ -1,4 +1,3 @@
-from aotomat.tools.plottools import *
 import scipy.constants as const
 import numpy as np
 import os
@@ -40,11 +39,10 @@ def fun_fit(par, E, eps_meas_n):
 
 
 def retrieve_params(E, eps_meas_n):
-    alpha0 = 1
-    alpha0 = 1, 1
+    par0 = 1, 1
     cons = {"type": "ineq", "fun": lambda x: np.array([x[0]])}
     opt = sc.optimize.minimize(
-        fun_fit, alpha0, args=(E, eps_meas_n), options={"disp": True}, constraints=cons
+        fun_fit, par0, args=(E, eps_meas_n), options={"disp": True}, constraints=cons
     )
     xopt = opt["x"]
     print("xopt = ", xopt)
@@ -68,18 +66,11 @@ def fit():
 def epsf_real(E_applied, dc=False):
     if dc:
         eps00 = 3050
-        alpha = 0.16184928
-        # eps00 = 165
-        alpha = [0.11957429, 0.02415848]
+        alpha, beta = 0.11957429, 0.02415848
     else:
         eps00 = 165
-        alpha = 0.35251572
-        alpha = [0.2403613, 0.07910162]
-
-    # eps00 = 120
-    # alpha = 0.9
-
-    return eps_norma_model(E_applied, *alpha) * eps00
+        alpha, beta = 0.2403613, 0.07910162
+    return eps_norma_model(E_applied, alpha, beta) * eps00
 
 
 E_applied_i = np.linspace(-10, 10, 1001)
@@ -96,6 +87,8 @@ def epsilonr_ferroelectric(E_applied, tandelta=1e-2, dc=False):
 
 
 if __name__ == "__main__":
+    from ferromtm.visualization.plots import *
+
     fit()
     fit_params = np.load(os.path.join(rootdir, "data", "fit_params.npz"))["fit_params"]
     meas = np.load(os.path.join(rootdir, "data", "measurements.npz"))
@@ -103,7 +96,7 @@ if __name__ == "__main__":
     eps_norm_exp = meas["eps_norm_exp"]
     eps_exp_0 = meas["eps_exp_0"]
 
-    E_fit = np.linspace(-10, 10, 101)
+    E_fit = np.linspace(-6, 6, 101)
     eps_norm_fit = []
     for i in range(2):
         alpha_opt = fit_params[i]
@@ -112,7 +105,7 @@ if __name__ == "__main__":
         eps_norm_fit.append(eps_fit)
 
     plt.close("all")
-    plt.figure()
+    fig = plt.figure(figsize=(5, 3))
     plt.plot(E_exp, eps_norm_exp[0], "o", label="measured, $f=0$", color="#3e8b58")
     plt.plot(E_fit, eps_norm_fit[0], "--", color="#3e8b58", label="fit, $f=0$")
     plt.plot(
@@ -124,3 +117,6 @@ if __name__ == "__main__":
     )
     plt.xlabel("electric field (MV/m)")
     plt.legend()
+
+    plt.tight_layout()
+    fig.savefig("epsilon_fit.eps")
