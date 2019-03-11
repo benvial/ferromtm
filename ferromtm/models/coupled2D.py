@@ -3,11 +3,12 @@
 # Author: Benjamin Vial
 # License: MIT
 
-from ferromtm import __file__
-
+import ferromtm
 import numpy as np
 
-# from aotomat.tools.plottools import *
+import time
+
+## from aotomat.tools.plottools import *
 from pytheas.homogenization import *
 from aotomat.electrostatics.per2D import femmodel as model_es
 from pytheas.homogenization.twoscale2D import femmodel as model_hom
@@ -17,36 +18,24 @@ from pytheas.material import genmat
 import os
 import tempfile
 from ferromtm.models.bst import epsilonr_ferroelectric
-from aotomat.tools.parallelize import *
+from pytheas.tools.utils import refine_mesh
 
-rootdir = os.path.dirname(os.path.dirname(__file__))
+# import logging
 #
+# logging.captureWarnings(True)
+# logging.basicConfig(
+#     format=("%(asctime)s - %(name)s - %(levelname)s - " + "%(message)s"),
+#     level=logging.DEBUG,
+# )
 #
 
-from aotomat.material.bst import epsi_bst_norma
+rootdir = os.path.dirname(os.path.dirname(ferromtm.__file__))
 
-
-def epsilonr_ferroelectric_(E_applied, tandelta=1e-2, eps00=120, sample=4):
-    return epsi_bst_norma(E_applied, sample) * eps00 * (1 - tandelta * 1j)
-
-
-E_applied_i = np.linspace(-10, 10, 1001)
-epsilonr_ferroelectric_i = epsilonr_ferroelectric_(E_applied_i)
-
-
-def epsilonr_ferroelectric_old(E_applied, tandelta=1e-2, eps00=120, sample=4, dc=False):
-    return np.interp(E_applied, E_applied_i, epsilonr_ferroelectric_i)
-
-
-# epsilonr_ferroelectric = epsilonr_ferroelectric_old
-
-# importlib.reload(model_es)
-# importlib.reload(model_hom)
 
 pi = np.pi
 eps_incl = 3
 data_folder = os.path.join(rootdir, "data", "results")
-mat_folder = "../data/mat/random/"
+mat_folder = os.path.join(rootdir, "data", "mat")
 
 
 def ellipse(Rinclx, Rincly, rot_incl, x0, y0):
@@ -117,6 +106,20 @@ def make_pattern(f, choice="rand", isample=0):
     return mat
 
 
+def ref_mesh(fem):
+    lc_des = 1 * (fem.dx + fem.dy) * 0.5 / (fem.parmesh)
+    nmesh_ref = 3
+    smooth_factor = np.linspace(0.8, 0.2, nmesh_ref)
+    min_scale = np.linspace(0.3, 0.1, nmesh_ref)
+    max_scale = np.linspace(0.3, 1, nmesh_ref)
+    par = [smooth_factor, min_scale, max_scale]
+    fem = refine_mesh(
+        fem, fem.mat, par=par, lc_des=lc_des, periodic_x=True, periodic_y=True
+    )
+    # fem.open_gmsh_gui()
+    return fem
+
+
 def init_es(f, E_bias, incl=True, mat=None):
     r = (f / pi) ** (1 / 2)
     #####################################
@@ -128,8 +131,8 @@ def init_es(f, E_bias, incl=True, mat=None):
     fem_es.getdp_verbose = 0  #: str: GetDP verbose (int between 0 and 4)
     fem_es.python_verbose = 0
     #: str: GetDP verbose (int between 0 and 1)
-    fem_es.parmesh = 25
-    fem_es.parmesh_incl = 25
+    fem_es.parmesh = 34
+    fem_es.parmesh_incl = 34
     fem_es.type_des = "elements"
     fem_es.inclusion_flag = incl
     # if not incl:
@@ -143,7 +146,7 @@ def init_es(f, E_bias, incl=True, mat=None):
     fem_es.eps_host = eps_incl
     fem_es.E_static = E_bias
     fem_es.coupling_flag = True
-    fem_es.tmp_dir = "./estat"
+    # fem_es.tmp_dir = "./estat"
     fem_es.tmp_dir = tempfile.mkdtemp(prefix="/tmp/benjaminv.")
     fem_es.initialize()
     if incl:
@@ -156,7 +159,9 @@ def init_es(f, E_bias, incl=True, mat=None):
             fem_es.mat = make_pattern(f)
 
         fem_es.make_mesh()
-        # fem_es.register_pattern(mat.pattern, mat.threshold_val)
+        fem_es = ref_mesh(fem_es)
+
+        # fem_es.open_gmsh_gui()
 
     return fem_es
 
@@ -190,6 +195,8 @@ def init_hom(fem_es):
     else:
         fem_hom.mat = fem_es.mat
         fem_hom.make_mesh()
+        fem_hom = ref_mesh(fem_hom)
+        # fem_hom.open_gmsh_gui()
         # fem_hom.register_pattern(mat.pattern, mat.threshold_val)
     return fem_hom
 
@@ -213,10 +220,13 @@ def compute_hom_pb(fem_hom, epsi, verbose=False):
         fem_hom: instance of TwoScale2D class
 
     """
-    # interp = not fem_hom.inclusion_flag
+    interp = not fem_hom.inclusion_flag
     interp = False
     make_pos_tensor_eps(fem_hom, epsi, interp=interp)
     fem_hom.compute_solution()
+    # fem_hom.postpro_fields(filetype="pos")
+    # fem_hom.open_gmsh_gui()
+
     eps_hom = fem_hom.compute_epsilon_eff()
     if verbose:
         print("eps_hom")
@@ -240,10 +250,57 @@ def mat2des(fem):
     return Vdes
 
 
-def coupling_loop(fem_es, epsi, tol=1e-2, verbose=False):
+def ppEmap(fem):
+    fem.postpro_fields()
+    Ex = -fem.get_field_map("vx.txt").real
+    Ey = -fem.get_field_map("vy.txt").real
+    return Ex, Ey
+
+
+def ppEpsimap(fem):
+    fem.postpro_fields()
+    eps_xx = fem.get_field_map("epsilonr_xx.txt").real
+    eps_yy = fem.get_field_map("epsilonr_yy.txt").real
+    return eps_xx, eps_yy
+
+
+def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv=False):
     conv = False
-    o = np.ones_like(epsi)
-    Eold = fem_es.E_static * o, 0 * o, 0 * o
+    o = np.ones_like(epsi[0], dtype=float)
+    E0 = np.array([fem_es.E_static * o, 0 * o, 0 * o])
+    norm0 = normvec(E0)
+    Eold = E0
+    iter = 0
+    if record_cv:
+        # E, fem_es = compute_elstat_pb(fem_es, epsi)
+        fem_hom = init_hom(fem_es)
+        epsi_rf = epsilonr_ferroelectric(E0)
+        if not fem_es.inclusion_flag:
+            epsi_rf[0, id == 1] = eps_incl
+            epsi_rf[1, id == 1] = eps_incl
+            epsi_rf[2, id == 1] = eps_incl
+        eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi_rf, verbose=verbose)
+        cv_dir = os.path.join(data_folder, "circ_rods", "convergence")
+        fname = "cv_iter_{}.npz".format(iter)
+        epsi_map = ppEpsimap(fem_hom)
+        tmp = np.zeros_like(epsi_map[0])
+        E_map = tmp, tmp
+        try:
+            os.mkdir(cv_dir)
+        except FileExistsError:
+            pass
+        np.savez(
+            os.path.join(cv_dir, fname),
+            fem_es=fem_es,
+            fem_hom=fem_hom,
+            eps_hom=eps_hom,
+            epsi=epsi,
+            epsi_rf=epsi_rf,
+            E=E0,
+            epsi_map=epsi_map,
+            E_map=E_map,
+        )
+
     while not conv:
         # if fem_es.inclusion_flag:
         E, fem_es = compute_elstat_pb(fem_es, epsi)
@@ -256,19 +313,58 @@ def coupling_loop(fem_es, epsi, tol=1e-2, verbose=False):
             epsi = epsi_
 
         normdiff = normvec(E - Eold)
-        normold = normvec(Eold)
-        cv = np.mean(normdiff) / np.mean(normold)
+
+        cv = np.mean(normdiff) / np.mean(norm0)
 
         conv = cv < tol
         Eold = E
+        iter += 1
+        if record_cv:
+            fem_hom = init_hom(fem_es)
+            epsi_rf = epsilonr_ferroelectric(E)
+            if not fem_es.inclusion_flag:
+                epsi_rf[0, id == 1] = eps_incl
+                epsi_rf[1, id == 1] = eps_incl
+                epsi_rf[2, id == 1] = eps_incl
+            eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi_rf, verbose=verbose)
+            cv_dir = os.path.join(data_folder, "circ_rods", "convergence")
+            fname = fname = "cv_iter_{}.npz".format(iter)
+            epsi_map = ppEpsimap(fem_hom)
+            E_map = ppEmap(fem_es)
+            try:
+                os.mkdir(cv_dir)
+            except FileExistsError:
+                pass
+            np.savez(
+                os.path.join(cv_dir, fname),
+                fem_es=fem_es,
+                fem_hom=fem_hom,
+                eps_hom=eps_hom,
+                epsi=epsi,
+                epsi_rf=epsi_rf,
+                E=E,
+                epsi_map=epsi_map,
+                E_map=E_map,
+            )
         if verbose:
             print("error: ", cv)
-    # fem_es.postpro_fields(filetype="pos")
-    # fem_es.open_gmsh_gui()
+        if iter > max_iter:
+            break
+        # fem_es.postpro_fields(filetype="pos")
+        # fem_es.open_gmsh_gui()
     return E, epsi, fem_es
 
 
-def main(f, E_bias, coupling=True, incl=True, mat=None, verbose=True, rmtmpdir=True):
+def main(
+    f,
+    E_bias,
+    coupling=True,
+    incl=True,
+    mat=None,
+    record_cv=False,
+    verbose=True,
+    rmtmpdir=True,
+):
     fem_es = init_es(f, E_bias, incl=incl, mat=mat)
     nvar = len(fem_es.des[0])
     eps_f = epsilonr_ferroelectric(E_bias, dc=True)
@@ -276,7 +372,6 @@ def main(f, E_bias, coupling=True, incl=True, mat=None, verbose=True, rmtmpdir=T
     id = np.ones(nvar)
     if incl:
         epsi = id * eps_f, id * eps_f0, id * eps_f0
-
     else:
         id = mat2des(fem_es)
         epsi_xx = np.ones_like(id, dtype=complex) * eps_incl
@@ -286,12 +381,18 @@ def main(f, E_bias, coupling=True, incl=True, mat=None, verbose=True, rmtmpdir=T
         epsi_yy[id == 0] = eps_f0
         epsi_zz[id == 0] = eps_f0
         epsi = epsi_xx, epsi_yy, epsi_zz
-    E = E_bias * id, 0 * id, 0 * id
+    E = E_bias * np.ones(nvar), 0 * np.ones(nvar), 0 * np.ones(nvar)
     if E_bias != 0:
         if coupling:
-            E, epsi, fem_es = coupling_loop(fem_es, epsi, verbose=verbose)
+            E, epsi, fem_es = coupling_loop(
+                fem_es, epsi, verbose=verbose, record_cv=record_cv
+            )
     fem_hom = init_hom(fem_es)
     epsi = epsilonr_ferroelectric(E)
+    if not incl:
+        epsi[0, id == 1] = eps_incl
+        epsi[1, id == 1] = eps_incl
+        epsi[2, id == 1] = eps_incl
     eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi, verbose=verbose)
     if rmtmpdir:
         fem_hom.rm_tmp_dir()
@@ -320,6 +421,13 @@ def main_circle(params, save=False, coupling=True):
             epsi=epsi,
             E=E,
         )
+    return eps_hom, epsi, E, fem_hom, fem_es
+
+
+def main_circle_conv(params):
+    E_bias, f = params
+    print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
+    eps_hom, epsi, E, fem_hom, fem_es = main(f, E_bias, coupling=True, record_cv=True)
     return eps_hom, epsi, E, fem_hom, fem_es
 
 
@@ -384,17 +492,7 @@ def normvec(E):
     return np.sqrt(n)
 
 
-def main_dummy(params):
-    print(params)
-
-
-f_parallel = parallel(main_dummy, partype="scoop")
-
-# f_parallel = parallel(main_circle, partype="scoop")
-# f_parallel = parallel(main_circle_pattern, partype="scoop")
-# f_parallel = parallel(main_rand, partype="scoop")
-
-nE = 11
+nE = 21
 Ebias = np.linspace(0, 2, nE)
 nF = 5
 Fincl = np.linspace(0.1, 0.5, nF)
@@ -403,7 +501,20 @@ params = np.vstack((E1.ravel(), F1.ravel())).T
 
 
 if __name__ == "__main__":
+    main_circle_conv(params[104])
 
-    f_parallel(params)
-    # f_parallel(params, save=True)
-    # f_parallel(params, save=True, coupling=False)
+    # main_circle(params[2], save=False, coupling=True)
+
+    # run_parallel_coupled = parallel(main_rand_coupled, partype="gridmap")
+    # run_parallel_uncoupled = parallel(main_rand_uncoupled, partype="gridmap")
+    #
+    # # f_parallel(params)
+    # tstart = time.time()
+    # print("TSART: {}".format(tstart))
+    # out_coupled = run_parallel_coupled(params)
+    # out_uncoupled = run_parallel_uncoupled(params)
+    # # f_parallel(params, save=True, coupling=False)
+    # tend = time.time()
+    # et = tend - tstart
+    # print("TEND: {}".format(tend))
+    # print("ELAPSED: {}s".format(et))

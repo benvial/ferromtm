@@ -24,7 +24,7 @@ iplot = [0, 1, 2, 3, 4]
 Nbsamples = 21
 
 
-def load_results():
+def load_results_():
     Eps_eff_lin = np.zeros((Nbsamples, nE, nF), dtype=complex)
     Eps_eff_nl = np.zeros((Nbsamples, nE, nF), dtype=complex)
     Aniso_factor_lin = np.zeros((Nbsamples, nE, nF), dtype=float)
@@ -38,6 +38,7 @@ def load_results():
             # print(iE)
             for isample in sample_list:
                 # print(isample)
+                print("E={:.2f}MV/m, f={:.2f}, sample {}".format(E_bias, f, isample))
                 _, _, eps_hom = load_arch(E_bias, f, isample, coupling=True)
                 # eigval, eigvec = np.linalg.eig(eps_hom)
                 # eps_hom = np.diag(eigval)
@@ -77,6 +78,21 @@ def load_results():
             n_norm_nl[isample, :, iF] = n_nl[isample, :, iF] / n_bulk
     # Knorm_lin[isample, :, iF] = K_lin[isample, :, iF] / K_bulk
     # Knorm_nl[isample, :, iF] = K_nl[isample, :, iF] / K_bulk
+    name = "random_case"
+    saveddir = os.path.join(data_folder, "rand_circ_rods")
+    filename = os.path.join(saveddir, name + ".npz")
+    np.savez(
+        filename,
+        norm_eps=norm_eps,
+        norm_eps_nl=norm_eps_nl,
+        norm_loss=norm_loss,
+        norm_loss_nl=norm_loss_nl,
+        n_norm_lin=n_norm_lin,
+        n_norm_nl=n_norm_nl,
+        Aniso_factor_lin=Aniso_factor_lin,
+        Aniso_factor_nl=Aniso_factor_nl,
+    )
+
     return (
         norm_eps,
         norm_eps_nl,
@@ -87,6 +103,36 @@ def load_results():
         Aniso_factor_lin,
         Aniso_factor_nl,
     )
+
+
+def load_results(retrieve=False):
+    print("Loading results...")
+    if retrieve:
+        return load_results_()
+    else:
+        name = "random_case"
+        saveddir = os.path.join(data_folder, "rand_circ_rods")
+        filename = os.path.join(saveddir, name + ".npz")
+        arch = np.load(filename)
+        norm_eps = arch["norm_eps"]
+        norm_eps_nl = arch["norm_eps_nl"]
+        norm_loss = arch["norm_loss"]
+        norm_loss_nl = arch["norm_loss_nl"]
+        n_norm_lin = arch["n_norm_lin"]
+        n_norm_nl = arch["n_norm_nl"]
+        Aniso_factor_lin = arch["Aniso_factor_lin"]
+        Aniso_factor_nl = arch["Aniso_factor_nl"]
+
+        return (
+            norm_eps,
+            norm_eps_nl,
+            norm_loss,
+            norm_loss_nl,
+            n_norm_lin,
+            n_norm_nl,
+            Aniso_factor_lin,
+            Aniso_factor_nl,
+        )
 
 
 def plot_eff_par(fig, ax, lin=False):
@@ -184,8 +230,8 @@ def plot_eff_cqf(fig, ax):
 
 if __name__ == "__main__":
 
-    norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl = (
-        load_results()
+    norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl = load_results(
+        retrieve=False
     )
 
     plt.close("all")

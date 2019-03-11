@@ -1,0 +1,27 @@
+/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py:125: RuntimeWarning: 'gridmap.runner' found in sys.modules after import of package 'gridmap', but prior to execution of 'gridmap.runner'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+2019-03-07 17:57:29,095 - __main__ - INFO - Appended /homes/benjaminv/Code/ferromtm/ferromtm/models to PYTHONPATH
+2019-03-07 17:57:29,095 - __main__ - INFO - Starting heart beat
+2019-03-07 17:57:29,102 - __main__ - INFO - Waiting 3 seconds before fetching input
+2019-03-07 17:57:32,684 - __main__ - INFO - Changing working directory: /homes/benjaminv/Code/ferromtm/ferromtm/models
+2019-03-07 17:57:32,684 - __main__ - INFO - Executing job
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 4 : Unknown variable 'dx'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 4 : Unknown variable 'dy'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 6 : Unknown variable 'parmesh'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 6 : Unknown variable 'eps_host_re'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 6 : Division by zero in '0 / 0'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 7 : Unknown variable 'parmesh_incl'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 7 : Unknown variable 'eps_incl_re'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 7 : Division by zero in '0 / 0'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 10 : Unknown variable 'dx'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 10 : Unknown variable 'dy'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 11 : Unknown variable 'dx'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 11 : Unknown variable 'dy'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 12 : Unknown variable 'dx'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 12 : Unknown variable 'dy'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 13 : Unknown variable 'dx'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 13 : Unknown variable 'dy'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 27 : Unknown variable 'inclusion_flag'
+Error   : '/tmp/benjaminv.9uvp5xxi/geometry.geo', line 48 : Unknown variable 'inclusion_flag'
+2019-03-07 19:39:53,653 - __main__ - INFO - Finished job
+2019-03-07 19:39:53,657 - __main__ - INFO - thanks

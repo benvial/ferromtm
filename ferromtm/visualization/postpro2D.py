@@ -1,5 +1,5 @@
-from ferromtm.visualization.plots import *
 from ferromtm.models.coupled2D import *
+from ferromtm.visualization.plots import *
 
 
 n_bulk = tunability(epsilonr_ferroelectric(Ebias), epsilonr_ferroelectric(0))
@@ -13,7 +13,7 @@ def load_arch(E_bias, f, coupling=True):
     if not coupling:
         name += "_uncoupled"
     saveddir = os.path.join(data_folder, "circ_rods")
-    saveddir = os.path.join(data_folder, "circ_rods_pattern")
+    # saveddir = os.path.join(data_folder, "circ_rods_pattern")
     filename = os.path.join(saveddir, name + ".npz")
     arch = np.load(filename)
     eps_hom = arch["eps_hom"]
@@ -135,7 +135,7 @@ def plot_eff_par(fig, ax):
     subplot_id(ax=ax[0][0], id="a")
     ax[1][0].set_ylim((0.75, 1.01))
     subplot_id(ax=ax[1][0], id="b")
-    ax[0][1].set_ylim((0.9, 1.21))
+    ax[0][1].set_ylim((0.9, 1.41))
     subplot_id(ax=ax[0][1], id="c")
     ax[1][1].set_ylim((0.37, 1.03))
     subplot_id(ax=ax[1][1], id="d")

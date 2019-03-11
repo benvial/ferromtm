@@ -112,11 +112,11 @@ if __name__ == "__main__":
         E_exp, eps_norm_exp[1], "o", label="measured, $f=3.8$ GHz", color="#b05151"
     )
     plt.plot(E_fit, eps_norm_fit[1], "--", color="#b05151", label="fit, $f=3.8$ GHz")
-    plt.ylabel(
-        r"normalized permittivity $\varepsilon^{\rm f}/\varepsilon^{\rm f}(E=0)$"
-    )
+    plt.ylabel(r"normalized permittivity")
+    # $\varepsilon^{\rm f}/\varepsilon^{\rm f}(E=0)$
     plt.xlabel("electric field (MV/m)")
     plt.legend()
 
     plt.tight_layout()
-    fig.savefig("epsilon_fit.eps")
+    plt.ylim((0.1, 1.04))
+    # fig.savefig("epsilon_fit.eps")

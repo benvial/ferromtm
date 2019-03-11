@@ -1,5 +1,7 @@
 import matplotlib as mpl
 
+# mpl.use("Qt4Agg")
+
 mpl.rcParams["legend.fancybox"] = False
 mpl.rcParams["legend.fontsize"] = "small"
 mpl.rcParams["legend.frameon"] = False
