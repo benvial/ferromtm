@@ -32,10 +32,18 @@ from pytheas.tools.utils import refine_mesh
 rootdir = os.path.dirname(os.path.dirname(ferromtm.__file__))
 
 
+#
+# def epsilonr_ferroelectric(E, dc=True):
+#     eps = 20
+#     return np.ones_like(E)*eps
+
 pi = np.pi
 eps_incl = 3
 data_folder = os.path.join(rootdir, "data", "results")
 mat_folder = os.path.join(rootdir, "data", "mat")
+cv_dir_ = "circ_rods"
+# cv_dir_ = "rand_circ_rods"
+cv_dir = os.path.join(data_folder, cv_dir_, "convergence")
 
 
 def ellipse(Rinclx, Rincly, rot_incl, x0, y0):
@@ -140,6 +148,8 @@ def init_es(f, E_bias, incl=True, mat=None):
     fem_es.dx = 1
     fem_es.dy = 1
     fem_es.dz = 1
+    fem_es.Nix = 501
+    fem_es.Niy = 501
     fem_es.r = r
     fem_es.f = f
     fem_es.eps_incl = eps_incl
@@ -182,6 +192,8 @@ def init_hom(fem_es):
     fem_hom.dx = fem_es.dx
     fem_hom.dy = fem_es.dy
     fem_hom.dz = fem_es.dz
+    fem_hom.Nix = fem_es.Nix
+    fem_hom.Niy = fem_es.Niy
     fem_hom.eps_incl = fem_es.eps_incl
     fem_hom.eps_host = fem_es.eps_host
     fem_hom.tmp_dir = tempfile.mkdtemp(prefix="/tmp/benjaminv.")
@@ -259,8 +271,8 @@ def ppEmap(fem):
 
 def ppEpsimap(fem):
     fem.postpro_fields()
-    eps_xx = fem.get_field_map("epsilonr_xx.txt").real
-    eps_yy = fem.get_field_map("epsilonr_yy.txt").real
+    eps_xx = fem.get_field_map("epsilonr_xx.txt")
+    eps_yy = fem.get_field_map("epsilonr_yy.txt")
     return eps_xx, eps_yy
 
 
@@ -275,12 +287,14 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
         # E, fem_es = compute_elstat_pb(fem_es, epsi)
         fem_hom = init_hom(fem_es)
         epsi_rf = epsilonr_ferroelectric(E0)
+
         if not fem_es.inclusion_flag:
+            id = mat2des(fem_es)
             epsi_rf[0, id == 1] = eps_incl
             epsi_rf[1, id == 1] = eps_incl
             epsi_rf[2, id == 1] = eps_incl
         eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi_rf, verbose=verbose)
-        cv_dir = os.path.join(data_folder, "circ_rods", "convergence")
+
         fname = "cv_iter_{}.npz".format(iter)
         epsi_map = ppEpsimap(fem_hom)
         tmp = np.zeros_like(epsi_map[0])
@@ -291,12 +305,12 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
             pass
         np.savez(
             os.path.join(cv_dir, fname),
-            fem_es=fem_es,
-            fem_hom=fem_hom,
+            # fem_es=fem_es,
+            # fem_hom=fem_hom,
+            # epsi=epsi,
+            # epsi_rf=epsi_rf,
+            # E=E0,
             eps_hom=eps_hom,
-            epsi=epsi,
-            epsi_rf=epsi_rf,
-            E=E0,
             epsi_map=epsi_map,
             E_map=E_map,
         )
@@ -305,6 +319,7 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
         # if fem_es.inclusion_flag:
         E, fem_es = compute_elstat_pb(fem_es, epsi)
         epsi = epsilonr_ferroelectric(E.real, dc=True)
+
         if not fem_es.inclusion_flag:
             id = mat2des(fem_es)
             epsi_ = np.ones_like(E.real, dtype=complex)
@@ -327,7 +342,6 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
                 epsi_rf[1, id == 1] = eps_incl
                 epsi_rf[2, id == 1] = eps_incl
             eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi_rf, verbose=verbose)
-            cv_dir = os.path.join(data_folder, "circ_rods", "convergence")
             fname = fname = "cv_iter_{}.npz".format(iter)
             epsi_map = ppEpsimap(fem_hom)
             E_map = ppEmap(fem_es)
@@ -337,12 +351,12 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
                 pass
             np.savez(
                 os.path.join(cv_dir, fname),
-                fem_es=fem_es,
-                fem_hom=fem_hom,
+                # fem_es=fem_es,
+                # fem_hom=fem_hom,
+                # epsi=epsi,
+                # epsi_rf=epsi_rf,
+                # E=E,
                 eps_hom=eps_hom,
-                epsi=epsi,
-                epsi_rf=epsi_rf,
-                E=E,
                 epsi_map=epsi_map,
                 E_map=E_map,
             )
@@ -350,8 +364,8 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
             print("error: ", cv)
         if iter > max_iter:
             break
-        # fem_es.postpro_fields(filetype="pos")
-        # fem_es.open_gmsh_gui()
+        fem_es.postpro_fields(filetype="pos")
+        fem_es.open_gmsh_gui()
     return E, epsi, fem_es
 
 
@@ -372,6 +386,7 @@ def main(
     id = np.ones(nvar)
     if incl:
         epsi = id * eps_f, id * eps_f0, id * eps_f0
+
     else:
         id = mat2des(fem_es)
         epsi_xx = np.ones_like(id, dtype=complex) * eps_incl
@@ -428,6 +443,17 @@ def main_circle_conv(params):
     E_bias, f = params
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
     eps_hom, epsi, E, fem_hom, fem_es = main(f, E_bias, coupling=True, record_cv=True)
+    return eps_hom, epsi, E, fem_hom, fem_es
+
+
+def main_random_conv(params):
+    E_bias, f = params
+    isample = 0
+    print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
+    mat = make_pattern(f, choice="rand", isample=isample)
+    eps_hom, epsi, E, fem_hom, fem_es = main(
+        f, E_bias, mat=mat, incl=False, coupling=True, record_cv=True
+    )
     return eps_hom, epsi, E, fem_hom, fem_es
 
 
@@ -501,7 +527,10 @@ params = np.vstack((E1.ravel(), F1.ravel())).T
 
 
 if __name__ == "__main__":
-    main_circle_conv(params[104])
+    # main_circle_conv(params[104])
+    f = pi * 0.4 ** 2
+    main_circle([1, f], coupling=False)
+    # main_random_conv(params[104])
 
     # main_circle(params[2], save=False, coupling=True)
 

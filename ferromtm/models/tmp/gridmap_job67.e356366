@@ -1,0 +1,17 @@
+/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py:125: RuntimeWarning: 'gridmap.runner' found in sys.modules after import of package 'gridmap', but prior to execution of 'gridmap.runner'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+2019-03-12 19:40:28,069 - __main__ - INFO - Appended /homes/benjaminv/Code/ferromtm/ferromtm/models to PYTHONPATH
+2019-03-12 19:40:28,069 - __main__ - INFO - Starting heart beat
+2019-03-12 19:40:28,073 - __main__ - INFO - Waiting 5 seconds before fetching input
+2019-03-12 19:40:34,756 - __main__ - INFO - Changing working directory: /homes/benjaminv/Code/ferromtm/ferromtm/models
+2019-03-12 19:40:34,756 - __main__ - INFO - Executing job
+Traceback (most recent call last):
+  File "/homes/benjaminv/programs/miniconda/lib/python3.7/site-packages/gridmap/job.py", line 249, in execute
+    self.ret = self.function(*self.args, **self.kwlist)
+  File "/homes/benjaminv/Code/ferromtm/ferromtm/models/slab.py", line 118, in main_meta
+    return main(t, homogenized=False)
+  File "/homes/benjaminv/Code/ferromtm/ferromtm/models/slab.py", line 82, in main
+    fem_es.tmp_dir = tempfile.mkdtemp(prefix="/tmp/benjaminv.")
+NameError: name 'fem_es' is not defined
+2019-03-12 19:40:34,760 - __main__ - INFO - Finished job
+2019-03-12 19:40:34,764 - __main__ - INFO - thanks

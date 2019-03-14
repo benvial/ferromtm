@@ -106,12 +106,12 @@ if __name__ == "__main__":
 
     plt.close("all")
     fig = plt.figure(figsize=(5, 3))
-    plt.plot(E_exp, eps_norm_exp[0], "o", label="measured, $f=0$", color="#3e8b58")
-    plt.plot(E_fit, eps_norm_fit[0], "--", color="#3e8b58", label="fit, $f=0$")
+    plt.plot(E_exp, eps_norm_exp[0], "o", label="measured, static", color="#3e8b58")
+    plt.plot(E_fit, eps_norm_fit[0], "--", color="#3e8b58", label="fit, static")
     plt.plot(
-        E_exp, eps_norm_exp[1], "o", label="measured, $f=3.8$ GHz", color="#b05151"
+        E_exp, eps_norm_exp[1], "o", label="measured, $f=3.8$ GHz", color="#eb931e"
     )
-    plt.plot(E_fit, eps_norm_fit[1], "--", color="#b05151", label="fit, $f=3.8$ GHz")
+    plt.plot(E_fit, eps_norm_fit[1], "--", color="#eb931e", label="fit, $f=3.8$ GHz")
     plt.ylabel(r"normalized permittivity")
     # $\varepsilon^{\rm f}/\varepsilon^{\rm f}(E=0)$
     plt.xlabel("electric field (MV/m)")

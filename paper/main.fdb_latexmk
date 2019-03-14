@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex main"] 1551896752 "main.aux" "main.bbl" "main" 1551978306
+["bibtex main"] 1552424070 "main.aux" "main.bbl" "main" 1552424071
   "/usr/share/texmf-dist/bibtex/bst/revtex/apsrev4-2.bst" 1550406587 69612 d43c8740409d8c756864ce4e3d57a214 ""
   "biblio.bib" 1550150781 7002 e374ff2c39aa6833ae510fb7e0497134 ""
-  "main.aux" 1551896753 6383 bc3d7e56b4bfc06bf290410cdfb238a3 ""
-  "mainNotes.bib" 1551896753 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
+  "main.aux" 1552424071 6573 5c87706f910bab07a9818702afdd5235 ""
+  "mainNotes.bib" 1552424071 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1551896752 "main.tex" "main.pdf" "main" 1551978306
+["pdflatex"] 1552424070 "main.tex" "main.pdf" "main" 1552424071
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1550406775 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1550406775 1120 1e8878807317373affa7f7bba4cf2f6a ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1550406775 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -50,6 +50,7 @@
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb" 1550406775 36094 798f80770b3b148ceedd006d487db67c ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb" 1550406775 36912 b448ef9ad9d7228ec3c6e71005136d55 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1550406775 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1550406775 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1550406775 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb" 1550406775 33993 9b89b85fd2d9df0482bd47194d1d3bf3 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb" 1550406775 24393 3b7eb51a67a0a62aec5849271bdb9c2e ""
@@ -96,17 +97,17 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1550406775 33301 a3134070eacafb10b1f371612ce2650d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1550689879 3122541 d40d88b581ddf85d7a6888b776ca231d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1550689870 7919196 fbae4be0817089eb85cbd0d3cf1771c0 ""
-  "conv" 0 -1 0 ""
-  "cvrand" 0 -1 0 ""
+  "conv_per.eps" 1552406108 719895 1685a8669c28635fb7ba89b69dadffb9 ""
+  "conv_rand.eps" 1552422291 995126 6921e62a2bf27580745eef943eec0226 ""
   "effpar_per.eps" 1551893751 70047 401924523d232aa736371f020b7ace84 ""
-  "effpar_rand" 0 -1 0 ""
-  "epsilon_fit.eps" 1551895110 34419 7328989e67309a5e0a8e482ee2ebea22 ""
-  "main.aux" 1551896753 6383 bc3d7e56b4bfc06bf290410cdfb238a3 ""
-  "main.bbl" 1551896752 16668 8f7e16082821b03fe4a9aef011229065 "bibtex main"
-  "main.tex" 1551896749 24492 e336e62ba818ea80c1b41b96f00061ce ""
+  "effpar_rand_cpl.png" 1552423894 107738 94827fdf24cbcfd58709227623b8967f ""
+  "epsilon_fit.eps" 1552401162 34275 70d3706d224d54f761ec2648b0038aa3 ""
+  "main.aux" 1552424071 6573 5c87706f910bab07a9818702afdd5235 ""
+  "main.bbl" 1552424070 16668 8f7e16082821b03fe4a9aef011229065 "bibtex main"
+  "main.tex" 1552424068 24870 a06b03625ee2c01ae74a277f9ce661f2 ""
   "randmatepsi.eps" 1550150782 622712 167f9f01e4a0a4c5606965e53c9dc7e5 ""
   (generated)
-  "main.log"
   "main.pdf"
-  "mainNotes.bib"
+  "main.log"
   "main.aux"
+  "mainNotes.bib"

@@ -172,8 +172,8 @@ ferroelectric phase depends on this induced electric field: this leads to a stro
 % -------------------------------------------------------------------------------
 \subsection*{Permittivity model\label{permmodel}}
 
-We use barium strontium titanate (BST) as our ferroelectric material. Microwave measurements
-at 10 GHz where performed and the normalized permittivity value
+We use barium strontium titanate (BST) as our ferroelectric material. Measurements
+have been carried out at electrostatics and at microwave frequencies, and the normalized permittivity value
 as a function of biasing field are reported on \fig{fig1}.\\
 To describe the permittivity, we make use of the Landau potential
 given by $F(P,E) = F_0 +  a P^2/2 + b P^4/4 + cP^6/6 - EP$, where $E$ is
@@ -185,23 +185,21 @@ of permittivity due to mechanical constraints is irrelevant.
 The equation of state $$\frac{\partial F (P, E)}{\partial P}   = a P_0 + b P_0^3 + c P_0^5 - E = 0$$ gives the
 dependence of the polarization on the applied electric field,
 with $P_0$ being the equilibrium polarization.
-Along the direction of a uniformly applied electric field, the permittivity is given by:
-
+Along the direction of a uniform applied electric field, the relative permittivity is given by:
 \begin{equation}
-  \epsf(E) = \left[\epsvac \frac{\partial^2 F (P, E)}{\partial P^2} \right]^{-1} = \frac{\epsf(0)}{1 + \beta P_0^2 + \gamma P_0^4},
+  \epsf(E) = \left[\frac{\partial^2 F (P, E)}{\partial P^2} \right]^{-1} = \frac{\epsf(0)}{1 + \alpha P_0^2 + \beta P_0^4},
   \label{eq_epsf}
 \end{equation}
-where $\beta = 3 b \epsvac \epsf(0) /a$ and  $\gamma = 5 c \epsvac \epsf(0) /a$.
-The permittivity without bias $\epsf(0)$ was measured to be 120 and the fitting parameters
-are $a = 0.992/\epsvac$, $b=0.086/(\epsvac^3\,E_{\rm ref}^2)$, $c=0.014/(\epsvac^5\,E_{\rm ref}^4)$, $E_{\rm ref}=1$ kV/mm.
+where $\epsf(0)=1/a$, $\alpha=3b/a$ and $\beta=5c/a$. The fitting parameters are given in Table \ref{table_params_fit}.
 As the norm of the field increases, the permittivity decreases with a characteristic
 bell curve typical for a ferroelectric material in its paraelectric state.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=1\columnwidth]{epsilon_fit}
 \caption{Variation of the ferroelectric permittivity as a function of the
- applied electric field (green dots: measurements, grey dashed line: fit to
- formula~(\ref{eq_epsf})).}
+ applied electric field (dots: measurements, dashed lines: fit to
+ formula~(\ref{eq_epsf})), for the static case (green) and at microwave frequencies
+  (orange, $f=3.8$ GHz). The fitting parameters are given in Table \ref{table_params_fit}.}
 \label{fig1}
 \end{figure}
 Furthermore, assuming the crystalline principal axes of the ferroelectric material
@@ -221,6 +219,17 @@ tensor are only function of the corresponding bias electric field components \ci
 \end{equation}
 where each of the diagonal components have the functional form
 given by \equ{eq_epsf}.
+\begin{table}
+  \begin{tabular}{c | ccc}
+   & $\epsf(0)$  & $\alpha$ ($\rm \mu m^2/V^2$) & $\beta$ ($\rm \mu m^4/V^4$)\\ \hline
+  % \\[-1.2em]
+  static & 3050 & 0.120 & 0.024\\ \hline
+  % \\[-1.2em]
+  $f=3.8$ GHz & 165 & 0.240 & 0.079
+  \end{tabular}
+  \caption{Fitting parameters}
+  \label{table_params_fit}
+\end{table}
 
 % -------------------------------------------------------------------------------
 \subsection*{Electrostatic model}
@@ -245,8 +254,9 @@ has to solve the electrostatic equation for the potential $V$:
 \div (\epsvac \epstens \grad V) = 0
 \label{eq_elstat}
 \end{equation}
-Note that for the TE case, the solution is straightforward since the structures
-are invariant along $z$, so that the electric field is equal to the uniform biasing field.
+Note that for the TE case, the solution is trivial since the structures
+are invariant along $z$, so that the electric field is equal to the uniform biasing field, and
+we will therefore not study it in the following.
 However in the TM case, the situation is much more complex: this is a coupled problem since the
 electric field $E=-\grad V$ derived from the
 solution of \equ{eq_elstat} depends on the permittivity distribution, which
@@ -278,17 +288,15 @@ The homogenized coefficient $\xihom$ is obtained with:
 where $\langle . \rangle$ denotes the mean value over the unit cell.
 The elements of the matrix $\B \phi$ represent correction terms and
 are given by $\B \phi_{ij} = \langle \xitens \grad \psi_i \rangle_j$.
-Finally the homogenized permittivity  can be calculated using $\epshom_{\rm TM}=\xihom^{\rm T}/ {\rm det }(\xihom)$.\\
-On the other hand, the TE case is fairly easy to handle since the homogenized permittivity
-is simply the average of the permittivity in the unit cell:
-\begin{equation}
-\epshom_{\rm TE} = \langle \epstens \rangle .
-\label{eq_hom_TE}
-\end{equation}
+Finally the homogenized permittivity  can be calculated using $\epshom=\xihom^{\rm T}/ {\rm det }(\xihom)$.\\
+Note that the TE case, which we shall not study here as no coupling happens, is trivial since
+the homogenized permittivity is simply the average of the permittivity in the unit cell:
+$\epshom = \langle \epstens \rangle$.
+
 
 % -------------------------------------------------------------------------------
 \subsection*{Numerical setup}
-In the TM case, equations~(\ref{eq_elstat}) and (\ref{eq_hom_annex}) are solved with a Finite Element
+Equations~(\ref{eq_elstat}) and (\ref{eq_hom_annex}) are solved with a Finite Element
 Method using the open source packages Gmsh \cite{gmsh} and GetDP \cite{getdp}.
 In both cases we use a square unit cell $\Omega$ of length $d$ with periodic boundary
 conditions along $x$ and $y$. Second order Lagrange elements are used and the
@@ -317,7 +325,7 @@ filling fraction $f=\pi r^2/d^2=0.5$ and $E_0=2$kV/mm. Figures \ref{conv2D}(a) a
 convergence of the real part and loss tangent of the components of the homogenized
  permittivity tensor, respectively. The $yy$ components converge very quickly
  and are almost unaffected by the coupling process whereas the
- $xx$ components change drastically from the initial conditions.
+ $xx$ components change substantially from the initial conditions.
  This is due to the effect of the distribution
  of the electrostatic field within the unit cell (see Figs.~(\ref{conv2D})(c) and \ref{conv2D}(d)),
  where the $x$ component of the electric field is still much stronger
@@ -331,8 +339,8 @@ convergence of the real part and loss tangent of the components of the homogeniz
  model differ significantly from the uncoupled one. Increasing the dielectric fraction
  lowers the effective permittivity while the losses are slightly reduced but much less sensitive.
  Due to the inhomogeneous redistribution of the permittivity over the ferroelectric domain, the
- overall tunability changes. In the case studied here, effective tunability is reduced with
- increasing dielectric concentration. There are two concurrent effect at stake here: on the one hand
+ overall tunability changes. In the case studied here, taking into account the coupling leads to an effective tunability increases with
+ increasing dielectric concentration, and is higher than the tunability of bulk ferroelectric.  There are two concurrent effect at stake here: on the one hand
  the dilution of ferroelectric makes the composite less tunable, but on the other hand,
  the rearrangement of the electrostatic field surrounding the inclusion and its
  concentration in some region will cause a higher permittivity change locally.
@@ -348,24 +356,24 @@ phase, and depending on the topology and permittivity of the rods, one effect wo
 Those subtle phenomena can only be rigorously taken into account by employing a coupling formalism
 and are responsible for the difference observed when compared to a simple uncoupled model.\\
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
 \centering
-\includegraphics[width=0.95\columnwidth]{conv}
-\caption{Convergence of the coupled problem in the TM polarization case.
+\includegraphics[width=0.9\textwidth]{conv_per}
+\caption{Convergence of the coupled problem.
 Real part (a) and loss tangent (b) of the components of the homogenized
  permittivity tensor as a function of iteration step $i$. The distribution of
- the electric field (colormap: magnitude, arrows: direction) and of the
+ the normalized electric field (colormap: magnitude, arrows: direction) and of the
  $xx$ component of the permittivity tensor are shown for $i=1$
-  (c and d) and $i=29$ (e and f).
+  (c and d) and $i=12$ (e and f).
  }
 \label{conv2D}
-\end{figure}
+\end{figure*}
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.8\textwidth]{effpar_per}
 \caption{Effective parameters of the 2D metamaterials as a function of the
- applied electric field for various filling fraction of dielectric, TM polarization.
+ applied electric field for various filling fraction of dielectric.
  (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
  (d): anisotropy factor. The solid lines correspond to the coupled model and
  the dashed lines to the uncoupled model.}
@@ -414,9 +422,9 @@ dielectric inclusions.}
 \end{figure}
 
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
 \centering
-\includegraphics[width=0.95\columnwidth]{effpar_rand}
+\includegraphics[width=0.95\textwidth]{effpar_rand_cpl}
 \caption{Effective parameters of the random 2D mixtures as a function of the
  applied electric field for various filling fraction of dielectric, TM polarization.
  (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
@@ -424,23 +432,23 @@ dielectric inclusions.}
   over the 21 samples and the lighter error bands show a confidence interval corresponding to
   the standard deviation.}
 \label{eff_par_2Drand_TM}
-\end{figure}
-
-
-
-\begin{figure}[!t]
+\end{figure*}
+%
+%
+%
+\begin{figure*}[!t]
 \centering
-\includegraphics[width=0.95\columnwidth]{cvrand}
-\caption{Convergence of the coupled problem for TM polarization in the random case
+\includegraphics[width=0.95\textwidth]{conv_rand}
+\caption{Convergence of the coupled problem in the random case
 for one sample.
 Real part (a) and loss tangent (b) of the components of the homogenized
  permittivity tensor as a function of iteration step $i$. The distribution of
- the electric field (colour map: magnitude in logarithmic scale, arrows: direction) and of the
+ the normalized electric field (colour map: magnitude in logarithmic scale, arrows: direction) and of the
  $xx$ component of the permittivity tensor are shown for $i=1$
-  (c and d) and $i=7$ (e and f).
+  (c and d) and $i=14$ (e and f).
  }
 \label{conv_random}
-\end{figure}
+\end{figure*}
 
 
 
@@ -457,7 +465,7 @@ The results obtained by this model differ significantly from a simple assumption
 the permittivity of the ferroelectric respond just to the uniform biasing field.
 We have considered both periodic and random arrays
 of dielectric rods in a ferroelectric matrix in 2D, and studied their effective properties
-for TE and TM polarization as a function of dielectric concentration and bias field.
+for TM polarization as a function of dielectric concentration and bias field.
 Importantly, adding more low index and low loss dielectric allows to decrease
 the overall permittivity significantly and slightly lower the losses. On the other hand,
 the higher the dielectric concentration the smaller the tunability would be while

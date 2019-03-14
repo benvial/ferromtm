@@ -1,5 +1,6 @@
 from ferromtm.models.coupled2D import *
 from ferromtm.visualization.plots import *
+from matplotlib.ticker import MaxNLocator
 
 
 n_bulk = tunability(epsilonr_ferroelectric(Ebias), epsilonr_ferroelectric(0))
@@ -7,9 +8,12 @@ K_bulk = cqf(epsilonr_ferroelectric(Ebias), epsilonr_ferroelectric(0))
 eps_00 = epsilonr_ferroelectric(0).real
 tandelta_00 = -epsilonr_ferroelectric(0).imag / epsilonr_ferroelectric(0).real
 
+cv_dir_ = "circ_rods"
+cv_dir_ = "rand_circ_rods"
+cv_dir = os.path.join(data_folder, cv_dir_, "convergence")
+
 
 def load_arch(iter):
-    cv_dir = os.path.join(data_folder, "circ_rods", "convergence")
     fname = "cv_iter_{}.npz".format(iter)
     filename = os.path.join(cv_dir, fname)
     arch = np.load(filename)
@@ -19,9 +23,8 @@ def load_arch(iter):
     return epsi, E, eps_hom
 
 
-iplot = [0, 1, 2, 3, 4]
-
-ncv = 13
+ncv = 13  # periodic
+ncv = 15  # random
 
 
 def load_results():
@@ -57,13 +60,14 @@ def plotEarrows(ax, Enewx, Enewy):
     dd = np.linspace(0, nx - 1, nx)
     X0, Y0 = np.meshgrid(dd, dd)
     X, Y = X0[::dspl, ::dspl], Y0[::dspl, ::dspl]
+    X, Y = X0, Y0
 
     U0 = Enewx[::dspl, ::dspl].T
     V0 = Enewy[::dspl, ::dspl].T
     normarrow = np.sqrt(U0 ** 2 + V0 ** 2)
-    U = U0 / 1
-    V = V0 / 1
-    ax.streamplot(X, Y, U, V, density=1, linewidth=0.25 * (normarrow), color="k")
+    U = U0
+    V = V0
+    ax.streamplot(X, Y, U, V, density=1, linewidth=1, color="#ababab")
 
 
 def plot_E_map_conv(axtmp, i, label=None):
@@ -77,7 +81,7 @@ def plot_E_map_conv(axtmp, i, label=None):
     Enp = Enp.T / normE0
     Enp[epsp <= 3] = np.NaN
     plotEarrows(axtmp, Enewx, Enewy)
-    Eax = axtmp.imshow((Enp), cmap="YlOrRd")
+    Eax = axtmp.imshow(np.log10(Enp), cmap="YlOrRd", vmin=-1, vmax=1)
     axtmp.set_aspect("equal")
     axtmp.set_axis_off()
     cb = plt.colorbar(Eax, ax=axtmp)
@@ -86,19 +90,20 @@ def plot_E_map_conv(axtmp, i, label=None):
     return axtmp, cb
 
 
-def plot_eps_map_conv(axtmp, i, label=None):
+def plot_eps_map_conv(ax, i, label=None):
 
     epsp_ = epsi_cv[i][0].real
 
     epsp_ = epsp_.T
     epsp_[epsp_ <= 3] = np.NaN
-    epsax = axtmp.imshow(epsp_, cmap="summer", vmax=eps_00.real)
-    axtmp.set_aspect("equal")
-    axtmp.set_axis_off()
-    cb = plt.colorbar(epsax, ax=axtmp)
-    axtmp.set_title(r"permittivity $\varepsilon_{{xx}}$, $i={0}$".format(i))
+    epsax = ax.imshow(epsp_, cmap="summer", vmax=eps_00.real)
+    ax.set_aspect("equal")
+    ax.set_axis_off()
+    cb = plt.colorbar(epsax, ax=ax)
+    ax.set_title(r"permittivity $\varepsilon_{{xx}}$, $i={0}$".format(i))
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
-    return axtmp, cb
+    return ax, cb
 
 
 def plot_eps_conv(ax):
@@ -120,7 +125,8 @@ def plot_eps_conv(ax):
     ax.legend()
     ax.set_xticklabels("")
     ax.set_title("normalized permittivity")
-    ax.set_ylim((0.12, 0.37))
+    ax.set_ylim((0.14, 0.22))
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     return ax
 
 
@@ -132,7 +138,8 @@ def plot_tand_conv(axtmp):
     axtmp.legend()
     axtmp.set_xlabel("iteration $i$")
     axtmp.set_title("normalized loss tangent")
-    axtmp.set_ylim((0.8, 0.97))
+    # axtmp.set_ylim((0.8, 0.97))
+    axtmp.set_ylim((0.65, 0.85))
     return axtmp
 
 
@@ -151,7 +158,8 @@ if __name__ == "__main__":
     plot_eps_map_conv(ax[0, 2], i)
     subplot_id(ax=ax[0, 2], id="e")
 
-    i = 12
+    i = ncv - 1
+    # i = 1 # random
     plot_E_map_conv(ax[1, 1], i)
     subplot_id(ax=ax[1, 1], id="d")
     plot_eps_map_conv(ax[1, 2], i)
