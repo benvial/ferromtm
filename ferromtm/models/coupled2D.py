@@ -32,13 +32,13 @@ from pytheas.tools.utils import refine_mesh
 rootdir = os.path.dirname(os.path.dirname(ferromtm.__file__))
 
 
-#
-# def epsilonr_ferroelectric(E, dc=True):
-#     eps = 20
-#     return np.ones_like(E)*eps
+def epsilonr_ferroelectric(E, dc=True):
+    eps = 1 / 50
+    return np.ones_like(E) * eps
+
 
 pi = np.pi
-eps_incl = 3
+eps_incl = 1 / 3
 data_folder = os.path.join(rootdir, "data", "results")
 mat_folder = os.path.join(rootdir, "data", "mat")
 cv_dir_ = "circ_rods"
@@ -137,7 +137,7 @@ def init_es(f, E_bias, incl=True, mat=None):
 
     fem_es.gmsh_verbose = 0  #: str: Gmsh verbose (int between 0 and 4)
     fem_es.getdp_verbose = 0  #: str: GetDP verbose (int between 0 and 4)
-    fem_es.python_verbose = 0
+    fem_es.python_verbose = 1
     #: str: GetDP verbose (int between 0 and 1)
     fem_es.parmesh = 34
     fem_es.parmesh_incl = 34
@@ -529,7 +529,28 @@ params = np.vstack((E1.ravel(), F1.ravel())).T
 if __name__ == "__main__":
     # main_circle_conv(params[104])
     f = pi * 0.4 ** 2
-    main_circle([1, f], coupling=False)
+    Ebias = 1
+    # eps_hom, epsi, E, fem_hom, fem_es = main_circle(
+    #     [Ebias, f], coupling=False, rmtmpdir=False
+    # )
+
+    eps_hom, epsi, E, fem_hom, fem_es = main(
+        f,
+        Ebias,
+        coupling=False,
+        incl=True,
+        mat=None,
+        record_cv=False,
+        verbose=True,
+        rmtmpdir=False,
+    )
+    fem_hom.postpro_fields(filetype="txt")
+    v = fem_hom.get_field_map("v.txt")
+    import matplotlib.pyplot as plt
+
+    plt.ion()
+    plt.imshow(v.real, cmap="bwr")
+    plt.colorbar()
     # main_random_conv(params[104])
 
     # main_circle(params[2], save=False, coupling=True)
