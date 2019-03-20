@@ -88,7 +88,7 @@
   between the electrostatic problem and the electric field dependent permittivity of the
   ferroelectric material. Periodic and random structures in two dimensions are investigated and
   we study the effective permittivity, losses, electrically induced anisotropy and tunability
-   of the homogenized materials.
+   of those metamaterials.
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -96,14 +96,11 @@
 
 \begin{fmtext}
   \section{Introduction}
-
-
-  Ferroelectric materials play a crucial role in tunable
+  Ferroelectric materials play a crucial role in reconfigurable 
   microwave devices, with typical applications including antenna beam steering,
   phase shifters, tunable power splitters, filters, voltage controlled oscillators and
-  matching networks \cite{Tagantsev2018}. Both bulk ceramics and thin films have
-  been employed to design frequency agile components \cite{vendik1999ferroelectric, lancaster1998thin,
-  xi2000oxide} and metamaterials \cite{Hand2008, Zhao2008}. The main reason of using
+  matching networks \cite{tagantsev_ferroelectric_2018}. Both bulk ceramics and thin films have
+  been employed to design frequency agile components \cite{vendik_ferroelectric_1999, lancaster_thin-film_1998,xi_oxide_2000} and metamaterials \cite{hand_frequency_2008, zhao_experimental_2008}. The main reason of using
   ferroelectric materials is their strong dependence of their permittivity $\varepsilon$
   on an applied electric field $E$, which is measured by their tunability defined as $n = \varepsilon(0)/\varepsilon(E)$.
   The key requirements for antenna and microwave applications are large tunability and low losses.
@@ -120,12 +117,11 @@
 
 \maketitle
 \noindent values and losses.
-The effective parameters of those composites have been investigated \cite{Sherman2006,
-jylha2008tunability, Sherman2004, ASTAFIEV20032381} and it has been found that the
+The effective parameters of those composites have been investigated \cite{sherman_ferroelectric-dielectric_2006, jylha_tunability_2008, sherman_tunability_2004, astafiev_can_2003} and it has been found that the
 permittivity can be greatly reduced while losses and tunability are much less sensitive to the
 dielectric phase addition.\\
 This study investigates the effective permittivity of dielectric/ferroelectric composites
-by using a two-scale convergence method \cite{Allaire92, Guenneau2000}.
+by using a two-scale convergence method \cite{allaire_homogenization_1992, guenneau_homogenization_2000}.
 The originality lies in the fact that a fully coupling model is employed to
 calculate the electrostatic field distribution when a uniform biasing field is
 applied on the structures, which will result in a local modification of the permittivity
@@ -173,7 +169,7 @@ have been carried out at electrostatics and at microwave frequencies, and the no
 as a function of biasing field are reported on \fig{fig1}.\\
 To describe the permittivity, we make use of the Landau potential
 given by $F(P,E) = F_0 +  a P^2/2 + b P^4/4 + cP^6/6 - EP$, where $E$ is
-the applied electric field and $P$ is the polarization \cite{landau_electrodynamics_2013, Zhou2008}. Variations of the
+the applied electric field and $P$ is the polarization \cite{landau_electrodynamics_2013, zhou_dielectric_2008}. Variations of the
 permittivity with the temperature can be taken into account through the
  coefficients $a$, $b$ and $c$, but we assume we are working at a constant
 room temperature. We further assume that the material is not subject to any stress, so that the variation
@@ -200,7 +196,7 @@ bell curve typical for a ferroelectric material in its paraelectric state.
 \end{figure}
 Furthermore, assuming the crystalline principal axes of the ferroelectric material
 are oriented in the coordinate directions, and that the diagonal components of the permittivity
-tensor are only function of the corresponding bias electric field components \cite{Krowne2002}, we have:
+tensor are only function of the corresponding bias electric field components \cite{krowne_anisotropic_2002}, we have:
 \begin{equation}
   \epsftens (\B E) =
 \left(
@@ -270,14 +266,14 @@ of the total electric field.\\
 % -------------------------------------------------------------------------------
 \subsection{Homogenization}
 The effective permittivity for TM polarization is calculated
-using two scale homogenization technique \cite{Allaire92, Guenneau2000}.
+using two scale homogenization technique \cite{allaire_homogenization_1992, guenneau_homogenization_2000}.
 For this purpose, one has to find the solutions
 $\psi_j$ of two annex problems $\mathcal P_j$, $j=\{1, 2\}$:
 \begin{equation}
 \div \left[ \xitens \grad(\psi_j + r_j) \right] = 0,
 \label{eq_hom_annex}
 \end{equation}
-where $\B r = (x, y)^T$ is the position vector in the $xy$ plane and
+where $\B r = (x, y)^{\rm T}$ is the position vector in the $xy$ plane and
 $\xitens=\epstens^{\rm T}/ {\rm det }(\epstens)$.
 The homogenized coefficient $\xihom$ is obtained with:
 \begin{equation}
@@ -296,10 +292,10 @@ $\epshom = \langle \epstens \rangle$.
 % -------------------------------------------------------------------------------
 \subsection{Numerical setup}
 Equations~(\ref{eq_elstat}) and (\ref{eq_hom_annex}) are solved with a Finite Element
-Method using the open source packages Gmsh \cite{gmsh} and GetDP \cite{getdp}.
+Method using the open source packages Gmsh \cite{geuzaine_gmsh:_2009} and GetDP \cite{dular_general_1998}.
 In both cases we use a square unit cell $\Omega$ of length $d$ with periodic boundary
 conditions along $x$ and $y$. Second order Lagrange elements are used and the
-solution is computed with a direct solver (MUMPS \cite{MUMPS}).
+solution is computed with a direct solver (MUMPS \cite{amestoy_fully_2001}).
 % The source code and
 % data necessary to reproduce the results reported in this paper are freely available
 % online.
@@ -479,7 +475,7 @@ The properties of the composites are affected by multiple factors:
   extending this study to 3D media.
  Finally, because the permittivity of the dielectric is much smaller than the ferroelectric one,
  it would be of great interest to use high contrast homogenization theory
- \cite{BOUCHITTE2004377, cherednichenko_cooper_2015} to
+ \cite{bouchitte_homogenization_2004, cherednichenko_homogenization_2015} to
  study this kind of mixtures.
  This would reveal the frequency dependant artificial magnetism due to "micro-resonances"
  in the high index phase and potentially lead to composites with tunable effective permeability.
