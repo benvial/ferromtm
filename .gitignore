@@ -84,5 +84,5 @@ target/
 *.swp
 *.swo
 
-*/tmp
-*gridmap_job
+tmp
+gridmap_job*

@@ -1,9 +1,0 @@
-/homes/benjaminv/programs/miniconda/lib/python3.7/runpy.py:125: RuntimeWarning: 'gridmap.runner' found in sys.modules after import of package 'gridmap', but prior to execution of 'gridmap.runner'; this may result in unpredictable behaviour
-  warn(RuntimeWarning(msg))
-2019-03-21 15:18:43,777 - __main__ - INFO - Appended /homes/benjaminv/Code/ferromtm/ferromtm/models to PYTHONPATH
-2019-03-21 15:18:43,778 - __main__ - INFO - Starting heart beat
-2019-03-21 15:18:43,786 - __main__ - INFO - Waiting 1 seconds before fetching input
-2019-03-21 15:18:47,197 - __main__ - INFO - Changing working directory: /homes/benjaminv/Code/ferromtm/ferromtm/models
-2019-03-21 15:18:47,197 - __main__ - INFO - Executing job
-2019-03-21 15:26:26,782 - __main__ - INFO - Finished job
-2019-03-21 15:26:26,789 - __main__ - INFO - thanks
