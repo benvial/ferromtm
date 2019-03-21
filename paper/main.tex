@@ -60,7 +60,10 @@
 \newtheorem{condition}{\bf Condition}[section]
 \newtheorem{corollary}{\bf Corollary}[section]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%
+% Coupled model and homogenization of dielectric-ferroelectric mixtures.
+%
+% We will present the study of the effective permittivity tensor of ferroelectric-dielectric composites under a static electric field. A refined model is used to take into account the coupling between the electrostatic problem and the electric field dependent permittivity of the ferroelectric medium. Periodic and random arrays of dielectric rods in a ferroelectric matrix are investigated and we study the effective permittivity, losses, electrically induced anisotropy and tunability of those metamaterials using a two-scale homogenization method.
 
 \begin{document}
 
@@ -96,7 +99,7 @@
 
 \begin{fmtext}
   \section{Introduction}
-  Ferroelectric materials play a crucial role in reconfigurable 
+  Ferroelectric materials play a crucial role in reconfigurable
   microwave devices, with typical applications including antenna beam steering,
   phase shifters, tunable power splitters, filters, voltage controlled oscillators and
   matching networks \cite{tagantsev_ferroelectric_2018}. Both bulk ceramics and thin films have
@@ -119,7 +122,8 @@
 \noindent values and losses.
 The effective parameters of those composites have been investigated \cite{sherman_ferroelectric-dielectric_2006, jylha_tunability_2008, sherman_tunability_2004, astafiev_can_2003} and it has been found that the
 permittivity can be greatly reduced while losses and tunability are much less sensitive to the
-dielectric phase addition.\\
+dielectric phase addition.
+\\
 This study investigates the effective permittivity of dielectric/ferroelectric composites
 by using a two-scale convergence method \cite{allaire_homogenization_1992, guenneau_homogenization_2000}.
 The originality lies in the fact that a fully coupling model is employed to
@@ -246,7 +250,7 @@ $\B E_0 = E_{0} \B e_x$ for the TM polarization case.
 To calculate the total electric field in the material, one
 has to solve the electrostatic equation for the potential $V$:
 \begin{equation}
-\div (\epsvac \epstens \grad V) = 0
+\div (\epstens \grad V) = 0
 \label{eq_elstat}
 \end{equation}
 Note that for the TE case, the solution is trivial since the structures
@@ -275,7 +279,7 @@ $\psi_j$ of two annex problems $\mathcal P_j$, $j=\{1, 2\}$:
 \end{equation}
 where $\B r = (x, y)^{\rm T}$ is the position vector in the $xy$ plane and
 $\xitens=\epstens^{\rm T}/ {\rm det }(\epstens)$.
-The homogenized coefficient $\xihom$ is obtained with:
+The homogenized tensor $\xihom$ is obtained with:
 \begin{equation}
 \xihom = \langle \xitens \rangle + \B \phi,
 \label{eq_hom}
@@ -283,7 +287,7 @@ The homogenized coefficient $\xihom$ is obtained with:
 where $\langle . \rangle$ denotes the mean value over the unit cell.
 The elements of the matrix $\B \phi$ represent correction terms and
 are given by $\B \phi_{ij} = \langle \xitens \grad \psi_i \rangle_j$.
-Finally the homogenized permittivity  can be calculated using $\epshom=\xihom^{\rm T}/ {\rm det }(\xihom)$.\\
+Finally the effective permittivity tensor can be calculated using $\epshom=\xihom^{\rm T}/ {\rm det }(\xihom)$.\\
 Note that the TE case, which we shall not study here as no coupling happens, is trivial since
 the homogenized permittivity is simply the average of the permittivity in the unit cell:
 $\epshom = \langle \epstens \rangle$.

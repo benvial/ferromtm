@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1553089719 "main.aux" "main.bbl" "main" 1553090130
+["bibtex main"] 1553089719 "main.aux" "main.bbl" "main" 1553174912
   "./RS.bst" 1507202554 20675 8d355db143f2f97544b01d9f8dce9f73 ""
   "biblio.bib" 1553089452 31272 d8699fbc13ca8fe0e0ca9bc31cd81439 ""
-  "main.aux" 1553090129 9367 b932f58f5772f8da862557e19c37db65 ""
+  "main.aux" 1553174912 9367 b932f58f5772f8da862557e19c37db65 ""
   (generated)
   "main.blg"
   "main.bbl"
-["pdflatex"] 1553090128 "main.tex" "main.pdf" "main" 1553090130
+["pdflatex"] 1553174910 "main.tex" "main.pdf" "main" 1553174912
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1550406775 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1550406775 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texmf-dist/fonts/tfm/adobe/helvetic/phvb8r.tfm" 1550406775 4484 b828043cbd581d289d955903c1339981 ""
@@ -162,14 +162,14 @@
   "effpar_per.eps" 1551893751 70047 401924523d232aa736371f020b7ace84 ""
   "effpar_rand_cpl.png" 1552423894 107738 94827fdf24cbcfd58709227623b8967f ""
   "epsilon_fit.eps" 1552401162 34275 70d3706d224d54f761ec2648b0038aa3 ""
-  "main.aux" 1553090129 9367 b932f58f5772f8da862557e19c37db65 ""
+  "main.aux" 1553174912 9367 b932f58f5772f8da862557e19c37db65 ""
   "main.bbl" 1553089719 4611 89ca415af42154e348e85605ed68d3c6 "bibtex main"
-  "main.out" 1553090129 705 569f92f38d8e0c325373387dfd61a3bb ""
-  "main.tex" 1553090124 31231 e6e724cda7b85ffb27830fdd8a458f65 ""
+  "main.out" 1553174912 705 569f92f38d8e0c325373387dfd61a3bb ""
+  "main.tex" 1553174907 31857 d75099488b0324db439d369a57da9b43 ""
   "randmatepsi.eps" 1550150782 622712 167f9f01e4a0a4c5606965e53c9dc7e5 ""
   "rsproca_new.cls" 1430918634 51856 8fe7a0a19ea20c8c011904f09a916ee5 ""
   (generated)
-  "main.out"
+  "main.pdf"
   "main.aux"
   "main.log"
-  "main.pdf"
+  "main.out"

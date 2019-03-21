@@ -79,14 +79,19 @@ fem.aniso = True
 
 
 def main(t, coupled=True, homogenized=False):
-    fem.tmp_dir = tempfile.mkdtemp(prefix="/tmp/benjaminv.")
-    fem.initialize()
-    mesh = fem.make_mesh()
     if coupled:
         iter = 12  # periodic
     else:
         iter = 0
     epsi_map, E_map, eps_hom = load_arch(iter)
+    fem.tmp_dir = tempfile.mkdtemp(prefix="/tmp/benjaminv.")
+    fem.theta_deg = t
+    ct = np.cos(t * pi / 180)
+    fem.h_pmltop = fem.lambda0 / ct  #: flt: thickness pml top
+    fem.h_pmlbot = fem.lambda0 / ct  #: flt: thickness pml bot
+    fem.initialize()
+    mesh = fem.make_mesh()
+
     epsi_xx = epsi_map[0]
     epsi_yy = epsi_map[1]
     n_x, n_y = epsi_xx.shape
@@ -106,7 +111,7 @@ def main(t, coupled=True, homogenized=False):
     make_pos_tensor_eps(fem, epsi, interp=True)
 
     effs = []
-    fem.theta_deg = t
+
     fem.compute_solution()
     effs = fem.diffraction_efficiencies()
     print("efficiencies", effs)
@@ -188,16 +193,16 @@ if __name__ == "__main__":
     plt.legend()
     plt.xlabel("incident angle (degree)")
     plt.ylabel("Reflection")
-    plt.xlim((0, 80))
+    plt.xlim((0, 90))
     plt.ylim((0, 1))
 
     plt.figure()
-    plt.plot(angle, Q_meta, "-r", alpha=0.5, lw=4, label="MTM coupled")
-    plt.plot(angle, Q_hom, "--r", label="hom. coupled")
-    plt.plot(angle, Q_meta_uncpl, "-b", alpha=0.5, lw=4, label="MTM uncoupled")
-    plt.plot(angle, Q_hom_uncpl, "--b", label="hom. uncoupled")
+    plt.plot(angle, T_meta, "-r", alpha=0.5, lw=4, label="MTM coupled")
+    plt.plot(angle, T_hom, "--r", label="hom. coupled")
+    plt.plot(angle, T_meta_uncpl, "-b", alpha=0.5, lw=4, label="MTM uncoupled")
+    plt.plot(angle, T_hom_uncpl, "--b", label="hom. uncoupled")
     plt.legend()
     plt.xlabel("incident angle (degree)")
     plt.ylabel("Absorption")
-    plt.xlim((0, 80))
-    # plt.ylim((0, 1))
+    plt.xlim((0, 90))
+    plt.ylim((0, 1))
