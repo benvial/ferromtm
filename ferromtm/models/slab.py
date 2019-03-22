@@ -78,7 +78,27 @@ else:
 fem.aniso = True
 
 
-def main(t, coupled=True, homogenized=False):
+def make_epsi(fem, epsi_map, nincly):
+    epsi_xx = epsi_map[0]
+    epsi_yy = epsi_map[1]
+    n_x, n_y = epsi_xx.shape
+    epsi_xx = np.tile(epsi_xx, (1, nincly))
+    epsi_yy = np.tile(epsi_yy, (1, nincly))
+    # plt.imshow(epsi_xx.real.T)
+
+    epsi_xx = epsi_xx.reshape((n_x, n_y * nincly, 1))
+    epsi_yy = epsi_xx.reshape((n_x, n_y * nincly, 1))
+    id = np.ones_like(epsi_xx)
+
+    # if homogenized:
+    #     epsi_xx, epsi_yy = eps_hom[0, 0] * id, eps_hom[1, 1] * id
+
+    epsi = epsi_xx, epsi_yy, id
+
+    make_pos_tensor_eps(fem, epsi, interp=True)
+
+
+def main_angle(t, coupled=True):
     if coupled:
         iter = 12  # periodic
     else:
@@ -91,27 +111,8 @@ def main(t, coupled=True, homogenized=False):
     fem.h_pmlbot = fem.lambda0 / ct  #: flt: thickness pml bot
     fem.initialize()
     mesh = fem.make_mesh()
-
-    epsi_xx = epsi_map[0]
-    epsi_yy = epsi_map[1]
-    n_x, n_y = epsi_xx.shape
-    epsi_xx = np.tile(epsi_xx, (1, nincly))
-    epsi_yy = np.tile(epsi_yy, (1, nincly))
-    # plt.imshow(epsi_xx.real.T)
-
-    epsi_xx = epsi_xx.reshape((n_x, n_y * nincly, 1))
-    epsi_yy = epsi_xx.reshape((n_x, n_y * nincly, 1))
-    id = np.ones_like(epsi_xx)
-
-    if homogenized:
-        epsi_xx, epsi_yy = eps_hom[0, 0] * id, eps_hom[1, 1] * id
-
-    epsi = epsi_xx, epsi_yy, id
-
-    make_pos_tensor_eps(fem, epsi, interp=True)
-
+    make_epsi(fem, epsi_map, nincly)
     effs = []
-
     fem.compute_solution()
     effs = fem.diffraction_efficiencies()
     print("efficiencies", effs)
@@ -119,19 +120,50 @@ def main(t, coupled=True, homogenized=False):
 
 
 def main_meta(t):
-    return main(t, homogenized=False)
-
-
-def main_hom(t):
-    return main(t, homogenized=True)
+    return main_angle(t)
 
 
 def main_meta_uncpl(t):
-    return main(t, coupled=False, homogenized=False)
+    return main_angle(t, coupled=False)
 
 
-def main_hom_uncpl(t):
-    return main(t, coupled=False, homogenized=True)
+def rslab(h, lambda0, theta, epsxx, epsyy):
+    """reflection coefficient for TM polarization of a
+    slab with diagonal permittivity in vacuum"""
+
+    t = pi * theta / 180
+    ct = np.cos(t)
+    st = np.sin(t)
+    k0 = 2 * pi / lambda0
+    k0x = k0 * st
+    k0y = k0 * ct
+    ky = k0 * (np.sqrt(epsxx * (1 - st ** 2 / epsyy)))
+
+    r1 = (k0y - ky / epsxx) / (k0y + ky / epsxx)
+    expo = np.exp(-2 * 1j * ky * h)
+    r = r1 * (1 - expo) / (1 - r1 ** 2 * expo)
+    return r
+
+
+def main_hom(angle, coupled=True):
+    if coupled:
+        iter = 12  # periodic
+    else:
+        iter = 0
+    _, _, eps_hom = load_arch(iter)
+    r = rslab(fem.h_des, fem.lambda0, angle, eps_hom[0, 0], eps_hom[1, 1])
+    return np.abs(r) ** 2
+
+
+def get_key(out, k):
+    return [e[k] for e in out]
+
+
+def extract_effs(out):
+    e = []
+    for k in ["R", "T", "Q", "B"]:
+        e.append(get_key(out, k))
+    return e
 
 
 if __name__ == "__main__":
@@ -140,50 +172,30 @@ if __name__ == "__main__":
 
     angle = list(np.linspace(0, 89, 100))
     save_dir_ = "meta"
-    save_arch = os.path.join(data_folder, save_dir_, "efficiencies.npz")
+    save_arch = os.path.join(data_folder, save_dir_, "efficiencies_angle.npz")
 
     if run:
         from aotomat.tools.parallelize import *
 
         main_meta_par = parallel(main_meta, partype="gridmap")
-        main_hom_par = parallel(main_hom, partype="gridmap")
         main_meta_uncpl_par = parallel(main_meta_uncpl, partype="gridmap")
-        main_hom_uncpl_par = parallel(main_hom_uncpl, partype="gridmap")
 
         out_meta = main_meta_par(angle)
-        out_hom = main_hom_par(angle)
         out_meta_uncpl = main_meta_uncpl_par(angle)
-        out_hom_uncpl = main_hom_uncpl_par(angle)
 
-        np.savez(
-            save_arch,
-            out_meta=out_meta,
-            out_hom=out_hom,
-            out_meta_uncpl=out_meta_uncpl,
-            out_hom_uncpl=out_hom_uncpl,
-        )
+        np.savez(save_arch, out_meta=out_meta, out_meta_uncpl=out_meta_uncpl)
     else:
         arch = np.load(save_arch)
         out_meta = arch["out_meta"]
-        out_hom = arch["out_hom"]
         out_meta_uncpl = arch["out_meta_uncpl"]
-        out_hom_uncpl = arch["out_hom_uncpl"]
 
-    def get_key(out, k):
-        return [e[k] for e in out]
-
-    def extract_effs(out):
-        e = []
-        for k in ["R", "T", "Q", "B"]:
-            e.append(get_key(out, k))
-        return e
+    R_hom = main_hom(np.array(angle), coupled=True)
+    R_hom_uncpl = main_hom(np.array(angle), coupled=False)
 
     R_meta, T_meta, Q_meta, B_meta = extract_effs(out_meta)
-    R_hom, T_hom, Q_hom, B_hom = extract_effs(out_hom)
     R_meta_uncpl, T_meta_uncpl, Q_meta_uncpl, B_meta_uncpl = extract_effs(
         out_meta_uncpl
     )
-    R_hom_uncpl, T_hom_uncpl, Q_hom_uncpl, B_hom_uncpl = extract_effs(out_hom_uncpl)
 
     plt.figure()
     plt.plot(angle, R_meta, "-r", alpha=0.5, lw=4, label="MTM coupled")
@@ -196,13 +208,13 @@ if __name__ == "__main__":
     plt.xlim((0, 90))
     plt.ylim((0, 1))
 
-    plt.figure()
-    plt.plot(angle, T_meta, "-r", alpha=0.5, lw=4, label="MTM coupled")
-    plt.plot(angle, T_hom, "--r", label="hom. coupled")
-    plt.plot(angle, T_meta_uncpl, "-b", alpha=0.5, lw=4, label="MTM uncoupled")
-    plt.plot(angle, T_hom_uncpl, "--b", label="hom. uncoupled")
-    plt.legend()
-    plt.xlabel("incident angle (degree)")
-    plt.ylabel("Absorption")
-    plt.xlim((0, 90))
-    plt.ylim((0, 1))
+    # plt.figure()
+    # plt.plot(angle, T_meta, "-r", alpha=0.5, lw=4, label="MTM coupled")
+    # plt.plot(angle, T_hom, "--r", label="hom. coupled")
+    # plt.plot(angle, T_meta_uncpl, "-b", alpha=0.5, lw=4, label="MTM uncoupled")
+    # plt.plot(angle, T_hom_uncpl, "--b", label="hom. uncoupled")
+    # plt.legend()
+    # plt.xlabel("incident angle (degree)")
+    # plt.ylabel("Absorption")
+    # plt.xlim((0, 90))
+    # plt.ylim((0, 1))

@@ -32,13 +32,8 @@ from pytheas.tools.utils import refine_mesh
 rootdir = os.path.dirname(os.path.dirname(ferromtm.__file__))
 
 
-def epsilonr_ferroelectric(E, dc=True):
-    eps = 1 / 50
-    return np.ones_like(E) * eps
-
-
 pi = np.pi
-eps_incl = 1 / 3
+eps_incl = 3
 data_folder = os.path.join(rootdir, "data", "results")
 mat_folder = os.path.join(rootdir, "data", "mat")
 cv_dir_ = "circ_rods"
@@ -364,8 +359,8 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
             print("error: ", cv)
         if iter > max_iter:
             break
-        fem_es.postpro_fields(filetype="pos")
-        fem_es.open_gmsh_gui()
+        # fem_es.postpro_fields(filetype="pos")
+        # fem_es.open_gmsh_gui()
     return E, epsi, fem_es
 
 
@@ -376,6 +371,7 @@ def main(
     incl=True,
     mat=None,
     record_cv=False,
+    postmaps=False,
     verbose=True,
     rmtmpdir=True,
 ):
@@ -409,16 +405,24 @@ def main(
         epsi[1, id == 1] = eps_incl
         epsi[2, id == 1] = eps_incl
     eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi, verbose=verbose)
+
+    if postmaps:
+        epsi_map = ppEpsimap(fem_hom)
+        ret = eps_hom, epsi, E, fem_hom, fem_es, epsi_map
+    else:
+        ret = eps_hom, epsi, E, fem_hom, fem_es
+
     if rmtmpdir:
         fem_hom.rm_tmp_dir()
         fem_es.rm_tmp_dir()
-    return eps_hom, epsi, E, fem_hom, fem_es
+    return ret
 
 
 def main_circle(params, save=False, coupling=True):
     E_bias, f = params
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
     eps_hom, epsi, E, fem_hom, fem_es = main(f, E_bias, coupling=coupling)
+
     if save:
         fname = "circle_f_{:.2f}_E_{:.2f}".format(f, E_bias)
         if not coupling:
@@ -528,30 +532,11 @@ params = np.vstack((E1.ravel(), F1.ravel())).T
 
 if __name__ == "__main__":
     # main_circle_conv(params[104])
-    f = pi * 0.4 ** 2
-    Ebias = 1
-    # eps_hom, epsi, E, fem_hom, fem_es = main_circle(
-    #     [Ebias, f], coupling=False, rmtmpdir=False
-    # )
-
-    eps_hom, epsi, E, fem_hom, fem_es = main(
-        f,
-        Ebias,
-        coupling=False,
-        incl=True,
-        mat=None,
-        record_cv=False,
-        verbose=True,
-        rmtmpdir=False,
+    f = 0.5  # pi * 0.4 ** 2
+    Ebias = 2
+    eps_hom, epsi, E, fem_hom, fem_es = main_circle(
+        [Ebias, f], coupling=False, rmtmpdir=False
     )
-    fem_hom.postpro_fields(filetype="txt")
-    v = fem_hom.get_field_map("v.txt")
-    import matplotlib.pyplot as plt
-
-    plt.ion()
-    plt.imshow(v.real, cmap="bwr")
-    plt.colorbar()
-    # main_random_conv(params[104])
 
     # main_circle(params[2], save=False, coupling=True)
 
@@ -568,3 +553,21 @@ if __name__ == "__main__":
     # et = tend - tstart
     # print("TEND: {}".format(tend))
     # print("ELAPSED: {}s".format(et))
+    # eps_hom, epsi, E, fem_hom, fem_es = main(
+    #     f,
+    #     Ebias,
+    #     coupling=False,
+    #     incl=True,
+    #     mat=None,
+    #     record_cv=False,
+    #     verbose=True,
+    #     rmtmpdir=False,
+    # )
+    # fem_hom.postpro_fields(filetype="txt")
+    # v = fem_hom.get_field_map("v.txt")
+    # import matplotlib.pyplot as plt
+    #
+    # plt.ion()
+    # plt.imshow(v.real, cmap="bwr")
+    # plt.colorbar()
+    # main_random_conv(params[104])
