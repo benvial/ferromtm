@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: clean lint req
+.PHONY: clean lint req data
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -116,6 +116,26 @@ styledoc: less doc
 ## run the test suite
 test:
 	pytest ./tests -s --cov=./$(PROJECT_NAME)
+
+
+## Run the codes for fitting BST measurements to a model
+bst:
+	python ./ferromtm/models/bst.py
+
+## Run the codes for periodic rods
+circ:
+	python ./ferromtm/models/run_circ.py
+
+## Run the codes for periodic rods convergence
+conv:
+	python ./ferromtm/models/run_convergence.py
+
+## Run the codes for random rods
+rand:
+	python ./ferromtm/models/run_rand.py
+
+## Run the codes and make the datasets
+data: bst circ conv rand
 
 
 #################################################################################

@@ -103,12 +103,12 @@
  microwave devices, with typical applications including antenna beam steering,
  phase shifters, tunable power splitters, filters, voltage controlled oscillators and
  matching networks \cite{tagantsev_ferroelectric_2018}. Both bulk ceramics and thin films have
- been employed to design frequency agile components \cite{vendik_ferroelectric_1999, lancaster_thin-film_1998,xi_oxide_2000} and metamaterials \cite{hand_frequency_2008, zhao_experimental_2008}. The main reason of using
+ been employed to design frequency agile components \cite{vendik_ferroelectric_1999, lancaster_thin-film_1998,xi_oxide_2000} and metamaterials \cite{hand_frequency_2008, zhao_experimental_2008}.
+ The main reason of using
  ferroelectric materials is their strong dependence of their permittivity $\varepsilon$
  on an applied electric field $E$, which is measured by their tunability defined as $n = \varepsilon(0)/\varepsilon(E)$.
  The key requirements for antenna and microwave applications are large tunability and low losses.
- These two characteristics are correlated and one has to find a trade-off for optimal device
- performance, which can be quantified by the so called commutation quality factor
+ These two characteristics are correlated and one has to find a trade-off for optimal device performance, which can be quantified by the so called commutation quality factor
  $K = (n -1)^2/(n\, \tan\delta(0)\,\tan\delta(E))$, where $\tan\delta$ is the loss tangent.\\
  These materials have usually high permittivity values,
  often leading to slow response time and impedance mismatch, which can be an issue in some practical
@@ -119,12 +119,12 @@
 %%%%%%%%%%%%%%% End of first page %%%%%%%%%%%%%%%%%%%%%
 
 \maketitle
-\noindent values and losses.
+\noindent values and losses.\\
 The effective parameters of those composites have been investigated \cite{sherman_ferroelectric-dielectric_2006, jylha_tunability_2008, sherman_tunability_2004, astafiev_can_2003} and it has been found that the
-permittivity can be greatly reduced while losses and tunability are much less sensitive to the
-dielectric phase addition.
+permittivity can be greatly reduced while losses are much less sensitive to the dielectric phase addition, and in some can lead to a small increase of the tunability of the mixture. In the context of porous ferroelectrics, the homogenized properties strongly depends on the size and morphology of the pores \cite{okazaki_effects_1973,stanculescu_study_2015}. In addition, the influence
+of local field enhancement in the tunability has been shown to be of particular importance \cite{padurariu_tailoring_2012,padurariu_field-dependent_2012,cazacu_tunable_2013}.
 \\
-This study investigates the effective permittivity of dielectric/ferroelectric composites
+This study investigates the effective permittivity of composites made of dielectric inclusions in a ferroelectric matrix
 by using a two-scale convergence method \cite{allaire_homogenization_1992, guenneau_homogenization_2000}.
 The originality lies in the fact that a fully coupling model is employed to
 calculate the electrostatic field distribution when a uniform biasing field is
@@ -132,7 +132,8 @@ applied on the structures, which will result in a local modification of the perm
 in the ferroelectric phase due to the microstructure. As compared to a simple uncoupled model where the
 ferroelectric phase is only modified through the biasing field,
 the resulting effective permittivity, dielectric losses, tunability and
-anisotropy significantly differ. \\
+anisotropy significantly differ. The difference between earlier sudies in the litterature \cite{padurariu_tailoring_2012,padurariu_field-dependent_2012} is that the non-linear coupling is taken into account beyond the first iteration and that we use two-scale
+convergence homogenization theory to compute the effective parameters at higher frequencies, instead of a capacitance based model.
 We study first a two-dimensional model of metamaterials made of parallel rods with circular cross section,
 considering both square periodic arrays and random distributions within the unit cell of
 a periodic array.
@@ -428,7 +429,7 @@ it will be.
 
 \begin{figure}[!t]
  \centering
- \includegraphics[width=1\textwidth]{effpar_rand_cpl}
+ \includegraphics[width=0.9\textwidth]{effpar_rand_cpl}
  \caption{Effective parameters of the random 2D mixtures as a function of the
   applied electric field for various filling fraction of dielectric, when the
   coupling is taken into account.
@@ -456,6 +457,8 @@ it will be.
 \end{figure}
 
 %#########################################################################################
+%
+
 
 \section{Conclusion}
 

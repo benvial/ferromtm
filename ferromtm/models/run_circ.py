@@ -1,5 +1,5 @@
 from coupled2D import *
-from aotomat.tools.parallelize import *
+from ferromtm.tools.parallelize import *
 
 
 def main_per_uncoupled(params):

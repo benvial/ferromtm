@@ -8,9 +8,9 @@ import numpy as np
 
 import time
 
-## from aotomat.tools.plottools import *
+
 from pytheas.homogenization import *
-from aotomat.electrostatics.per2D import femmodel as model_es
+from ferromtm.models.electrostatics.per2D import femmodel as model_es
 from pytheas.homogenization.twoscale2D import femmodel as model_hom
 import importlib
 from ferromtm.tools.utils import *

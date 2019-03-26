@@ -235,11 +235,22 @@ if __name__ == "__main__":
     )
 
     plt.close("all")
-    fig, ax = plt.subplots(ncols=2, nrows=2)
-    plot_eff_par(fig, ax, lin=True)
+    # fig, ax = plt.subplots(ncols=2, nrows=2)
+    # plot_eff_par(fig, ax, lin=True)
 
-    fig, ax = plt.subplots(ncols=2, nrows=2)
+    fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6, 4))
+    fig.set_rasterized(True)
+    [a.set_rasterized(True) for a in ax.ravel()]
     plot_eff_par(fig, ax, lin=False)
+    plt.tight_layout()
+    fig.savefig("effpar_rand_cpl.eps", rasterized=True, dpi=300)
+
+    fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6, 4))
+    fig.set_rasterized(True)
+    [a.set_rasterized(True) for a in ax.ravel()]
+    plot_eff_par(fig, ax, lin=True)
+    plt.tight_layout()
+    fig.savefig("effpar_rand_uncpl.eps", rasterized=True, dpi=300)
 
 # data = norm_eps[:, :, iF].ravel()
 # sns.lineplot(x=Ebias_plot, y=data, ax=ax[0][0], ci="sd", color=clr)

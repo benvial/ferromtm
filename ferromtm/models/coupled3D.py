@@ -7,9 +7,8 @@
 # import matplotlib.pyplot as plt
 # plt.ion()
 import numpy as np
-from aotomat.tools.plottools import *
 from pytheas.homogenization import *
-from aotomat.electrostatics.per3D import femmodel as model_es
+from ferromtm.models.electrostatics.per3D import femmodel as model_es
 from pytheas.homogenization.twoscale3D import femmodel as model_hom
 import importlib
 
@@ -176,6 +175,8 @@ def coupling_loop_analytical(E, f, eps_incl, eps_f, verbose=False):
 
 
 if __name__ == "__main__":
+    from ferromtm.visualization.plots import *
+
     fmax = 4 / 3 * pi * 0.5 ** 3
     f = 0.4
     nbias = 10

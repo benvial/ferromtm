@@ -3,24 +3,43 @@ ferromtm
 
 .. inclusion-marker-do-not-remove
 
-Here you should describe a bit more the project.
+### Coupled model and homogenization of ferroelectric-dielectric metamaterials.
 
-Lorem ipsum dolor amet four loko meh pour-over try-hard distillery. 
-Aesthetic wolf microdosing sustainable sriracha pug poutine. 
-Keffiyeh migas woke, hot chicken retro messenger bag heirloom. 
-Man bun cardigan seitan, lyft keffiyeh jianbing woke hoodie intelligentsia 
-pickled hot chicken ramps wayfarers chia slow-carb. 
+This repository provides the codes to run and postprocess the data for the
+results obtained in this research project.
 
-Normcore cliche fingerstache 
-yr taxidermy post-ironic fixie you probably haven't heard of them hell of. 
-Meggings roof party master cleanse yuccie godard live-edge street art. 
-Brunch ugh skateboard farm-to-table, poutine tbh ennui
+####Requirements
 
-Shaman man bun offal vegan, tote bag fashion axe activated charcoal pabst vinyl 
-lyft gentrify vape pug organic. Narwhal pitchfork austin lumbersexual, iPhone 
-aesthetic messenger bag fanny pack yr.
+- python 3
+- [gmsh]
+- [getdp]
+- make
 
-Drinking vinegar cornhole enamel pin narwhal DIY vape man braid tofu craft beer, 
-fashion axe fam jianbing umami thundercats. Microdosing craft beer schlitz small batch, forage plaid VHS pork belly. 
-Health goth wolf green juice flannel venmo, fanny pack tumblr. 
-Microdosing salvia kickstarter hexagon sartorial locavore crucifix four loko keytar knausgaard selvage fam chillwave. 
+
+####Installation
+
+First clone this repository:
+
+```
+git clone https://github.com/benvial/ferromtm
+```
+
+Then create, activate the environment and test it:
+
+
+```
+cd ferromtm
+make env
+source activate ferromtm
+make testenv
+```
+
+
+Finally install the required packages:
+```
+make req
+```
+
+
+[getdp]: http://getdp.info/
+[gmsh]: http://gmsh.info/
