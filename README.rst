@@ -3,40 +3,53 @@ ferromtm
 
 .. inclusion-marker-do-not-remove
 
-### Coupled model and homogenization of ferroelectric-dielectric metamaterials.
+Coupled model and homogenization of ferroelectric-dielectric metamaterials.
+---------------------------------------------------------------------------
 
 This repository provides the codes to run and postprocess the data for the
 results obtained in this research project.
 
-#### Requirements
+Requirements
+++++++++++++
 
 - python 3
-- [gmsh](http://gmsh.info)
-- [getdp](http://getdp.info)
+- Gmsh_
+- GetDP_
 - make
 
-
-#### Installation
-
+Installation
+++++++++++++
 
 First clone this repository:
 
-```
-git clone https://github.com/benvial/ferromtm.git
-```
+.. code-block:: bash
+
+  git clone https://github.com/benvial/ferromtm.git
 
 Then create, activate the environment and test it:
 
+.. code-block:: bash
 
-```
-cd ferromtm
-make env
-source activate ferromtm
-make testenv
-```
+    cd ferromtm
+    make env
+    source activate ferromtm
+    make testenv
+
 
 
 Finally install the required packages:
-```
-make req
-```
+
+.. code-block:: bash
+
+  make req
+
+
+Alternatively, one can use this docker recipe_:
+
+.. code-block:: bash
+
+   docker run -t --rm benvial/ferromtm:latest
+
+.. _Gmsh: http://www.gmsh.info/
+.. _GetDP: http://www.getdp.info/
+.. _recipe: https://cloud.docker.com/repository/docker/benvial/ferromtm
