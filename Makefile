@@ -41,7 +41,7 @@ else
 	@echo -e ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 endif
 
-## Test python environment is setup correctly
+## Test if python environment is setup correctly
 testenv:
 	source activate $(PROJECT_NAME); \
 	$(PYTHON_INTERPRETER) testenv.py
@@ -50,8 +50,8 @@ testenv:
 
 ## Install Python Dependencies
 req: testenv
-	source activate $(PROJECT_NAME)
-	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+	source activate $(PROJECT_NAME); \
+	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel; \
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
 

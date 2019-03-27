@@ -8,15 +8,15 @@ ferromtm
 This repository provides the codes to run and postprocess the data for the
 results obtained in this research project.
 
-####Requirements
+#### Requirements
 
 - python 3
-- [gmsh]
-- [getdp]
+- [gmsh](http://gmsh.info)
+- [getdp](http://getdp.info)
 - make
 
 
-####Installation
+#### Installation
 
 
 First clone this repository:
@@ -40,7 +40,3 @@ Finally install the required packages:
 ```
 make req
 ```
-
-
-[getdp]: http://getdp.info/
-[gmsh]: http://gmsh.info/

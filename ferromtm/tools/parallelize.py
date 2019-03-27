@@ -3,13 +3,13 @@ from functools import partial
 from gridmap import grid_map
 import subprocess
 
+
 def is_sge():
     try:
-        a = subprocess.call('qstat', stdout=subprocess.PIPE)
+        a = subprocess.call("qstat", stdout=subprocess.PIPE)
         return True
     except FileNotFoundError:
         return False
-
 
 
 def parallel(function, partype="gridmap"):
@@ -33,7 +33,7 @@ def parallel(function, partype="gridmap"):
     """
     if partype == "gridmap":
         if not is_sge():
-            partype="serial"
+            partype = "serial"
 
     if partype == "gridmap":
 
