@@ -132,7 +132,7 @@ def init_es(f, E_bias, incl=True, mat=None):
 
     fem_es.gmsh_verbose = 0  #: str: Gmsh verbose (int between 0 and 4)
     fem_es.getdp_verbose = 0  #: str: GetDP verbose (int between 0 and 4)
-    fem_es.python_verbose = 1
+    fem_es.python_verbose = 0
     #: str: GetDP verbose (int between 0 and 1)
     fem_es.parmesh = 34
     fem_es.parmesh_incl = 34

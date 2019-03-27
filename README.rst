@@ -18,10 +18,11 @@ results obtained in this research project.
 
 ####Installation
 
+
 First clone this repository:
 
 ```
-git clone https://github.com/benvial/ferromtm
+git clone https://github.com/benvial/ferromtm.git
 ```
 
 Then create, activate the environment and test it:

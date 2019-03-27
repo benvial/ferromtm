@@ -13,3 +13,4 @@ matplotlib
 pytheas-pip
 gridmap
 seaborn
+nlopt

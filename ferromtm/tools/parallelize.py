@@ -1,6 +1,15 @@
 from multiprocessing import Pool
 from functools import partial
 from gridmap import grid_map
+import subprocess
+
+def is_sge():
+    try:
+        a = subprocess.call('qstat', stdout=subprocess.PIPE)
+        return True
+    except FileNotFoundError:
+        return False
+
 
 
 def parallel(function, partype="gridmap"):
@@ -22,18 +31,9 @@ def parallel(function, partype="gridmap"):
     FUNCTION.
 
     """
-    if partype == "multiprocessing":
-        # multiprocessing
-        pool = Pool()
-        parmap = pool.map
-    else:
-        # No parallelisation
-        parmap = map
-
-    def par(iterable_values, *args, **kwargs):
-        mapfunc = partial(function, *args, **kwargs)
-        result = [*parmap(mapfunc, iterable_values)]
-        return result
+    if partype == "gridmap":
+        if not is_sge():
+            partype="serial"
 
     if partype == "gridmap":
 
@@ -51,6 +51,20 @@ def parallel(function, partype="gridmap"):
                 cleanup=True,
             )
 
+            return result
+
+    else:
+        if partype == "multiprocessing":
+            # multiprocessing
+            pool = Pool()
+            parmap = pool.map
+        else:
+            # No parallelisation
+            parmap = map
+
+        def par(iterable_values, *args, **kwargs):
+            mapfunc = partial(function, *args, **kwargs)
+            result = [*parmap(mapfunc, iterable_values)]
             return result
 
     return par
