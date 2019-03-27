@@ -111,9 +111,8 @@
 <span class="c1"># import matplotlib.pyplot as plt</span>
 <span class="c1"># plt.ion()</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">aotomat.tools.plottools</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">pytheas.homogenization</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">aotomat.electrostatics.per3D</span> <span class="k">import</span> <span class="n">femmodel</span> <span class="k">as</span> <span class="n">model_es</span>
+<span class="kn">from</span> <span class="nn">ferromtm.models.electrostatics.per3D</span> <span class="k">import</span> <span class="n">femmodel</span> <span class="k">as</span> <span class="n">model_es</span>
 <span class="kn">from</span> <span class="nn">pytheas.homogenization.twoscale3D</span> <span class="k">import</span> <span class="n">femmodel</span> <span class="k">as</span> <span class="n">model_hom</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 
@@ -280,6 +279,8 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">ferromtm.visualization.plots</span> <span class="k">import</span> <span class="o">*</span>
+
     <span class="n">fmax</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">**</span> <span class="mi">3</span>
     <span class="n">f</span> <span class="o">=</span> <span class="mf">0.4</span>
     <span class="n">nbias</span> <span class="o">=</span> <span class="mi">10</span>

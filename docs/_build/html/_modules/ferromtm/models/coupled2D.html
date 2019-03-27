@@ -107,33 +107,42 @@
 <span class="c1"># Author: Benjamin Vial</span>
 <span class="c1"># License: MIT</span>
 
-<span class="kn">from</span> <span class="nn">ferromtm</span> <span class="k">import</span> <span class="vm">__file__</span>
-
+<span class="kn">import</span> <span class="nn">ferromtm</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="c1"># from aotomat.tools.plottools import *</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
 <span class="kn">from</span> <span class="nn">pytheas.homogenization</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">aotomat.electrostatics.per2D</span> <span class="k">import</span> <span class="n">femmodel</span> <span class="k">as</span> <span class="n">model_es</span>
+<span class="kn">from</span> <span class="nn">ferromtm.models.electrostatics.per2D</span> <span class="k">import</span> <span class="n">femmodel</span> <span class="k">as</span> <span class="n">model_es</span>
 <span class="kn">from</span> <span class="nn">pytheas.homogenization.twoscale2D</span> <span class="k">import</span> <span class="n">femmodel</span> <span class="k">as</span> <span class="n">model_hom</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">from</span> <span class="nn">ferromtm.tools.utils</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">pytheas.material</span> <span class="k">import</span> <span class="n">genmat</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">ferromtm.models.bst</span> <span class="k">import</span> <span class="n">epsilonr_ferroelectric</span>
+<span class="kn">from</span> <span class="nn">pytheas.tools.utils</span> <span class="k">import</span> <span class="n">refine_mesh</span>
 
-<span class="kn">from</span> <span class="nn">aotomat.tools.parallelize</span> <span class="k">import</span> <span class="o">*</span>
+<span class="c1"># import logging</span>
+<span class="c1">#</span>
+<span class="c1"># logging.captureWarnings(True)</span>
+<span class="c1"># logging.basicConfig(</span>
+<span class="c1">#     format=(&quot;%(asctime)s - %(name)s - %(levelname)s - &quot; + &quot;%(message)s&quot;),</span>
+<span class="c1">#     level=logging.DEBUG,</span>
+<span class="c1"># )</span>
+<span class="c1">#</span>
 
-<span class="n">rootdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">rootdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">ferromtm</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
 
-
-
-<span class="c1"># importlib.reload(model_es)</span>
-<span class="c1"># importlib.reload(model_hom)</span>
 
 <span class="n">pi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 <span class="n">eps_incl</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">data_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s1">&#39;results&#39;</span><span class="p">)</span>
-<span class="n">mat_folder</span> <span class="o">=</span> <span class="s2">&quot;../data/mat/&quot;</span>
+<span class="n">data_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">)</span>
+<span class="n">mat_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;mat&quot;</span><span class="p">)</span>
+<span class="n">cv_dir_</span> <span class="o">=</span> <span class="s2">&quot;circ_rods&quot;</span>
+<span class="c1"># cv_dir_ = &quot;rand_circ_rods&quot;</span>
+<span class="n">cv_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">cv_dir_</span><span class="p">,</span> <span class="s2">&quot;convergence&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="ellipse"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.ellipse">[docs]</a><span class="k">def</span> <span class="nf">ellipse</span><span class="p">(</span><span class="n">Rinclx</span><span class="p">,</span> <span class="n">Rincly</span><span class="p">,</span> <span class="n">rot_incl</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">):</span>
@@ -204,6 +213,20 @@
     <span class="k">return</span> <span class="n">mat</span></div>
 
 
+<div class="viewcode-block" id="ref_mesh"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.ref_mesh">[docs]</a><span class="k">def</span> <span class="nf">ref_mesh</span><span class="p">(</span><span class="n">fem</span><span class="p">):</span>
+    <span class="n">lc_des</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">fem</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span> <span class="n">fem</span><span class="o">.</span><span class="n">dy</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="p">(</span><span class="n">fem</span><span class="o">.</span><span class="n">parmesh</span><span class="p">)</span>
+    <span class="n">nmesh_ref</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">smooth_factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">nmesh_ref</span><span class="p">)</span>
+    <span class="n">min_scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">nmesh_ref</span><span class="p">)</span>
+    <span class="n">max_scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nmesh_ref</span><span class="p">)</span>
+    <span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="n">smooth_factor</span><span class="p">,</span> <span class="n">min_scale</span><span class="p">,</span> <span class="n">max_scale</span><span class="p">]</span>
+    <span class="n">fem</span> <span class="o">=</span> <span class="n">refine_mesh</span><span class="p">(</span>
+        <span class="n">fem</span><span class="p">,</span> <span class="n">fem</span><span class="o">.</span><span class="n">mat</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span> <span class="n">lc_des</span><span class="o">=</span><span class="n">lc_des</span><span class="p">,</span> <span class="n">periodic_x</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">periodic_y</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="c1"># fem.open_gmsh_gui()</span>
+    <span class="k">return</span> <span class="n">fem</span></div>
+
+
 <div class="viewcode-block" id="init_es"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.init_es">[docs]</a><span class="k">def</span> <span class="nf">init_es</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">E_bias</span><span class="p">,</span> <span class="n">incl</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span> <span class="o">/</span> <span class="n">pi</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     <span class="c1">#####################################</span>
@@ -215,8 +238,8 @@
     <span class="n">fem_es</span><span class="o">.</span><span class="n">getdp_verbose</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">#: str: GetDP verbose (int between 0 and 4)</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">python_verbose</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1">#: str: GetDP verbose (int between 0 and 1)</span>
-    <span class="n">fem_es</span><span class="o">.</span><span class="n">parmesh</span> <span class="o">=</span> <span class="mi">30</span>
-    <span class="n">fem_es</span><span class="o">.</span><span class="n">parmesh_incl</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="n">fem_es</span><span class="o">.</span><span class="n">parmesh</span> <span class="o">=</span> <span class="mi">34</span>
+    <span class="n">fem_es</span><span class="o">.</span><span class="n">parmesh_incl</span> <span class="o">=</span> <span class="mi">34</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">type_des</span> <span class="o">=</span> <span class="s2">&quot;elements&quot;</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">inclusion_flag</span> <span class="o">=</span> <span class="n">incl</span>
     <span class="c1"># if not incl:</span>
@@ -224,13 +247,15 @@
     <span class="n">fem_es</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">dy</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">dz</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">fem_es</span><span class="o">.</span><span class="n">Nix</span> <span class="o">=</span> <span class="mi">501</span>
+    <span class="n">fem_es</span><span class="o">.</span><span class="n">Niy</span> <span class="o">=</span> <span class="mi">501</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">eps_incl</span> <span class="o">=</span> <span class="n">eps_incl</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">eps_host</span> <span class="o">=</span> <span class="n">eps_incl</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">E_static</span> <span class="o">=</span> <span class="n">E_bias</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">coupling_flag</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">fem_es</span><span class="o">.</span><span class="n">tmp_dir</span> <span class="o">=</span> <span class="s2">&quot;./estat&quot;</span>
+    <span class="c1"># fem_es.tmp_dir = &quot;./estat&quot;</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/tmp/benjaminv.&quot;</span><span class="p">)</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">incl</span><span class="p">:</span>
@@ -243,7 +268,9 @@
             <span class="n">fem_es</span><span class="o">.</span><span class="n">mat</span> <span class="o">=</span> <span class="n">make_pattern</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
         <span class="n">fem_es</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">()</span>
-        <span class="c1"># fem_es.register_pattern(mat.pattern, mat.threshold_val)</span>
+        <span class="n">fem_es</span> <span class="o">=</span> <span class="n">ref_mesh</span><span class="p">(</span><span class="n">fem_es</span><span class="p">)</span>
+
+        <span class="c1"># fem_es.open_gmsh_gui()</span>
 
     <span class="k">return</span> <span class="n">fem_es</span></div>
 
@@ -264,6 +291,8 @@
     <span class="n">fem_hom</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">dx</span>
     <span class="n">fem_hom</span><span class="o">.</span><span class="n">dy</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">dy</span>
     <span class="n">fem_hom</span><span class="o">.</span><span class="n">dz</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">dz</span>
+    <span class="n">fem_hom</span><span class="o">.</span><span class="n">Nix</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">Nix</span>
+    <span class="n">fem_hom</span><span class="o">.</span><span class="n">Niy</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">Niy</span>
     <span class="n">fem_hom</span><span class="o">.</span><span class="n">eps_incl</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">eps_incl</span>
     <span class="n">fem_hom</span><span class="o">.</span><span class="n">eps_host</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">eps_host</span>
     <span class="n">fem_hom</span><span class="o">.</span><span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/tmp/benjaminv.&quot;</span><span class="p">)</span>
@@ -277,11 +306,13 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">fem_hom</span><span class="o">.</span><span class="n">mat</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">mat</span>
         <span class="n">fem_hom</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">()</span>
+        <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">ref_mesh</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">)</span>
+        <span class="c1"># fem_hom.open_gmsh_gui()</span>
         <span class="c1"># fem_hom.register_pattern(mat.pattern, mat.threshold_val)</span>
     <span class="k">return</span> <span class="n">fem_hom</span></div>
 
 
-<div class="viewcode-block" id="compute_hom_pb"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.compute_hom_pb">[docs]</a><span class="k">def</span> <span class="nf">compute_hom_pb</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">):</span>
+<div class="viewcode-block" id="compute_hom_pb"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.compute_hom_pb">[docs]</a><span class="k">def</span> <span class="nf">compute_hom_pb</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Computes the homogenization problem.</span>
 
 <span class="sd">    Parameters</span>
@@ -300,11 +331,17 @@
 <span class="sd">        fem_hom: instance of TwoScale2D class</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># interp = not fem_hom.inclusion_flag</span>
+    <span class="n">interp</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">fem_hom</span><span class="o">.</span><span class="n">inclusion_flag</span>
     <span class="n">interp</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">make_pos_tensor_eps</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="n">interp</span><span class="p">)</span>
     <span class="n">fem_hom</span><span class="o">.</span><span class="n">compute_solution</span><span class="p">()</span>
+    <span class="c1"># fem_hom.postpro_fields(filetype=&quot;pos&quot;)</span>
+    <span class="c1"># fem_hom.open_gmsh_gui()</span>
+
     <span class="n">eps_hom</span> <span class="o">=</span> <span class="n">fem_hom</span><span class="o">.</span><span class="n">compute_epsilon_eff</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eps_hom&quot;</span><span class="p">)</span>
+        <span class="n">matprint</span><span class="p">(</span><span class="n">eps_hom</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">eps_hom</span><span class="p">,</span> <span class="n">fem_hom</span></div>
 
 
@@ -314,6 +351,7 @@
     <span class="n">make_pos_tensor_eps</span><span class="p">(</span><span class="n">fem_es</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="n">interp</span><span class="p">)</span>
     <span class="n">fem_es</span><span class="o">.</span><span class="n">compute_solution</span><span class="p">()</span>
     <span class="n">E</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">postpro_electrostatic_field</span><span class="p">()</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_es</span></div>
 
 
@@ -323,14 +361,64 @@
     <span class="k">return</span> <span class="n">Vdes</span></div>
 
 
-<div class="viewcode-block" id="coupling_loop"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.coupling_loop">[docs]</a><span class="k">def</span> <span class="nf">coupling_loop</span><span class="p">(</span><span class="n">fem_es</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="ppEmap"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.ppEmap">[docs]</a><span class="k">def</span> <span class="nf">ppEmap</span><span class="p">(</span><span class="n">fem</span><span class="p">):</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">postpro_fields</span><span class="p">()</span>
+    <span class="n">Ex</span> <span class="o">=</span> <span class="o">-</span><span class="n">fem</span><span class="o">.</span><span class="n">get_field_map</span><span class="p">(</span><span class="s2">&quot;vx.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+    <span class="n">Ey</span> <span class="o">=</span> <span class="o">-</span><span class="n">fem</span><span class="o">.</span><span class="n">get_field_map</span><span class="p">(</span><span class="s2">&quot;vy.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+    <span class="k">return</span> <span class="n">Ex</span><span class="p">,</span> <span class="n">Ey</span></div>
+
+
+<div class="viewcode-block" id="ppEpsimap"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.ppEpsimap">[docs]</a><span class="k">def</span> <span class="nf">ppEpsimap</span><span class="p">(</span><span class="n">fem</span><span class="p">):</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">postpro_fields</span><span class="p">()</span>
+    <span class="n">eps_xx</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">get_field_map</span><span class="p">(</span><span class="s2">&quot;epsilonr_xx.txt&quot;</span><span class="p">)</span>
+    <span class="n">eps_yy</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">get_field_map</span><span class="p">(</span><span class="s2">&quot;epsilonr_yy.txt&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">eps_xx</span><span class="p">,</span> <span class="n">eps_yy</span></div>
+
+
+<div class="viewcode-block" id="coupling_loop"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.coupling_loop">[docs]</a><span class="k">def</span> <span class="nf">coupling_loop</span><span class="p">(</span><span class="n">fem_es</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">record_cv</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">conv</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">epsi</span><span class="p">)</span>
-    <span class="n">Eold</span> <span class="o">=</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">E_static</span> <span class="o">*</span> <span class="n">o</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">o</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">o</span>
+    <span class="n">o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">epsi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">E0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fem_es</span><span class="o">.</span><span class="n">E_static</span> <span class="o">*</span> <span class="n">o</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">o</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">o</span><span class="p">])</span>
+    <span class="n">norm0</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">(</span><span class="n">E0</span><span class="p">)</span>
+    <span class="n">Eold</span> <span class="o">=</span> <span class="n">E0</span>
+    <span class="nb">iter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">record_cv</span><span class="p">:</span>
+        <span class="c1"># E, fem_es = compute_elstat_pb(fem_es, epsi)</span>
+        <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">init_hom</span><span class="p">(</span><span class="n">fem_es</span><span class="p">)</span>
+        <span class="n">epsi_rf</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">inclusion_flag</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">mat2des</span><span class="p">(</span><span class="n">fem_es</span><span class="p">)</span>
+            <span class="n">epsi_rf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+            <span class="n">epsi_rf</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+            <span class="n">epsi_rf</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+        <span class="n">eps_hom</span><span class="p">,</span> <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">compute_hom_pb</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi_rf</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;cv_iter_</span><span class="si">{}</span><span class="s2">.npz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
+        <span class="n">epsi_map</span> <span class="o">=</span> <span class="n">ppEpsimap</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">)</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">epsi_map</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">E_map</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">tmp</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">cv_dir</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cv_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">),</span>
+            <span class="c1"># fem_es=fem_es,</span>
+            <span class="c1"># fem_hom=fem_hom,</span>
+            <span class="c1"># epsi=epsi,</span>
+            <span class="c1"># epsi_rf=epsi_rf,</span>
+            <span class="c1"># E=E0,</span>
+            <span class="n">eps_hom</span><span class="o">=</span><span class="n">eps_hom</span><span class="p">,</span>
+            <span class="n">epsi_map</span><span class="o">=</span><span class="n">epsi_map</span><span class="p">,</span>
+            <span class="n">E_map</span><span class="o">=</span><span class="n">E_map</span><span class="p">,</span>
+        <span class="p">)</span>
+
     <span class="k">while</span> <span class="ow">not</span> <span class="n">conv</span><span class="p">:</span>
         <span class="c1"># if fem_es.inclusion_flag:</span>
         <span class="n">E</span><span class="p">,</span> <span class="n">fem_es</span> <span class="o">=</span> <span class="n">compute_elstat_pb</span><span class="p">(</span><span class="n">fem_es</span><span class="p">,</span> <span class="n">epsi</span><span class="p">)</span>
-        <span class="n">epsi</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+        <span class="n">epsi</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">inclusion_flag</span><span class="p">:</span>
             <span class="nb">id</span> <span class="o">=</span> <span class="n">mat2des</span><span class="p">(</span><span class="n">fem_es</span><span class="p">)</span>
             <span class="n">epsi_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
@@ -339,26 +427,66 @@
             <span class="n">epsi</span> <span class="o">=</span> <span class="n">epsi_</span>
 
         <span class="n">normdiff</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">(</span><span class="n">E</span> <span class="o">-</span> <span class="n">Eold</span><span class="p">)</span>
-        <span class="n">normold</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">(</span><span class="n">Eold</span><span class="p">)</span>
-        <span class="n">cv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">normdiff</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">normold</span><span class="p">)</span>
+
+        <span class="n">cv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">normdiff</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">norm0</span><span class="p">)</span>
 
         <span class="n">conv</span> <span class="o">=</span> <span class="n">cv</span> <span class="o">&lt;</span> <span class="n">tol</span>
         <span class="n">Eold</span> <span class="o">=</span> <span class="n">E</span>
+        <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">record_cv</span><span class="p">:</span>
+            <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">init_hom</span><span class="p">(</span><span class="n">fem_es</span><span class="p">)</span>
+            <span class="n">epsi_rf</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">fem_es</span><span class="o">.</span><span class="n">inclusion_flag</span><span class="p">:</span>
+                <span class="n">epsi_rf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+                <span class="n">epsi_rf</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+                <span class="n">epsi_rf</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+            <span class="n">eps_hom</span><span class="p">,</span> <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">compute_hom_pb</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi_rf</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="n">fname</span> <span class="o">=</span> <span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;cv_iter_</span><span class="si">{}</span><span class="s2">.npz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span>
+            <span class="n">epsi_map</span> <span class="o">=</span> <span class="n">ppEpsimap</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">)</span>
+            <span class="n">E_map</span> <span class="o">=</span> <span class="n">ppEmap</span><span class="p">(</span><span class="n">fem_es</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">cv_dir</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cv_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">),</span>
+                <span class="c1"># fem_es=fem_es,</span>
+                <span class="c1"># fem_hom=fem_hom,</span>
+                <span class="c1"># epsi=epsi,</span>
+                <span class="c1"># epsi_rf=epsi_rf,</span>
+                <span class="c1"># E=E,</span>
+                <span class="n">eps_hom</span><span class="o">=</span><span class="n">eps_hom</span><span class="p">,</span>
+                <span class="n">epsi_map</span><span class="o">=</span><span class="n">epsi_map</span><span class="p">,</span>
+                <span class="n">E_map</span><span class="o">=</span><span class="n">E_map</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error: &quot;</span><span class="p">,</span> <span class="n">cv</span><span class="p">)</span>
-    <span class="c1"># fem_es.postpro_fields(filetype=&quot;pos&quot;)</span>
-    <span class="c1"># fem_es.open_gmsh_gui()</span>
+        <span class="k">if</span> <span class="nb">iter</span> <span class="o">&gt;</span> <span class="n">max_iter</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="c1"># fem_es.postpro_fields(filetype=&quot;pos&quot;)</span>
+        <span class="c1"># fem_es.open_gmsh_gui()</span>
     <span class="k">return</span> <span class="n">E</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">fem_es</span></div>
 
 
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">E_bias</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">incl</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rmtmpdir</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">,</span>
+    <span class="n">E_bias</span><span class="p">,</span>
+    <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">incl</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">mat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">record_cv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">postmaps</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">rmtmpdir</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="n">fem_es</span> <span class="o">=</span> <span class="n">init_es</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">E_bias</span><span class="p">,</span> <span class="n">incl</span><span class="o">=</span><span class="n">incl</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="n">mat</span><span class="p">)</span>
     <span class="n">nvar</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fem_es</span><span class="o">.</span><span class="n">des</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">eps_f</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E_bias</span><span class="p">)</span>
-    <span class="n">eps_f0</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">eps_f</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E_bias</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">eps_f0</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nvar</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">incl</span><span class="p">:</span>
         <span class="n">epsi</span> <span class="o">=</span> <span class="nb">id</span> <span class="o">*</span> <span class="n">eps_f</span><span class="p">,</span> <span class="nb">id</span> <span class="o">*</span> <span class="n">eps_f0</span><span class="p">,</span> <span class="nb">id</span> <span class="o">*</span> <span class="n">eps_f0</span>
+
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">id</span> <span class="o">=</span> <span class="n">mat2des</span><span class="p">(</span><span class="n">fem_es</span><span class="p">)</span>
         <span class="n">epsi_xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="o">*</span> <span class="n">eps_incl</span>
@@ -368,22 +496,37 @@
         <span class="n">epsi_yy</span><span class="p">[</span><span class="nb">id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_f0</span>
         <span class="n">epsi_zz</span><span class="p">[</span><span class="nb">id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_f0</span>
         <span class="n">epsi</span> <span class="o">=</span> <span class="n">epsi_xx</span><span class="p">,</span> <span class="n">epsi_yy</span><span class="p">,</span> <span class="n">epsi_zz</span>
-    <span class="n">E</span> <span class="o">=</span> <span class="n">E_bias</span> <span class="o">*</span> <span class="nb">id</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">E_bias</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nvar</span><span class="p">),</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nvar</span><span class="p">),</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nvar</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">E_bias</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">coupling</span><span class="p">:</span>
-            <span class="n">E</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">fem_es</span> <span class="o">=</span> <span class="n">coupling_loop</span><span class="p">(</span><span class="n">fem_es</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="n">E</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">fem_es</span> <span class="o">=</span> <span class="n">coupling_loop</span><span class="p">(</span>
+                <span class="n">fem_es</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="n">record_cv</span><span class="o">=</span><span class="n">record_cv</span>
+            <span class="p">)</span>
     <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">init_hom</span><span class="p">(</span><span class="n">fem_es</span><span class="p">)</span>
-    <span class="n">eps_hom</span><span class="p">,</span> <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">compute_hom_pb</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">)</span>
+    <span class="n">epsi</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">incl</span><span class="p">:</span>
+        <span class="n">epsi</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+        <span class="n">epsi</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+        <span class="n">epsi</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_incl</span>
+    <span class="n">eps_hom</span><span class="p">,</span> <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">compute_hom_pb</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">postmaps</span><span class="p">:</span>
+        <span class="n">epsi_map</span> <span class="o">=</span> <span class="n">ppEpsimap</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span><span class="p">,</span> <span class="n">epsi_map</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span>
+
     <span class="k">if</span> <span class="n">rmtmpdir</span><span class="p">:</span>
         <span class="n">fem_hom</span><span class="o">.</span><span class="n">rm_tmp_dir</span><span class="p">()</span>
         <span class="n">fem_es</span><span class="o">.</span><span class="n">rm_tmp_dir</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span></div>
+    <span class="k">return</span> <span class="n">ret</span></div>
 
 
 <div class="viewcode-block" id="main_circle"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.main_circle">[docs]</a><span class="k">def</span> <span class="nf">main_circle</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">params</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parameters: E = </span><span class="si">{:.2f}</span><span class="s2">MV/m - f = </span><span class="si">{:.2f}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
     <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span> <span class="o">=</span> <span class="n">main</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">E_bias</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="n">coupling</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
         <span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;circle_f_</span><span class="si">{:.2f}</span><span class="s2">_E_</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">E_bias</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">coupling</span><span class="p">:</span>
@@ -400,7 +543,26 @@
             <span class="n">E_bias</span><span class="o">=</span><span class="n">E_bias</span><span class="p">,</span>
             <span class="n">epsi</span><span class="o">=</span><span class="n">epsi</span><span class="p">,</span>
             <span class="n">E</span><span class="o">=</span><span class="n">E</span><span class="p">,</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span></div>
+
+
+<div class="viewcode-block" id="main_circle_conv"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.main_circle_conv">[docs]</a><span class="k">def</span> <span class="nf">main_circle_conv</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parameters: E = </span><span class="si">{:.2f}</span><span class="s2">MV/m - f = </span><span class="si">{:.2f}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+    <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span> <span class="o">=</span> <span class="n">main</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">E_bias</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">record_cv</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span></div>
+
+
+<div class="viewcode-block" id="main_random_conv"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.main_random_conv">[docs]</a><span class="k">def</span> <span class="nf">main_random_conv</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">isample</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parameters: E = </span><span class="si">{:.2f}</span><span class="s2">MV/m - f = </span><span class="si">{:.2f}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">make_pattern</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">choice</span><span class="o">=</span><span class="s2">&quot;rand&quot;</span><span class="p">,</span> <span class="n">isample</span><span class="o">=</span><span class="n">isample</span><span class="p">)</span>
+    <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span> <span class="o">=</span> <span class="n">main</span><span class="p">(</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">E_bias</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="n">mat</span><span class="p">,</span> <span class="n">incl</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">record_cv</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span></div>
 
 
 <div class="viewcode-block" id="main_circle_pattern"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.coupled2D.main_circle_pattern">[docs]</a><span class="k">def</span> <span class="nf">main_circle_pattern</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -464,13 +626,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
 
-
-<span class="c1"># f_parallel = parallel(main_circle, partype=&quot;scoop&quot;)</span>
-<span class="n">f_parallel</span> <span class="o">=</span> <span class="n">parallel</span><span class="p">(</span><span class="n">main_circle_pattern</span><span class="p">,</span> <span class="n">partype</span><span class="o">=</span><span class="s2">&quot;scoop&quot;</span><span class="p">)</span>
-
-<span class="c1"># f_parallel = parallel(main_rand, partype=&quot;scoop&quot;)</span>
-
-<span class="n">nE</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">nE</span> <span class="o">=</span> <span class="mi">21</span>
 <span class="n">Ebias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nE</span><span class="p">)</span>
 <span class="n">nF</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">Fincl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">nF</span><span class="p">)</span>
@@ -479,170 +635,46 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># main_circle_conv(params[104])</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># pi * 0.4 ** 2</span>
+    <span class="n">Ebias</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">eps_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">fem_hom</span><span class="p">,</span> <span class="n">fem_es</span> <span class="o">=</span> <span class="n">main_circle</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rmtmpdir</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
 
-    <span class="n">f_parallel</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">f_parallel</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># main_circle(params[2], save=False, coupling=True)</span>
 
-<span class="c1">#</span>
-<span class="c1">#</span>
-<span class="c1"># if __name__ == &quot;__main__&quot;:</span>
-<span class="c1">#     incl = False</span>
-<span class="c1">#     f = 0.4</span>
-<span class="c1">#     nbias = 7</span>
-<span class="c1">#     bias = np.linspace(0, 2, nbias)</span>
-<span class="c1">#     eps_f = epsilonr_ferroelectric(bias)</span>
-<span class="c1">#     eps_f0 = epsilonr_ferroelectric(0)</span>
-<span class="c1">#     eps_harm = harmonic_mean(f, eps_incl, eps_f)</span>
-<span class="c1">#     eps_ar = arithmetic_mean(f, eps_incl, eps_f)</span>
-<span class="c1">#</span>
-<span class="c1">#     eps_c, eps_s = [], []</span>
-<span class="c1">#     epsilon_c, epsilon_s = [], []</span>
-<span class="c1">#     E_c, E_s = [], []</span>
-<span class="c1">#</span>
-<span class="c1">#     mat = make_pattern(f)</span>
-<span class="c1">#     for E_bias in bias:</span>
-<span class="c1">#         print(&quot;&quot;)</span>
-<span class="c1">#         print(&quot;*&quot; * 33)</span>
-<span class="c1">#         print(&quot;Bias = {} MV/m&quot;.format(E_bias))</span>
-<span class="c1">#         print(&quot;*&quot; * 33)</span>
-<span class="c1">#         print(&quot;&quot;)</span>
-<span class="c1">#         print(&quot;Coupled --------------&quot;)</span>
-<span class="c1">#         eps_hom, epsi, E, fem_hom, fem_es = main(</span>
-<span class="c1">#             f, E_bias, coupling=True, incl=incl, mat=mat</span>
-<span class="c1">#         )</span>
-<span class="c1">#         print(&quot;eps_hom&quot;)</span>
-<span class="c1">#         matprint(eps_hom)</span>
-<span class="c1">#         print(&quot;Uncoupled ------------&quot;)</span>
-<span class="c1">#         eps_hom_uc, epsi_uc, E_uc, fem_hom, fem_es = main(</span>
-<span class="c1">#             f, E_bias, coupling=False, incl=incl, mat=mat</span>
-<span class="c1">#         )</span>
-<span class="c1">#         print(&quot;eps_hom_uc&quot;)</span>
-<span class="c1">#         matprint(eps_hom_uc)</span>
-<span class="c1">#         eps_c.append(eps_hom)</span>
-<span class="c1">#         eps_s.append(eps_hom_uc)</span>
-<span class="c1">#         epsilon_c.append(epsi)</span>
-<span class="c1">#         epsilon_s.append(epsi_uc)</span>
-<span class="c1">#         E_c.append(E)</span>
-<span class="c1">#         E_s.append(E_uc)</span>
-<span class="c1">#</span>
-<span class="c1">#     eps_bias_c, eps_bias_s = (</span>
-<span class="c1">#         np.zeros((2, nbias), dtype=complex),</span>
-<span class="c1">#         np.zeros((2, nbias), dtype=complex),</span>
-<span class="c1">#     )</span>
-<span class="c1">#     eps_bias_c_mean, E_bias_c_mean = (</span>
-<span class="c1">#         np.zeros((2, nbias), dtype=complex),</span>
-<span class="c1">#         np.zeros((2, nbias), dtype=complex),</span>
-<span class="c1">#     )</span>
-<span class="c1">#     for i in range(2):</span>
-<span class="c1">#         eps_bias_c[i, :] = np.array([_[i, i] for _ in eps_c])</span>
-<span class="c1">#         eps_bias_s[i, :] = np.array([_[i, i] for _ in eps_s])</span>
-<span class="c1">#         eps_bias_c_mean[i, :] = np.array([np.mean(_[i]) for _ in epsilon_c])</span>
-<span class="c1">#         # E_bias_c_mean[i,:] = np.array([np.mean(_[i]) for _ in E_c])</span>
-<span class="c1">#</span>
-<span class="c1">#     eps_mg = [maxwell_garnett(f, eps_incl, eps_f)]</span>
-<span class="c1">#     eps_mg.append(np.ones(nbias) * eps_mg[0][0])</span>
-<span class="c1">#     eps_mg_mean = maxwell_garnett(f, eps_incl, eps_bias_c_mean)</span>
-<span class="c1">#</span>
-<span class="c1">#     # eps_ana_c, E_ana_c = [], []</span>
-<span class="c1">#     # for E in bias:</span>
-<span class="c1">#     #     eps_ = epsilonr_ferroelectric(E)</span>
-<span class="c1">#     #     E, eps_ = coupling_loop_analytical(E, f, eps_incl, eps_)</span>
-<span class="c1">#     #     eps_ana_c.append(eps_)</span>
-<span class="c1">#     #     E_ana_c.append(E)</span>
-<span class="c1">#     # eps_ana_c = np.array(eps_ana_c)</span>
-<span class="c1">#     # eps_mg_ana_c = [maxwell_garnett(f, eps_incl, eps_ana_c)]</span>
-<span class="c1">#     # eps_mg_ana_c.append(np.ones(nbias) * eps_mg_ana_c[0][0])</span>
-<span class="c1">#</span>
-<span class="c1">#     plt.close(&quot;all&quot;)</span>
-<span class="c1">#     fig, ax = plt.subplots(2, figsize=(4, 8))</span>
-<span class="c1">#     ax[0].plot(bias, eps_bias_c[0], &quot;-r&quot;, label=&quot;coupled $\parallel$&quot;)</span>
-<span class="c1">#     ax[0].plot(bias, eps_bias_s[0], &quot;-b&quot;, label=&quot;uncoupled $\parallel$&quot;)</span>
-<span class="c1">#     # ax[0].plot(bias, eps_mg[0], &quot;-g&quot;, label=&quot;Maxwell-Garnett $\parallel$&quot;)</span>
-<span class="c1">#     # ax[0].plot(bias, eps_mg_mean[0], &quot;-m&quot;, label=&quot;numerical mean epsi MG $\parallel$&quot;)</span>
-<span class="c1">#     # ax[0].plot(bias, eps_mg_ana_c[0], &quot;-c&quot;, label=&quot;analytical mean epsi MG $\parallel$&quot;)</span>
-<span class="c1">#</span>
-<span class="c1">#     ax[0].legend()</span>
-<span class="c1">#     ax[1].plot(bias, eps_bias_c[1], &quot;-r&quot;, label=&quot;coupled $\perp$&quot;)</span>
-<span class="c1">#     ax[1].plot(bias, eps_bias_s[1], &quot;-b&quot;, label=&quot;uncoupled $\perp$&quot;)</span>
-<span class="c1">#     # ax[1].plot(bias, eps_mg[1], &quot;-g&quot;, label=&quot;Maxwell-Garnett $\perp$&quot;)</span>
-<span class="c1">#     # ax[1].plot(bias, eps_mg_mean[1], &quot;-m&quot;, label=&quot;numerical mean epsi MG $\perp$&quot;)</span>
-<span class="c1">#     # ax[1].plot(bias, eps_mg_ana_c[1], &quot;-c&quot;, label=&quot;analytical mean epsi MG $\perp$&quot;)</span>
-<span class="c1">#</span>
-<span class="c1">#     ax[1].legend()</span>
-<span class="c1">#     ax[1].set_xlabel(&quot;Bias field $E$ (MV/m)&quot;)</span>
-<span class="c1">#     ax[0].set_title(&quot;effective permittivity, $f = {}$&quot;.format(f))</span>
-<span class="c1">#</span>
-<span class="c1">#     ## loss tangent</span>
-<span class="c1">#     tand_bias_c = losstan(eps_bias_c)</span>
-<span class="c1">#     tand_bias_s = losstan(eps_bias_s)</span>
-<span class="c1">#</span>
-<span class="c1">#     fig, ax = plt.subplots(2, figsize=(4, 8))</span>
-<span class="c1">#     ax[0].plot(bias, tand_bias_c[0], &quot;-r&quot;, label=&quot;coupled $\parallel$&quot;)</span>
-<span class="c1">#     ax[0].plot(bias, tand_bias_s[0], &quot;-b&quot;, label=&quot;uncoupled $\parallel$&quot;)</span>
-<span class="c1">#</span>
-<span class="c1">#     ax[0].legend()</span>
-<span class="c1">#     ax[1].plot(bias, tand_bias_c[1], &quot;-r&quot;, label=&quot;coupled $\perp$&quot;)</span>
-<span class="c1">#     ax[1].plot(bias, tand_bias_s[1], &quot;-b&quot;, label=&quot;uncoupled $\perp$&quot;)</span>
-<span class="c1">#</span>
-<span class="c1">#     ax[1].legend()</span>
-<span class="c1">#     ax[1].set_xlabel(&quot;Bias field $E$ (MV/m)&quot;)</span>
-<span class="c1">#     ax[0].set_title(&quot;effective loss tangent, $f = {}$&quot;.format(f))</span>
-<span class="c1">#</span>
-<span class="c1">#     ## tunabilities</span>
-<span class="c1">#</span>
-<span class="c1">#     tunability_c = []</span>
-<span class="c1">#     for e in eps_bias_c:</span>
-<span class="c1">#         tunability_c.append(tunability(e, e[0]))</span>
-<span class="c1">#     tunability_s = []</span>
-<span class="c1">#     for e in eps_bias_s:</span>
-<span class="c1">#         tunability_s.append(tunability(e, e[0]))</span>
-<span class="c1">#</span>
-<span class="c1">#     tunability_bulk = [tunability(eps_f, eps_f0)]</span>
-<span class="c1">#     tbx = [1 for _ in range(nbias)]</span>
-<span class="c1">#     tunability_bulk.append(tbx)</span>
-<span class="c1">#     tunability_bulk.append(tbx)</span>
-<span class="c1">#</span>
-<span class="c1">#     fig, ax = plt.subplots(2, figsize=(4, 8))</span>
-<span class="c1">#     ax[0].plot(bias, tunability_c[0], &quot;-r&quot;, label=&quot;coupled $\parallel$&quot;)</span>
-<span class="c1">#     ax[0].plot(bias, tunability_s[0], &quot;-b&quot;, label=&quot;uncoupled $\parallel$&quot;)</span>
-<span class="c1">#</span>
-<span class="c1">#     ax[0].plot(bias, tunability_bulk[0], &quot;-k&quot;, label=&quot;bulk $\parallel$&quot;)</span>
-<span class="c1">#     ax[0].legend()</span>
-<span class="c1">#     ax[1].plot(bias, tunability_c[1], &quot;-r&quot;, label=&quot;coupled $\perp$&quot;)</span>
-<span class="c1">#     ax[1].plot(bias, tunability_s[1], &quot;-b&quot;, label=&quot;uncoupled $\perp$&quot;)</span>
-<span class="c1">#</span>
-<span class="c1">#     ax[1].plot(bias, tunability_bulk[1], &quot;-k&quot;, label=&quot;bulk $\perp$&quot;)</span>
-<span class="c1">#     ax[1].legend()</span>
-<span class="c1">#     ax[1].set_xlabel(&quot;Bias field $E$ (MV/m)&quot;)</span>
-<span class="c1">#     ax[0].set_title(&quot;tunability, $f = {}$&quot;.format(f))</span>
-<span class="c1">#</span>
-<span class="c1">#     # commutation quality factor</span>
-<span class="c1">#</span>
-<span class="c1">#     K_c = []</span>
-<span class="c1">#     for e in eps_bias_c:</span>
-<span class="c1">#         K_c.append(cqf(e, e[0]))</span>
-<span class="c1">#     K_s = []</span>
-<span class="c1">#     for e in eps_bias_s:</span>
-<span class="c1">#         K_s.append(cqf(e, e[0]))</span>
-<span class="c1">#</span>
-<span class="c1">#     K_bulk = [cqf(eps_f, eps_f0)]</span>
-<span class="c1">#     Ktmp = [0 for _ in range(nbias)]</span>
-<span class="c1">#     K_bulk.append(Ktmp)</span>
-<span class="c1">#     K_bulk.append(Ktmp)</span>
-<span class="c1">#</span>
-<span class="c1">#     fig, ax = plt.subplots(2, figsize=(4, 8))</span>
-<span class="c1">#     ax[0].plot(bias, K_c[0], &quot;-r&quot;, label=&quot;coupled $\parallel$&quot;)</span>
-<span class="c1">#     ax[0].plot(bias, K_s[0], &quot;-b&quot;, label=&quot;uncoupled $\parallel$&quot;)</span>
-<span class="c1">#</span>
-<span class="c1">#     ax[0].plot(bias, K_bulk[0], &quot;-k&quot;, label=&quot;bulk $\parallel$&quot;)</span>
-<span class="c1">#     ax[0].legend()</span>
-<span class="c1">#     ax[1].plot(bias, K_c[1], &quot;-r&quot;, label=&quot;coupled $\perp$&quot;)</span>
-<span class="c1">#     ax[1].plot(bias, K_s[1], &quot;-b&quot;, label=&quot;uncoupled $\perp$&quot;)</span>
-<span class="c1">#</span>
-<span class="c1">#     ax[1].plot(bias, K_bulk[1], &quot;-k&quot;, label=&quot;bulk $\perp$&quot;)</span>
-<span class="c1">#     ax[1].legend()</span>
-<span class="c1">#     ax[1].set_xlabel(&quot;Bias field $E$ (MV/m)&quot;)</span>
-<span class="c1">#     ax[0].set_title(&quot;commutation quality factor, $f = {}$&quot;.format(f))</span>
+    <span class="c1"># run_parallel_coupled = parallel(main_rand_coupled, partype=&quot;gridmap&quot;)</span>
+    <span class="c1"># run_parallel_uncoupled = parallel(main_rand_uncoupled, partype=&quot;gridmap&quot;)</span>
+    <span class="c1">#</span>
+    <span class="c1"># # f_parallel(params)</span>
+    <span class="c1"># tstart = time.time()</span>
+    <span class="c1"># print(&quot;TSART: {}&quot;.format(tstart))</span>
+    <span class="c1"># out_coupled = run_parallel_coupled(params)</span>
+    <span class="c1"># out_uncoupled = run_parallel_uncoupled(params)</span>
+    <span class="c1"># # f_parallel(params, save=True, coupling=False)</span>
+    <span class="c1"># tend = time.time()</span>
+    <span class="c1"># et = tend - tstart</span>
+    <span class="c1"># print(&quot;TEND: {}&quot;.format(tend))</span>
+    <span class="c1"># print(&quot;ELAPSED: {}s&quot;.format(et))</span>
+    <span class="c1"># eps_hom, epsi, E, fem_hom, fem_es = main(</span>
+    <span class="c1">#     f,</span>
+    <span class="c1">#     Ebias,</span>
+    <span class="c1">#     coupling=False,</span>
+    <span class="c1">#     incl=True,</span>
+    <span class="c1">#     mat=None,</span>
+    <span class="c1">#     record_cv=False,</span>
+    <span class="c1">#     verbose=True,</span>
+    <span class="c1">#     rmtmpdir=False,</span>
+    <span class="c1"># )</span>
+    <span class="c1"># fem_hom.postpro_fields(filetype=&quot;txt&quot;)</span>
+    <span class="c1"># v = fem_hom.get_field_map(&quot;v.txt&quot;)</span>
+    <span class="c1"># import matplotlib.pyplot as plt</span>
+    <span class="c1">#</span>
+    <span class="c1"># plt.ion()</span>
+    <span class="c1"># plt.imshow(v.real, cmap=&quot;bwr&quot;)</span>
+    <span class="c1"># plt.colorbar()</span>
+    <span class="c1"># main_random_conv(params[104])</span>
 </pre></div>
 
     </div>

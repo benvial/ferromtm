@@ -105,6 +105,7 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
 <li><a class="reference internal" href="#">ferromtm.tools package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ferromtm.tools.parallelize">ferromtm.tools.parallelize module</a></li>
 <li><a class="reference internal" href="#module-ferromtm.tools.utils">ferromtm.tools.utils module</a></li>
 <li><a class="reference internal" href="#module-ferromtm.tools">Module contents</a></li>
 </ul>
@@ -120,6 +121,29 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="module-ferromtm.tools.parallelize">
+<span id="ferromtm-tools-parallelize-module"></span><h2>ferromtm.tools.parallelize module<a class="headerlink" href="#module-ferromtm.tools.parallelize" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.tools.parallelize.is_sge">
+<code class="descclassname">ferromtm.tools.parallelize.</code><code class="descname">is_sge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/tools/parallelize.html#is_sge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.tools.parallelize.is_sge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.tools.parallelize.parallel">
+<code class="descclassname">ferromtm.tools.parallelize.</code><code class="descname">parallel</code><span class="sig-paren">(</span><em>function</em>, <em>partype='gridmap'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/tools/parallelize.html#parallel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.tools.parallelize.parallel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to parallelize problems.</p>
+<dl class="docutils">
+<dt>function <span class="classifier-delimiter">:</span> <span class="classifier">the function that will be parallelized. The FIRST</span></dt>
+<dd>argument is the one to be iterated on (in parallel). The other
+arguments are the same in all the parallel runs of the function
+(they can be named or unnamedarguments).</dd>
+</dl>
+<p>partype : the module used for parallelisation (gridmap, scoop or multiprocessing)</p>
+<p>A paralelized function. DO NOT NAME IT THE SAME AS THE INPUT
+FUNCTION.</p>
+</dd></dl>
+
+</div>
 <div class="section" id="module-ferromtm.tools.utils">
 <span id="ferromtm-tools-utils-module"></span><h2>ferromtm.tools.utils module<a class="headerlink" href="#module-ferromtm.tools.utils" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -130,16 +154,6 @@
 <dl class="function">
 <dt id="ferromtm.tools.utils.cqf">
 <code class="descclassname">ferromtm.tools.utils.</code><code class="descname">cqf</code><span class="sig-paren">(</span><em>eps</em>, <em>eps0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/tools/utils.html#cqf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.tools.utils.cqf" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="ferromtm.tools.utils.epsilonr_ferroelectric">
-<code class="descclassname">ferromtm.tools.utils.</code><code class="descname">epsilonr_ferroelectric</code><span class="sig-paren">(</span><em>E_applied</em>, <em>tandelta=0.01</em>, <em>eps00=120</em>, <em>sample=4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/tools/utils.html#epsilonr_ferroelectric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.tools.utils.epsilonr_ferroelectric" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="ferromtm.tools.utils.epsilonr_ferroelectric_">
-<code class="descclassname">ferromtm.tools.utils.</code><code class="descname">epsilonr_ferroelectric_</code><span class="sig-paren">(</span><em>E_applied</em>, <em>tandelta=0.01</em>, <em>eps00=120</em>, <em>sample=4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/tools/utils.html#epsilonr_ferroelectric_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.tools.utils.epsilonr_ferroelectric_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">

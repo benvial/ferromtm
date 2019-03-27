@@ -105,19 +105,6 @@
 <span></span><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">aotomat.material.bst</span> <span class="k">import</span> <span class="n">epsi_bst_norma</span>
-
-
-<div class="viewcode-block" id="epsilonr_ferroelectric_"><a class="viewcode-back" href="../../../ferromtm.tools.html#ferromtm.tools.utils.epsilonr_ferroelectric_">[docs]</a><span class="k">def</span> <span class="nf">epsilonr_ferroelectric_</span><span class="p">(</span><span class="n">E_applied</span><span class="p">,</span> <span class="n">tandelta</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">eps00</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">epsi_bst_norma</span><span class="p">(</span><span class="n">E_applied</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span> <span class="o">*</span> <span class="n">eps00</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tandelta</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span></div>
-
-
-<span class="n">E_applied_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
-<span class="n">epsilonr_ferroelectric_i</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric_</span><span class="p">(</span><span class="n">E_applied_i</span><span class="p">)</span>
-
-
-<div class="viewcode-block" id="epsilonr_ferroelectric"><a class="viewcode-back" href="../../../ferromtm.tools.html#ferromtm.tools.utils.epsilonr_ferroelectric">[docs]</a><span class="k">def</span> <span class="nf">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E_applied</span><span class="p">,</span> <span class="n">tandelta</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">eps00</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">E_applied</span><span class="p">,</span> <span class="n">E_applied_i</span><span class="p">,</span> <span class="n">epsilonr_ferroelectric_i</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="make_pos_tensor_eps"><a class="viewcode-back" href="../../../ferromtm.tools.html#ferromtm.tools.utils.make_pos_tensor_eps">[docs]</a><span class="k">def</span> <span class="nf">make_pos_tensor_eps</span><span class="p">(</span><span class="n">fem</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -161,11 +148,7 @@
 
 <div class="viewcode-block" id="subplot_id"><a class="viewcode-back" href="../../../ferromtm.tools.html#ferromtm.tools.utils.subplot_id">[docs]</a><span class="k">def</span> <span class="nf">subplot_id</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-        <span class="mf">0.05</span><span class="p">,</span>
-        <span class="mf">0.88</span><span class="p">,</span>
-        <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="nb">id</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">,</span>
-        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
-        <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;facecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+        <span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span>
     <span class="p">)</span></div>
 </pre></div>
 

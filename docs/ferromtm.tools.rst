@@ -4,6 +4,14 @@ ferromtm.tools package
 Submodules
 ----------
 
+ferromtm.tools.parallelize module
+---------------------------------
+
+.. automodule:: ferromtm.tools.parallelize
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 ferromtm.tools.utils module
 ---------------------------
 

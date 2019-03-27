@@ -108,23 +108,40 @@
   <div class="row">
     <div class="col-md-12 content">
       
-  <div class="project-description"><p>Here you should describe a bit more the project.</p>
-<p>Lorem ipsum dolor amet four loko meh pour-over try-hard distillery.
-Aesthetic wolf microdosing sustainable sriracha pug poutine.
-Keffiyeh migas woke, hot chicken retro messenger bag heirloom.
-Man bun cardigan seitan, lyft keffiyeh jianbing woke hoodie intelligentsia
-pickled hot chicken ramps wayfarers chia slow-carb.</p>
-<p>Normcore cliche fingerstache
-yr taxidermy post-ironic fixie you probably haven’t heard of them hell of.
-Meggings roof party master cleanse yuccie godard live-edge street art.
-Brunch ugh skateboard farm-to-table, poutine tbh ennui</p>
-<p>Shaman man bun offal vegan, tote bag fashion axe activated charcoal pabst vinyl
-lyft gentrify vape pug organic. Narwhal pitchfork austin lumbersexual, iPhone
-aesthetic messenger bag fanny pack yr.</p>
-<p>Drinking vinegar cornhole enamel pin narwhal DIY vape man braid tofu craft beer,
-fashion axe fam jianbing umami thundercats. Microdosing craft beer schlitz small batch, forage plaid VHS pork belly.
-Health goth wolf green juice flannel venmo, fanny pack tumblr.
-Microdosing salvia kickstarter hexagon sartorial locavore crucifix four loko keytar knausgaard selvage fam chillwave.</p>
+  <div class="project-description"><div class="section" id="coupled-model-and-homogenization-of-ferroelectric-dielectric-metamaterials">
+<h1>Coupled model and homogenization of ferroelectric-dielectric metamaterials.<a class="headerlink" href="#coupled-model-and-homogenization-of-ferroelectric-dielectric-metamaterials" title="Permalink to this headline">¶</a></h1>
+<p>This repository provides the codes to run and postprocess the data for the
+results obtained in this research project.</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>python 3</li>
+<li><a class="reference external" href="http://www.gmsh.info/">Gmsh</a></li>
+<li><a class="reference external" href="http://www.getdp.info/">GetDP</a></li>
+<li>make</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>First clone this repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/benvial/ferromtm.git
+</pre></div>
+</div>
+<p>Then create, activate the environment and test it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ferromtm
+make env
+<span class="nb">source</span> activate ferromtm
+make testenv
+</pre></div>
+</div>
+<p>Finally install the required packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make req
+</pre></div>
+</div>
+<p>Alternatively, one can use this docker <a class="reference external" href="https://hub.docker.com/r/benvial/ferromtm">recipe</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -t --rm benvial/ferromtm:latest
+</pre></div>
+</div>
 </div><div class="clearer">
   <div class="row">
     <div class="col-md-6">
@@ -143,6 +160,8 @@ Microdosing salvia kickstarter hexagon sartorial locavore crucifix four loko key
       </div>
   </div>
 </div><div class="toctree-wrapper compound">
+</div>
+</div>
 </div>
 
 

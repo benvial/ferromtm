@@ -12,7 +12,7 @@ results obtained in this research project.
 Requirements
 ++++++++++++
 
-- python 3
+- Python 3
 - Gmsh_
 - GetDP_
 - make
@@ -52,4 +52,4 @@ Alternatively, one can use this docker recipe_:
 
 .. _Gmsh: http://www.gmsh.info/
 .. _GetDP: http://www.getdp.info/
-.. _recipe: https://cloud.docker.com/repository/docker/benvial/ferromtm
+.. _recipe: https://hub.docker.com/r/benvial/ferromtm
