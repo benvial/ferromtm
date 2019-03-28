@@ -188,7 +188,23 @@ plots: figbst effparper plotconvper plotconvrand epsrand effparrand
 paper:
 	cd ./paper && make
 
+## Build the docker container
+dockbuild:
+	docker build --no-cache -t benvial/ferromtm:latest ./docker/.
 
+
+## Run the docker container
+dockrun:
+	docker run -it --rm benvial/ferromtm:latest
+
+## Pull the docker container
+dockpull:
+	docker pull benvial/ferromtm:latest
+
+
+## Push the docker container
+dockpush:
+	docker push benvial/ferromtm:latest
 
 #################################################################################
 # PROJECT RULES                                                                 #
