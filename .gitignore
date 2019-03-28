@@ -76,7 +76,7 @@ target/
 
 # exclude data from source control by default
 *.npz
-/data/*
+
 /data/figures/*.eps
 !/data/.gitkeep
 !/data/mat
