@@ -161,8 +161,10 @@ if __name__ == "__main__":
         load_results()
     )
     plt.close("all")
-    fig, ax = plt.subplots(ncols=2, nrows=2)
+    fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6.2, 4.2))
     plot_eff_par(fig, ax)
+    plt.tight_layout()
+    fig.savefig(os.path.join(rootdir, "data", "figures", "effective_params_per.eps"))
     #
     # fig, ax = plt.subplots()
     # plot_eff_cqf(fig, ax)

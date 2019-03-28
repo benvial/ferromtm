@@ -230,27 +230,44 @@ def plot_eff_cqf(fig, ax):
 
 if __name__ == "__main__":
 
+    import sys
+
+    if len(sys.argv) > 1:
+        retrieve = True
+    else:
+        retrieve = False
+
     norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl = load_results(
-        retrieve=False
+        retrieve=retrieve
     )
 
-    plt.close("all")
-    # fig, ax = plt.subplots(ncols=2, nrows=2)
-    # plot_eff_par(fig, ax, lin=True)
+    if retrieve is False:
 
-    fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6, 4))
-    fig.set_rasterized(True)
-    [a.set_rasterized(True) for a in ax.ravel()]
-    plot_eff_par(fig, ax, lin=False)
-    plt.tight_layout()
-    fig.savefig("effpar_rand_cpl.eps", rasterized=True, dpi=300)
+        plt.close("all")
+        # fig, ax = plt.subplots(ncols=2, nrows=2)
+        # plot_eff_par(fig, ax, lin=True)
 
-    fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6, 4))
-    fig.set_rasterized(True)
-    [a.set_rasterized(True) for a in ax.ravel()]
-    plot_eff_par(fig, ax, lin=True)
-    plt.tight_layout()
-    fig.savefig("effpar_rand_uncpl.eps", rasterized=True, dpi=300)
+        fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6, 4))
+        fig.set_rasterized(True)
+        [a.set_rasterized(True) for a in ax.ravel()]
+        plot_eff_par(fig, ax, lin=False)
+        plt.tight_layout()
+        fig.savefig(
+            os.path.join(rootdir, "data", "figures", "effpar_rand_cpl.eps"),
+            rasterized=True,
+            dpi=300,
+        )
+
+        fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6, 4))
+        fig.set_rasterized(True)
+        [a.set_rasterized(True) for a in ax.ravel()]
+        plot_eff_par(fig, ax, lin=True)
+        plt.tight_layout()
+        fig.savefig(
+            os.path.join(rootdir, "data", "figures", "effpar_rand_uncpl.eps"),
+            rasterized=True,
+            dpi=300,
+        )
 
 # data = norm_eps[:, :, iF].ravel()
 # sns.lineplot(x=Ebias_plot, y=data, ax=ax[0][0], ci="sd", color=clr)

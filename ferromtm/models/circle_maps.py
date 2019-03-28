@@ -1,4 +1,4 @@
-from .coupled2D import *
+from ferromtm.models.coupled2D import *
 from ferromtm.tools.parallelize import *
 
 

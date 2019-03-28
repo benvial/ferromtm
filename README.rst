@@ -6,8 +6,8 @@ ferromtm
 Coupled model and homogenization of ferroelectric-dielectric metamaterials.
 ---------------------------------------------------------------------------
 
-This repository provides the codes to run and postprocess the data for the
-results obtained in this research project.
+This repository provides the codes to run, postprocess the results and compile the
+article related to this research project.
 
 Requirements
 ++++++++++++
@@ -16,6 +16,7 @@ Requirements
 - Gmsh_
 - GetDP_
 - make
+- pdflatex
 
 Installation
 ++++++++++++
@@ -53,3 +54,45 @@ Alternatively, one can use this docker recipe_:
 .. _Gmsh: http://www.gmsh.info/
 .. _GetDP: http://www.getdp.info/
 .. _recipe: https://hub.docker.com/r/benvial/ferromtm
+
+
+Running the code
+++++++++++++++++
+
+Make the data (this will take a while, if you have acces to a cluster with
+SGE this would be parallelized automatically)
+
+.. code-block:: bash
+
+  make results
+
+
+Postprocessing and plots
+++++++++++++++++++++++++
+
+This will postprocess some of the data
+
+.. code-block:: bash
+
+  make postpro
+
+
+Plotting
+++++++++++++++++++++++++
+
+Generate plots with:
+
+.. code-block:: bash
+
+  make plots
+
+
+
+Article
++++++++
+
+Run latex and generate the pdf paper
+
+.. code-block:: bash
+
+  make paper

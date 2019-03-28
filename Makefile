@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: clean lint req data
+.PHONY: clean lint req data paper
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -106,8 +106,13 @@ less:
 	lessc custom_pygments.less  ../custom_pygments.css;\
 
 ## Make html doc with Sphinx
-doc:
-	cd docs && make clean && sphinx-apidoc -f -o . ../$(PROJECT_NAME) && make html
+doc: cleandoc
+	cd docs && sphinx-apidoc -f -o . ../$(PROJECT_NAME) && make html
+
+## Clean html doc with Sphinx
+cleandoc:
+	cd docs && make clean
+
 
 ## Style and build html doc
 styledoc: less doc
@@ -119,23 +124,70 @@ test:
 
 
 ## Run the codes for fitting BST measurements to a model
-bst:
-	python ./ferromtm/models/bst.py
+fit:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/models/bst.py
 
 ## Run the codes for periodic rods
 circ:
-	python ./ferromtm/models/run_circ.py
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/models/run_circ.py
 
 ## Run the codes for periodic rods convergence
-conv:
-	python ./ferromtm/models/run_convergence.py
+convper:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/models/run_convergence.py
+
+## Run the codes for random rods convergence
+convrand:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/models/run_convergence.py rand
 
 ## Run the codes for random rods
 rand:
-	python ./ferromtm/models/run_rand.py
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/models/run_rand.py
+
 
 ## Run the codes and make the datasets
-data: bst circ conv rand
+results: bst circ conv rand convper convrand
+
+
+## Postprocess effective parameters, random case
+postprorand:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/postpro2D_random.py postpro
+
+
+## Postprocessing
+postpro: postprorand
+
+
+## Plot bst permittivity
+figbst:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/plot_bst.py
+
+## Plot effective parameters, periodic case
+effparper:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/postpro2D.py
+
+## Plot convergence, periodic case
+plotconvper:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/postpro2D_conv.py
+
+## Plot convergence, random case
+plotconvrand:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/postpro2D_conv.py rand
+
+## Plot effective parameters, random case
+effparrand:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/postpro2D_random.py
+
+## Plot random samples permittivity map
+epsrand:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/plot_random_fibers.py
+
+## Make all plots
+plots: figbst effparper plotconvper plotconvrand epsrand effparrand
+
+## Make the paper
+paper:
+	cd ./paper && make
+
 
 
 #################################################################################

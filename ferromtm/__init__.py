@@ -10,3 +10,7 @@ from .__about__ import (
 )
 
 __doc__ = __description__
+
+import os
+
+rootdir = os.path.dirname(os.path.dirname(__file__))

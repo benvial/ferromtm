@@ -36,6 +36,14 @@ ferromtm.models.coupled3D module
     :undoc-members:
     :show-inheritance:
 
+ferromtm.models.fit\_measurements module
+----------------------------------------
+
+.. automodule:: ferromtm.models.fit_measurements
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 ferromtm.models.run\_circ module
 --------------------------------
 

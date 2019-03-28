@@ -9,6 +9,8 @@
 
 
 \usepackage{graphicx}
+
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{bm}
@@ -64,6 +66,9 @@
 % Coupled model and homogenization of dielectric-ferroelectric mixtures.
 %
 % We will present the study of the effective permittivity tensor of ferroelectric-dielectric composites under a static electric field. A refined model is used to take into account the coupling between the electrostatic problem and the electric field dependent permittivity of the ferroelectric medium. Periodic and random arrays of dielectric rods in a ferroelectric matrix are investigated and we study the effective permittivity, losses, electrically induced anisotropy and tunability of those metamaterials using a two-scale homogenization method.
+
+\usepackage[outdir=./]{epstopdf}
+\graphicspath{{../data/figures/}}
 
 \begin{document}
 
@@ -320,11 +325,12 @@ tangent $\tan \delta^{\rm f} = 10^{-2}$.
 \subsection{Two dimensional periodic metamaterial}
 \begin{figure}[!t]
  \centering
- \includegraphics[width=1\textwidth]{conv_per}
+ \includegraphics[width=1\textwidth]{convergence_per}
  \caption{Convergence of the coupled problem.
   Real part (a) and loss tangent (b) of the components of the homogenized
   permittivity tensor as a function of iteration step $i$. The distribution of
-  the normalized electric field (colormap: magnitude, arrows: direction) and of the
+  the normalized electric field (colour map: magnitude in logarithmic scale,
+  lines: equipotential contours) and of the
   $xx$ component of the permittivity tensor are shown for $i=1$
   (c and d) and $i=12$ (e and f).
  }
@@ -373,7 +379,7 @@ and are responsible for the difference observed when compared to a simple uncoup
 
 \begin{figure}[!t]
  \centering
- \includegraphics[width=1\textwidth]{effpar_per}
+ \includegraphics[width=1\textwidth]{effective_params_per}
  \caption{Effective parameters of the 2D metamaterials as a function of the
   applied electric field for various filling fraction of dielectric.
   (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
@@ -386,7 +392,7 @@ and are responsible for the difference observed when compared to a simple uncoup
 \subsection{Random case}
 \begin{figure}
  \centering
- \includegraphics[width=0.8\columnwidth]{randmatepsi}
+ \includegraphics[width=0.8\columnwidth]{random_samples_f_50percent}
  \caption{Permittivity distribution of the numerical samples used for $f=0.5$. Dark
   colour indicates the ferroelectric material while light colour represents the
   dielectric inclusions.}
@@ -444,14 +450,14 @@ it will be.
 %
 \begin{figure}[!t]
  \centering
- \includegraphics[width=1\textwidth]{conv_rand}
+ \includegraphics[width=1\textwidth]{convergence_rand}
  \caption{Convergence of the coupled problem in the random case
   for one sample.
   Real part (a) and loss tangent (b) of the components of the homogenized
   permittivity tensor as a function of iteration step $i$. The distribution of
-  the normalized electric field (colour map: magnitude in logarithmic scale, arrows: direction) and of the
-  $xx$ component of the permittivity tensor are shown for $i=1$
-  (c and d) and $i=14$ (e and f).
+  the normalized electric field (colour map: magnitude in logarithmic scale,
+  lines: equipotential contours) and of the $xx$ component of the permittivity tensor are shown for $i=1$
+  (c and d) and $i=12$ (e and f).
  }
  \label{conv_random}
 \end{figure}

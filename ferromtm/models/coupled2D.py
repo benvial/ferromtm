@@ -3,8 +3,9 @@
 # Author: Benjamin Vial
 # License: MIT
 
-import ferromtm
 import numpy as np
+from ferromtm import rootdir
+
 
 import time
 
@@ -29,16 +30,11 @@ from pytheas.tools.utils import refine_mesh
 # )
 #
 
-rootdir = os.path.dirname(os.path.dirname(ferromtm.__file__))
-
 
 pi = np.pi
 eps_incl = 3
 data_folder = os.path.join(rootdir, "data", "results")
 mat_folder = os.path.join(rootdir, "data", "mat")
-cv_dir_ = "circ_rods"
-# cv_dir_ = "rand_circ_rods"
-cv_dir = os.path.join(data_folder, cv_dir_, "convergence")
 
 
 def ellipse(Rinclx, Rincly, rot_incl, x0, y0):
@@ -123,7 +119,7 @@ def ref_mesh(fem):
     return fem
 
 
-def init_es(f, E_bias, incl=True, mat=None):
+def init_es(f, E_bias, incl=True, mat=None, parmesh=20):
     r = (f / pi) ** (1 / 2)
     #####################################
     # # electrostatics
@@ -134,8 +130,8 @@ def init_es(f, E_bias, incl=True, mat=None):
     fem_es.getdp_verbose = 0  #: str: GetDP verbose (int between 0 and 4)
     fem_es.python_verbose = 0
     #: str: GetDP verbose (int between 0 and 1)
-    fem_es.parmesh = 34
-    fem_es.parmesh_incl = 34
+    fem_es.parmesh = parmesh
+    fem_es.parmesh_incl = parmesh
     fem_es.type_des = "elements"
     fem_es.inclusion_flag = incl
     # if not incl:
@@ -271,7 +267,15 @@ def ppEpsimap(fem):
     return eps_xx, eps_yy
 
 
-def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv=False):
+def ppVmap(fem):
+    fem.postpro_fields()
+    v = fem.get_field_map("v.txt").real
+    return v
+
+
+def coupling_loop(
+    fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv=False, cv_dir_=None
+):
     conv = False
     o = np.ones_like(epsi[0], dtype=float)
     E0 = np.array([fem_es.E_static * o, 0 * o, 0 * o])
@@ -279,6 +283,7 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
     Eold = E0
     iter = 0
     if record_cv:
+        cv_dir = os.path.join(data_folder, cv_dir_, "convergence")
         # E, fem_es = compute_elstat_pb(fem_es, epsi)
         fem_hom = init_hom(fem_es)
         epsi_rf = epsilonr_ferroelectric(E0)
@@ -294,6 +299,7 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
         epsi_map = ppEpsimap(fem_hom)
         tmp = np.zeros_like(epsi_map[0])
         E_map = tmp, tmp
+        v_map = tmp, tmp
         try:
             os.mkdir(cv_dir)
         except FileExistsError:
@@ -308,6 +314,7 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
             eps_hom=eps_hom,
             epsi_map=epsi_map,
             E_map=E_map,
+            v_map=v_map,
         )
 
     while not conv:
@@ -340,6 +347,7 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
             fname = fname = "cv_iter_{}.npz".format(iter)
             epsi_map = ppEpsimap(fem_hom)
             E_map = ppEmap(fem_es)
+            v_map = ppVmap(fem_es)
             try:
                 os.mkdir(cv_dir)
             except FileExistsError:
@@ -354,6 +362,7 @@ def coupling_loop(fem_es, epsi, tol=1e-2, max_iter=100, verbose=False, record_cv
                 eps_hom=eps_hom,
                 epsi_map=epsi_map,
                 E_map=E_map,
+                v_map=v_map,
             )
         if verbose:
             print("error: ", cv)
@@ -374,8 +383,10 @@ def main(
     postmaps=False,
     verbose=True,
     rmtmpdir=True,
+    parmesh=20,
+    cv_dir_=None,
 ):
-    fem_es = init_es(f, E_bias, incl=incl, mat=mat)
+    fem_es = init_es(f, E_bias, incl=incl, mat=mat, parmesh=parmesh)
     nvar = len(fem_es.des[0])
     eps_f = epsilonr_ferroelectric(E_bias, dc=True)
     eps_f0 = epsilonr_ferroelectric(0, dc=True)
@@ -396,7 +407,7 @@ def main(
     if E_bias != 0:
         if coupling:
             E, epsi, fem_es = coupling_loop(
-                fem_es, epsi, verbose=verbose, record_cv=record_cv
+                fem_es, epsi, verbose=verbose, record_cv=record_cv, cv_dir_=cv_dir_
             )
     fem_hom = init_hom(fem_es)
     epsi = epsilonr_ferroelectric(E)
@@ -446,7 +457,9 @@ def main_circle(params, save=False, coupling=True):
 def main_circle_conv(params):
     E_bias, f = params
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
-    eps_hom, epsi, E, fem_hom, fem_es = main(f, E_bias, coupling=True, record_cv=True)
+    eps_hom, epsi, E, fem_hom, fem_es = main(
+        f, E_bias, coupling=True, record_cv=True, parmesh=33, cv_dir_="circ_rods"
+    )
     return eps_hom, epsi, E, fem_hom, fem_es
 
 
@@ -456,7 +469,14 @@ def main_random_conv(params):
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
     mat = make_pattern(f, choice="rand", isample=isample)
     eps_hom, epsi, E, fem_hom, fem_es = main(
-        f, E_bias, mat=mat, incl=False, coupling=True, record_cv=True
+        f,
+        E_bias,
+        mat=mat,
+        incl=False,
+        coupling=True,
+        record_cv=True,
+        parmesh=33,
+        cv_dir_="rand_circ_rods",
     )
     return eps_hom, epsi, E, fem_hom, fem_es
 
@@ -466,7 +486,7 @@ def main_circle_pattern(params, save=False, coupling=True):
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
     mat = make_pattern(f, choice="circ")
     eps_hom, epsi, E, fem_hom, fem_es = main(
-        f, E_bias, incl=False, coupling=coupling, mat=mat
+        f, E_bias, incl=False, coupling=coupling, mat=mat, parmesh=33
     )
     if save:
         fname = "circle_f_{:.2f}_E_{:.2f}".format(f, E_bias)
@@ -494,7 +514,7 @@ def main_rand(params, save=False, coupling=True):
         print("  sample {}".format(isample))
         mat = make_pattern(f, choice="rand", isample=isample)
         eps_hom, epsi, E, fem_hom, fem_es = main(
-            f, E_bias, incl=False, coupling=coupling, mat=mat
+            f, E_bias, incl=False, coupling=coupling, mat=mat, parmesh=33
         )
         if save:
             fname = "rand_f_{:.2f}_E_{:.2f}_sample_{}".format(f, E_bias, isample)
