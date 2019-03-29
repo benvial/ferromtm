@@ -1,11 +1,5 @@
-%% Author_tex.tex
-%% V1.0
-%% 2012/13/12
-%% developed by Techset
-%%
-%% This file describes the coding for rsproca.cls
 
-\documentclass[openacc]{rsproca_new}%%%%where rsproca is the template name
+\documentclass[aps,prb,11pt]{revtex4-1}
 
 
 \usepackage{graphicx}
@@ -13,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{bm}
 
+\usepackage{hyperref}
 \newcommand{\ie}{i.\,e.~}
 \newcommand{\Ie}{I.\,e.~}
 \newcommand{\eg}{e.\,g.~}
@@ -53,17 +48,9 @@
 \newcommand{\xihom}{\tilde{\xitens}}
 
 
-%%%% *** Do not adjust lengths that control margins, column widths, etc. ***
-
-%%%%%%%%%%% Defining Enunciations  %%%%%%%%%%%
-\newtheorem{theorem}{\bf Theorem}[section]
-\newtheorem{condition}{\bf Condition}[section]
-\newtheorem{corollary}{\bf Corollary}[section]
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\usepackage[outdir=./]{epstopdf}
-\graphicspath{{}{../data/figures/}}
+%
+% \usepackage[outdir=./]{epstopdf}
+% \graphicspath{{./}{../../data/figures/}}
 
 \begin{document}
 
@@ -72,17 +59,22 @@
 \author{Benjamin Vial and Yang Hao}
 
 %%%%%%%%% Insert author address here
-\address{School of Engineering and Computer Science, Queen Mary, University of London, London, E1 4NS, United Kingdom}
+\affiliation{School of Engineering and Computer Science, Queen Mary, University of London, London, E1 4NS, United Kingdom}
 
-%%%% Subject entries to be placed here %%%%
-\subject{Electromagnetism, Computer modelling and simulation, Applied mathematics}
+% %%%% Subject entries to be placed here %%%%
+% \subject{Electromagnetism, Computer modelling and simulation, Applied mathematics}
+%
+% %%%% Keyword entries to be placed here %%%%
+% \keywords{Homogenization, Ferroelectrics, Metamaterials , Tunability}
+%
+% %%%% Insert corresponding author and its email address}
+% \corres{Benjamin Vial\\
+%  \email{b.vial@qmul.ac.uk}}
 
-%%%% Keyword entries to be placed here %%%%
-\keywords{Homogenization, Ferroelectrics, Metamaterials , Tunability}
+%%%%%%%%%%%%%%% End of first page %%%%%%%%%%%%%%%%%%%%%
 
-%%%% Insert corresponding author and its email address}
-\corres{Benjamin Vial\\
- \email{b.vial@qmul.ac.uk}}
+%
+
 
 %%%% Abstract text to be placed here %%%%%%%%%%%%
 \begin{abstract}
@@ -95,9 +87,8 @@
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%% Insert the texts which can accomdate on firstpage in the tag "fmtext" %%%%%
+\maketitle
 
-\begin{fmtext}
  \section{Introduction}
  Ferroelectric materials play a crucial role in reconfigurable
  microwave devices, with typical applications including antenna beam steering,
@@ -114,11 +105,8 @@
  often leading to slow response time and impedance mismatch, which can be an issue in some practical
  applications. Thus it has been considered to mix ferroelectric ceramics to low-index and
  low-loss non-tunable dielectrics in order to reduce both permittivity
-\end{fmtext}
 
-%%%%%%%%%%%%%%% End of first page %%%%%%%%%%%%%%%%%%%%%
 
-\maketitle
 \noindent values and losses.
 The effective parameters of those composites have been investigated \cite{sherman_ferroelectric-dielectric_2006, jylha_tunability_2008, sherman_tunability_2004, astafiev_can_2003} and it has been found that the
 permittivity can be greatly reduced while losses are much less sensitive to the dielectric phase addition, and in some situations lead to a small increase of the tunability of the mixture. In the context of porous ferroelectrics, the homogenized properties strongly depends on the size and morphology of the pores \cite{okazaki_effects_1973,stanculescu_study_2015}. In addition, the influence
@@ -424,7 +412,7 @@ decreases with increasing dielectric concentration.
 
 \begin{figure}[!t]
  \centering
- \includegraphics[width=0.9\textwidth]{effpar_rand_cpl}
+ \includegraphics[width=0.9\textwidth]{effpar_rand_cpl.png}
  \caption{Effective parameters of the random 2D mixtures as a function of the
   applied electric field for various filling fraction of dielectric, when the
   coupling is taken into account.
@@ -486,6 +474,25 @@ study this kind of mixtures.
 This would reveal the frequency dependant artificial magnetism due to "micro-resonances"
 in the high index phase and potentially lead to composites with tunable effective permeability.
 
+\section*{Additional information}
+
+\vskip6pt
+
+
+\noindent{The codes necessary to reproduce the results in this article are freely
+available online at this address: \href{https://www.github.com/benvial/ferromtm}{https://www.github.com/benvial/ferromtm}.}\\
+{Benjamin Vial wrote devised the research, implemented
+the codes and wrote the paper. Yang Hao supervised the research and
+co-authored the manuscript.}\\
+{The authors declare no competing interrests.}\\
+{This work was funded by the Engineering and Physical Sciences Research
+Council (EPSRC), UK, under a grant (EP/P005578/1) 'Adaptive Tools for
+Electromagnetics and Materials Modelling to Bridge the Gap between
+Design and Manufacturing (AOTOMAT)'.}\\
+{The authors would like to thanks Henry Giddens for performing the
+measurements of ferroelectric permittivity used in this paper.}\\
+
+
 \appendix
 
 \section{Random permittivity distribution and uncoupled effective parameters}
@@ -502,7 +509,7 @@ in the high index phase and potentially lead to composites with tunable effectiv
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=0.8\textwidth]{effpar_rand_uncpl}
+ \includegraphics[width=0.8\textwidth]{effpar_rand_uncpl.png}
  \caption{Effective parameters of the random 2D mixtures as a function of the
   applied electric field for various filling fraction of dielectric, when the
   coupling is neglected.
@@ -514,27 +521,7 @@ in the high index phase and potentially lead to composites with tunable effectiv
 \end{figure}
 %
 
-\vskip6pt
 
-\enlargethispage{20pt}
-
-% \ethics{Insert ethics text here.}
-
-\dataccess{The codes necessary to reproduce the results in this article are freely available at \href{https://www.github.com/benvial/ferromtm}{github.com/benvial/ferromtm}.}
-
-\aucontribute{Benjamin Vial wrote devised the research, implemented
-the codes and wrote the paper. Yang Hao supervised the research and
-co-authored the manuscript.}
-
-\competing{The authors declare no competing interrests.}
-
-\funding{This work was funded by the Engineering and Physical Sciences Research
-Council (EPSRC), UK, under a grant (EP/P005578/1) 'Adaptive Tools for
-Electromagnetics and Materials Modelling to Bridge the Gap between
-Design and Manufacturing (AOTOMAT)'.}
-
-\ack{The authors would like to thanks Henry Giddens for performing the
-measurements of ferroelectric permittivity used in this paper.}
 
 % \disclaimer{Insert disclaimer text here.}
 

@@ -98,12 +98,12 @@ def plot_potential(ax, v):
     # V = V-np.mean(V)
     Vplot = (V - np.min(V)) / (np.max(V) - np.min(V))
 
-    # Vplot[epsp <= 3] = 0
-    # levels = list(np.linspace(0, 0.1, 15))
-    # levels.extend(list(np.linspace(0.1 + 0.000000001, 0.9, 11)))
-    # levels.extend(list(np.linspace(0.9 + 0.000000001, 1, 15)))
-    # levels = np.array(levels).ravel()
-    levels = 11
+    # Vplot[epsp <= 3] =  np.NaN
+    levels = list(np.linspace(0.0, 0.1, 5))
+    levels.extend(list(np.linspace(0.1 + 1e-9, 0.9, 7)))
+    levels.extend(list(np.linspace(0.9 + 1e-9, 1, 5)))
+    levels = np.array(levels).ravel()
+    # levels = 11
     ax.contour(X, Y, Vplot, levels, linewidths=1, colors="#ababab", linestyles="solid")
 
 
@@ -192,7 +192,7 @@ if __name__ == "__main__":
         load_results()
     )
     plt.close("all")
-    fig, ax = plt.subplots(ncols=3, nrows=2, figsize=(8, 4.2))
+    fig, ax = plt.subplots(ncols=3, nrows=2, figsize=(7, 4))
     plot_eps_conv(ax[0, 0])
     subplot_id(ax=ax[0, 0], id="a")
     plot_tand_conv(ax[1, 0])
@@ -212,12 +212,12 @@ if __name__ == "__main__":
     plt.tight_layout()
     fig.savefig(os.path.join(rootdir, "data", "figures", figname))
 
-    plt.close("all")
-    fig, ax = plt.subplots(ncols=2, nrows=1, figsize=(5, 2))
-    i = 1
-    plot_eps_map_conv(ax[0], i, j=1)
-    subplot_id(ax=ax[0], id="a")
-    i = ncv - 1
-    plot_eps_map_conv(ax[1], i, j=1)
-    subplot_id(ax=ax[1], id="b")
-    plt.tight_layout()
+    # plt.close("all")
+    # fig, ax = plt.subplots(ncols=2, nrows=1, figsize=(5, 2))
+    # i = 1
+    # plot_eps_map_conv(ax[0], i, j=1)
+    # subplot_id(ax=ax[0], id="a")
+    # i = ncv - 1
+    # plot_eps_map_conv(ax[1], i, j=1)
+    # subplot_id(ax=ax[1], id="b")
+    # plt.tight_layout()

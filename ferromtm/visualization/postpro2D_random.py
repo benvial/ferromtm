@@ -247,7 +247,7 @@ if __name__ == "__main__":
         # fig, ax = plt.subplots(ncols=2, nrows=2)
         # plot_eff_par(fig, ax, lin=True)
 
-        fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6, 4))
+        fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6.7, 3.8))
         fig.set_rasterized(True)
         [a.set_rasterized(True) for a in ax.ravel()]
         plot_eff_par(fig, ax, lin=False)
@@ -258,7 +258,7 @@ if __name__ == "__main__":
             dpi=300,
         )
 
-        fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6, 4))
+        fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6.7, 3.8))
         fig.set_rasterized(True)
         [a.set_rasterized(True) for a in ax.ravel()]
         plot_eff_par(fig, ax, lin=True)

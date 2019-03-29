@@ -22,7 +22,7 @@ for f in frange:
     for i, ax in enumerate(axarr.ravel()):
         ax.axis("off")
         b = sample[i, :, :]
-        ax.imshow(b.T, cmap="Greens_r")
+        ax.imshow(b, cmap="Greens_r")
 
     figname = "random_samples_f_" + "{0}percent.eps".format(int(f * 100))
     plt.savefig(os.path.join(rootdir, "data", "figures", figname), bbox_inches="tight")
