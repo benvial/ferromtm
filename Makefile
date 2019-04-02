@@ -181,6 +181,16 @@ effparrand:
 epsrand:
 	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/plot_random_fibers.py
 
+## Plot reflection coefficient of a slab as a function of angle
+slabangle:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/postpro_slab_angle.py
+
+## Plot reflection coefficient of a slab as a function of frequency
+slabfreq:
+	$(PYTHON_INTERPRETER) ./$(PROJECT_NAME)/visualization/postpro_slab_freq.py
+
+
+
 ## Make all plots
 plots: figbst effparper plotconvper plotconvrand epsrand effparrand
 

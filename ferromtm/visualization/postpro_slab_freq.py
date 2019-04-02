@@ -30,4 +30,8 @@ if __name__ == "__main__":
     plt.xlim((fnorm[0], 0.06))
     plt.ylim((0, 1.09))
     plt.tight_layout()
-    fig.savefig("Rslab_freq.eps", rasterized=True, dpi=300)
+    fig.savefig(
+        os.path.join(rootdir, "data", "figures", "Rslab_freq.eps"),
+        rasterized=True,
+        dpi=300,
+    )

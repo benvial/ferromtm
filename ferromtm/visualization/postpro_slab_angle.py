@@ -29,4 +29,8 @@ if __name__ == "__main__":
     plt.xlim((0, 90))
     plt.ylim((0, 1))
     plt.tight_layout()
-    fig.savefig("Rslab_angle.eps", rasterized=True, dpi=300)
+    fig.savefig(
+        os.path.join(rootdir, "data", "figures", "Rslab_angle.eps"),
+        rasterized=True,
+        dpi=300,
+    )

@@ -73,6 +73,8 @@ def load_results():
         n_norm_nl,
         Aniso_factor_lin,
         Aniso_factor_nl,
+        Knorm_lin,
+        Knorm_nl,
     )
 
 
@@ -146,18 +148,37 @@ def plot_eff_par(fig, ax):
 
 def plot_eff_cqf(fig, ax):
     ax.plot(Ebias, Knorm_lin, ls="--")
-    ax.plot(Ebias, K_bulk, "k-")
+    ax.plot(Ebias, K_bulk, "k-", label="bulk")
     ax.set_prop_cycle(None)
     ax.plot(Ebias, Knorm_nl, ls="-")
-    ax.set_yscale("log")
+    # ax.set_yscale("log")
     # ax.plot(Ebias, K_nl, ls="-")
     ax.set_xlabel("electric field (MV/m)")
+
+    ax.set_ylabel("commutation quality factor")
     # plt.plot(Ebias, K_bulk, "--k")
+    colors = sns.color_palette()
+    colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+
+    custom_lines0 = [
+        Line2D([0], [0], color=colors[0]),
+        Line2D([0], [0], color=colors[1]),
+        Line2D([0], [0], color=colors[2]),
+        Line2D([0], [0], color=colors[3]),
+        Line2D([0], [0], color=colors[4]),
+    ]
+    custom_lines1 = [Line2D([0], [0], color="k", ls="-")]
+
+    custom_lines = custom_lines1 + custom_lines0
+    leg = [r"bulk"]
+    leg += [r"$f={:.1f}$".format(f) for f in Fincl[iplot]]
+    ax.legend(custom_lines, leg, loc=0)
+    ax.set_title("solid: coupled, dashed: uncoupled")
 
 
 if __name__ == "__main__":
 
-    norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl = (
+    norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl, Knorm_lin, Knorm_nl, = (
         load_results()
     )
     plt.close("all")
@@ -168,3 +189,8 @@ if __name__ == "__main__":
     #
     # fig, ax = plt.subplots()
     # plot_eff_cqf(fig, ax)
+    fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(3, 3))
+    plot_eff_cqf(fig, ax)
+    plt.tight_layout()
+    fig.savefig(os.path.join(rootdir, "data", "figures", "effective_cqf_per.eps"))
+    #
