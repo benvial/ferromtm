@@ -227,8 +227,8 @@ def compute_hom_pb(fem_hom, epsi, verbose=False):
     interp = False
     make_pos_tensor_eps(fem_hom, epsi, interp=interp)
     fem_hom.compute_solution()
-    # fem_hom.postpro_fields(filetype="pos")
-    # fem_hom.open_gmsh_gui()
+    fem_hom.postpro_fields(filetype="pos")
+    fem_hom.open_gmsh_gui()
 
     eps_hom = fem_hom.compute_epsilon_eff()
     if verbose:
@@ -429,10 +429,12 @@ def main(
     return ret
 
 
-def main_circle(params, save=False, coupling=True):
+def main_circle(params, save=False, coupling=True, rmtmpdir=True):
     E_bias, f = params
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
-    eps_hom, epsi, E, fem_hom, fem_es = main(f, E_bias, coupling=coupling)
+    eps_hom, epsi, E, fem_hom, fem_es = main(
+        f, E_bias, coupling=coupling, rmtmpdir=rmtmpdir
+    )
 
     if save:
         fname = "circle_f_{:.2f}_E_{:.2f}".format(f, E_bias)
@@ -553,7 +555,7 @@ params = np.vstack((E1.ravel(), F1.ravel())).T
 if __name__ == "__main__":
     # main_circle_conv(params[104])
     f = 0.5  # pi * 0.4 ** 2
-    Ebias = 2
+    Ebias = 0
     eps_hom, epsi, E, fem_hom, fem_es = main_circle(
         [Ebias, f], coupling=False, rmtmpdir=False
     )
