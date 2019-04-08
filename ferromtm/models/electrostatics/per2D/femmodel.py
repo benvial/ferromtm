@@ -73,7 +73,7 @@ class FemModel(BaseFEM):
         if self.pattern:
             self.update_epsilon_value()
         self.update_params()
-        self.print_progress("Computing solution: homogenization problem")
+        self.print_progress("Computing solution: electrostatic problem")
         argstr = "-petsc_prealloc 1500 -ksp_type preonly \
                  -pc_type lu -pc_factor_mat_solver_type mumps"
         resolution = "electrostat_scalar"

@@ -119,7 +119,7 @@ def ref_mesh(fem):
     return fem
 
 
-def init_es(f, E_bias, incl=True, mat=None, parmesh=20):
+def init_es(f, E_bias, incl=True, mat=None, parmesh=20, mesh_refine=True):
     r = (f / pi) ** (1 / 2)
     #####################################
     # # electrostatics
@@ -149,6 +149,7 @@ def init_es(f, E_bias, incl=True, mat=None, parmesh=20):
     fem_es.coupling_flag = True
     # fem_es.tmp_dir = "./estat"
     fem_es.tmp_dir = tempfile.mkdtemp(prefix="/tmp/benjaminv.")
+    fem_es.mesh_refine = mesh_refine
     fem_es.initialize()
     if incl:
         build_incl(fem_es, r)
@@ -160,7 +161,8 @@ def init_es(f, E_bias, incl=True, mat=None, parmesh=20):
             fem_es.mat = make_pattern(f)
 
         fem_es.make_mesh()
-        fem_es = ref_mesh(fem_es)
+        if mesh_refine:
+            fem_es = ref_mesh(fem_es)
 
         # fem_es.open_gmsh_gui()
 
@@ -198,7 +200,8 @@ def init_hom(fem_es):
     else:
         fem_hom.mat = fem_es.mat
         fem_hom.make_mesh()
-        fem_hom = ref_mesh(fem_hom)
+        if fem_es.mesh_refine:
+            fem_hom = ref_mesh(fem_hom)
         # fem_hom.open_gmsh_gui()
         # fem_hom.register_pattern(mat.pattern, mat.threshold_val)
     return fem_hom
@@ -226,9 +229,9 @@ def compute_hom_pb(fem_hom, epsi, verbose=False):
     interp = not fem_hom.inclusion_flag
     interp = False
     make_pos_tensor_eps(fem_hom, epsi, interp=interp)
-    fem_hom.compute_solution()
-    fem_hom.postpro_fields(filetype="pos")
-    fem_hom.open_gmsh_gui()
+
+    # fem_hom.postpro_fields(filetype="pos")
+    # fem_hom.open_gmsh_gui()
 
     eps_hom = fem_hom.compute_epsilon_eff()
     if verbose:
@@ -483,12 +486,12 @@ def main_random_conv(params):
     return eps_hom, epsi, E, fem_hom, fem_es
 
 
-def main_circle_pattern(params, save=False, coupling=True):
+def main_circle_pattern(params, save=False, coupling=True, rmtmpdir=True):
     E_bias, f = params
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
     mat = make_pattern(f, choice="circ")
     eps_hom, epsi, E, fem_hom, fem_es = main(
-        f, E_bias, incl=False, coupling=coupling, mat=mat, parmesh=33
+        f, E_bias, incl=False, coupling=coupling, mat=mat, parmesh=33, rmtmpdir=rmtmpdir
     )
     if save:
         fname = "circle_f_{:.2f}_E_{:.2f}".format(f, E_bias)
@@ -507,6 +510,7 @@ def main_circle_pattern(params, save=False, coupling=True):
             epsi=epsi,
             E=E,
         )
+    return eps_hom, epsi, E, fem_hom, fem_es
 
 
 def main_rand(params, save=False, coupling=True):
@@ -535,6 +539,7 @@ def main_rand(params, save=False, coupling=True):
                 epsi=epsi,
                 E=E,
             )
+    return
 
 
 def normvec(E):
@@ -555,9 +560,9 @@ params = np.vstack((E1.ravel(), F1.ravel())).T
 if __name__ == "__main__":
     # main_circle_conv(params[104])
     f = 0.5  # pi * 0.4 ** 2
-    Ebias = 0
-    eps_hom, epsi, E, fem_hom, fem_es = main_circle(
-        [Ebias, f], coupling=False, rmtmpdir=False
+    Ebias = 1
+    eps_hom, epsi, E, fem_hom, fem_es = main_circle_pattern(
+        [Ebias, f], coupling=True, rmtmpdir=False
     )
 
     # main_circle(params[2], save=False, coupling=True)
