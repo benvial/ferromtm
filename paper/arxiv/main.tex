@@ -1,6 +1,17 @@
 
-\documentclass[aps,prb,11pt]{revtex4-1}
-
+\documentclass[%
+ aip,
+% jmp,
+% bmf,
+% sd,
+% rsi,
+ amsmath,amssymb,
+%preprint,%
+ reprint,%
+%author-year,%
+%author-numerical,%
+% Conference Proceedings
+]{revtex4-1}
 
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -55,7 +66,7 @@
 \begin{document}
 
 %%%% Article title to be placed here
-\title{Homogenization of periodic and random ferroelectric-dielectric composites}
+\title{Enhanced tunability in ferroelectric metamaterials through local field enhancement and the effect of disorder}
 \author{Benjamin Vial and Yang Hao}
 
 %%%%%%%%% Insert author address here
@@ -78,12 +89,17 @@
 
 %%%% Abstract text to be placed here %%%%%%%%%%%%
 \begin{abstract}
- We investigate the homogenized permittivity of ferroelectric-dielectric mixtures under
+ We investigate the homogenized permittivities of metamaterials made of low index dielectric inclusions
+ in a feroelectric matrix under
  a static electric field. A refined model is used to take into account the coupling
  between the electrostatic problem and the electric field dependent permittivity of the
- ferroelectric material. Periodic and random structures in two dimensions are investigated and
+ ferroelectric material, leading to a local field enhancement and permittivity change in the ferroelectric.
+ Periodic and pseudo-random structures in two dimensions are investigated and
  we study the effective permittivity, losses, electrically induced anisotropy and tunability
- of those metamaterials.
+ of those metamaterials. We show that the tunability of such composites might be substantially
+ enhanced in the periodic case, wherehas introducing disorder in the microstructure
+ weaken the effect of enhanced local permittivity change. Our results may be useful to guide the synthesis of novel
+ composite ceramics with improved characteristics for controllable microwave devices.
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -94,39 +110,65 @@
  microwave devices, with typical applications including antenna beam steering,
  phase shifters, tunable power splitters, filters, voltage controlled oscillators and
  matching networks \cite{tagantsev_ferroelectric_2018}. Both bulk ceramics and thin films have
- been employed to design frequency agile components \cite{vendik_ferroelectric_1999, lancaster_thin-film_1998,xi_oxide_2000} and metamaterials \cite{hand_frequency_2008, zhao_experimental_2008}.
+ been employed to design frequency agile components \cite{vendik_ferroelectric_1999,
+ lancaster_thin-film_1998,xi_oxide_2000} and metamaterials \cite{hand_frequency_2008, zhao_experimental_2008}.
  The main reason of using
  ferroelectric materials is their strong dependence of their permittivity $\varepsilon$
- on an applied electric field $E$, which is measured by their tunability defined as $n = \varepsilon(0)/\varepsilon(E)$.
+ on an applied electric field $E$, which is measured by their tunability defined as $n = \varepsilon(0)/\varepsilon(E)$,
+ along with a non hysteresis behaviour when used in their paraelectric state.
  The key requirements for antenna and microwave applications are large tunability and low losses.
- These two characteristics are correlated and one has to find a trade-off for optimal device performance, which can be quantified by the so called commutation quality factor
+ These two characteristics are correlated and one has to find a trade-off for optimal
+  device performance, which can be quantified by the so called commutation quality factor
  $K = (n -1)^2/(n\, \tan\delta(0)\,\tan\delta(E))$, where $\tan\delta$ is the loss tangent.\\
- These materials have usually high permittivity values,
+ These materials have usually high permittivity values even at microwave frequencies,
  often leading to slow response time and impedance mismatch, which can be an issue in some practical
  applications. Thus it has been considered to mix ferroelectric ceramics to low-index and
- low-loss non-tunable dielectrics in order to reduce both permittivity
-
-
-\noindent values and losses.
-The effective parameters of those composites have been investigated \cite{sherman_ferroelectric-dielectric_2006, jylha_tunability_2008, sherman_tunability_2004, astafiev_can_2003} and it has been found that the
-permittivity can be greatly reduced while losses are much less sensitive to the dielectric phase addition, and in some situations lead to a small increase of the tunability of the mixture. In the context of porous ferroelectrics, the homogenized properties strongly depends on the size and morphology of the pores \cite{okazaki_effects_1973,stanculescu_study_2015}. In addition, the influence
-of local field enhancement in the tunability has been shown to be of particular importance \cite{padurariu_tailoring_2012,padurariu_field-dependent_2012,cazacu_tunable_2013}.
+ low-loss non-tunable dielectrics in order to reduce both permittivity values and losses, or to
+ use porous ceramics to achieve the same goals without unwanted chemical reactions at the boundaries between dissimilar materials.
+The effective parameters of those composites have been investigated
+\cite{sherman_ferroelectric-dielectric_2006, jylha_tunability_2008, sherman_tunability_2004, astafiev_can_2003}
+and it has been found that the permittivity can be greatly reduced while losses are much less
+ sensitive to the dielectric phase addition, and in some situations lead to a small
+  increase of the tunability of the mixtures. Analytical models based on the Bruggeman effective
+medium approach for low concentration of dielectrics were derived for diferent configurations (columnar, layered and spherical
+inclusions models) and have succesfully be compared with numerical simulations and experiments \cite{sherman_ferroelectric-dielectric_2006}.
+  In the context of porous ferroelectrics,
+   the homogenized properties strongly depends on the size and morphology of the pores
+    \cite{okazaki_effects_1973,stanculescu_study_2015}.
+    Recently, the concept of tailoring the nonlinear properties of ferroelectric
+     and dielectric structures by local field engineering has been introduced \cite{padurariu_tailoring_2012,padurariu_field-dependent_2012,cazacu_tunable_2013}.
+      It was shown through finite element calculation including the nonlinear coupling, that by employing
+      composite materials made of linear dielectric inclusions into a ferroelectric matrix, one can lower the permittivity while maintaining
+      high tunability, due to the local field in the ferroelectric phase which is tuned by the linear dielectric phase.
+Moreover, the effect of grain sizes in ferroelectric
+ceramics was studied using a model taking the field enhancement into account at
+the grain boundaries, and the predicted behavior succesfully compared to experimental data \cite{padurariu_field-dependent_2012}.
+Generally, there is a need for refined theoretical and numerical models to explain and design
+tunable materials and composites with tailored nonlinear properties.
 \\
-This study investigates the effective permittivity of composites made of dielectric inclusions in a ferroelectric matrix
-by using a two-scale convergence method \cite{allaire_homogenization_1992, guenneau_homogenization_2000}.
+This study investigates the effective permittivity of composites made of
+ dielectric inclusions in a ferroelectric matrix
+by using a two-scale convergence method \cite{allaire_homogenization_1992,
+ guenneau_homogenization_2000}.
 The originality lies in the fact that a fully coupling model is employed to
 calculate the electrostatic field distribution when a uniform biasing field is
 applied on the structures, which will result in a local modification of the permittivity
 in the ferroelectric phase due to the microstructure. As compared to a simple uncoupled model where the
 ferroelectric phase is only modified through the biasing field,
 the resulting effective permittivity, dielectric losses, tunability and
-anisotropy significantly differ. As compared to earlier sudies in the litterature \cite{padurariu_tailoring_2012,padurariu_field-dependent_2012}, we account for
+anisotropy significantly differ. As compared to earlier sudies in the
+litterature \cite{padurariu_tailoring_2012,padurariu_field-dependent_2012}, we account for
 the non-linear coupling beyond the first iteration and use two-scale
-convergence homogenization analysis to obtain the effective parameters at higher frequencies, instead of a capacitance-based model.
-We first study metamaterials consisting of a squarre array of parallel dielectric rods with circular cross section in a ferroelectric host, and then investigate the effect of random distribution of those rods within the unit cell.
+convergence homogenization analysis to obtain the effective parameters at
+higher frequencies, instead of a capacitance-based model.
+We first study metamaterials consisting of a squarre array of parallel
+dielectric rods with circular cross section in a ferroelectric host, and
+then investigate the effect of random distribution of those rods within the unit cell.
 
 
 %#########################################################################################
+
+
 
 \section{Theory and numerical model}
 
@@ -139,10 +181,12 @@ of the wave equation in the transverse electric case (TE, electric field paralle
 to the direction of invariance) and the
 transverse magnetic case (TM, magnetic field parallel to the direction
 of invariance).
-A uniform biasing field is applied in order to be able to tune the effective permittivity. Modelling homogenized properties of this type of mixtures can be done by assuming
+A uniform biasing field is applied in order to be able to tune the effective permittivity.
+ Modelling homogenized properties of this type of mixtures can be done by assuming
 that the electric field distribution is uniform throughout the sample,
 so that the study of the tunability is
-essentially achieved by changing the value of the properties in the ferroelectric phase and computing the effective permittivity of the composite.
+essentially achieved by changing the value of the properties in the
+ferroelectric phase and computing the effective permittivity of the composite.
 We refer this approach as to the uncoupled model in the following.
 However, a more accurate description is to take into account the change of the
 electric field by the microstructure, if any. We therefore need to solve an
@@ -153,6 +197,15 @@ ferroelectric phase depends on this induced electric field: this leads to a stro
 % -------------------------------------------------------------------------------
 \subsection{Permittivity model\label{permmodel}}
 
+\begin{figure}[!t]
+ \centering
+ \includegraphics[width=1\columnwidth]{epsilon_fit}
+ \caption{Variation of the ferroelectric permittivity as a function of the
+  applied electric field (dots: measurements, dashed lines: fit to
+  formula~(\ref{eq_epsf})), for the static case (green) and at microwave frequencies
+  (orange, $f=3.8$ GHz). The fitting parameters are given in Table \ref{table_params_fit}.}
+ \label{fig1}
+\end{figure}
 We use barium strontium titanate (BST) as our ferroelectric material. Measurements
 have been carried out at electrostatics and at microwave frequencies, and the normalized permittivity value
 as a function of biasing field are reported on \fig{fig1}.\\
@@ -174,15 +227,6 @@ Along the direction of a uniform applied electric field, the relative permittivi
 where $\epsf(0)=1/a$, $\alpha=3b/a$ and $\beta=5c/a$. The fitting parameters are given in Table \ref{table_params_fit}.
 As the norm of the field increases, the permittivity decreases with a characteristic
 bell curve typical for a ferroelectric material in its paraelectric state.
-\begin{figure}[!t]
- \centering
- \includegraphics[width=0.75\columnwidth]{epsilon_fit}
- \caption{Variation of the ferroelectric permittivity as a function of the
-  applied electric field (dots: measurements, dashed lines: fit to
-  formula~(\ref{eq_epsf})), for the static case (green) and at microwave frequencies
-  (orange, $f=3.8$ GHz). The fitting parameters are given in Table \ref{table_params_fit}.}
- \label{fig1}
-\end{figure}
 Furthermore, assuming the crystalline principal axes of the ferroelectric material
 are oriented in the coordinate directions, and that the diagonal components of the permittivity
 tensor are only function of the corresponding bias electric field components \cite{krowne_anisotropic_2002}, we have:
@@ -214,6 +258,20 @@ of permittivity at microwaves.\\
  \end{tabular}
 \end{table}
 
+
+\begin{figure*}[!t]
+ \centering
+ \includegraphics[width=0.75\textwidth]{convergence_per}
+ \caption{Convergence of the coupled problem.
+  Real part (a) and loss tangent (b) of the components of the homogenized
+  permittivity tensor as a function of iteration step $i$. The distribution of
+  the normalized electric field (colour map: magnitude in logarithmic scale,
+  lines: equipotential contours) and of the
+  $xx$ component of the permittivity tensor are shown for $i=1$
+  (c and d) and $i=12$ (e and f).
+ }
+ \label{conv2D}
+\end{figure*}
 
 % -------------------------------------------------------------------------------
 \subsection{Electrostatic model}
@@ -252,6 +310,8 @@ Here we would like to emphasise that the permittivity in the ferroelectric mater
 uniform initially, is spatially varying due to the non-uniform distribution
 of the total electric field.\\
 
+
+
 % -------------------------------------------------------------------------------
 \subsection{Homogenization}
 The effective permittivity for TM polarization is calculated
@@ -278,8 +338,28 @@ the homogenized permittivity is simply the average of the permittivity in the un
 $\epshom = \langle \epstens \rangle$.
 
 
-% -------------------------------------------------------------------------------
-\subsection{Numerical setup}
+%#########################################################################################
+
+
+
+
+
+\begin{figure*}[!t]
+ \centering
+ \includegraphics[width=0.75\textwidth]{effective_params_per}
+ \caption{Effective parameters of the 2D metamaterials as a function of the
+  applied electric field for various filling fraction of dielectric.
+  (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
+  (d): anisotropy factor. The solid lines correspond to the coupled model and
+  the dashed lines to the uncoupled model.}
+ \label{eff_par_2D_TM}
+\end{figure*}
+
+\section{Numerical results}
+In the following numerical results, the dielectric phase is supposed to be
+lossless and non dispersive with $\epsd = 3$ while the ferroelectric material follows the
+permittivity described in section~\ref{permmodel} and has a constant loss
+tangent $\tan \delta^{\rm f} = 10^{-2}$.
 Equations~(\ref{eq_elstat}) and (\ref{eq_hom_annex}) are solved with a Finite Element
 Method using the open source packages Gmsh \cite{geuzaine_gmsh:_2009} and GetDP \cite{dular_general_1998}.
 In both cases we use a square unit cell $\Omega$ of length $d$ with periodic boundary
@@ -289,32 +369,26 @@ solution is computed with a direct solver (MUMPS \cite{amestoy_fully_2001}).
 % data necessary to reproduce the results reported in this paper are freely available
 % online.
 
-
-%#########################################################################################
-
-\section{Numerical results}
-In the following numerical results, the dielectric phase is supposed to be
-lossless and non dispersive with $\epsd = 3$ while the ferroelectric material follows the
-permittivity described in section~\ref{permmodel} and has a constant loss
-tangent $\tan \delta^{\rm f} = 10^{-2}$.
-
+\begin{figure*}[!t]
+ \centering
+ \includegraphics[width=0.75\textwidth]{effpar_rand_cpl.png}
+ \caption{Effective parameters of the pseudo-random composites as a function of the
+  applied electric field for various filling fraction of dielectric, when the
+  coupling is taken into account.
+  (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
+  (d): anisotropy factor. The solid lines represent the average values
+  over the 21 samples and the lighter error bands show a confidence interval corresponding to
+  the standard deviation.}
+ \label{eff_par_2Drand_TM}
+\end{figure*}
+%
+%
+%
 
 
 % -------------------------------------------------------------------------------
 \subsection{Two dimensional periodic metamaterial}
-\begin{figure}[!t]
- \centering
- \includegraphics[width=1\textwidth]{convergence_per}
- \caption{Convergence of the coupled problem.
-  Real part (a) and loss tangent (b) of the components of the homogenized
-  permittivity tensor as a function of iteration step $i$. The distribution of
-  the normalized electric field (colour map: magnitude in logarithmic scale,
-  lines: equipotential contours) and of the
-  $xx$ component of the permittivity tensor are shown for $i=1$
-  (c and d) and $i=12$ (e and f).
- }
- \label{conv2D}
-\end{figure}
+
 Lets us now consider a periodc square array of infinitely long dielectric rods of circular cross section
 of radius $r$ embedded in a ferroelectric matrix.\\
 We first study the convergence of the coupled problem on the particular case with dielectric
@@ -358,24 +432,26 @@ In the case studied here, the equilibrium permittivity distribution varies stron
  in our coupled model compared to the uncoupled one (cf. Fig.~(\ref{eff_par_2D_TM}.d)).
 Those subtle phenomena can only be rigorously taken into account by employing a coupling formalism
 and are responsible for the difference observed when compared to a simple uncoupled model.\\
-
-
-\begin{figure}[!t]
+\begin{figure*}[!t]
  \centering
- \includegraphics[width=0.9\textwidth]{effective_params_per}
- \caption{Effective parameters of the 2D metamaterials as a function of the
-  applied electric field for various filling fraction of dielectric.
-  (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
-  (d): anisotropy factor. The solid lines correspond to the coupled model and
-  the dashed lines to the uncoupled model.}
- \label{eff_par_2D_TM}
-\end{figure}
+ \includegraphics[width=0.75\textwidth]{convergence_rand}
+ \caption{Convergence of the coupled problem in the random case
+  for one sample.
+  Real part (a) and loss tangent (b) of the components of the homogenized
+  permittivity tensor as a function of iteration step $i$. The distribution of
+  the normalized electric field (colour map: magnitude in logarithmic scale,
+  lines: equipotential contours) and of the $xx$ component of the permittivity tensor are shown for $i=1$
+  (c and d) and $i=12$ (e and f).
+ }
+ \label{conv_random}
+\end{figure*}
 
 % -------------------------------------------------------------------------------
-\subsection{Random case}
+\subsection{Pseudo-random case}
 
 
-We finally study the effect of random particle distribution on the effective parameters of the
+
+We finally study the effect of random distribution of the inclusions within the unit cell on the effective parameters of the
 composites. This is an important point as fabrication of randomly dispersed
 inclusions is much more easy from a technological perspective. For each filling fraction of the dielectric,
 we generated 21 numerical samples with inclusions of circular cross section of average radius
@@ -399,9 +475,9 @@ The redistribution of electric field, permittivity and convergence of
 the effective parameters are displayed in \fig{conv_random}. The effect of
 disorder plays an important role here: the electrostatic field gets concentrated
 in between neighbouring inclusions and the smaller the gap the higher the field, hence
-a greater local permittivity change. In addition, even if the distribution of particle is
+a greater local permittivity change. In addition, even if the distribution is
 random, one expects that the anisotropy due to geometry would cancel for a sufficiently large number
-of particles (which is the case as the mean anisotropy factor is close to $1$ when no
+of rods (which is the case as the mean anisotropy factor is close to $1$ when no
 bias field is applied). However, the anisotropy due to ferroelectric properties is
 important in this case as well, as both the $x$ and $y$ components of the electrostatic field
 are playing a role.
@@ -410,38 +486,8 @@ by the coupling, so that the anisotropy factor for higher fields is reduced as c
 However even if there is a substantial variability from sample to sample, on average, the anisotropy factor
 decreases with increasing dielectric concentration.
 
-\begin{figure}[!t]
- \centering
- \includegraphics[width=0.9\textwidth]{effpar_rand_cpl.png}
- \caption{Effective parameters of the random 2D mixtures as a function of the
-  applied electric field for various filling fraction of dielectric, when the
-  coupling is taken into account.
-  (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
-  (d): anisotropy factor. The solid lines represent the average values
-  over the 21 samples and the lighter error bands show a confidence interval corresponding to
-  the standard deviation.}
- \label{eff_par_2Drand_TM}
-\end{figure}
-%
-%
-%
-\begin{figure}[!t]
- \centering
- \includegraphics[width=1\textwidth]{convergence_rand}
- \caption{Convergence of the coupled problem in the random case
-  for one sample.
-  Real part (a) and loss tangent (b) of the components of the homogenized
-  permittivity tensor as a function of iteration step $i$. The distribution of
-  the normalized electric field (colour map: magnitude in logarithmic scale,
-  lines: equipotential contours) and of the $xx$ component of the permittivity tensor are shown for $i=1$
-  (c and d) and $i=12$ (e and f).
- }
- \label{conv_random}
-\end{figure}
-
 %#########################################################################################
 %
-
 
 \section{Conclusion}
 
@@ -459,7 +505,7 @@ Importantly, adding more low index and low loss dielectric allows to decrease
 the overall permittivity significantly and slightly lower the losses.
 For the periodic case, the tunability is higher than the bulk due to local field enhancement, whereas
 this effect is strongly suppressed when disorder is introduced. The assymetric redistribution of the permittivity
-induce en effective anisotropy that is added to the one arising purely from the ferroelectric material.
+induce an effective anisotropy that is added to the one arising purely from the ferroelectric material.
 The properties of the composites are affected by multiple factors:
 geometry and the spatially dependent electric field that will induce locally a tunable, anisotropic
 response in the ferroelectric phase depending on its amplitude and direction.
@@ -497,17 +543,17 @@ measurements of ferroelectric permittivity used in this paper.}\\
 
 \section{Random permittivity distribution and uncoupled effective parameters}
 
-\begin{figure}[h!]
+\begin{figure*}[h!]
  \centering
- \includegraphics[width=0.7\columnwidth]{random_samples_f_50percent}
+ \includegraphics[width=0.8\textwidth]{random_samples_f_50percent}
  \caption{Permittivity distribution of the numerical samples used for $f=0.5$. Dark
   colour indicates the ferroelectric material while light colour represents the
   dielectric inclusions.}
  \label{randmatepsi}
-\end{figure}
+\end{figure*}
 
 
-\begin{figure}[h!]
+\begin{figure*}[h!]
  \centering
  \includegraphics[width=0.8\textwidth]{effpar_rand_uncpl.png}
  \caption{Effective parameters of the random 2D mixtures as a function of the
@@ -518,7 +564,7 @@ measurements of ferroelectric permittivity used in this paper.}\\
   over the 21 samples and the lighter error bands show a confidence interval corresponding to
   the standard deviation.}
  \label{eff_par_2Drand_TM_uncpl}
-\end{figure}
+\end{figure*}
 %
 
 
