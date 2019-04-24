@@ -24,12 +24,18 @@ def init_pattern():
 
 
 mat = init_pattern()
-
 mat.pattern = mat.normalized_pattern
-parmesh = 11
+
+parmesh = 30
+
 fem_es = init_es(0, 0, incl=False, mat=mat, parmesh=parmesh, mesh_refine=False)
+fem_es.quad_mesh_flag = True
+# fem_es.gmsh_verbose = 4
 fem_hom = init_hom(fem_es)
 fem_hom.pola = "TM"
+
+# fem_hom.open_gmsh_gui()
+
 
 # ##########################################
 # #########  OPTIMIZATION PARAMETERS  ######
@@ -37,19 +43,21 @@ fem_hom.pola = "TM"
 to = TopOpt(fem_hom)
 to.type_des = fem_hom.type_des
 to.algorithm = topopt.nlopt.LD_MMA
+# to.algorithm = topopt.nlopt.GN_DIRECT_L
+
 to.typeopt = "min"  # type of optimization "min" or "max"
 to.pmin = 0  # minimum value
 to.pmax = 1  # maximum value
 to.m = 1  # interpolation order eps=(eps_min-eps_max)*x^m-eps_min
-to.ptol_rel = 1.0e-6
-to.ftol_rel = 1.0e-12
-to.stopval = None
-to.maxeval = 10  # maximum of function evaluation
+to.ptol_rel = 1.0e-10
+to.ftol_rel = 1.0e-5
+to.stopval = 1e-12
+to.maxeval = 20  # maximum of function evaluation
 to.Nitmax = 8  # maximum number of global iterations
 to.N0 = 0  # initial global iterations
 # to.beta = 1  # projection parameter
 lmin = 1
-to.rfilt = 0.00005 * lmin  # filter radius
+to.rfilt = 0.05 * lmin  # filter radius
 to.filt_weight = "gaussian"
 to.dg_dp = 0
 to.eps_interp = eps_interp
@@ -62,8 +70,8 @@ to.dp = 1e-7
 to.m = 1
 
 ratio_hdes = 1
-n_x = 101
-n_y = 100  # int(n_x * ratio_hdes) +1
+n_x = 203
+n_y = 205  # int(n_x * ratio_hdes) +1
 n_z = 1
 
 to.n_x, to.n_y, to.n_z = n_x, n_y, n_z
@@ -103,37 +111,73 @@ def f_obj(
 ):
     sens_ana = np.size(grad) > 0
     fem_hom.adjoint = sens_ana
-    # print(sens_ana)
-    epsilon = to.make_epsilon(p, filt=filt, proj=proj)
-    epsi = epsilon, epsilon, epsilon
-    eps_hom_xx, fem_hom = compute_hom_pb_y(fem_hom, epsi, verbose=verbose)
-    print("eps_hom_xx = ", eps_hom_xx)
-    # print("1/eps_hom_xx = ", 1/eps_hom_xx)
 
-    print("objtest = ", np.abs(1 / eps_hom_xx - 1 / 3) ** 2 * 3 ** 2)
-    obj = to.get_objective()
-    obj = np.abs(1 / 3 - obj) ** 2 * 3 ** 2
+    epsilon, depsilon_dp = to.make_epsilon(p, filt=filt, proj=proj, grad=True)
+    # epsilon,depsilon_dp = p, np.ones_like(p)
+    # epsilon[np.isnan(epsilon)] = 0
+    # epsi = epsilon, epsilon, epsilon
+    # eps_hom_xx, fem_hom = compute_hom_pb_y(fem_hom, epsi, verbose=verbose)
+    # print("eps_hom_xx = ", eps_hom_xx)
+    # obj0 = to.get_objective()
+
+    # obj0 = np.sum(p)
+
+    # eps_obj= 18
+    # obj = np.abs(1 / eps_obj - obj0) ** 2 * (eps_obj) ** 2
+
+    # obj = np.abs(eps_obj - 1/obj0) ** 2 / (eps_obj) ** 2
+
+    # epsilon, depsilon_dp = to.simp(p)
+
+    tar = 15
+    epsmean = np.mean(epsilon)
+    # print(epsilon)
+
+    print("epsmean: ", epsmean)
+    obj = np.abs(epsmean - tar) ** 2 / tar ** 2
+
+    # obj = np.log10(obj)
     # print("objective: ", obj)
     if sens_ana:
-        sens = to.get_sensitivity(p, filt=filt, proj=proj)
+        deps = to.dp
+        dobj = np.ones_like(epsilon)
+
+        for i, ep in enumerate(epsilon):
+            epsi = np.copy(epsilon)
+            # print(epsi)
+            epsi[i] += deps
+            # print(epsi)
+            epsmean_i = np.mean(epsi)
+            dobj[i] = np.abs(epsmean_i - tar) ** 2 / tar ** 2
+
+            # dobj[i] = np.sum(p)
+            # plt.pause(2)
+
+        dgdeps = (dobj - obj) / deps
+
+        # print(dgdeps)
+
+        # dgdeps= 2 *  np.abs(epsmean - tar) * np.ones_like(p)
+        sens = dgdeps * depsilon_dp
+        # print(sens)
+        # sens = 0*to.get_sensitivity(p, filt=filt, proj=proj)
     else:
         sens = 0
     # fem_hom.postpro_fields(filetype="pos")
     # fem_hom.open_gmsh_gui()
 
     # plt.clf()
-    # print(sens)
+    # # print(sens)
     # sensplt = to.mesh2grid(sens)
     # plt.imshow(sensplt)
     # plt.colorbar()
-
-    plt.clf()
-    adj = to.get_adjoint()
-    print(adj)
-    adjplt = to.mesh2grid(adj.real)
-    plt.imshow(adjplt)
-    plt.colorbar()
-    plt.pause(1)
+    #
+    # plt.clf()
+    # adj = to.get_adjoint()
+    # # print(adj)
+    # adjplt = to.mesh2grid(adj.real)
+    # plt.imshow(adjplt)
+    # plt.colorbar()
 
     # plt.clf()
     # deq_deps = to.get_deq_deps()
@@ -141,7 +185,9 @@ def f_obj(
     # deq_deps_plt = to.mesh2grid(deq_deps.real)
     # plt.imshow(deq_deps_plt)
     # plt.colorbar()
-    # cds
+    # # cds
+    #
+    # plt.pause(2)
 
     if rmtmpdir:
         fem_hom.rm_tmp_dir()
@@ -158,6 +204,8 @@ def f_obj(
 
     if to.plotconv:
         make_plots(to, p, filt=filt, proj=proj)
+
+    grad[:] = sens
     return obj
 
 
@@ -201,8 +249,10 @@ def make_plots(to, p, filt=True, proj=True):
 
 if __name__ == "__main__":
     # define initial density p0
+
     p0 = to.random_pattern(mat)
     # p0 = 0.5*np.ones_like(p0)
+    # p0=np.random.random(len(p0))
     Ebias = 0
     # c = f_obj(p0, f_obj,coupling=True, rmtmpdir=False)
     out = main_opt(p0)
