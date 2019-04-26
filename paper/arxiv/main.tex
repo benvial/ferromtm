@@ -488,7 +488,29 @@ decreases with increasing dielectric concentration.
 
 %#########################################################################################
 %
+\begin{figure*}[h!]
+ \centering
+ \includegraphics[width=0.8\textwidth]{random_samples_f_50percent}
+ \caption{Permittivity distribution of the numerical samples used for $f=0.5$. Dark
+  colour indicates the ferroelectric material while light colour represents the
+  dielectric inclusions.}
+ \label{randmatepsi}
+\end{figure*}
 
+
+\begin{figure*}[h!]
+ \centering
+ \includegraphics[width=0.8\textwidth]{effpar_rand_uncpl.png}
+ \caption{Effective parameters of the random 2D mixtures as a function of the
+  applied electric field for various filling fraction of dielectric, when the
+  coupling is neglected.
+  (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
+  (d): anisotropy factor. The solid lines represent the average values
+  over the 21 samples and the lighter error bands show a confidence interval corresponding to
+  the standard deviation.}
+ \label{eff_par_2Drand_TM_uncpl}
+\end{figure*}
+%
 \section{Conclusion}
 
 We have studied the homogenized properties of dielectric/ferroelectric mixtures
@@ -520,56 +542,28 @@ study this kind of mixtures.
 This would reveal the frequency dependant artificial magnetism due to "micro-resonances"
 in the high index phase and potentially lead to composites with tunable effective permeability.
 
-\section*{Additional information}
-
-\vskip6pt
 
 
-\noindent{The codes necessary to reproduce the results in this article are freely
-available online at this address: \href{https://www.github.com/benvial/ferromtm}{https://www.github.com/benvial/ferromtm}.}\\
-{Benjamin Vial wrote devised the research, implemented
-the codes and wrote the paper. Yang Hao supervised the research and
-co-authored the manuscript.}\\
-{The authors declare no competing interrests.}\\
-{This work was funded by the Engineering and Physical Sciences Research
+\begin{acknowledgments}
+This work was funded by the Engineering and Physical Sciences Research
 Council (EPSRC), UK, under a grant (EP/P005578/1) 'Adaptive Tools for
 Electromagnetics and Materials Modelling to Bridge the Gap between
-Design and Manufacturing (AOTOMAT)'.}\\
-{The authors would like to thanks Henry Giddens for performing the
-measurements of ferroelectric permittivity used in this paper.}\\
-
-
-\appendix
-
-\section{Random permittivity distribution and uncoupled effective parameters}
-
-\begin{figure*}[h!]
- \centering
- \includegraphics[width=0.8\textwidth]{random_samples_f_50percent}
- \caption{Permittivity distribution of the numerical samples used for $f=0.5$. Dark
-  colour indicates the ferroelectric material while light colour represents the
-  dielectric inclusions.}
- \label{randmatepsi}
-\end{figure*}
-
-
-\begin{figure*}[h!]
- \centering
- \includegraphics[width=0.8\textwidth]{effpar_rand_uncpl.png}
- \caption{Effective parameters of the random 2D mixtures as a function of the
-  applied electric field for various filling fraction of dielectric, when the
-  coupling is neglected.
-  (a): normalized permittivity, (b): normalized loss tangent, (c): normalized tunability and
-  (d): anisotropy factor. The solid lines represent the average values
-  over the 21 samples and the lighter error bands show a confidence interval corresponding to
-  the standard deviation.}
- \label{eff_par_2Drand_TM_uncpl}
-\end{figure*}
+Design and Manufacturing (AOTOMAT)'.\\
+The authors would like to thanks Henry Giddens for performing the
+measurements of ferroelectric permittivity used in this paper.\\
 %
+% Benjamin Vial wrote devised the research, implemented
+% the codes and wrote the paper. Yang Hao supervised the research and
+% co-authored the manuscript.\\
+% The authors declare no competing interrests.\\
+The codes necessary to reproduce the results in this article are freely
+available online at this address: \href{https://www.github.com/benvial/ferromtm}{https://www.github.com/benvial/ferromtm}.
+\end{acknowledgments}
 
+% \appendix
 
+% \section{Random permittivity distribution and uncoupled effective parameters}
 
-% \disclaimer{Insert disclaimer text here.}
 
 
 

@@ -9,18 +9,6 @@ from aotomat.tools.plottools import *
 eps_interp = [1, 21]
 
 
-import autograd.numpy as np  # Thinly-wrapped version of Numpy
-from autograd import grad as grad_auto
-
-#
-# def taylor_sine(x):  # Taylor approximation to sine function
-#     ca = np.mean(x)
-#     return ca
-#
-# grad_sine = grad(taylor_sine)
-# print( "Gradient of sin(pi) is", grad_sine(np.linspace(0,1,100)))
-
-
 def init_pattern():
     # # material pattern
     nmatx, nmaty = 2 ** 8, 2 ** 8
@@ -38,13 +26,12 @@ def init_pattern():
 mat = init_pattern()
 mat.pattern = mat.normalized_pattern
 
-parmesh = 33
+parmesh = 30
 
 fem_es = init_es(0, 0, incl=False, mat=mat, parmesh=parmesh, mesh_refine=False)
-
 fem_es.quad_mesh_flag = True
 # fem_es.gmsh_verbose = 4
-fem_hom = init_hom(fem_es, tmp_dir="./tmp/test0")
+fem_hom = init_hom(fem_es)
 fem_hom.pola = "TM"
 
 # fem_hom.open_gmsh_gui()
@@ -83,8 +70,8 @@ to.dp = 1e-7
 to.m = 1
 
 ratio_hdes = 1
-n_x = 207
-n_y = 203  # int(n_x * ratio_hdes) +1
+n_x = 203
+n_y = 205  # int(n_x * ratio_hdes) +1
 n_z = 1
 
 to.n_x, to.n_y, to.n_z = n_x, n_y, n_z
@@ -95,9 +82,6 @@ def compute_hom_pb_y(fem_hom, epsi, verbose=False):
     interp = False
     make_pos_tensor_eps(fem_hom, epsi, interp=interp)
     fem_hom.y_flag = True
-
-    fem_hom.path_pos += " ./tmp/test0/source_adj.pos"
-    # print(fem_hom.path_pos)
     fem_hom.compute_solution()
     fem_hom.postprocessing()
     V = fem_hom.get_vol()
@@ -129,94 +113,49 @@ def f_obj(
     fem_hom.adjoint = sens_ana
 
     epsilon, depsilon_dp = to.make_epsilon(p, filt=filt, proj=proj, grad=True)
-    epsi = epsilon, epsilon, epsilon
+    # epsilon,depsilon_dp = p, np.ones_like(p)
+    # epsilon[np.isnan(epsilon)] = 0
+    # epsi = epsilon, epsilon, epsilon
+    # eps_hom_xx, fem_hom = compute_hom_pb_y(fem_hom, epsi, verbose=verbose)
+    # print("eps_hom_xx = ", eps_hom_xx)
+    # obj0 = to.get_objective()
 
-    eps_hom_xx, fem_hom = compute_hom_pb_y(fem_hom, epsi, verbose=verbose)
-    print("eps_hom_xx = ", eps_hom_xx)
-    obj0 = to.get_objective()
-    eps_obj = 18
-    obj = np.abs(1 / eps_obj - obj0) ** 2 * (eps_obj) ** 2
+    # obj0 = np.sum(p)
 
+    # eps_obj= 18
+    # obj = np.abs(1 / eps_obj - obj0) ** 2 * (eps_obj) ** 2
+
+    # obj = np.abs(eps_obj - 1/obj0) ** 2 / (eps_obj) ** 2
+
+    # epsilon, depsilon_dp = to.simp(p)
+
+    tar = 15
+    epsmean = np.mean(epsilon)
+    # print(epsilon)
+
+    print("epsmean: ", epsmean)
+    obj = np.abs(epsmean - tar) ** 2 / tar ** 2
+
+    # obj = np.log10(obj)
+    # print("objective: ", obj)
     if sens_ana:
-        sens = to.get_sensitivity(p, filt=filt, proj=proj)
+        deps = to.dp
+        dobj = np.ones_like(epsilon)
+        for i, ep in enumerate(epsilon):
+            epsi = np.copy(epsilon)
+            epsi[i] += deps
+            epsmean_i = np.mean(epsi)
+            dobj[i] = np.abs(epsmean_i - tar) ** 2 / tar ** 2
+        dgdeps = (dobj - obj) / deps
+
+        # dgdeps= 2 *  (epsmean - tar) * np.ones_like(p) / tar ** 2
+        sens = dgdeps * depsilon_dp
+        # print(sens)
+        # sens = 0*to.get_sensitivity(p, filt=filt, proj=proj)
     else:
         sens = 0
     # fem_hom.postpro_fields(filetype="pos")
     # fem_hom.open_gmsh_gui()
-
-    # plt.clf()
-    sol = fem_hom.get_solution().real
-    # # print(adj)
-    # solplt = to.mesh2grid(sol.real)
-    # ux, uy = np.gradient(solplt)
-    # plt.imshow(ux)
-    # plt.colorbar()
-    # plt.pause(1)
-    #
-    x, y = to.grid
-    dx = x[1] - x[0]
-    dy = y[1] - y[0]
-    xsi = 1 / epsilon
-    xsi_tmp = to.mesh2grid(xsi)
-    u = to.mesh2grid(sol)
-    #
-    #
-    def objective_func(u):
-        ux, uy = np.gradient(u.T, edge_order=2)
-        integ = xsi_tmp.T * (1 + uy / dy)
-        xsihom = np.trapz(np.trapz(integ, y), x)
-        # xsihom = np.mean(u)
-        return xsihom
-
-    #
-    # def grad_objective_func(u, du=1e-2):
-    #     g = np.zeros_like(u)
-    #     N,M = u.shape
-    #     f = objective_func(u)
-    #     for ix in range(N):
-    #         for iy in range(M):
-    #             u_ = np.copy(u)
-    #             u_[ix,iy] += du
-    #             df = objective_func(u_)
-    #             g[ix,iy]= (df-f)/du
-    #     return g
-    #
-    def grad_objective_func(umesh):
-        du = 1e-7
-        df = []
-        ugrid = to.mesh2grid(umesh)
-        f = objective_func(ugrid)
-        for i, u_ in enumerate(umesh):
-            u_tmp = np.copy(umesh)
-            u_tmp[i] += du
-            ugrid = to.mesh2grid(u_tmp)
-            df.append(objective_func(ugrid))
-        df = np.array(df)
-        # du = np.gradient(umesh)
-        return (df - f) / du
-
-    #
-
-    # source_adj = grad_objective_func(sol)
-    # fem_hom.make_eps_pos( fem_hom.des[0], -source_adj, posname="source_adj")
-
-    xsihom = objective_func(u)
-    print("eps_hom_xx test = ", 1 / xsihom)
-
-    # grad_objective_func = grad_auto(objective_func)
-
-    # dgdsol = grad_objective_func(sol)
-    # dgdsol = to.mesh2grid(dgdsol)
-    # plt.clf()
-    # plt.imshow(dgdsol.real)
-    # plt.colorbar()
-    # plt.pause(2)
-    # #
-    # # dgdsol = grad_objective_func(u)
-    # # plt.clf()
-    # # plt.imshow(dgdsol.real)
-    # # plt.colorbar()
-    #
 
     # plt.clf()
     # # print(sens)
@@ -224,12 +163,12 @@ def f_obj(
     # plt.imshow(sensplt)
     # plt.colorbar()
     #
-    plt.clf()
-    adj = to.get_adjoint()
-    # print(adj)
-    adjplt = to.mesh2grid(adj.real)
-    plt.imshow(adjplt)
-    plt.colorbar()
+    # plt.clf()
+    # adj = to.get_adjoint()
+    # # print(adj)
+    # adjplt = to.mesh2grid(adj.real)
+    # plt.imshow(adjplt)
+    # plt.colorbar()
 
     # plt.clf()
     # deq_deps = to.get_deq_deps()
@@ -239,7 +178,7 @@ def f_obj(
     # plt.colorbar()
     # # cds
     #
-    # plt.pause(3)
+    # plt.pause(2)
 
     if rmtmpdir:
         fem_hom.rm_tmp_dir()
@@ -301,7 +240,7 @@ def make_plots(to, p, filt=True, proj=True):
 
 if __name__ == "__main__":
     # define initial density p0
-    np.random.seed(22)
+    np.random.seed(10)
 
     mat.p_seed = np.random.random(mat.pattern.shape)
 

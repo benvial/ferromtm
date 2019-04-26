@@ -119,7 +119,7 @@ def ref_mesh(fem):
     return fem
 
 
-def init_es(f, E_bias, incl=True, mat=None, parmesh=20, mesh_refine=True):
+def init_es(f, E_bias, incl=True, mat=None, parmesh=20, mesh_refine=True, tmp_dir=None):
     r = (f / pi) ** (1 / 2)
     #####################################
     # # electrostatics
@@ -148,7 +148,10 @@ def init_es(f, E_bias, incl=True, mat=None, parmesh=20, mesh_refine=True):
     fem_es.E_static = E_bias
     fem_es.coupling_flag = True
     # fem_es.tmp_dir = "./estat"
-    fem_es.tmp_dir = tempfile.mkdtemp(prefix="/tmp/benjaminv.")
+    if tmp_dir:
+        fem_es.tmp_dir = tmp_dir
+    else:
+        fem_es.tmp_dir = tempfile.mkdtemp()
     fem_es.mesh_refine = mesh_refine
     fem_es.initialize()
     if incl:
@@ -169,7 +172,7 @@ def init_es(f, E_bias, incl=True, mat=None, parmesh=20, mesh_refine=True):
     return fem_es
 
 
-def init_hom(fem_es):
+def init_hom(fem_es, tmp_dir=None):
     #####################################
     # # homogenization
     #####################################
@@ -189,7 +192,10 @@ def init_hom(fem_es):
     fem_hom.Niy = fem_es.Niy
     fem_hom.eps_incl = fem_es.eps_incl
     fem_hom.eps_host = fem_es.eps_host
-    fem_hom.tmp_dir = tempfile.mkdtemp(prefix="/tmp/benjaminv.")
+    if tmp_dir:
+        fem_hom.tmp_dir = tmp_dir
+    else:
+        fem_hom.tmp_dir = tempfile.mkdtemp()
     fem_hom.coupling_flag = fem_es.coupling_flag
     fem_hom.aniso = True
 
