@@ -9,8 +9,8 @@ from aotomat.tools.plottools import *
 eps_interp = [1, 21]
 
 
-import autograd.numpy as np  # Thinly-wrapped version of Numpy
-from autograd import grad as grad_auto
+# import autograd.numpy as np  # Thinly-wrapped version of Numpy
+# from autograd import grad as grad_auto
 
 #
 # def taylor_sine(x):  # Taylor approximation to sine function
@@ -38,14 +38,14 @@ def init_pattern():
 mat = init_pattern()
 mat.pattern = mat.normalized_pattern
 
-parmesh = 33
+parmesh = 11
 
 fem_es = init_es(0, 0, incl=False, mat=mat, parmesh=parmesh, mesh_refine=False)
 
-fem_es.quad_mesh_flag = True
+fem_es.quad_mesh_flag = False
 # fem_es.gmsh_verbose = 4
 fem_hom = init_hom(fem_es, tmp_dir="./tmp/test0")
-fem_hom.pola = "TM"
+fem_hom.pola = "TE"
 
 # fem_hom.open_gmsh_gui()
 
@@ -83,11 +83,14 @@ to.dp = 1e-7
 to.m = 1
 
 ratio_hdes = 1
-n_x = 207
-n_y = 203  # int(n_x * ratio_hdes) +1
+n_x = 111
+n_y = 111  # int(n_x * ratio_hdes) +1
 n_z = 1
 
 to.n_x, to.n_y, to.n_z = n_x, n_y, n_z
+
+
+fem_hom.getdp_verbose = 0
 
 
 def compute_hom_pb_y(fem_hom, epsi, verbose=False):
@@ -137,28 +140,33 @@ def f_obj(
     eps_obj = 18
     obj = np.abs(1 / eps_obj - obj0) ** 2 * (eps_obj) ** 2
 
+    obj = obj0
+    V = 1
+    int_inveps_yy = femio.load_table(fem_hom.tmppath("I_inveps_yy.txt")) / V
+
     if sens_ana:
-        sens = to.get_sensitivity(p, filt=filt, proj=proj)
+        sens = to.get_sensitivity(p, filt=filt, proj=proj) * int_inveps_yy.real
     else:
         sens = 0
     # fem_hom.postpro_fields(filetype="pos")
     # fem_hom.open_gmsh_gui()
+    # ncdc
 
     # plt.clf()
-    sol = fem_hom.get_solution().real
-    # # print(adj)
-    # solplt = to.mesh2grid(sol.real)
-    # ux, uy = np.gradient(solplt)
-    # plt.imshow(ux)
-    # plt.colorbar()
-    # plt.pause(1)
-    #
-    x, y = to.grid
-    dx = x[1] - x[0]
-    dy = y[1] - y[0]
-    xsi = 1 / epsilon
-    xsi_tmp = to.mesh2grid(xsi)
-    u = to.mesh2grid(sol)
+    # sol = fem_hom.get_solution().real
+    # # # print(adj)
+    # # solplt = to.mesh2grid(sol.real)
+    # # ux, uy = np.gradient(solplt)
+    # # plt.imshow(ux)
+    # # plt.colorbar()
+    # # plt.pause(1)
+    # #
+    # x, y = to.grid
+    # dx = x[1] - x[0]
+    # dy = y[1] - y[0]
+    # xsi = 1 / epsilon
+    # xsi_tmp = to.mesh2grid(xsi)
+    # u = to.mesh2grid(sol)
     #
     #
     def objective_func(u):
@@ -200,8 +208,8 @@ def f_obj(
     # source_adj = grad_objective_func(sol)
     # fem_hom.make_eps_pos( fem_hom.des[0], -source_adj, posname="source_adj")
 
-    xsihom = objective_func(u)
-    print("eps_hom_xx test = ", 1 / xsihom)
+    # xsihom = objective_func(u)
+    # print("eps_hom_xx test = ", 1 / xsihom)
 
     # grad_objective_func = grad_auto(objective_func)
 
@@ -223,22 +231,24 @@ def f_obj(
     # sensplt = to.mesh2grid(sens)
     # plt.imshow(sensplt)
     # plt.colorbar()
-    #
-    plt.clf()
-    adj = to.get_adjoint()
-    # print(adj)
-    adjplt = to.mesh2grid(adj.real)
-    plt.imshow(adjplt)
-    plt.colorbar()
+    # plt.pause(3)
+    # #
+    # plt.clf()
+    # adj = to.get_adjoint()
+    # # print(adj)
+    # adjplt = to.mesh2grid(adj.real)
+    # plt.imshow(adjplt)
+    # plt.colorbar()
+    # plt.pause(3)
 
     # plt.clf()
     # deq_deps = to.get_deq_deps()
-    # print(deq_deps)
+    # # print(deq_deps)
     # deq_deps_plt = to.mesh2grid(deq_deps.real)
     # plt.imshow(deq_deps_plt)
     # plt.colorbar()
-    # # cds
-    #
+    # # # cds
+    # #
     # plt.pause(3)
 
     if rmtmpdir:
