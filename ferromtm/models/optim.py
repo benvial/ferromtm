@@ -38,14 +38,14 @@ def init_pattern():
 mat = init_pattern()
 mat.pattern = mat.normalized_pattern
 
-parmesh = 11
+parmesh = 7
 
 fem_es = init_es(0, 0, incl=False, mat=mat, parmesh=parmesh, mesh_refine=False)
 
 fem_es.quad_mesh_flag = False
 # fem_es.gmsh_verbose = 4
 fem_hom = init_hom(fem_es, tmp_dir="./tmp/test0")
-fem_hom.pola = "TE"
+fem_hom.pola = "TM"
 
 # fem_hom.open_gmsh_gui()
 
@@ -136,18 +136,26 @@ def f_obj(
 
     eps_hom_xx, fem_hom = compute_hom_pb_y(fem_hom, epsi, verbose=verbose)
     print("eps_hom_xx = ", eps_hom_xx)
-    obj0 = to.get_objective()
-    eps_obj = 18
-    obj = np.abs(1 / eps_obj - obj0) ** 2 * (eps_obj) ** 2
+    # obj0 = to.get_objective()
 
-    obj = obj0
-    V = 1
-    int_inveps_yy = femio.load_table(fem_hom.tmppath("I_inveps_yy.txt")) / V
+    eps_obj = 7
+
+    obj = np.abs(1 / eps_obj - 1 / eps_hom_xx) ** 2 * eps_obj ** 2
+
+    def get_sensitivity(to, p, filt=True, proj=True, interp_method="cubic"):
+        to.fem.print_progress("Retrieving sensitivity")
+        adjoint = to.get_adjoint()
+        epsilon, depsilon_dp = to.make_epsilon(p, filt=filt, proj=proj, grad=True)
+        deq_deps = to.get_deq_deps(interp_method=interp_method) * (-1 / epsilon ** 2)
+        sens = to.dg_dp + np.real(adjoint * deq_deps * depsilon_dp)
+        return sens
 
     if sens_ana:
-        sens = to.get_sensitivity(p, filt=filt, proj=proj) * int_inveps_yy.real
+        sens = get_sensitivity(to, p, filt=filt, proj=proj)
     else:
         sens = 0
+
+    # #
     # fem_hom.postpro_fields(filetype="pos")
     # fem_hom.open_gmsh_gui()
     # ncdc
@@ -169,12 +177,12 @@ def f_obj(
     # u = to.mesh2grid(sol)
     #
     #
-    def objective_func(u):
-        ux, uy = np.gradient(u.T, edge_order=2)
-        integ = xsi_tmp.T * (1 + uy / dy)
-        xsihom = np.trapz(np.trapz(integ, y), x)
-        # xsihom = np.mean(u)
-        return xsihom
+    # def objective_func(u):
+    #     ux, uy = np.gradient(u.T, edge_order=2)
+    #     integ = xsi_tmp.T * (1 + uy / dy)
+    #     xsihom = np.trapz(np.trapz(integ, y), x)
+    #     # xsihom = np.mean(u)
+    #     return xsihom
 
     #
     # def grad_objective_func(u, du=1e-2):
@@ -189,19 +197,19 @@ def f_obj(
     #             g[ix,iy]= (df-f)/du
     #     return g
     #
-    def grad_objective_func(umesh):
-        du = 1e-7
-        df = []
-        ugrid = to.mesh2grid(umesh)
-        f = objective_func(ugrid)
-        for i, u_ in enumerate(umesh):
-            u_tmp = np.copy(umesh)
-            u_tmp[i] += du
-            ugrid = to.mesh2grid(u_tmp)
-            df.append(objective_func(ugrid))
-        df = np.array(df)
-        # du = np.gradient(umesh)
-        return (df - f) / du
+    # def grad_objective_func(umesh):
+    #     du = 1e-7
+    #     df = []
+    #     ugrid = to.mesh2grid(umesh)
+    #     f = objective_func(ugrid)
+    #     for i, u_ in enumerate(umesh):
+    #         u_tmp = np.copy(umesh)
+    #         u_tmp[i] += du
+    #         ugrid = to.mesh2grid(u_tmp)
+    #         df.append(objective_func(ugrid))
+    #     df = np.array(df)
+    #     # du = np.gradient(umesh)
+    #     return (df - f) / du
 
     #
 
@@ -225,13 +233,13 @@ def f_obj(
     # # plt.imshow(dgdsol.real)
     # # plt.colorbar()
     #
-
-    # plt.clf()
-    # # print(sens)
-    # sensplt = to.mesh2grid(sens)
-    # plt.imshow(sensplt)
-    # plt.colorbar()
-    # plt.pause(3)
+    #
+    plt.clf()
+    # print(sens)
+    sensplt = to.mesh2grid(sens)
+    plt.imshow(sensplt)
+    plt.colorbar()
+    plt.pause(3)
     # #
     # plt.clf()
     # adj = to.get_adjoint()
@@ -311,7 +319,7 @@ def make_plots(to, p, filt=True, proj=True):
 
 if __name__ == "__main__":
     # define initial density p0
-    np.random.seed(22)
+    # np.random.seed(22)
 
     mat.p_seed = np.random.random(mat.pattern.shape)
 
