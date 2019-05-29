@@ -5,20 +5,11 @@ from pytheas.optim import topopt
 from pytheas.optim import TopOpt
 import tempfile
 from aotomat.tools.plottools import *
+from aotomat.tools.parallelize import *
 
 plt.close("all")
 
 eps_interp = [1, 21]
-
-
-# import autograd.numpy as np  # Thinly-wrapped version of Numpy
-# from autograd import grad as grad_auto
-# def taylor_sine(x):  # Taylor approximation to sine function
-#     ca = np.mean(x)
-#     return ca
-#
-# grad_sine = grad(taylor_sine)
-# print( "Gradient of sin(pi) is", grad_sine(np.linspace(0,1,100)))
 
 
 def init_pattern():
@@ -38,17 +29,21 @@ def init_pattern():
 mat = init_pattern()
 mat.pattern = mat.normalized_pattern
 
-parmesh = 15
+parmesh = 4
 
 fem_es = init_es(0, 0, incl=False, mat=mat, parmesh=parmesh, mesh_refine=False)
 
+debug = False
+if debug:
+    fem_es.getdp_verbose = 4
+    fem_es.gmsh_verbose = 4
+    fem_es.python_verbose = 1
+
+
 fem_es.quad_mesh_flag = True
 # fem_es.gmsh_verbose = 4
-fem_hom = init_hom(fem_es, tmp_dir="./tmp/test0")
+fem_hom = init_hom(fem_es)
 fem_hom.pola = "TM"
-
-# fem_hom.open_gmsh_gui()
-
 
 # ##########################################
 # #########  OPTIMIZATION PARAMETERS  ######
@@ -64,9 +59,9 @@ to.pmax = 1  # maximum value
 to.m = 1  # interpolation order eps=(eps_min-eps_max)*x^m-eps_min
 to.ptol_rel = 1.0e-10
 to.ftol_rel = 1.0e-5
-to.stopval = 1e-12
-to.maxeval = 20  # maximum of function evaluation
-to.Nitmax = 8  # maximum number of global iterations
+to.stopval = 1e-6
+to.maxeval = 3  # maximum of function evaluation
+to.Nitmax = 1  # maximum number of global iterations
 to.N0 = 0  # initial global iterations
 # to.beta = 1  # projection parameter
 lmin = 1
@@ -75,8 +70,9 @@ to.filt_weight = "gaussian"
 to.dg_dp = 0
 to.eps_interp = eps_interp
 to.log_opt = False
-to.plotconv = False
+to.plotconv = True
 to.force_xsym = False
+to.threshold_final = False
 
 to.dp = 1e-7
 to.m = 1
@@ -89,16 +85,10 @@ n_z = 1
 to.n_x, to.n_y, to.n_z = n_x, n_y, n_z
 
 
-fem_hom.getdp_verbose = 0
-
-
 def compute_hom_pb_y(fem_hom, epsi, verbose=False):
-    interp = not fem_hom.inclusion_flag
-    interp = False
-    make_pos_tensor_eps(fem_hom, epsi, interp=interp)
+    make_pos_tensor_eps(fem_hom, epsi, interp=False)
     fem_hom.y_flag = True
-
-    fem_hom.path_pos += " ./tmp/test0/source_adj.pos"
+    # fem_hom.path_pos += " ./tmp/test0/source_adj.pos"
     # print(fem_hom.path_pos)
     fem_hom.compute_solution()
     fem_hom.postprocessing()
@@ -113,6 +103,7 @@ def compute_hom_pb_y(fem_hom, epsi, verbose=False):
 
 
 def get_sensitivity(to, p, filt=True, proj=True, interp_method="cubic"):
+    print(to.fem.tmp_dir)
     to.fem.print_progress("Retrieving sensitivity")
     adjoint = to.get_adjoint()
     epsilon, depsilon_dp = to.make_epsilon(p, filt=filt, proj=proj, grad=True)
@@ -136,38 +127,60 @@ def plt_field(a, title=None):
     plt.pause(0.1)
 
 
-def f_obj(
-    p,
-    grad,
-    coupling=True,
-    mat=mat,
-    record_cv=False,
-    verbose=False,
-    rmtmpdir=False,
-    parmesh=parmesh,
-    sens_ana=False,
-    filt=True,
-    proj=True,
-    fem_es=fem_es,
-    fem_hom=fem_hom,
-    retgrad=False,
-):
-    sens_ana = np.size(grad) > 0
-    fem_hom.adjoint = sens_ana
+def objectivefunc(p, fem_hom=fem_hom, filt=True, proj=True, verbose=False, init=True):
+    if init:
+        fem_hom = init_hom(fem_es)
+        # print(fem_hom.tmp_dir)
     epsilon, depsilon_dp = to.make_epsilon(p, filt=filt, proj=proj, grad=True)
     epsi = epsilon, epsilon, epsilon
-    eps_hom_xx, fem_hom = compute_hom_pb_y(fem_hom, epsi, verbose=verbose)
-    print("eps_hom_xx = ", eps_hom_xx)
+    eps_hom_xx, fem_hom = compute_hom_pb_y(fem_hom, epsi, verbose=False)
+    if verbose:
+        print("eps_hom_xx = ", eps_hom_xx)
     # obj0 = to.get_objective()
     eps_obj = 7
     obj = np.abs(1 / eps_obj - 1 / eps_hom_xx) ** 2 * eps_obj ** 2
+    return obj, fem_hom
+
+
+def f_obj(
+    p,
+    grad,
+    verbose=False,
+    rmtmpdir=False,
+    filt=True,
+    proj=True,
+    fem_hom=fem_hom,
+    retgrad=False,
+    fd=False,
+):
+    p.setflags(write=1)
+    p[np.isnan(p)] = 0.5
+    print(fem_hom.tmp_dir)
+
+    sens_ana = np.size(grad) > 0
+    if not fd:
+        fem_hom.adjoint = sens_ana
+
+    obj, fem_hom = objectivefunc(
+        p, fem_hom=fem_hom, filt=filt, proj=proj, verbose=True, init=fd
+    )
+    to.fem = fem_hom
 
     if sens_ana:
-        sens = get_sensitivity(to, p, filt=filt, proj=proj)
+        if fd:
+            sens = get_grad_fd(p, para=True)
+        else:
+            sens = get_sensitivity(to, p, filt=filt, proj=proj)
+
+        # sens[np.isnan(sens)] = 0
+        sens[np.isnan(sens)] = 0
     else:
         sens = 0
+
+    print("p = \n", p)
+    print("sens = \n", sens)
     # #
-    fem_hom.postpro_fields(filetype="pos")
+    # fem_hom.postpro_fields(filetype="pos")
     fem_hom.open_gmsh_gui()
     #
     # adj = to.get_adjoint()
@@ -194,10 +207,18 @@ def f_obj(
         return obj
 
 
-def main_opt(p0):
+def main_opt(p0, fd=True):
+
+    if fd:
+
+        def f(p, grad):
+            return f_obj(p, grad, fd=True, rmtmpdir=True)
+
+    else:
+        f = f_obj
 
     # ##### MAIN OPTIMIZATION LOOP ############
-    popt, opt_f, opt = to.main_loop_topopt(f_obj, p0)
+    popt, opt_f, opt = to.main_loop_topopt(f, p0)
     print("optimum at ", popt)
     print("with value  = ", opt_f)
     print(popt)
@@ -232,35 +253,53 @@ def make_plots(to, p, filt=True, proj=True):
     )
 
 
+def get_grad_fd(p0, para=False):
+    f, _ = objectivefunc(p0)
+    dp = 1e-6
+    nvar = len(p0)
+    P = np.zeros((nvar, nvar))
+    df = []
+    for i, p in enumerate(p0):
+        # print("iteration {0}/{1}".format(i,len(p0)))
+        p1 = np.copy(p0)
+        p1[i] += dp
+        P[i, :] = np.array(p1)
+    if para:
+
+        res = objectivefuncpara(P)
+        df = [_[0] for _ in res]
+    else:
+        for p in P:
+            df.append(objectivefunc(p))
+    grad_fd = (np.array(df) - f) / dp
+    return grad_fd
+
+
 if __name__ == "__main__":
+    fd = True
+    # partype = "gridmap"
+    partype = "multiprocessing"
+    objectivefuncpara = parallel(objectivefunc, partype=partype)
     # define initial density p0
     np.random.seed(22)
     mat.p_seed = np.random.random(mat.pattern.shape)
     p0 = to.random_pattern(mat)
     print(len(p0))
 
-    # out = main_opt(p0)
+    out = main_opt(p0, fd=fd)
 
-    fd = False
+    dasda
 
+    #
     if fd:
-        grad_fd = []
-        f = f_obj(p0, np.array([]))
-        dp = 1e-3
-        for i, p in enumerate(p0):
-            print("iteration {0}/{1}".format(i, len(p0)))
-            p1 = np.copy(p0)
-            p1[i] += dp
-            df = f_obj(p1, np.array([]))
-            fd = (df - f) / dp
-            print(fd)
-            grad_fd.append(fd)
-        grad_fd = np.array(grad_fd)
+        grad_fd = get_grad_fd(p0)
+
         np.savez("test_grad_fd.npz", grad_fd=grad_fd)
     else:
         grad_fd = np.load("test_grad_fd.npz")["grad_fd"]
     plt_field(grad_fd)
-    f, grad_adj = f_obj(p0, np.ones(len(p0)), retgrad=True)
+
+    f, grad_adj = f_obj(p0, np.ones(len(p0)), retgrad=True, rmtmpdir=False)
     plt_field(grad_adj)
 
     to.fem.print_progress("Retrieving sensitivity")
