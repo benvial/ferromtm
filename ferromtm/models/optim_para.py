@@ -29,7 +29,7 @@ def init_pattern():
 mat = init_pattern()
 mat.pattern = mat.normalized_pattern
 
-parmesh = 4
+parmesh = 21
 
 fem_es = init_es(0, 0, incl=False, mat=mat, parmesh=parmesh, mesh_refine=False)
 
@@ -276,9 +276,9 @@ def get_grad_fd(p0, para=False):
 
 
 if __name__ == "__main__":
-    fd = True
-    # partype = "gridmap"
-    partype = "multiprocessing"
+    fd = False
+    partype = "gridmap"
+    # partype = "multiprocessing"
     objectivefuncpara = parallel(objectivefunc, partype=partype)
     # define initial density p0
     np.random.seed(22)
@@ -286,18 +286,20 @@ if __name__ == "__main__":
     p0 = to.random_pattern(mat)
     print(len(p0))
 
-    out = main_opt(p0, fd=fd)
+    # out = main_opt(p0, fd=fd)
 
-    dasda
+    # dasda
 
     #
     if fd:
-        grad_fd = get_grad_fd(p0)
+        grad_fd = get_grad_fd(p0, para=True)
 
         np.savez("test_grad_fd.npz", grad_fd=grad_fd)
     else:
         grad_fd = np.load("test_grad_fd.npz")["grad_fd"]
     plt_field(grad_fd)
+
+    das
 
     f, grad_adj = f_obj(p0, np.ones(len(p0)), retgrad=True, rmtmpdir=False)
     plt_field(grad_adj)
