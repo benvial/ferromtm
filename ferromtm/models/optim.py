@@ -156,7 +156,7 @@ def get_sensitivity(to, p, filt=True, proj=True, interp_method="cubic"):
 def plt_field(a, title=None):
     plt.figure()
     plt.clf()
-    a = to.mesh2grid(a.real)
+    a = to.mesh2grid(a.real, interp_method="nearest")
     plt.imshow(a)
     plt.colorbar()
     if title:
