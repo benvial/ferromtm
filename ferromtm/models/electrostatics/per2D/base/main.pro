@@ -75,6 +75,9 @@ Constraint {
 		}
 }
 
+
+
+
 // #############################################################################
 
 Jacobian {
@@ -169,11 +172,11 @@ PostProcessing {
             { Name epsilonr_yy; Value { Local { [CompYY[epsilonr[]]] ; In Omega; Jacobian JVol; } } }
             { Name v; Value { Local { [{v}] ; In Omega; Jacobian JVol; } } }
             { Name vx; Value { Local {[CompX[{d v}]] ; In Omega; Jacobian JVol; } } }
-              { Name vy; Value { Local {[CompY[{d v}]] ; In Omega; Jacobian JVol; } } }
-              { Name abs_dv; Value { Local {[Sqrt[(CompX[{d v}])^2 + (CompY[{d v}])^2]] ; In Omega; Jacobian JVol; } } }
-              { Name epsilonr; Value { Local {[CompXX[epsilonr[]]] ; In Omega; Jacobian JVol; } } }
-              { Name efield_tot; Value { Local { [ E_bias[] -{d v} ]  ; In Omega; Jacobian JVol; } } }
-               { Name abs_Etot; Value { Local {[Sqrt[(CompX[E_bias[] - {d v}])^2 + (CompY[E_bias[] - {d v}])^2]] ; In Omega; Jacobian JVol; } } }
+            { Name vy; Value { Local {[CompY[{d v}]] ; In Omega; Jacobian JVol; } } }
+            { Name abs_dv; Value { Local {[Sqrt[(CompX[{d v}])^2 + (CompY[{d v}])^2]] ; In Omega; Jacobian JVol; } } }
+            { Name epsilonr; Value { Local {[CompXX[epsilonr[]]] ; In Omega; Jacobian JVol; } } }
+            { Name efield_tot; Value { Local { [ E_bias[] -{d v} ]  ; In Omega; Jacobian JVol; } } }
+            { Name abs_Etot; Value { Local {[Sqrt[(CompX[E_bias[] - {d v}])^2 + (CompY[E_bias[] - {d v}])^2]] ; In Omega; Jacobian JVol; } } }
 
 		     }
     }

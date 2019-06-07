@@ -33,8 +33,7 @@ def fun_fit(par, E, eps_meas_n):
     return np.mean(err) ** 0.5
 
 
-def retrieve_params(E, eps_meas_n):
-    par0 = 1, 1
+def retrieve_params(E, eps_meas_n, par0=(1, 1)):
     cons = {"type": "ineq", "fun": lambda x: np.array([x[0]])}
     opt = minimize(
         fun_fit, par0, args=(E, eps_meas_n), options={"disp": True}, constraints=cons
@@ -44,8 +43,8 @@ def retrieve_params(E, eps_meas_n):
     return xopt
 
 
-def fit():
-    meas = np.load(os.path.join(rootdir, "data", "measurements.npz"))
+def fit(filename, fitname):
+    meas = np.load(os.path.join(rootdir, "data", filename))
     E_exp = meas["E_exp"]
     eps_norm_exp = meas["eps_norm_exp"]
     eps_exp_0 = meas["eps_exp_0"]
@@ -53,7 +52,7 @@ def fit():
     for i in range(2):
         alpha_opt = retrieve_params(E_exp, eps_norm_exp[i])
         fit_params.append(alpha_opt)
-    np.savez(os.path.join(rootdir, "data", "fit_params.npz"), fit_params=fit_params)
+    np.savez(os.path.join(rootdir, "data", fitname), fit_params=fit_params)
     return fit_params
 
 
@@ -82,4 +81,4 @@ def epsilonr_ferroelectric(E_applied, tandelta=1e-2, dc=False):
 
 if __name__ == "__main__":
 
-    fit()
+    fit("measurements.npz", "fit_params.npz")
