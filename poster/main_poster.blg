@@ -1,0 +1,5 @@
+[0] Config.pm:304> INFO - This is Biber 2.12
+[0] Config.pm:307> INFO - Logfile is 'main_poster.blg'
+[25] biber:315> INFO - === Sun Jun  9, 2019, 15:33:45
+[108] Utils.pm:209> ERROR - Cannot find control file 'main_poster.bcf'! - Did latex run successfully on your .tex file before you ran biber?
+[108] Biber.pm:114> INFO - ERRORS: 1

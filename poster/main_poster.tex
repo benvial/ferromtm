@@ -1,0 +1,270 @@
+
+\documentclass[final,12pt]{beamer} % use beamer
+\include{preamble}
+
+
+\begin{document}
+\color{fresnelblack}
+\date{\today}
+\title{Effective parameters of ferroelectric dielectric mixtures}
+\subtitle{}
+\author{B. Vial and Y. Hao }
+
+\begin{frame}
+
+
+%%%%%%%%%%%%%%%%%%Title, authors and affiliations   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{textblock*}{80cm}(2cm,2cm)
+{\hfill \blackfont\fontsize{1.9cm}{1em}\selectfont \textcolor{fresnelorange}{\MakeUppercase{\inserttitle}}\\}\vspace*{2em}
+{\hfill \textcolor{white}{\Large\insertauthor}\\}
+\vspace*{16pt}
+{\hfill \itshape\large\textcolor{white}{
+School of Electronic Engineering \& Computer Science, Queen Mary, University of London}}
+\end{textblock*}
+
+
+
+
+%%%%%%%%%%%  ABSTRACT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{textblock*}{79.5cm}(2.5cm,16.2cm)
+% \textcolor{fresneldarkblue}{\rule{\columnwidth}{5pt}}\\
+%  {\color{fresneldarkblue}\bfseries Abstract:}
+{\color{white}{ \blackfont  \bfseries \large \uppercase{Abstract}\\} \vspace{0.5em} 
+  \large \itshape
+  We investigate the homogenized parameters of ferroelectric-dielectric composites under a static electric field. A numerical model that takes into account the coupling
+  between the electrostatic problem and the electric field dependent permittivity of the
+  ferroelectric material is used. Metamaterials consisting of periodic and random arrays of rods
+  are considered for transverse electric polarization case
+  and we study their effective permittivity, losses, electrically induced anisotropy
+  and tunability by a two scale convergence homogenization method.}
+\end{textblock*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% Left column  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% 
+%%%%%%%%%%%  BOX1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{textblock*}{38.5cm}(2.5cm,29cm)
+
+\begin{posterblock}{Method}{benchcolor1}
+
+\begin{columns}[t,totalwidth=\columnwidth]
+\begin{column}{.55\columnwidth}
+
+  Ferroelectric materials play a crucial role in reconfigurable
+  microwave devices, with typical applications including antenna beam steering,
+  phase shifters, tunable power splitters, filters, voltage controlled oscillators and
+  matching networks \cite{tagantsev_ferroelectric_2018}. 
+
+\mysubtitle{Ferroelectric permittivity}
+
+\begin{equation}
+ \epsf(E) = \left[\frac{\partial^2 F (P, E)}{\partial P^2} \right]^{-1} = \frac{\epsf(0)}{1 + \alpha P_0^2 + \beta P_0^4},
+ \label{eq_epsf}
+\end{equation}
+
+\mysubtitle{Normalization of modes} 
+
+
+\mysubtitle{Expansion of the coupled modes}
+
+
+
+\end{column}
+\begin{column}{.40\columnwidth}
+% \vspace*{2cm}
+% \begin{figure}
+% \centering
+% \input{./figures/schemafig1}
+%  \end{figure}
+
+\end{column}
+\end{columns}
+
+
+
+\end{posterblock}
+\end{textblock*}
+% 
+% % 
+% %%%%%%%%%%%%% BOX 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% \begin{textblock*}{38.5cm}(2.5cm,72cm)
+% \begin{posterblock}{Results}{benchcolor1}
+%  \mysubtitle{Dielectric rod dimmer}\vspace{-1.5cm}
+% 
+% \vspace*{0.7cm}
+% TE polarization $\B E=E_z\B z$, $\varepsilon_a=\varepsilon_b=10-0.01\ic$, $\varepsilon_h=1$, 
+% $\mu_a=\mu_b=\mu_h=1$, $L_x=10^{-2}\,$m, $L_y=3L_x$, gap $d$, $\omega_0=2\pi c/L_y$.
+% 
+% \begin{columns}[b,totalwidth=\columnwidth]
+% \begin{column}{.49\columnwidth}
+%  \begin{figure}
+%  \centering
+%  \includegraphics[width=\columnwidth]{./figures/figd2}
+%  \caption{Real (top) and imaginary (bottom) parts of the eigenfrequencies for the first four 
+%  coupled modes as a function of normalized gap $d/L_x$. Circles: coupled modes (full wave direct computation), 
+%  solid lines: 1 mode coupling model.}
+% \end{figure}
+% \end{column}
+% \begin{column}{.49\columnwidth}
+% \vspace*{1cm}\\
+% \begin{figure}
+%  \centering
+%  \includegraphics[width=0.5\columnwidth]{./figures/singlerod1}
+%   \includegraphics[width=0.5\columnwidth]{./figures/singlerod2}
+%  \caption{Eigenfield $\re(E_z)$ for the modes of the isolated rod.}
+% \end{figure}
+% \begin{figure}
+%  \centering
+%  \includegraphics[width=0.5\columnwidth]{./figures/test1}
+%   \includegraphics[width=0.5\columnwidth]{./figures/test2}\\
+%    \includegraphics[width=0.5\columnwidth]{./figures/test3}
+%   \includegraphics[width=0.5\columnwidth]{./figures/test4}\\
+%  \caption{Eigenfield $\re(E_z)$ for the coupled modes, $d/L_x=2.1$.}
+% \end{figure}
+% 
+% \end{column}
+% \end{columns}
+% \vspace*{1cm}
+% Very good agreement is obtained with this simple one mode model. \\
+% The study of the phase difference between the coefficients $A_i$ and $B_i$ 
+% indicates an in-phase (resp. out of phase) hybridization mechanism 
+% for modes $C1$ and $C3$ (resp. $C2$ and $C4$).
+% 
+% \end{posterblock}
+% 
+% \end{textblock*}
+% % 
+% % 
+% % % 
+% % % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % % 
+% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % %%%%%%%%%%% Right column  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % 
+% % %%%%%%%%%%%%%%%%%%  BOX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % 
+% \begin{textblock*}{38.5cm}(43.5cm,29cm)
+% \begin{posterblock}{Results}{benchcolor1}
+% 
+%  \mysubtitle{Breaking the symmetry}
+% Shift $e$ along $y$, $d/L_x=1$.
+% 
+% \begin{columns}[b,totalwidth=\columnwidth]
+% \begin{column}{.49\columnwidth}
+% 
+% \begin{figure}
+% \includegraphics[width=\columnwidth]{./figures/figfne}
+%  \caption{Real (top) and imaginary (bottom) parts of the eigenfrequencies for the first four 
+%  coupled modes as a function of normalized shift $e/L_y$. Circles: coupled modes (full wave direct computation), 
+%  solid lines: 4 modes coupling model.}
+%  \end{figure}
+% \end{column}
+% \begin{column}{.49\columnwidth}
+% 
+%  \begin{figure}
+%   \includegraphics[width=\columnwidth]{./figures/AN}\\
+%   \includegraphics[width=0.5\columnwidth]{./figures/etest3}
+%   \includegraphics[width=0.5\columnwidth]{./figures/etest4}
+%  \caption{Top: norm of coupling coefficient $A$ as a function of 
+%  normalized shift $e/L_y$. Bottom: coupled modes for $e/L_y=0.2$.}
+%  \end{figure}
+% \end{column}
+% \end{columns}
+% 
+% \vspace*{1cm}
+% Good agreement is obtained between full wave calculations and our model. \\
+% The shift breaks the symmetry of the coupling mechanism, as revealed by 
+% the study of the coefficients $A_i$ and $B_i$. For modes $C3$ and $C4$, 
+% both modes $A1$ and $A2$ are significantly coupled when $e\neq0$.
+% \end{posterblock}
+% \end{textblock*}
+% % 
+% % 
+% %%%%%%%%%%%%%%%%%%  BOX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% \begin{textblock*}{38.5cm}(43.5cm,68.3cm)
+% \begin{posterblock}{Conclusion and outlook}{benchcolor1}
+% We developped a model for the coupling of quasi-normal modes in meta-molecules, allowing 
+% for a fast computation of coupled complex eigenfrequencies and QNMs. The validity of 
+% our approach has been illustrated with an example of a dielectric nanorod dimmer. It 
+% is found that shifting one of the resonator perpendicular to the dimmer axis induce a 
+% symmetry breaking of the coupling mechanism.\\
+% Future research directions includes:
+% \begin{itemize}
+%    \item model for TM polarization
+%    \item include magnetic material	
+%    \item include dispersion \cite{QNM3}
+%    \item more than two coupled resonators
+%     \item 3D model
+%   \end{itemize}
+% 
+% \end{posterblock}
+% 
+% \end{textblock*}
+% % % 
+% % % 
+% %%%%%%%%%%%%%%%%%%%%%  Reference box %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+\begin{textblock*}{38.5cm}(43.5cm,86.cm)
+\myblocktitle{References}{fresnelgreenblue}
+\color{fresnelblack}
+\printbibliography
+\end{textblock*}
+
+%%%%%%%%%%%%%%%%%%%%%  Acknowledgments box %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{textblock*}{38.5cm}(43.5cm,105.cm)
+\myblocktitle{Acknowledgments}{fresnelgreenblue}
+\color{fresnelblack}
+This work was funded by the Engineering and Physical
+Sciences Research Council (EPSRC), UK under a
+Programme Grant (EP/I034548/1) ‘‘The Quest for
+Ultimate Electromagnetics using Spatial Transformations
+(QUEST).’’
+\end{textblock*}
+% 
+
+\begin{textblock*}{70cm}(12cm,113cm)
+
+
+{\hfill\semiboldfont \bfseries \color{fresnelorange} \Large CONTACT \& LINKS}\\
+\vspace*{0.5em}
+\color{white}
+\hfill Corresponding author: Benjamin Vial |~\textcolor{fresnelorange}{\href{mailto:b.vial@qmul.ac.uk}{\faEnvelope~b.vial@qmul.ac.uk}}\\
+\hfill QUEST |~\textcolor{fresnelorange}{\href{http://www.quest-spatial-transformation.org}{\faExternalLink~www.quest-spatial-transformation.org}}\\
+\hfill Antennas \& Electromagnetics Research Group |~\textcolor{fresnelorange}{\href{http://antennas.eecs.qmul.ac.uk}{\faExternalLink~antennas.eecs.qmul.ac.uk}}
+
+\end{textblock*}
+%% LOGOS %%%%%%%%%%%
+
+
+\begin{textblock*}{5.5cm}(2.5cm,114cm)
+ \includegraphics[width=\columnwidth]{./logos/logo_epsrc.png}
+\end{textblock*}
+
+\begin{textblock*}{6cm}(10cm,114.5cm)
+ \includegraphics[width=\columnwidth]{./logos/logo_qmul.png}
+\end{textblock*}
+% 
+% \begin{textblock*}{10.8cm}(17.6cm,114cm)
+%  \includegraphics[width=\columnwidth]{./logos/logo_qmul.png}%{logo_black.png}
+% \end{textblock*}
+% 
+% \begin{textblock*}{8cm}(30.cm,114cm)
+%  \includegraphics[width=\columnwidth]{./logos/logo_exeter.png}
+% \end{textblock*}
+% 
+% \begin{textblock*}{8.7cm}(39.5cm,114cm)
+%  \includegraphics[width=\columnwidth]{./logos/logo_oxford.png}
+% \end{textblock*}
+
+
+
+\end{frame}
+
+\end{document}

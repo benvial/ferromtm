@@ -1,0 +1,305 @@
+
+%--some needed packages--------------------------------------------------------
+\usepackage[english]{babel}  % language
+% \usepackage[utf8]{inputenc} 
+\usepackage{amsmath,amssymb}
+\usepackage{lipsum}
+\usepackage[absolute,showboxes,overlay]{textpos}  %% textblocks
+\TPshowboxesfalse  % show textblock borders
+
+
+%%%%%%%%%%%%%%%%%% COLORS %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xcolor}
+
+
+\definecolor{fresnellightblue}{HTML}{424242}
+\definecolor{fresnelmiddleblue}{HTML}{FCA822}
+\definecolor{fresneldarkblue}{HTML}{D6A977}
+\definecolor{fresnelblue}{HTML}{9E5B5B}%{974E4E}
+\definecolor{fresnelorange}{HTML}{FFFFFF}
+\definecolor{fresnellightgray}{HTML}{FFFFFF}
+\definecolor{fresnelgray}{HTML}{656263}
+\definecolor{fresnelred}{HTML}{D64937}
+\definecolor{fresnelgreen}{HTML}{95C11F}
+\definecolor{fresneldarkgray}{HTML}{9E5B5B}%    {634A49}
+\definecolor{fresnelblack}{HTML}{292A33}
+\definecolor{fresnelgreenblue}{HTML}{9E5B5B}%{2F8A82}
+\definecolor{fresnelcaption}{HTML}{4E4D52}%{2F8A82}
+
+
+
+\definecolor{benchcolor1}{HTML}{9E5B5B}  %%% red %% frame title and rule
+\definecolor{benchcolor2}{HTML}{6FBD90}  %%  green
+\definecolor{benchcolor3}{HTML}{424242}  %%% dark grey/ black  %%normal text
+\definecolor{benchcolor4}{HTML}{03658C}  %%   blue
+\definecolor{benchcolor5}{HTML}{E05A00}   %% orange
+\definecolor{benchcolor6}{HTML}{424242}  %%%% dark grey/ black
+\definecolor{benchcolor7}{HTML}{179D9D}  %%%% green blue
+\definecolor{benchcolor8}{HTML}{B6855A}  %%%% brown
+\definecolor{benchcolor9}{HTML}{9F61A8}  %%%% purple
+\definecolor{benchcolor10}{HTML}{E09EDE}  %%%% pink
+\definecolor{benchcolor11}{HTML}{A1A1A1}  %%%% light gray
+\definecolor{benchcolor12}{HTML}{D0D0D0}  %%%% lighter gray
+
+
+%%%%%%%%%%%%%%   Fonts %%%%%%%%%%%
+%%%%%%%%   pgfplots and tikz for awesome drawings %%%%%%%%%%%
+\usepackage{pgfplots}
+  \pgfplotsset{compat=newest}
+  \pgfplotsset{plot coordinates/math parser=false}
+  \usepgfplotslibrary{patchplots}
+ \usepackage{tikz}
+  \usetikzlibrary{%
+      decorations.pathreplacing,%
+      decorations.pathmorphing,%
+  shapes%
+  }
+\usetikzlibrary{plotmarks}
+
+
+
+
+
+%%%%%%%%   Fonts %%%%%%%%%%%
+ \usepackage[math]{iwona}% math font
+%  \usepackage{arev}
+ % \usepackage{cmbright}
+
+ \DeclareMathSizes{9.8}{17}{7}{7}
+ 
+\usepackage[no-math]{fontspec}
+\usepackage{xunicode} %Unicode extras!
+\usepackage{xltxtra}  %Fixes
+% \setmainfont[Ligatures=TeX]{Avenir Next Medium}
+%\usepackage{mathastext}
+ \usepackage{fontawesome}
+% 
+% % 
+\setmainfont[BoldFont = {Open Sans Bold},
+             ItalicFont = {Open Sans Italic},
+             BoldItalicFont = {Open Sans Bold Italic}]
+            {Open Sans}
+            
+   \newfontfamily{\romanfont}[Scale=1]{Garogier}       
+ \newfontfamily{\semiboldfont}[Scale=1.3]{Oswald Regular}
+ \newfontfamily{\condensedfont}[Scale=1.3]{Oswald Regular}
+ \newfontfamily{\blackfont}[Scale=1.3]{Oswald Regular}
+
+% \newfontfamily{\FA}{FontAwesome}
+% \def\twitter{{\FA \faTwitter}}
+
+\newcommand{\ie}{i.\,e.~}
+\newcommand{\Ie}{I.\,e.~}
+\newcommand{\eg}{e.\,g.~}
+\newcommand{\Eg}{E.\,g.~}
+% \newcommand{\e}{\mathrm{e}}
+\newcommand{\ic}{i}
+
+\newcommand*\conj[1]{
+  \vbox{
+  \hrule height 0.3ptword
+  \kern0.5ex
+  \hbox{
+  \kern-0.4em
+  \ifmmode#1\else\ensuremath{#1}\fi
+   \kern-0.em
+  }
+ }
+}
+\renewcommand{\B}{\boldsymbol}
+% \newcommand{\tens}[1]{\B{#1}}
+% \newcommand{\tens}[1]{\underline{\underline{#1}}}
+\newcommand{\tens}[1]{\B{#1}}
+\newcommand{\re}{\mathrm{Re}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\grad}{\B{\mathrm{\nabla}}}
+\renewcommand{\div}{\B{\mathrm{\nabla\cdotp}}}
+\newcommand{\ddroit}{\mathrm{d}}
+\newcommand{\epsf}{\varepsilon^{\rm f}}
+\newcommand{\epsftens}{\tens{\varepsilon}^{\rm f}}
+\newcommand{\epstens}{\tens{\varepsilon}}
+\newcommand{\epsd}{\varepsilon^{\rm d}}
+\newcommand{\epsvac}{\varepsilon_{0}}
+\newcommand{\epshom}{\tilde{\epstens}}
+\newcommand{\fig}[1]{Fig.~(\ref{#1})}
+\newcommand{\equ}[1]{Eq.~(\ref{#1})}
+
+\newcommand{\xitens}{\tens{\xi}}
+\newcommand{\xihom}{\tilde{\xitens}}
+
+\usepackage{mdframed}
+% \newenvironment<>{posterblock}[2]{%
+%  \begin{actionenv}#3%
+%  \def\insertblocktitle{\leftskip=20pt\rightskip=20pt \\ { \vspace{20pt} \textbf{\huge #1} } 
+%  \\ \vspace{10pt} \textcolor{fresnelblue}{\textnormal{\LARGE #2}} \vspace{20pt}}%
+%  \par%
+%  \usebeamertemplate{block begin}\leftskip=20pt\rightskip=20pt}
+%  {\par\vspace{20pt}\usebeamertemplate{block end}
+%  \end{actionenv}}
+ 
+ \newenvironment{posterblock}[2]{%
+  \begin{mdframed}[innerleftmargin =1cm,innerrightmargin =1cm,
+  innerbottommargin=0.2em,innertopmargin=0.2em,
+  linewidth=8pt,linecolor=#2,backgroundcolor=#2]
+    {\blackfont \color{fresnelorange} \textbf{\Large \uppercase{#1}}} 
+
+%  \\ \vspace{10pt} \textcolor{fresnelblue}{\textnormal{\LARGE #2}} \vspace{20pt}}%
+  \end{mdframed}
+  \begin{mdframed}[innerleftmargin =1cm,innerrightmargin =1cm,
+  innerbottommargin=1em,innertopmargin=1em,
+  topline=false,linewidth=8pt,linecolor=white,backgroundcolor=white]
+  \color{fresnelblack}
+}{
+\end{mdframed}
+}
+ 
+ 
+%   \newcommand{\myblocktitle}[2]{
+%     {\color{fresneldarkblue}\textbf{\blackfont \huge #1}\\ \vspace{-0.5em} } 
+%     \textcolor{fresneldarkblue}{\rule{\columnwidth}{5pt}}\\
+%     \vspace{0.5em}
+%     {\textcolor{fresnelblue}{\textnormal{\LARGE #2}}}\\
+%     \vspace{0.5em}
+% }
+%  
+
+
+   \newcommand{\myblocktitle}[2]{
+    {\color{#2}\textbf{\semiboldfont\Large\uppercase{#1}}\\ \vspace{-0.5em} } 
+    \textcolor{#2}{\rule{\columnwidth}{8pt}}\\
+    \vspace{0.5em}
+%     {\textcolor{fresnelblue}{\textnormal{\LARGE #2}}}\\
+%     \vspace{0.5em}
+}
+
+
+% 
+%    \newcommand{\myblocktitle}[2]{
+%      \begin{mdframed}[innerleftmargin =1cm,innerrightmargin =1cm,
+%   innerbottommargin=1cm,innertopmargin=1cm,
+%   linewidth=5pt,backgroundcolor=#2,linecolor=white]
+%    {\color{white}\textbf{\blackfont \huge #1}\\ \vspace{-0.5em} }  
+%      \end{mdframed}
+% }
+
+
+\newcommand{\mysubtitle}[1]{
+{\semiboldfont \textcolor{benchcolor2}{{\textbf{#1}}}}\\
+}
+
+
+%%%   biblio, biblatex, biber   %%%%%%%%%%%%%%
+\usepackage{csquotes}   
+\usepackage[style=numeric-comp,citetracker=true,sorting=none,natbib=true,backend=bibtex,
+abbreviate = true,
+maxcitenames=3,
+firstinits=true,
+maxnames=1,
+doi=false,
+    isbn=false,bibencoding=utf8,
+    url=false]{biblatex}
+
+\renewcommand{\bibfont}{\normalfont}
+\addbibresource{biblio.bib}
+  \urlstyle{same}
+ \renewbibmacro{in:}{}
+% \AtEveryBibitem{\clearfield{title}}
+ \AtEveryBibitem{\clearfield{note}}
+ \AtEveryBibitem{\clearfield{language}}
+% % % {\DeclareFieldFormat*{volume}{\textbf{#1}}}
+ \AtEveryBibitem{\DeclareFieldFormat{number}{\textbf{#1}}}
+ \AtEveryBibitem{\DeclareFieldFormat*{journaltitle}{{\itshape {#1}}}}
+ \AtEveryBibitem{\DeclareFieldFormat*{volume}{\bfseries{#1}}}
+  \AtEveryBibitem{\DeclareFieldFormat*{edition}{{#1\addnbspace Ed.}}}
+  
+  
+  \usepackage[orientation=portrait,
+              size=a0,          % poster size
+              scale=1.0         % font scale factor
+             ]{beamerposter}    % beamer in poster size
+
+             
+             
+             \usefonttheme{serif}
+  \usefonttheme{professionalfonts}% use own font handling
+             
+  %%%%%%%%%%%%%%%%%  Beamer stuff %%%%%%%%%%%%%%%%%%%%%
+              
+  % \setbeamerfont{block title}{series=\bfseries,size=\huge}
+  %\setbeamerfont{title in head/foot}{size={},series=\normalfont}
+  \setbeamercolor{section in head/foot}{bg=fresnelblue, fg=fresnelblue}
+  \setbeamercolor{subsection in head/foot}{bg=fresnelblue, fg=fresnelblue}
+  \setbeamercolor*{block title}{bg=white, fg=black}
+  \setbeamercolor*{block body}{bg=white, fg=black}
+  \setbeamercolor*{block title example}{bg=fresnelgreen,fg=white}
+  \setbeamercolor*{block body example}{bg=, fg=fresnelgreen}
+  \setbeamercolor*{block title alerted}{bg=fresnelorange,fg=white}
+  \setbeamercolor*{block body alerted}{bg=, fg=fresnelorange}
+
+  \setbeamerfont{caption}{shape=\itshape,size=\small}
+  \setbeamercolor{caption}{fg=fresnelcaption}
+  \setbeamertemplate{caption}{\usebeamercolor{caption}\usebeamerfont{caption}\raggedright\insertcaption\par}
+
+  \setbeamercolor{bibliography entry title}{bg=white, fg=fresnelblack}%
+  \setbeamercolor{bibliography entry location}{bg=white, fg=fresnelblack}%
+  \setbeamercolor{bibliography entry note}{bg=white, fg=fresnelblack}%
+  \setbeamercolor{bibliography entry author}{bg=white, fg=fresnelblack}%
+  \setbeamercolor{bibliography  item}{bg=white, fg=fresnelblack}%
+  \setbeamertemplate{bibliography item}[text]
+  \setbeamertemplate{navigation symbols}{}
+
+
+  \setbeamertemplate{enumerate items}[circle]
+  \setbeamercolor*{enumerate}{fg=fresnelorange,bg=white}
+  \setbeamertemplate{enumerate subitem}{\alph{enumii}.}
+  \setbeamercolor*{enumerate subitem}{fg=fresnelgreen,bg=white}
+   \setbeamercolor{item projected}{bg=fresnelorange,fg=white}
+  \setbeamercolor{enumerate subsubitem}{bg=,fg=fresnelblue}
+   \setbeamertemplate{enumerate subsubitem}{\roman{enumiii}.}
+   
+
+   
+   \let\olditem\item
+  \renewcommand{\item}{\olditem  \color{fresnelblack}}
+   
+   
+  \setbeamertemplate{itemize items}[square] 
+    \setbeamertemplate{itemize items}{%
+       \tiny\raise1.5pt\hbox{\color{fresnelblue}$\blacksquare$}%
+  }
+   \setbeamertemplate{itemize subitem}{%
+      \tiny\raise1.5pt\hbox{\color{fresnelgreen}$\blacktriangleright$}%
+  }
+   \setbeamertemplate{itemize subsubitem}{%
+      \tiny\raise1.5pt\hbox{\color{fresnelblue}$\bullet$}%
+  }
+
+  \addtolength{\leftmargini}{2.5em} 
+
+
+
+
+
+
+  %%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%
+   
+  % \usebackgroundtemplate{\includegraphics[width=1.048\paperwidth]{bg3.jpg}}
+  \setbeamertemplate{background}{
+  {\leavevmode
+    \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+     \fill[color=fresnellightgray] (0,0) rectangle (111,122);
+      \fill[color=fresneldarkgray] (0,104) rectangle (111,122);
+      \fill[color=fresnellightblue] (0,92) rectangle (111,104);
+      \fill[color=benchcolor3] (0,0) rectangle (111,7);
+  %     \fill[color=fresnelblue] (0,103) rectangle (111,104);
+  %     \fill[color=fresnelblue] (0,7) rectangle (111,8);
+  % \fill[color=fresnellightblue] (0,6) rectangle (111,7);
+  %  \fill[color=fresnellightgray] (40,8) rectangle (80,20);
+    \end{tikzpicture}
+  }
+  }
+
+  \setbeamersize{text margin left=6cm,text margin right=2cm}
+  \setbeamertemplate{footline}{\vspace{6cm}}
+  \setbeamertemplate{headline}{\vspace{35cm}}
