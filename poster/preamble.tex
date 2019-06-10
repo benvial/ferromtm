@@ -1,7 +1,7 @@
 
 %--some needed packages--------------------------------------------------------
 \usepackage[english]{babel}  % language
-% \usepackage[utf8]{inputenc} 
+% \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb}
 \usepackage{lipsum}
 \usepackage[absolute,showboxes,overlay]{textpos}  %% textblocks
@@ -66,21 +66,21 @@
  % \usepackage{cmbright}
 
  \DeclareMathSizes{9.8}{17}{7}{7}
- 
+
 \usepackage[no-math]{fontspec}
 \usepackage{xunicode} %Unicode extras!
 \usepackage{xltxtra}  %Fixes
 % \setmainfont[Ligatures=TeX]{Avenir Next Medium}
 %\usepackage{mathastext}
  \usepackage{fontawesome}
-% 
-% % 
+%
+% %
 \setmainfont[BoldFont = {Open Sans Bold},
              ItalicFont = {Open Sans Italic},
              BoldItalicFont = {Open Sans Bold Italic}]
             {Open Sans}
-            
-   \newfontfamily{\romanfont}[Scale=1]{Garogier}       
+
+   % \newfontfamily{\romanfont}[Scale=1]{Garogier}
  \newfontfamily{\semiboldfont}[Scale=1.3]{Oswald Regular}
  \newfontfamily{\condensedfont}[Scale=1.3]{Oswald Regular}
  \newfontfamily{\blackfont}[Scale=1.3]{Oswald Regular}
@@ -130,18 +130,18 @@
 \usepackage{mdframed}
 % \newenvironment<>{posterblock}[2]{%
 %  \begin{actionenv}#3%
-%  \def\insertblocktitle{\leftskip=20pt\rightskip=20pt \\ { \vspace{20pt} \textbf{\huge #1} } 
+%  \def\insertblocktitle{\leftskip=20pt\rightskip=20pt \\ { \vspace{20pt} \textbf{\huge #1} }
 %  \\ \vspace{10pt} \textcolor{fresnelblue}{\textnormal{\LARGE #2}} \vspace{20pt}}%
 %  \par%
 %  \usebeamertemplate{block begin}\leftskip=20pt\rightskip=20pt}
 %  {\par\vspace{20pt}\usebeamertemplate{block end}
 %  \end{actionenv}}
- 
+
  \newenvironment{posterblock}[2]{%
-  \begin{mdframed}[innerleftmargin =1cm,innerrightmargin =1cm,
-  innerbottommargin=0.2em,innertopmargin=0.2em,
-  linewidth=8pt,linecolor=#2,backgroundcolor=#2]
-    {\blackfont \color{fresnelorange} \textbf{\Large \uppercase{#1}}} 
+  \begin{mdframed}[innerleftmargin =0.85em,innerrightmargin =0.85em,
+  innerbottommargin=0.85em,innertopmargin=0.85em,
+  linewidth=0pt,linecolor=#2,backgroundcolor=#2]
+    {\blackfont \color{fresnelorange} \textbf{\Large \uppercase{#1}}}
 
 %  \\ \vspace{10pt} \textcolor{fresnelblue}{\textnormal{\LARGE #2}} \vspace{20pt}}%
   \end{mdframed}
@@ -152,20 +152,11 @@
 }{
 \end{mdframed}
 }
- 
- 
-%   \newcommand{\myblocktitle}[2]{
-%     {\color{fresneldarkblue}\textbf{\blackfont \huge #1}\\ \vspace{-0.5em} } 
-%     \textcolor{fresneldarkblue}{\rule{\columnwidth}{5pt}}\\
-%     \vspace{0.5em}
-%     {\textcolor{fresnelblue}{\textnormal{\LARGE #2}}}\\
-%     \vspace{0.5em}
-% }
-%  
+
 
 
    \newcommand{\myblocktitle}[2]{
-    {\color{#2}\textbf{\semiboldfont\Large\uppercase{#1}}\\ \vspace{-0.5em} } 
+    {\color{#2}\textbf{\semiboldfont\Large\uppercase{#1}}\\ \vspace{-0.5em} }
     \textcolor{#2}{\rule{\columnwidth}{8pt}}\\
     \vspace{0.5em}
 %     {\textcolor{fresnelblue}{\textnormal{\LARGE #2}}}\\
@@ -173,24 +164,15 @@
 }
 
 
-% 
-%    \newcommand{\myblocktitle}[2]{
-%      \begin{mdframed}[innerleftmargin =1cm,innerrightmargin =1cm,
-%   innerbottommargin=1cm,innertopmargin=1cm,
-%   linewidth=5pt,backgroundcolor=#2,linecolor=white]
-%    {\color{white}\textbf{\blackfont \huge #1}\\ \vspace{-0.5em} }  
-%      \end{mdframed}
-% }
 
-
-\newcommand{\mysubtitle}[1]{
-{\semiboldfont \textcolor{benchcolor2}{{\textbf{#1}}}}\\
+\newcommand{\mysubtitle}[1]{\vspace*{0.85em}
+{\semiboldfont \textcolor{benchcolor2}{{\textbf{#1}}}}\vspace*{0.2em}\\
 }
 
 
 %%%   biblio, biblatex, biber   %%%%%%%%%%%%%%
-\usepackage{csquotes}   
-\usepackage[style=numeric-comp,citetracker=true,sorting=none,natbib=true,backend=bibtex,
+\usepackage{csquotes}
+\usepackage[style=numeric-comp,citetracker=true,sorting=none,natbib=true,backend=biber,
 abbreviate = true,
 maxcitenames=3,
 firstinits=true,
@@ -199,7 +181,7 @@ doi=false,
     isbn=false,bibencoding=utf8,
     url=false]{biblatex}
 
-\renewcommand{\bibfont}{\normalfont}
+\renewcommand{\bibfont}{\small}
 \addbibresource{biblio.bib}
   \urlstyle{same}
  \renewbibmacro{in:}{}
@@ -211,20 +193,20 @@ doi=false,
  \AtEveryBibitem{\DeclareFieldFormat*{journaltitle}{{\itshape {#1}}}}
  \AtEveryBibitem{\DeclareFieldFormat*{volume}{\bfseries{#1}}}
   \AtEveryBibitem{\DeclareFieldFormat*{edition}{{#1\addnbspace Ed.}}}
-  
-  
+
+
   \usepackage[orientation=portrait,
               size=a0,          % poster size
               scale=1.0         % font scale factor
              ]{beamerposter}    % beamer in poster size
 
-             
-             
+
+
              \usefonttheme{serif}
   \usefonttheme{professionalfonts}% use own font handling
-             
+
   %%%%%%%%%%%%%%%%%  Beamer stuff %%%%%%%%%%%%%%%%%%%%%
-              
+
   % \setbeamerfont{block title}{series=\bfseries,size=\huge}
   %\setbeamerfont{title in head/foot}{size={},series=\normalfont}
   \setbeamercolor{section in head/foot}{bg=fresnelblue, fg=fresnelblue}
@@ -256,14 +238,14 @@ doi=false,
    \setbeamercolor{item projected}{bg=fresnelorange,fg=white}
   \setbeamercolor{enumerate subsubitem}{bg=,fg=fresnelblue}
    \setbeamertemplate{enumerate subsubitem}{\roman{enumiii}.}
-   
 
-   
+
+
    \let\olditem\item
   \renewcommand{\item}{\olditem  \color{fresnelblack}}
-   
-   
-  \setbeamertemplate{itemize items}[square] 
+
+
+  \setbeamertemplate{itemize items}[square]
     \setbeamertemplate{itemize items}{%
        \tiny\raise1.5pt\hbox{\color{fresnelblue}$\blacksquare$}%
   }
@@ -274,23 +256,24 @@ doi=false,
       \tiny\raise1.5pt\hbox{\color{fresnelblue}$\bullet$}%
   }
 
-  \addtolength{\leftmargini}{2.5em} 
+  \addtolength{\leftmargini}{2.5em}
 
 
 
-
+  \graphicspath{
+  {../data/figures/}{./figs/}}
 
 
   %%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%
-   
+
   % \usebackgroundtemplate{\includegraphics[width=1.048\paperwidth]{bg3.jpg}}
   \setbeamertemplate{background}{
   {\leavevmode
     \begin{tikzpicture}
     \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
-     \fill[color=fresnellightgray] (0,0) rectangle (111,122);
-      \fill[color=fresneldarkgray] (0,104) rectangle (111,122);
-      \fill[color=fresnellightblue] (0,92) rectangle (111,104);
+     % \fill[color=fresnellightgray] (0,0) rectangle (111,122);
+      \fill[color=fresneldarkgray] (0,108) rectangle (111,122);
+      \fill[color=fresnellightblue] (0,98) rectangle (111,108);
       \fill[color=benchcolor3] (0,0) rectangle (111,7);
   %     \fill[color=fresnelblue] (0,103) rectangle (111,104);
   %     \fill[color=fresnelblue] (0,7) rectangle (111,8);

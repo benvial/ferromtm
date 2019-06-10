@@ -10,7 +10,12 @@ Reallocated singl_function (elt_size=8) to 100 items from 50.
 Reallocated singl_function (elt_size=8) to 100 items from 50.
 Reallocated wiz_functions (elt_size=8) to 6000 items from 3000.
 Database file #1: aipsampNotes.bib
-Database file #2: aipsamp.bib
+Database file #2: ../biblio.bib
+Warning--I didn't find a database entry for "feyn54"
+Warning--I didn't find a database entry for "witten2001"
+Warning--I didn't find a database entry for "epr"
+Warning--I didn't find a database entry for "Bire82"
+Warning--I didn't find a database entry for "Berman1983"
 control{REVTEX41Control}, control.key{N/A}, control.author{N/A}, control.editor{N/A}, control.title{N/A}, control.pages{N/A}, control.year{N/A}, control.eprint{N/A}, 
 control{aip41Control}, control.key{N/A}, control.author{N/A}, control.editor{N/A}, control.title{0}, control.pages{1}, control.year{N/A}, control.eprint{N/A}, 
 Warning--jnrlst (dependency: not reversed) set 1
@@ -23,56 +28,46 @@ Control: production of article title (0) allowed
 Control: page (1) range
 Control: year (1) truncated
 Control: production of eprint (0) enabled
-Warning--empty year in Smith2010
-Warning--empty year in Smith2010a
-Warning--can't use both volume and number fields in Smith2007
-Warning--empty year in SmithDA01
-Warning--empty title in Nelson1999
-Warning--empty institution in Nelson1999
-Warning--empty title in Fields2005
-Warning--empty institution in Fields2005
-Warning--empty chapter and pages in ballagh2000
-Warning--empty year in Magnetism
-Warning--empty chapter and pages in Smith80
-You've used 47 entries,
+Warning--empty year in noauthor_tunable_nodate
+You've used 43 entries,
             5918 wiz_defined-function locations,
-            1884 strings with 19688 characters,
-and the built_in function-call counts, 40444 in all, are:
-= -- 2851
-> -- 931
-< -- 214
-+ -- 327
-- -- 238
-* -- 6042
-:= -- 4346
-add.period$ -- 66
-call.type$ -- 47
-change.case$ -- 261
-chr.to.int$ -- 64
-cite$ -- 58
-duplicate$ -- 3919
-empty$ -- 2960
-format.name$ -- 455
-if$ -- 7705
-int.to.chr$ -- 7
-int.to.str$ -- 54
-missing$ -- 497
-newline$ -- 188
-num.names$ -- 143
-pop$ -- 1586
-preamble$ -- 2
-purify$ -- 220
+            1902 strings with 24826 characters,
+and the built_in function-call counts, 49739 in all, are:
+= -- 3187
+> -- 1619
+< -- 305
++ -- 493
+- -- 417
+* -- 8014
+:= -- 4970
+add.period$ -- 80
+call.type$ -- 43
+change.case$ -- 208
+chr.to.int$ -- 47
+cite$ -- 46
+duplicate$ -- 4487
+empty$ -- 3582
+format.name$ -- 832
+if$ -- 9701
+int.to.chr$ -- 2
+int.to.str$ -- 50
+missing$ -- 583
+newline$ -- 175
+num.names$ -- 118
+pop$ -- 1713
+preamble$ -- 1
+purify$ -- 203
 quote$ -- 0
-skip$ -- 1339
+skip$ -- 1500
 stack$ -- 0
-substring$ -- 961
-swap$ -- 3629
-text.length$ -- 110
+substring$ -- 1496
+swap$ -- 4466
+text.length$ -- 163
 text.prefix$ -- 0
 top$ -- 10
-type$ -- 586
-warning$ -- 12
-while$ -- 179
+type$ -- 622
+warning$ -- 2
+while$ -- 191
 width$ -- 0
-write$ -- 437
-(There were 12 warnings)
+write$ -- 413
+(There were 7 warnings)

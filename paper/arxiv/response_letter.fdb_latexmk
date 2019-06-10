@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex response_letter"] 1559916178 "response_letter.aux" "response_letter.bbl" "response_letter" 1559917948
+["bibtex response_letter"] 1560184782 "response_letter.aux" "response_letter.bbl" "response_letter" 1560184799
   "/usr/share/texmf-dist/bibtex/bst/revtex/aipnum4-1.bst" 1550406587 71946 e545479b1bc8cbb9ec432bb3b5f0199e ""
-  "response_letter.aux" 1559917948 942 3ce3b32c385a9d7cf47edbbb44b33e11 ""
-  "response_letterNotes.bib" 1559917948 69 7fe5a2a5b0ca4322ba6c6ddff14c7fd3 ""
+  "response_letter.aux" 1560184783 942 3ce3b32c385a9d7cf47edbbb44b33e11 ""
+  "response_letterNotes.bib" 1560184783 69 7fe5a2a5b0ca4322ba6c6ddff14c7fd3 ""
   (generated)
   "response_letter.blg"
   "response_letter.bbl"
-["pdflatex"] 1559917947 "response_letter.tex" "response_letter.pdf" "response_letter" 1559917948
+["pdflatex"] 1560184782 "response_letter.tex" "response_letter.pdf" "response_letter" 1560184799
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1550406775 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1550406775 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1550406775 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -55,12 +55,11 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1550406775 33301 a3134070eacafb10b1f371612ce2650d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1556277159 3122541 d40d88b581ddf85d7a6888b776ca231d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1556277154 7919196 42a00397098357c048607689cc20b8e0 ""
-  "response_letter.aux" 1559917948 942 3ce3b32c385a9d7cf47edbbb44b33e11 ""
-  "response_letter.bbl" 1559916178 1980 9b3cc11c22f721d7f27d2e6cee54c1fb "bibtex response_letter"
-  "response_letter.tex" 1559917942 7527 5ff3823d7514584eda216fea440ea9b0 ""
+  "response_letter.aux" 1560184783 942 3ce3b32c385a9d7cf47edbbb44b33e11 ""
+  "response_letter.bbl" 1560184782 1980 9b3cc11c22f721d7f27d2e6cee54c1fb "bibtex response_letter"
+  "response_letter.tex" 1560184777 7810 db89a52e48e4c4ec5363edf76be62489 ""
   (generated)
   "response_letterNotes.bib"
   "response_letter.aux"
-  "response_letter.pdf"
-  "response_letter.out"
   "response_letter.log"
+  "response_letter.pdf"

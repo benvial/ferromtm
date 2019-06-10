@@ -9,7 +9,7 @@
 %
 % TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
 % as well as the rest of the prerequisites for REVTeX 4.1
-% 
+%
 % It also requires running BibTeX. The commands are as follows:
 %
 %  1)  latex  aipsamp
@@ -33,6 +33,7 @@
 % Conference Proceedings
 ]{revtex4-1}
 
+
 \usepackage{graphicx}% Include figure files
 \usepackage{dcolumn}% Align table columns on decimal point
 \usepackage{bm}% bold math
@@ -54,10 +55,10 @@
  \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
 \author{B. Author}%
  \email{Second.Author@institution.edu.}
-\affiliation{ 
+\affiliation{
 Authors' institution and/or address%\\This line break forced with \textbackslash\textbackslash
 }%
-
+xasx
 \author{C. Author}
  \homepage{http://www.Second.institution.edu/~Charlie.Author.}
 \affiliation{%
@@ -70,15 +71,15 @@ Second institution and/or address%\\This line break forced% with \\
 \begin{abstract}
 An article usually includes an abstract, a concise summary of the work
 covered at length in the main body of the article. It is used for
-secondary publications and for information retrieval purposes. 
+secondary publications and for information retrieval purposes.
 \end{abstract}
 
 \maketitle
 
 \begin{quotation}
-The ``lead paragraph'' is encapsulated with the \LaTeX\ 
-\verb+quotation+ environment and is formatted as a single paragraph before the first section heading. 
-(The \verb+quotation+ environment reverts to its usual meaning after the first sectioning command.) 
+The ``lead paragraph'' is encapsulated with the \LaTeX\
+\verb+quotation+ environment and is formatted as a single paragraph before the first section heading.
+(The \verb+quotation+ environment reverts to its usual meaning after the first sectioning command.)
 Note that numbered references are allowed in the lead paragraph.
 %
 The lead paragraph will only be found in an article being prepared for the journal \textit{Chaos}.
@@ -90,7 +91,7 @@ break was forced \lowercase{via} \textbackslash\textbackslash}
 This sample document demonstrates proper use of REV\TeX~4.1 (and
 \LaTeXe) in manuscripts prepared for submission to AIP
 journals. Further information can be found in the documentation included in the distribution or available at
-\url{http://authors.aip.org} and in the documentation for 
+\url{http://authors.aip.org} and in the documentation for
 REV\TeX~4.1 itself.
 
 When commands are referred to in this example file, they are always
@@ -103,12 +104,12 @@ stands for the title text of the paper.
 
 Line breaks in section headings at all levels can be introduced using
 \textbackslash\textbackslash. A blank input line tells \TeX\ that the
-paragraph has ended. 
+paragraph has ended.
 
 \subsection{\label{sec:level2}Second-level heading: Formatting}
 
 This file may be formatted in both the \texttt{preprint} (the default) and
-\texttt{reprint} styles; the latter format may be used to 
+\texttt{reprint} styles; the latter format may be used to
 mimic final journal output. Either format may be used for submission
 purposes; however, for peer review and production, AIP will format the
 article using the \texttt{preprint} class option. Hence, it is
@@ -127,35 +128,35 @@ instead.
 \subsubsection{\label{sec:level3}Third-level heading: Citations and Footnotes}
 
 Citations in text refer to entries in the Bibliography;
-they use the commands \verb+\cite{#1}+ or \verb+\onlinecite{#1}+. 
-Because REV\TeX\ uses the \verb+natbib+ package of Patrick Daly, 
+they use the commands \verb+\cite{#1}+ or \verb+\onlinecite{#1}+.
+Because REV\TeX\ uses the \verb+natbib+ package of Patrick Daly,
 its entire repertoire of commands are available in your document;
 see the \verb+natbib+ documentation for further details.
 The argument of \verb+\cite+ is a comma-separated list of \emph{keys};
-a key may consist of letters and numerals. 
+a key may consist of letters and numerals.
 
-By default, citations are numerical; \cite{feyn54} author-year citations are an option. 
-To give a textual citation, use \verb+\onlinecite{#1}+: (Refs.~\onlinecite{witten2001,epr,Bire82}). 
-REV\TeX\ ``collapses'' lists of consecutive numerical citations when appropriate. 
+By default, citations are numerical; \cite{feyn54} author-year citations are an option.
+To give a textual citation, use \verb+\onlinecite{#1}+: (Refs.~\onlinecite{witten2001,epr,Bire82}).
+REV\TeX\ ``collapses'' lists of consecutive numerical citations when appropriate.
 REV\TeX\ provides the ability to properly punctuate textual citations in author-year style;
-this facility works correctly with numerical citations only with \texttt{natbib}'s compress option turned off. 
-To illustrate, we cite several together \cite{feyn54,witten2001,epr,Berman1983}, 
-and once again (Refs.~\onlinecite{epr,feyn54,Bire82,Berman1983}). 
-Note that, when numerical citations are used, the references were sorted into the same order they appear in the bibliography. 
+this facility works correctly with numerical citations only with \texttt{natbib}'s compress option turned off.
+To illustrate, we cite several together \cite{feyn54,witten2001,epr,Berman1983},
+and once again (Refs.~\onlinecite{epr,feyn54,Bire82,Berman1983}).
+Note that, when numerical citations are used, the references were sorted into the same order they appear in the bibliography.
 
 A reference within the bibliography is specified with a \verb+\bibitem{#1}+ command,
-where the argument is the citation key mentioned above. 
+where the argument is the citation key mentioned above.
 \verb+\bibitem{#1}+ commands may be crafted by hand or, preferably,
-generated by using Bib\TeX. 
+generated by using Bib\TeX.
 The AIP styles for REV\TeX~4 include Bib\TeX\ style files
 \verb+aipnum.bst+ and \verb+aipauth.bst+, appropriate for
 numbered and author-year bibliographies,
-respectively. 
-REV\TeX~4 will automatically choose the style appropriate for 
+respectively.
+REV\TeX~4 will automatically choose the style appropriate for
 the document's selected class options: the default is numerical, and
 you obtain the author-year style by specifying a class option of \verb+author-year+.
 
-This sample file demonstrates a simple use of Bib\TeX\ 
+This sample file demonstrates a simple use of Bib\TeX\
 via a \verb+\bibliography+ command referencing the \verb+aipsamp.bib+ file.
 Running Bib\TeX\ (in this case \texttt{bibtex
 aipsamp}) after the first pass of \LaTeX\ produces the file
@@ -165,13 +166,13 @@ aipsamp}) after the first pass of \LaTeX\ produces the file
 \verb+thebibiliography+ environment should be used instead.
 
 \paragraph{Fourth-level heading is run in.}%
-Footnotes are produced using the \verb+\footnote{#1}+ command. 
-Numerical style citations put footnotes into the 
+Footnotes are produced using the \verb+\footnote{#1}+ command.
+Numerical style citations put footnotes into the
 bibliography\footnote{Automatically placing footnotes into the bibliography requires using BibTeX to compile the bibliography.}.
-Author-year and numerical author-year citation styles (each for its own reason) cannot use this method. 
+Author-year and numerical author-year citation styles (each for its own reason) cannot use this method.
 Note: due to the method used to place footnotes in the bibliography, \emph{you
 must re-run BibTeX every time you change any of your document's
-footnotes}. 
+footnotes}.
 
 \section{Math and Equations}
 Inline math may be typeset using the \verb+$+ delimiters. Bold math
@@ -188,7 +189,7 @@ In \LaTeX\ there are many different ways to display equations, and a
 few preferred ways are noted below. Displayed math will center by
 default. Use the class option \verb+fleqn+ to flush equations left.
 
-Below we have numbered single-line equations, the most common kind: 
+Below we have numbered single-line equations, the most common kind:
 \begin{eqnarray}
 \chi_+(p)\alt{\bf [}2|{\bf p}|(|{\bf p}|+p_z){\bf ]}^{-1/2}
 \left(
@@ -362,7 +363,7 @@ and Fig.~\ref{fig:epsart}.
 
 \section{Figures and Tables}
 Figures and tables are typically ``floats''; \LaTeX\ determines their
-final position via placement rules. 
+final position via placement rules.
 \LaTeX\ isn't always successful in automatically placing floats where you wish them.
 
 Figures are marked up with the \texttt{figure} environment, the content of which
@@ -392,26 +393,26 @@ so instead the \texttt{figure*} environment has been used.
 
 The analog of the \texttt{figure} environment is \texttt{table}, which uses
 the same \verb+\caption+ command.
-However, you should type your caption command first within the \texttt{table}, 
+However, you should type your caption command first within the \texttt{table},
 instead of last as you did for \texttt{figure}.
 
 The heart of any table is the \texttt{tabular} environment,
 which represents the table content as a (vertical) sequence of table rows,
-each containing a (horizontal) sequence of table cells. 
+each containing a (horizontal) sequence of table cells.
 Cells are separated by the \verb+&+ character;
-the row terminates with \verb+\\+. 
+the row terminates with \verb+\\+.
 The required argument for the \texttt{tabular} environment
-specifies how data are displayed in each of the columns. 
+specifies how data are displayed in each of the columns.
 For instance, a column
 may be centered (\verb+c+), left-justified (\verb+l+), right-justified (\verb+r+),
-or aligned on a decimal point (\verb+d+). 
+or aligned on a decimal point (\verb+d+).
 (Table~\ref{tab:table4}%
 \begin{table}
 \caption{\label{tab:table4}Numbers in columns Three--Five have been
 aligned by using the ``d'' column specifier (requires the
-\texttt{dcolumn} package). 
+\texttt{dcolumn} package).
 Non-numeric entries (those entries without
-a ``.'') in a ``d'' column are aligned on the decimal point. 
+a ``.'') in a ``d'' column are aligned on the decimal point.
 Use the
 ``D'' specifier for more complex layouts. }
 \begin{ruledtabular}
@@ -471,8 +472,8 @@ Lengthy tables may need to break across pages.
 A simple way to allow this is to specify
 the \verb+[H]+ float placement on the \texttt{table} or
 \texttt{table*} environment.
-Alternatively, using the standard \LaTeXe\ package \texttt{longtable} 
-gives more control over how tables break and allows headers and footers 
+Alternatively, using the standard \LaTeXe\ package \texttt{longtable}
+gives more control over how tables break and allows headers and footers
 to be specified for each page of the table.
 An example of the use of \texttt{longtable} can be found
 in the file \texttt{summary.tex} that is included with the REV\TeX~4
@@ -491,11 +492,11 @@ In this case,
 create the footnotes using
 \verb+\footnotemark[#1]+ and \verb+\footnotetext[#1]{#2}+.
 \texttt{\#1} is a numeric value.
-Each time the same value for \texttt{\#1} is used, 
-the same mark is produced in the table. 
+Each time the same value for \texttt{\#1} is used,
+the same mark is produced in the table.
 The \verb+\footnotetext[#1]{#2}+ commands are placed after the \texttt{tabular}
-environment. 
-Examine the \LaTeX\ source and output for Tables~\ref{tab:table1} and 
+environment.
+Examine the \LaTeX\ source and output for Tables~\ref{tab:table1} and
 \ref{tab:table2}%
 \begin{table}
 \caption{\label{tab:table2}A table with more columns still fits
@@ -536,13 +537,13 @@ Tl& 0.480 & 18.90 & 3.550 & & & & \\
 \footnotetext[4]{Here's the fourth.}
 \footnotetext[5]{And etc.}
 \end{table}
-for an illustration. 
+for an illustration.
 
 All AIP journals require that the initial citation of
 figures or tables be in numerical order.
 \LaTeX's automatic numbering of floats is your friend here:
-just put each \texttt{figure} environment immediately following 
-its first reference (\verb+\ref+), as we have done in this example file. 
+just put each \texttt{figure} environment immediately following
+its first reference (\verb+\ref+), as we have done in this example file.
 
 \begin{acknowledgments}
 We wish to acknowledge the support of the author community in using
@@ -608,8 +609,8 @@ E&\agt& mc^3. \label{appc}
 They turn out to be Eqs.~(\ref{appa}), (\ref{appb}), and (\ref{appc}).
 
 \nocite{*}
-\bibliography{aipsamp}% Produces the bibliography via BibTeX.
-
+% \bibliography{aipsamp}% Produces the bibliography via BibTeX.
+\bibliography{../biblio}
 \end{document}
 %
 % ****** End of file aipsamp.tex ******

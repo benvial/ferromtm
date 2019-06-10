@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex aipsamp"] 1556016517 "aipsamp.aux" "aipsamp.bbl" "aipsamp" 1556016519
+["bibtex aipsamp"] 1560184358 "aipsamp.aux" "aipsamp.bbl" "aipsamp" 1560184359
+  "../biblio.bib" 1560183576 41024 52f854c6c3144c008e694f11a4c07206 ""
   "./aipnum4-1.bst" 1556012838 71945 7cd378302a037b260485973f72a35dcd ""
-  "aipsamp.aux" 1556016518 7057 bb5510dc6a1c72733b429c33010f710e ""
-  "aipsamp.bib" 1556012838 13144 2db4a8fca2f3d95a47549aff199c10eb ""
-  "aipsampNotes.bib" 1556016518 210 a2a9371dec71b197cd701746e3358ae2 ""
+  "aipsamp.aux" 1560184358 8853 1aae554dac9b6923252d42104b1c7883 ""
+  "aipsampNotes.bib" 1560184358 210 a2a9371dec71b197cd701746e3358ae2 ""
   (generated)
-  "aipsamp.blg"
   "aipsamp.bbl"
-["pdflatex"] 1556016518 "aipsamp.tex" "aipsamp.pdf" "aipsamp" 1556016519
+  "aipsamp.blg"
+["pdflatex"] 1560184358 "aipsamp.tex" "aipsamp.pdf" "aipsamp" 1560184359
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1550406775 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1550406775 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1550406775 3332 103109f5612ad95229751940c61aada0 ""
@@ -143,18 +143,18 @@
   "/usr/share/texmf-dist/tex/latex/tools/dcolumn.sty" 1550406775 2755 a95af7253bb47cb72ad0ac110a442c52 ""
   "/usr/share/texmf-dist/tex/latex/url/url.sty" 1550406775 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1550406775 33301 a3134070eacafb10b1f371612ce2650d ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1554721994 3122541 d40d88b581ddf85d7a6888b776ca231d ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1554721973 7919195 7c845d9e4133a42a91760627bf6bb991 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1556277159 3122541 d40d88b581ddf85d7a6888b776ca231d ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1556277154 7919196 42a00397098357c048607689cc20b8e0 ""
   "aip4-1.rtx" 1556012838 60820 bf92ecfa6582cd56ac89ec391de9aa41 ""
-  "aipsamp.aux" 1556016518 7057 bb5510dc6a1c72733b429c33010f710e ""
-  "aipsamp.bbl" 1556016518 25259 8adb8822dfb17c04cb1bbefe263336d3 "bibtex aipsamp"
-  "aipsamp.tex" 1556012838 24357 f8b20daa95d2e853e2289862eabbfed6 ""
+  "aipsamp.aux" 1560184358 8853 1aae554dac9b6923252d42104b1c7883 ""
+  "aipsamp.bbl" 1560184358 36071 2f769b98fb82e339b23e36d553ea4d2d "bibtex aipsamp"
+  "aipsamp.tex" 1560184355 24343 9a8d516090392391d7c6252d85304e5f ""
   "fig_1.png" 1556012838 134508 1f18c82c892a7dcd5b21ece70a6b9fa0 ""
   "fig_2.eps" 1556012838 195 0a3bb00e3be97a61072cc3d3ce7c067d ""
   "revsymb4-1.sty" 1556012838 5190 0f4247f7a75d2f8239f5a0c0c404bea3 ""
   "revtex4-1.cls" 1556012838 199797 cabc32ae3f68475cabbf37ac7498f20b ""
   (generated)
   "aipsamp.aux"
-  "aipsamp.log"
   "aipsamp.pdf"
   "aipsampNotes.bib"
+  "aipsamp.log"

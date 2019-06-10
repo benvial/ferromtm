@@ -6,8 +6,7 @@
 %Control: page (1) range
 %Control: year (1) truncated
 %Control: production of eprint (0) enabled
-\providecommand{\noopsort}[1]{}\providecommand{\singleletter}[1]{#1}%
-\begin{thebibliography}{45}%
+\begin{thebibliography}{41}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \@ifx{#1\undefined}
@@ -51,382 +50,527 @@
 \providecommand \BibitemShut  [1]{\csname bibitem#1\endcsname}%
 \let\auto@bib@innerbib\@empty
 %</preamble>
-\bibitem [{\citenamefont {Feynman}(1954)}]{feyn54}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.~P.}\ \bibnamefont
-  {Feynman}},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
-  {Phys.\ Rev.}\ }\textbf {\bibinfo {volume} {94}},\ \bibinfo {pages} {262}
-  (\bibinfo {year} {1954})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Witten}(2001)}]{witten2001}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {E.}~\bibnamefont
-  {Witten}},\ }\href@noop {} {} (\bibinfo {year} {2001}),\ \Eprint
-  {http://arxiv.org/abs/hep-th/0106109} {hep-th/0106109} \BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Einstein}, \citenamefont {Podolsky},\ and\
-  \citenamefont {Rosen}(1935)}]{epr}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
-  {Einstein}}, \bibinfo {author} {\bibfnamefont {{\relax Yu}.}~\bibnamefont
-  {Podolsky}}, \ and\ \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
-  {Rosen}},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {Phys.\
-  Rev.}\ }\textbf {\bibinfo {volume} {47}},\ \bibinfo {pages} {777} (\bibinfo
-  {year} {1935})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Birell}\ and\ \citenamefont {Davies}(1982)}]{Bire82}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.~D.}\ \bibnamefont
-  {Birell}}\ and\ \bibinfo {author} {\bibfnamefont {P.~C.~W.}\ \bibnamefont
-  {Davies}},\ }\href@noop {} {\emph {\bibinfo {title} {Quantum Fields in Curved
-  Space}}}\ (\bibinfo  {publisher} {Cambridge University Press},\ \bibinfo
-  {year} {1982})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Berman}\ and\ \citenamefont
-  {Izrailev}(1983)}]{Berman1983}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.~P.}\ \bibnamefont
-  {Berman}, \bibfnamefont {Jr.}}\ and\ \bibinfo {author} {\bibfnamefont
-  {F.~M.}\ \bibnamefont {Izrailev}, \bibfnamefont {Jr.}},\ }\bibfield  {title}
-  {\enquote {\bibinfo {title} {Stability of nonlinear modes},}\ }\href@noop {}
-  {\bibfield  {journal} {\bibinfo  {journal} {Physica D}\ }\textbf {\bibinfo
-  {volume} {88}},\ \bibinfo {pages} {445} (\bibinfo {year} {1983})}\BibitemShut
-  {NoStop}%
 \bibitem [{Note1()}]{Note1}%
   \BibitemOpen
   \bibinfo {note} {Automatically placing footnotes into the bibliography
   requires using BibTeX to compile the bibliography.}\BibitemShut {Stop}%
-\bibitem [{\citenamefont {Davies}\ and\ \citenamefont
-  {Parns}(1988)}]{Davies1998}%
+\bibitem [{\citenamefont {Cherednichenko}\ and\ \citenamefont
+  {Cooper}(2015)}]{cherednichenko_homogenization_2015}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {E.~B.}\ \bibnamefont
-  {Davies}}\ and\ \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Parns}},\
-  }\bibfield  {title} {\enquote {\bibinfo {title} {Trapped modes in acoustic
-  waveguides},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {Q.
-  J. Mech. Appl. Math.}\ }\textbf {\bibinfo {volume} {51}},\ \bibinfo {pages}
-  {477--492} (\bibinfo {year} {1988})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Beutler}(1994{\natexlab{a}})}]{Beutler1994}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Cherednichenko}}\ and\ \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Cooper}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Homogenization
+  of the system of high-contrast {Maxwell} equations},}\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {Mathematika}\ }\textbf {\bibinfo
+  {volume} {61}},\ \bibinfo {pages} {475--500} (\bibinfo {year}
+  {2015})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Bouchitté}\ and\ \citenamefont
+  {Felbacq}(2004)}]{bouchitte_homogenization_2004}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {E.}~\bibnamefont
-  {Beutler}},\ }\enquote {\bibinfo {title} {Williams hematology},}\ \ (\bibinfo
-   {publisher} {McGraw-Hill},\ \bibinfo {address} {New York},\ \bibinfo {year}
-  {1994})\ Chap.~\bibinfo {chapter} {7}, pp.\ \bibinfo {pages} {654--662},\
-  \bibinfo {edition} {5th}\ ed.\BibitemShut {Stop}%
-\bibitem [{\citenamefont {Knuth}(1973)}]{inbook-full}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Bouchitté}}\ and\ \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
+  {Felbacq}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Homogenization
+  near resonances and artificial magnetism from dielectrics},}\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {Comptes Rendus Mathématique}\
+  }\textbf {\bibinfo {volume} {339}},\ \bibinfo {pages} {377 -- 382} (\bibinfo
+  {year} {2004})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Guenneau}\ \emph {et~al.}(2014)\citenamefont
+  {Guenneau}, \citenamefont {Craster}, \citenamefont {Antonakakis},
+  \citenamefont {Skelton}, \citenamefont {Cherednichenko},\ and\ \citenamefont
+  {Cooper}}]{guenneau_homogenization_2014}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.~E.}\ \bibnamefont
-  {Knuth}},\ }\enquote {\bibinfo {title} {Fundamental algorithms},}\ \
-  (\bibinfo  {publisher} {Addison-Wesley},\ \bibinfo {address} {Reading,
-  Massachusetts},\ \bibinfo {year} {\noopsort{1973b}1973})\ \bibinfo {type}
-  {Section}\ \bibinfo {chapter} {1.2}, pp.\ \bibinfo {pages} {10--119},\
-  \bibinfo {edition} {2nd}\ ed.,\ \bibinfo {note} {a full INBOOK
-  entry}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Smith}\ and\ \citenamefont
-  {Johnson}(2005)}]{Smith2005}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~S.}\ \bibnamefont
-  {Smith}}\ and\ \bibinfo {author} {\bibfnamefont {G.~W.}\ \bibnamefont
-  {Johnson}},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
-  {Philos. Trans. R. Soc. London, Ser. B}\ }\textbf {\bibinfo {volume} {777}},\
-  \bibinfo {pages} {1395} (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Smith}, \citenamefont {Johnson},\ and\ \citenamefont
-  {Miller}()}]{Smith2010}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.~J.}\ \bibnamefont
-  {Smith}}, \bibinfo {author} {\bibfnamefont {T.~J.}\ \bibnamefont {Johnson}},
-  \ and\ \bibinfo {author} {\bibfnamefont {B.~G.}\ \bibnamefont {Miller}},\
-  }\href@noop {} {\enquote {\bibinfo {title} {Surface chemistry and
-  preferential crystal orientation on a silicon surface},}\ }\bibinfo {note}
-  {{J. Appl. Phys.} (unpublished)}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Smith}, \citenamefont {Johnson},\ and\ \citenamefont
-  {Klein}()}]{Smith2010a}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {V.~K.}\ \bibnamefont
-  {Smith}}, \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Johnson}}, \
-  and\ \bibinfo {author} {\bibfnamefont {M.~O.}\ \bibnamefont {Klein}},\
-  }\href@noop {} {\enquote {\bibinfo {title} {Surface chemistry and
-  preferential crystal orientation on a silicon surface},}\ }\bibinfo {note}
-  {{J. Appl. Phys.} (submitted)}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {{\"{U}}nderwood}, \citenamefont {{\~N}et},\ and\
-  \citenamefont {{\={P}}ot}(1988)}]{unpublished-full}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {U.}~\bibnamefont
-  {{\"{U}}nderwood}}, \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
-  {{\~N}et}}, \ and\ \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
-  {{\={P}}ot}},\ }\href@noop {} {\enquote {\bibinfo {title} {Lower bounds for
-  wishful research results},}\ } (\bibinfo {year} {1988}),\ \bibinfo {note}
-  {talk at Fanstord University (A full UNPUBLISHED entry)}\BibitemShut
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Guenneau}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Craster}},
+  \bibinfo {author} {\bibfnamefont {T.}~\bibnamefont {Antonakakis}}, \bibinfo
+  {author} {\bibfnamefont {E.}~\bibnamefont {Skelton}}, \bibinfo {author}
+  {\bibfnamefont {K.}~\bibnamefont {Cherednichenko}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {S.}~\bibnamefont {Cooper}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {Homogenization {Techniques} for {Periodic}
+  {Structures}},}\ }in\ \href@noop {} {\emph {\bibinfo {booktitle} {Gratings:
+  {Theory} and {Numeric} {Applications}}}},\ \bibinfo {editor} {edited by\
+  \bibinfo {editor} {\bibfnamefont {E.}~\bibnamefont {Popov}}}\ (\bibinfo
+  {publisher} {Presses Universitaires de Provence},\ \bibinfo {year} {2014})\
+  \bibinfo {edition} {2nd}\ ed.,\ pp.\ \bibinfo {pages} {411--445}\BibitemShut
   {NoStop}%
-\bibitem [{\citenamefont {Johnson}, \citenamefont {Miller},\ and\ \citenamefont
-  {Smith}(2007)}]{JohnsonMillerSmith2007}%
+\bibitem [{\citenamefont {Tagantsev}\ \emph {et~al.}(2018)\citenamefont
+  {Tagantsev}, \citenamefont {Sherman}, \citenamefont {Astafiev}, \citenamefont
+  {Venkatesh},\ and\ \citenamefont {Setter}}]{tagantsev_ferroelectric_2018}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.~P.}\ \bibnamefont
-  {Johnson}}, \bibinfo {author} {\bibfnamefont {K.~L.}\ \bibnamefont {Miller}},
-  \ and\ \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Smith}},\
-  }\href@noop {} {}\bibinfo {howpublished} {personal communication} (\bibinfo
-  {year} {2007})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Smith}(2007{\natexlab{a}})}]{Smith2007}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.~K.}\ \bibnamefont
+  {Tagantsev}}, \bibinfo {author} {\bibfnamefont {V.~O.}\ \bibnamefont
+  {Sherman}}, \bibinfo {author} {\bibfnamefont {K.~F.}\ \bibnamefont
+  {Astafiev}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Venkatesh}},
+  \ and\ \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont {Setter}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Ferroelectric {Materials}
+  for {Microwave} {Tunable} {Applications}},}\ }\href@noop {} {\bibfield
+  {journal} {\bibinfo  {journal} {J. Electroceram.}\ }\textbf {\bibinfo
+  {volume} {11}},\ \bibinfo {pages} {5--66} (\bibinfo {year}
+  {2018})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Allaire}(1992)}]{allaire_homogenization_1992}%
   \BibitemOpen
-  \bibinfo {editor} {\bibfnamefont {J.}~\bibnamefont {Smith}},\ ed.,\
-  \href@noop {} {\emph {\bibinfo {title} {AIP Conf. Proc.}}},\ Vol.\ \bibinfo
-  {volume} {841}\ (\bibinfo {year} {2007})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Oz}\ and\ \citenamefont
-  {Yannakakis}(1983)}]{proceedings-full}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Allaire}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Homogenization
+  and {Two}-{Scale} {Convergence}},}\ }\href@noop {} {\bibfield  {journal}
+  {\bibinfo  {journal} {SIAM Journal on Mathematical Analysis}\ }\textbf
+  {\bibinfo {volume} {23}},\ \bibinfo {pages} {1482--1518} (\bibinfo {year}
+  {1992})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Guenneau}\ and\ \citenamefont
+  {Zolla}(2000)}]{guenneau_homogenization_2000}%
   \BibitemOpen
-  \bibinfo {editor} {\bibfnamefont {W.~V.}\ \bibnamefont {Oz}}\ and\ \bibinfo
-  {editor} {\bibfnamefont {M.}~\bibnamefont {Yannakakis}},\ eds.,\ \href@noop
-  {} {\emph {\bibinfo {title} {Proc. Fifteenth Annual}}},\ \bibinfo {series}
-  {All ACM Conferences}\ No.~\bibinfo {number} {17},\ \bibinfo {organization}
-  {ACM}\ (\bibinfo  {publisher} {Academic Press},\ \bibinfo {address}
-  {Boston},\ \bibinfo {year} {1983})\ \bibinfo {note} {a full PROCEEDINGS
-  entry}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Burstyn}(2004)}]{Burstyn2004}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Guenneau}}\ and\ \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont
+  {Zolla}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Homogenization of
+  {Three}-{Dimensional} {Finite} {Photonic} {Crystals}},}\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {Journal of Electromagnetic Waves
+  and Applications}\ }\textbf {\bibinfo {volume} {14}},\ \bibinfo {pages}
+  {529--530} (\bibinfo {year} {2000})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zhou}\ \emph {et~al.}(2008)\citenamefont {Zhou},
+  \citenamefont {Boggs}, \citenamefont {Ramprasad}, \citenamefont {Aindow},
+  \citenamefont {Erkey},\ and\ \citenamefont {Alpay}}]{zhou_dielectric_2008}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
-  {Burstyn}},\ }\href@noop {} {\enquote {\bibinfo {title} {{Proceedings of the
-  5th International Molecular Beam Epitaxy Conference, Santa Fe, NM}},}\ }
-  (\bibinfo {year} {2004}),\ \bibinfo {note} {(unpublished)}\BibitemShut
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Zhou}}, \bibinfo {author} {\bibfnamefont {S.~A.}\ \bibnamefont {Boggs}},
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Ramprasad}}, \bibinfo
+  {author} {\bibfnamefont {M.}~\bibnamefont {Aindow}}, \bibinfo {author}
+  {\bibfnamefont {C.}~\bibnamefont {Erkey}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {S.~P.}\ \bibnamefont {Alpay}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {Dielectric response and tunability of a
+  dielectric-paraelectric composite},}\ }\href@noop {} {\bibfield  {journal}
+  {\bibinfo  {journal} {Applied Physics Letters}\ }\textbf {\bibinfo {volume}
+  {93}},\ \bibinfo {pages} {102908} (\bibinfo {year} {2008})}\BibitemShut
   {NoStop}%
-\bibitem [{\citenamefont {Quinn}(2001)}]{Quinn2001}%
+\bibitem [{\citenamefont {Krowne}\ \emph {et~al.}(2002)\citenamefont {Krowne},
+  \citenamefont {Daniel}, \citenamefont {Kirchoefer},\ and\ \citenamefont
+  {Pond}}]{krowne_anisotropic_2002}%
   \BibitemOpen
-  \bibinfo {editor} {\bibfnamefont {B.}~\bibnamefont {Quinn}},\ ed.,\
-  \href@noop {} {\emph {\bibinfo {title} {{Proceedings of the 2003 Particle
-  Accelerator Conference, Portland, OR, 12-16 May 2005}}}}\ (\bibinfo
-  {publisher} {Wiley},\ \bibinfo {address} {New York},\ \bibinfo {year}
-  {2001})\ \bibinfo {note} {albeit the conference was held in 2005, it was the
-  2003 conference, and the proceedings were published in 2001; go
-  figure}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Agarwal}(2001)}]{Agarwal2001}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.~G.}\ \bibnamefont
-  {Agarwal}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {{Proceedings of
-  the Fifth Low Temperature Conference, Madison, WI, 1999}},}\ }\href@noop {}
-  {\bibfield  {journal} {\bibinfo  {journal} {Semiconductors}\ }\textbf
-  {\bibinfo {volume} {66}},\ \bibinfo {pages} {1238} (\bibinfo {year}
-  {2001})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Smith}()}]{SmithDA01}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
-  {Smith}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Hummingbirds are
-  our friends},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {J.
-  Appl. Phys. (these proceedings)}\ }}\bibinfo {note} {Abstract No.
-  DA-01}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Smith}(2007{\natexlab{b}})}]{Smith2007a}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
-  {Smith}},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {Proc.
-  SPIE}\ }\textbf {\bibinfo {volume} {124}},\ \bibinfo {pages} {367} (\bibinfo
-  {year} {2007}{\natexlab{b}})},\ \bibinfo {note} {required title is
-  missing}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {T{\'{e}}rrific}(1988)}]{techreport-full}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
-  {T{\'{e}}rrific}},\ }\href@noop {} {\enquote {\bibinfo {title} {An {$O(n \log
-  n / \! \log\log n)$} sorting algorithm},}\ }\bibinfo {type} {Wishful Research
-  Result}\ \bibinfo {number} {7}\ (\bibinfo  {institution} {Fanstord
-  University},\ \bibinfo {address} {Computer Science Department, Fanstord,
-  California},\ \bibinfo {year} {1988})\ \bibinfo {note} {a full TECHREPORT
-  entry}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Nelson}(1999{\natexlab{a}})}]{Nelson1999}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
-  {Nelson}},\ }\href@noop {} {}\bibinfo {type} {{TWI Report}}\ \bibinfo
-  {number} {666/1999}\ (\bibinfo {year} {Jan.~1999})\ \bibinfo {note} {required
-  institution missing}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Fields}(2005)}]{Fields2005}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.~K.}\ \bibnamefont
-  {Fields}},\ }\href@noop {} {}\bibinfo {type} {{ECE Report No.}}\ \bibinfo
-  {number} {AL944}\ (\bibinfo {year} {2005})\ \bibinfo {note} {required
-  institution missing}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Zalkins}(2008)}]{Zalkins2008}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.~M.}\ \bibnamefont
-  {Zalkins}},\ }\href@noop {} {}\bibinfo {howpublished} {e-print
-  arXiv:cond-mat/040426} (\bibinfo {year} {2008})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Nelson}(2005)}]{Nelson2005}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
-  {Nelson}},\ }\href@noop {} {}\bibinfo {howpublished} {{U.S. Patent No.}
-  5,693,000} (\bibinfo {year} {12~Dec.~2005})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Nelson}(1999{\natexlab{b}})}]{Nelson1999a}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~K.}\ \bibnamefont
-  {Nelson}},\ }\href@noop {} {\bibinfo {type} {M.{S}. thesis}},\ \bibinfo
-  {school} {New York University} (\bibinfo {year}
-  {1999}{\natexlab{b}})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Masterly}(1988)}]{mastersthesis-full}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {{\'{E}}.}~\bibnamefont
-  {Masterly}},\ }\emph {\bibinfo {title} {Mastering Thesis Writing}},\
-  \href@noop {} {\bibinfo {type} {Master's project}},\ \bibinfo  {school}
-  {Stanford University}, \bibinfo {address} {English Department} (\bibinfo
-  {year} {1988}),\ \bibinfo {note} {a full MASTERSTHESIS entry}\BibitemShut
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.~M.}\ \bibnamefont
+  {Krowne}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Daniel}},
+  \bibinfo {author} {\bibfnamefont {S.~W.}\ \bibnamefont {Kirchoefer}}, \ and\
+  \bibinfo {author} {\bibfnamefont {J.~A.}\ \bibnamefont {Pond}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Anisotropic permittivity and attenuation
+  extraction from propagation constant measurements using an anisotropic
+  full-wave {Green}'s function solver for coplanar ferroelectric thin-film
+  devices},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {IEEE
+  Transactions on Microwave Theory and Techniques}\ }\textbf {\bibinfo {volume}
+  {50}},\ \bibinfo {pages} {537--548} (\bibinfo {year} {2002})}\BibitemShut
   {NoStop}%
-\bibitem [{\citenamefont {Smith}(2003)}]{Smith2003}%
+\bibitem [{\citenamefont {Dular}\ \emph {et~al.}(1998)\citenamefont {Dular},
+  \citenamefont {Geuzaine}, \citenamefont {Henrotte},\ and\ \citenamefont
+  {Legros}}]{dular_general_1998}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.~M.}\ \bibnamefont
-  {Smith}},\ }\href@noop {} {\bibinfo {type} {{Ph.D.} thesis}},\ \bibinfo
-  {school} {Massachusetts Institute of Technology} (\bibinfo {year}
-  {2003})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Kawa}\ and\ \citenamefont {Lin}(2003)}]{KawaLin2003}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
+  {Dular}}, \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont {Geuzaine}},
+  \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Henrotte}}, \ and\
+  \bibinfo {author} {\bibfnamefont {W.}~\bibnamefont {Legros}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {A general environment for the treatment
+  of discrete problems and its application to the finite element method},}\
+  }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {IEEE Transactions
+  on Magnetics}\ }\textbf {\bibinfo {volume} {34}},\ \bibinfo {pages}
+  {3395--3398} (\bibinfo {year} {1998})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Amestoy}\ \emph {et~al.}(2001)\citenamefont
+  {Amestoy}, \citenamefont {Duff}, \citenamefont {Koster},\ and\ \citenamefont
+  {L'Excellent}}]{amestoy_fully_2001}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.~R.}\ \bibnamefont
-  {Kawa}}\ and\ \bibinfo {author} {\bibfnamefont {S.-J.}\ \bibnamefont {Lin}},\
-  }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {J. Geophys. Res.}\
-  }\textbf {\bibinfo {volume} {108}},\ \bibinfo {pages} {4201} (\bibinfo {year}
-  {2003})},\ \bibinfo {note} {{DOI:10.1029/2002JD002268}}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Phony-Baloney}(1988)}]{phdthesis-full}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.~R.}\ \bibnamefont
+  {Amestoy}}, \bibinfo {author} {\bibfnamefont {I.~S.}\ \bibnamefont {Duff}},
+  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Koster}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {J.-Y.}\ \bibnamefont {L'Excellent}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {A {Fully} {Asynchronous} {Multifrontal}
+  {Solver} {Using} {Distributed} {Dynamic} {Scheduling}},}\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {SIAM Journal on Matrix Analysis
+  and Applications}\ }\textbf {\bibinfo {volume} {23}},\ \bibinfo {pages}
+  {15--41} (\bibinfo {year} {2001})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Vendik}\ \emph {et~al.}(1999)\citenamefont {Vendik},
+  \citenamefont {Hollmann}, \citenamefont {Kozyrev},\ and\ \citenamefont
+  {Prudan}}]{vendik_ferroelectric_1999}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {F.~P.}\ \bibnamefont
-  {Phony-Baloney}},\ }\emph {\bibinfo {title} {Fighting Fire with Fire:
-  Festooning {F}rench Phrases}},\ \href@noop {} {\bibinfo {type} {{PhD}
-  dissertation}},\ \bibinfo  {school} {Fanstord University}, \bibinfo {address}
-  {Department of French} (\bibinfo {year} {1988}),\ \bibinfo {note} {a full
-  PHDTHESIS entry}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Knuth}(1981)}]{book-full}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {O.}~\bibnamefont
+  {Vendik}}, \bibinfo {author} {\bibfnamefont {E.}~\bibnamefont {Hollmann}},
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Kozyrev}}, \ and\
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Prudan}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Ferroelectric tuning of planar and bulk
+  microwave devices},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of Superconductivity}\ }\textbf {\bibinfo {volume} {12}},\
+  \bibinfo {pages} {325--338} (\bibinfo {year} {1999})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Lancaster}, \citenamefont {Powell},\ and\
+  \citenamefont {Porch}(1998)}]{lancaster_thin-film_1998}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.~E.}\ \bibnamefont
-  {Knuth}},\ }\href@noop {} {\emph {\bibinfo {title} {Seminumerical
-  Algorithms}}},\ \bibinfo {edition} {2nd}\ ed.,\ \bibinfo {series} {The Art of
-  Computer Programming}, Vol.~\bibinfo {volume} {2}\ (\bibinfo  {publisher}
-  {Addison-Wesley},\ \bibinfo {address} {Reading, Massachusetts},\ \bibinfo
-  {year} {\noopsort{1973c}1981})\ \bibinfo {note} {a full BOOK
-  entry}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Knvth}(1988)}]{booklet-full}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
+  {Lancaster}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Powell}}, \
+  and\ \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Porch}},\ }\bibfield
+   {title} {\enquote {\bibinfo {title} {Thin-film ferroelectric microwave
+  devices},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
+  {Superconductor Science and Technology}\ }\textbf {\bibinfo {volume} {11}},\
+  \bibinfo {pages} {1323} (\bibinfo {year} {1998})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Xi}\ \emph {et~al.}(2000)\citenamefont {Xi},
+  \citenamefont {Li}, \citenamefont {Si}, \citenamefont {Sirenko},
+  \citenamefont {Akimov}, \citenamefont {Fox}, \citenamefont {Clark},\ and\
+  \citenamefont {Hao}}]{xi_oxide_2000}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~C.}\ \bibnamefont
-  {Knvth}},\ }\href@noop {} {\enquote {\bibinfo {title} {The programming of
-  computer art},}\ }\bibinfo {howpublished} {Vernier Art Center},\ \bibinfo
-  {address} {Stanford, California} (\bibinfo {year} {1988}),\ \bibinfo {note}
-  {a full BOOKLET entry}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Ballagh}\ and\ \citenamefont
-  {Savage}(2000{\natexlab{a}})}]{ballagh2000}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {X.}~\bibnamefont
+  {Xi}}, \bibinfo {author} {\bibfnamefont {H.-C.}\ \bibnamefont {Li}}, \bibinfo
+  {author} {\bibfnamefont {W.}~\bibnamefont {Si}}, \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Sirenko}}, \bibinfo {author} {\bibfnamefont
+  {I.}~\bibnamefont {Akimov}}, \bibinfo {author} {\bibfnamefont
+  {J.}~\bibnamefont {Fox}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Clark}}, \ and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Hao}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Oxide thin films for tunable
+  microwave devices},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of Electroceramics}\ }\textbf {\bibinfo {volume} {4}},\
+  \bibinfo {pages} {393--405} (\bibinfo {year} {2000})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hand}\ and\ \citenamefont
+  {Cummer}(2008)}]{hand_frequency_2008}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
-  {Ballagh}}\ and\ \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
-  {Savage}},\ }\enquote {\bibinfo {title} {Bose-einstein condensation: from
-  atomic physics to quantum fluids, proceedings of the 13th physics summer
-  school},}\ \ (\bibinfo  {publisher} {World Scientific},\ \bibinfo {address}
-  {Singapore},\ \bibinfo {year} {2000})\ \Eprint
-  {http://arxiv.org/abs/cond-mat/0008070} {cond-mat/0008070} \BibitemShut
-  {NoStop}%
-\bibitem [{\citenamefont {Opechowski}\ and\ \citenamefont
-  {Guccione}()}]{Magnetism}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.~H.}\ \bibnamefont
+  {Hand}}\ and\ \bibinfo {author} {\bibfnamefont {S.~A.}\ \bibnamefont
+  {Cummer}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Frequency
+  tunable electromagnetic metamaterial using ferroelectric loaded split
+  rings},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {Journal
+  of Applied Physics}\ }\textbf {\bibinfo {volume} {103}},\ \bibinfo {pages}
+  {066105} (\bibinfo {year} {2008})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zhao}\ \emph {et~al.}(2008)\citenamefont {Zhao},
+  \citenamefont {Kang}, \citenamefont {Zhou}, \citenamefont {Zhao},
+  \citenamefont {Li}, \citenamefont {Peng},\ and\ \citenamefont
+  {Bai}}]{zhao_experimental_2008}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.}~\bibnamefont
-  {Opechowski}}\ and\ \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
-  {Guccione}},\ }\enquote {\bibinfo {title} {Introduction to the theory of
-  normal metals},}\ in\ \href@noop {} {\emph {\bibinfo {booktitle}
-  {Magnetism}}},\ Vol.\ \bibinfo {volume} {IIa},\ \bibinfo {editor} {edited by\
-  \bibinfo {editor} {\bibfnamefont {G.~T.}\ \bibnamefont {Rado}}\ and\ \bibinfo
-  {editor} {\bibfnamefont {H.}~\bibnamefont {Suhl}}}\ (\bibinfo  {publisher}
-  {Academic Press},\ \bibinfo {address} {New York})\ p.\ \bibinfo {pages}
-  {105}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Opechowski}\ and\ \citenamefont
-  {Guccione}(1965{\natexlab{a}})}]{Magnetismb}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {H.}~\bibnamefont
+  {Zhao}}, \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Kang}}, \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Zhou}}, \bibinfo {author}
+  {\bibfnamefont {Q.}~\bibnamefont {Zhao}}, \bibinfo {author} {\bibfnamefont
+  {L.}~\bibnamefont {Li}}, \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
+  {Peng}}, \ and\ \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont {Bai}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Experimental demonstration
+  of tunable negative phase velocity and negative refraction in a
+  ferromagnetic/ferroelectric composite metamaterial},}\ }\href@noop {}
+  {\bibfield  {journal} {\bibinfo  {journal} {Applied Physics Letters}\
+  }\textbf {\bibinfo {volume} {93}},\ \bibinfo {pages} {201106} (\bibinfo
+  {year} {2008})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Sherman}\ \emph {et~al.}(2006)\citenamefont
+  {Sherman}, \citenamefont {Tagantsev}, \citenamefont {Setter}, \citenamefont
+  {Iddles},\ and\ \citenamefont
+  {Price}}]{sherman_ferroelectric-dielectric_2006}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.}~\bibnamefont
-  {Opechowski}}\ and\ \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
-  {Guccione}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Introduction
-  to the theory of normal metals},}\ }in\ \href@noop {} {\emph {\bibinfo
-  {booktitle} {Magnetism}}},\ Vol.\ \bibinfo {volume} {IIa},\ \bibinfo {editor}
-  {edited by\ \bibinfo {editor} {\bibfnamefont {G.~T.}\ \bibnamefont {Rado}}\
-  and\ \bibinfo {editor} {\bibfnamefont {H.}~\bibnamefont {Suhl}}}\ (\bibinfo
-  {publisher} {Academic Press},\ \bibinfo {address} {New York},\ \bibinfo
-  {year} {1965})\ p.\ \bibinfo {pages} {105}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Smith}(1980{\natexlab{a}})}]{Smith80}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~M.}\ \bibnamefont
-  {Smith}},\ }\enquote {\bibinfo {title} {Molecular dynamics},}\ \ (\bibinfo
-  {publisher} {Academic},\ \bibinfo {address} {New York},\ \bibinfo {year}
-  {1980})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Zakharov}\ and\ \citenamefont {Shabat}(1971)}]{ZS71}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {V.~E.}\ \bibnamefont
-  {Zakharov}}\ and\ \bibinfo {author} {\bibfnamefont {A.~B.}\ \bibnamefont
-  {Shabat}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Exact theory of
-  two-dimensional self-focusing and one-dimensional self-modulation of waves in
-  nonlinear media},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
-  {Zh. Eksp. Teor. Fiz.}\ }\textbf {\bibinfo {volume} {61}},\ \bibinfo {pages}
-  {118--134} (\bibinfo {year} {1971})},\ \translation{Sov. Phys. JETP
-  \textbf{34}, 62 (1972)}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Beutler}(1994{\natexlab{b}})}]{Beutler1994a}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {E.}~\bibnamefont
-  {Beutler}},\ }in\ \href@noop {} {\emph {\bibinfo {booktitle} {Williams
-  Hematology}}},\ Vol.~\bibinfo {volume} {2},\ \bibinfo {editor} {edited by\
-  \bibinfo {editor} {\bibfnamefont {E.}~\bibnamefont {Beutler}}, \bibinfo
-  {editor} {\bibfnamefont {M.~A.}\ \bibnamefont {Lichtman}}, \bibinfo {editor}
-  {\bibfnamefont {B.~W.}\ \bibnamefont {Coller}}, \ and\ \bibinfo {editor}
-  {\bibfnamefont {T.~S.}\ \bibnamefont {Kipps}}}\ (\bibinfo  {publisher}
-  {McGraw-Hill},\ \bibinfo {address} {New York},\ \bibinfo {year} {1994})\
-  \bibinfo {edition} {5th}\ ed.,\ Chap.~\bibinfo {chapter} {7}, pp.\ \bibinfo
-  {pages} {654--662}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Ballagh}\ and\ \citenamefont
-  {Savage}(2000{\natexlab{b}})}]{ballagh2000a}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
-  {Ballagh}}\ and\ \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
-  {Savage}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Bose-einstein
-  condensation: from atomic physics to quantum fluids},}\ }in\ \href@noop {}
-  {\emph {\bibinfo {booktitle} {Proceedings of the 13th Physics Summer
-  School}}},\ \bibinfo {editor} {edited by\ \bibinfo {editor} {\bibfnamefont
-  {C.}~\bibnamefont {Savage}}\ and\ \bibinfo {editor} {\bibfnamefont
-  {M.}~\bibnamefont {Das}}}\ (\bibinfo  {publisher} {World Scientific},\
-  \bibinfo {address} {Singapore},\ \bibinfo {year} {2000})\ \Eprint
-  {http://arxiv.org/abs/cond-mat/0008070} {cond-mat/0008070} \BibitemShut
-  {NoStop}%
-\bibitem [{\citenamefont {Opechowski}\ and\ \citenamefont
-  {Guccione}(1965{\natexlab{b}})}]{Magnetisma}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.}~\bibnamefont
-  {Opechowski}}\ and\ \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
-  {Guccione}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Introduction
-  to the theory of normal metals},}\ }in\ \href@noop {} {\emph {\bibinfo
-  {booktitle} {Magnetism}}},\ Vol.\ \bibinfo {volume} {IIa},\ \bibinfo {editor}
-  {edited by\ \bibinfo {editor} {\bibfnamefont {G.~T.}\ \bibnamefont {Rado}}\
-  and\ \bibinfo {editor} {\bibfnamefont {H.}~\bibnamefont {Suhl}}}\ (\bibinfo
-  {publisher} {Academic Press},\ \bibinfo {address} {New York},\ \bibinfo
-  {year} {1965})\ p.\ \bibinfo {pages} {105}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Smith}(1980{\natexlab{b}})}]{Smith80a}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~M.}\ \bibnamefont
-  {Smith}},\ }in\ \href@noop {} {\emph {\bibinfo {booktitle} {Molecular
-  Dynamics}}},\ \bibinfo {editor} {edited by\ \bibinfo {editor} {\bibfnamefont
-  {C.}~\bibnamefont {Brown}}}\ (\bibinfo  {publisher} {Academic},\ \bibinfo
-  {address} {New York},\ \bibinfo {year} {1980})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Lincoll}(1977)}]{incollection-full}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.~D.}\ \bibnamefont
-  {Lincoll}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Semigroups of
-  recurrences},}\ }in\ \href@noop {} {\emph {\bibinfo {booktitle} {High Speed
-  Computer and Algorithm Organization}}},\ \bibinfo {series and number}
-  {\bibinfo {series} {Fast Computers}\ No.~\bibinfo {number} {23}},\ \bibinfo
-  {editor} {edited by\ \bibinfo {editor} {\bibfnamefont {D.~J.}\ \bibnamefont
-  {Lipcoll}}, \bibinfo {editor} {\bibfnamefont {D.~H.}\ \bibnamefont {Lawrie}},
-  \ and\ \bibinfo {editor} {\bibfnamefont {A.~H.}\ \bibnamefont {Sameh}}}\
-  (\bibinfo  {publisher} {Academic Press},\ \bibinfo {address} {New York},\
-  \bibinfo {year} {1977})\ \bibinfo {edition} {3rd}\ ed.,\ \bibinfo {type}
-  {Part}~\bibinfo {chapter} {3}, pp.\ \bibinfo {pages} {179--183},\ \bibinfo
-  {note} {a full INCOLLECTION entry}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Oaho}, \citenamefont {Ullman},\ and\ \citenamefont
-  {Yannakakis}(1983)}]{inproceedings-full}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.~V.}\ \bibnamefont
-  {Oaho}}, \bibinfo {author} {\bibfnamefont {J.~D.}\ \bibnamefont {Ullman}}, \
-  and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Yannakakis}},\
-  }\bibfield  {title} {\enquote {\bibinfo {title} {On notions of information
-  transfer in {VLSI} circuits},}\ }in\ \href@noop {} {\emph {\bibinfo
-  {booktitle} {Proc. Fifteenth Annual ACM}}},\ \bibinfo {series and number}
-  {\bibinfo {series} {All ACM Conferences}\ No.~\bibinfo {number} {17}},\
-  \bibinfo {editor} {edited by\ \bibinfo {editor} {\bibfnamefont {W.~V.}\
-  \bibnamefont {Oz}}\ and\ \bibinfo {editor} {\bibfnamefont {M.}~\bibnamefont
-  {Yannakakis}}},\ \bibinfo {organization} {ACM}\ (\bibinfo  {publisher}
-  {Academic Press},\ \bibinfo {address} {Boston},\ \bibinfo {year} {1983})\
-  pp.\ \bibinfo {pages} {133--139},\ \bibinfo {note} {a full INPROCEDINGS
-  entry}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Manmaker}(1986)}]{manual-full}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {V.~O.}\ \bibnamefont
+  {Sherman}}, \bibinfo {author} {\bibfnamefont {A.~K.}\ \bibnamefont
+  {Tagantsev}}, \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont {Setter}},
+  \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Iddles}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {T.}~\bibnamefont {Price}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Ferroelectric-dielectric tunable composites},}\
+  }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {Journal of Applied
+  Physics}\ }\textbf {\bibinfo {volume} {99}},\ \bibinfo {pages} {074104}
+  (\bibinfo {year} {2006})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Jylha}\ and\ \citenamefont
+  {Sihvola}(2008)}]{jylha_tunability_2008}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
-  {Manmaker}},\ }\href@noop {} {\emph {\bibinfo {title} {The Definitive
-  Computer Manual}}},\ \bibinfo {organization} {Chips-R-Us},\ \bibinfo
-  {address} {Silicon Valley},\ \bibinfo {edition} {silver}\ ed. (\bibinfo
-  {year} {1986}),\ \bibinfo {note} {a full MANUAL entry}\BibitemShut {NoStop}%
+  {Jylha}}\ and\ \bibinfo {author} {\bibfnamefont {A.~H.}\ \bibnamefont
+  {Sihvola}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Tunability of
+  granular ferroelectric dielectric composites},}\ }\href@noop {} {\bibfield
+  {journal} {\bibinfo  {journal} {Progress in Electromagnetics Research}\
+  }\textbf {\bibinfo {volume} {78}},\ \bibinfo {pages} {189--207} (\bibinfo
+  {year} {2008})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Sherman}, \citenamefont {Tagantsev},\ and\
+  \citenamefont {Setter}(2004)}]{sherman_tunability_2004}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {V.~O.}\ \bibnamefont
+  {Sherman}}, \bibinfo {author} {\bibfnamefont {A.~K.}\ \bibnamefont
+  {Tagantsev}}, \ and\ \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
+  {Setter}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Tunability and
+  loss of the ferroelectric-dielectric composites},}\ }in\ \href@noop {} {\emph
+  {\bibinfo {booktitle} {14th {IEEE} {International} {Symposium} on
+  {Applications} of {Ferroelectrics}, 2004. {ISAF}-04. 2004}}}\ (\bibinfo
+  {year} {2004})\ pp.\ \bibinfo {pages} {33--38}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Astafiev}\ \emph {et~al.}(2003)\citenamefont
+  {Astafiev}, \citenamefont {Sherman}, \citenamefont {Tagantsev},\ and\
+  \citenamefont {Setter}}]{astafiev_can_2003}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.~F.}\ \bibnamefont
+  {Astafiev}}, \bibinfo {author} {\bibfnamefont {V.~O.}\ \bibnamefont
+  {Sherman}}, \bibinfo {author} {\bibfnamefont {A.~K.}\ \bibnamefont
+  {Tagantsev}}, \ and\ \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
+  {Setter}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Can the addition
+  of a dielectric improve the figure of merit of a tunable material?}}\
+  }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {Journal of the
+  European Ceramic Society}\ }\textbf {\bibinfo {volume} {23}},\ \bibinfo
+  {pages} {2381 -- 2386} (\bibinfo {year} {2003})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Padurariu}\ \emph
+  {et~al.}(2012{\natexlab{a}})\citenamefont {Padurariu}, \citenamefont
+  {Curecheriu}, \citenamefont {Galassi},\ and\ \citenamefont
+  {Mitoseriu}}]{padurariu_tailoring_2012}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
+  {Padurariu}}, \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
+  {Curecheriu}}, \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont {Galassi}},
+  \ and\ \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Mitoseriu}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Tailoring non-linear
+  dielectric properties by local field engineering in anisotropic porous
+  ferroelectric structures},}\ }\href {\doibase 10.1063/1.4729878} {\bibfield
+  {journal} {\bibinfo  {journal} {Appl. Phys. Lett.}\ }\textbf {\bibinfo
+  {volume} {100}},\ \bibinfo {pages} {252905} (\bibinfo {year}
+  {2012}{\natexlab{a}})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Landau}\ \emph {et~al.}(2013)\citenamefont {Landau},
+  \citenamefont {Bell}, \citenamefont {Kearsley}, \citenamefont {Pitaevskii},
+  \citenamefont {Lifshitz},\ and\ \citenamefont
+  {Sykes}}]{landau_electrodynamics_2013}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.~D.}\ \bibnamefont
+  {Landau}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Bell}},
+  \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Kearsley}}, \bibinfo
+  {author} {\bibfnamefont {L.}~\bibnamefont {Pitaevskii}}, \bibinfo {author}
+  {\bibfnamefont {E.}~\bibnamefont {Lifshitz}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Sykes}},\ }\href@noop {} {\emph {\bibinfo
+  {title} {Electrodynamics of continuous media}}},\ Vol.~\bibinfo {volume} {8}\
+  (\bibinfo  {publisher} {elsevier},\ \bibinfo {year} {2013})\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Murzina}\ \emph {et~al.}(2007)\citenamefont
+  {Murzina}, \citenamefont {Sychev}, \citenamefont {Kolmychek},\ and\
+  \citenamefont {Aktsipetrov}}]{murzina_tunable_2007}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.~V.}\ \bibnamefont
+  {Murzina}}, \bibinfo {author} {\bibfnamefont {F.~Y.}\ \bibnamefont {Sychev}},
+  \bibinfo {author} {\bibfnamefont {I.~A.}\ \bibnamefont {Kolmychek}}, \ and\
+  \bibinfo {author} {\bibfnamefont {O.~A.}\ \bibnamefont {Aktsipetrov}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Tunable ferroelectric
+  photonic crystals based on porous silicon templates infiltrated by sodium
+  nitrite},}\ }\href {\doibase 10.1063/1.2724928} {\bibfield  {journal}
+  {\bibinfo  {journal} {Appl. Phys. Lett.}\ }\textbf {\bibinfo {volume} {90}},\
+  \bibinfo {pages} {161120} (\bibinfo {year} {2007})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zhang}\ \emph {et~al.}(2008)\citenamefont {Zhang},
+  \citenamefont {Wang}, \citenamefont {Wang}, \citenamefont {Wang},\ and\
+  \citenamefont {Dong}}]{zhang_model_2008}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Zhang}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Wang}},
+  \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Wang}}, \bibinfo {author}
+  {\bibfnamefont {Y.}~\bibnamefont {Wang}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {X.}~\bibnamefont {Dong}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {The model of electric field dependent dielectric
+  properties for porous ceramics},}\ }\href {\doibase 10.1063/1.2937196}
+  {\bibfield  {journal} {\bibinfo  {journal} {Journal of Applied Physics}\
+  }\textbf {\bibinfo {volume} {103}},\ \bibinfo {pages} {114103} (\bibinfo
+  {year} {2008})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zhang}\ \emph {et~al.}(2007)\citenamefont {Zhang},
+  \citenamefont {Wang}, \citenamefont {Zeng}, \citenamefont {Liang},\ and\
+  \citenamefont {Dong}}]{zhang_electric_2007}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Zhang}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Wang}},
+  \bibinfo {author} {\bibfnamefont {T.}~\bibnamefont {Zeng}}, \bibinfo {author}
+  {\bibfnamefont {R.}~\bibnamefont {Liang}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {X.}~\bibnamefont {Dong}},\ }\bibfield  {title}
+  {{\selectlanguage {en}\enquote {\bibinfo {title} {Electric
+  {Field}-{Dependent} {Dielectric} {Properties} and {High} {Tunability} of
+  {Porous} {Ba}0.5sr0.5tio3 {Ceramics}},}\ }}\href {\doibase
+  10.1111/j.1551-2916.2007.01526.x} {\bibfield  {journal} {\bibinfo  {journal}
+  {Journal of the American Ceramic Society}\ }\textbf {\bibinfo {volume}
+  {90}},\ \bibinfo {pages} {1327--1330} (\bibinfo {year} {2007})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Wersing}, \citenamefont {Lubitz},\ and\ \citenamefont
+  {Mohaupt}(1986)}]{wersing_dielectric_1986}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.}~\bibnamefont
+  {Wersing}}, \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Lubitz}}, \
+  and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Mohaupt}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Dielectric, elastic and
+  piezoelectric properties of porous pzt ceramics},}\ }\href {\doibase
+  10.1080/00150198608238739} {\bibfield  {journal} {\bibinfo  {journal}
+  {Ferroelectrics}\ }\textbf {\bibinfo {volume} {68}},\ \bibinfo {pages}
+  {77--97} (\bibinfo {year} {1986})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Okazaki}\ and\ \citenamefont
+  {Nagata}(1973)}]{okazaki_effects_1973}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Okazaki}}\ and\ \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Nagata}},\ }\bibfield  {title} {{\selectlanguage {en}\enquote {\bibinfo
+  {title} {Effects of {Grain} {Size} and {Porosity} on {Electrical} and
+  {Optical} {Properties} of {PLZT} {Ceramics}},}\ }}\href {\doibase
+  10.1111/j.1151-2916.1973.tb12363.x} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of the American Ceramic Society}\ }\textbf {\bibinfo
+  {volume} {56}},\ \bibinfo {pages} {82--86} (\bibinfo {year}
+  {1973})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Johnson}(1962)}]{johnson_variation_1962}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.~M.}\ \bibnamefont
+  {Johnson}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Variation of
+  {Dielectric} {Constant} with {Voltage} in {Ferroelectrics} and {Its}
+  {Application} to {Parametric} {Devices}},}\ }\href {\doibase
+  10.1063/1.1702558} {\bibfield  {journal} {\bibinfo  {journal} {Journal of
+  Applied Physics}\ }\textbf {\bibinfo {volume} {33}},\ \bibinfo {pages}
+  {2826--2831} (\bibinfo {year} {1962})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Wong}, \citenamefont {Poon},\ and\ \citenamefont
+  {Shin}(2002)}]{wong_explicit_2002}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.~K.}\ \bibnamefont
+  {Wong}}, \bibinfo {author} {\bibfnamefont {Y.~M.}\ \bibnamefont {Poon}}, \
+  and\ \bibinfo {author} {\bibfnamefont {F.~G.}\ \bibnamefont {Shin}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Explicit formulas for
+  effective piezoelectric coefficients of ferroelectric 0–3 composites based
+  on effective medium theory},}\ }\href {\doibase 10.1063/1.1524720} {\bibfield
+   {journal} {\bibinfo  {journal} {Journal of Applied Physics}\ }\textbf
+  {\bibinfo {volume} {93}},\ \bibinfo {pages} {487--496} (\bibinfo {year}
+  {2002})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Wong}, \citenamefont {Poon},\ and\ \citenamefont
+  {Shin}(2001)}]{wong_explicit_2001}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.~K.}\ \bibnamefont
+  {Wong}}, \bibinfo {author} {\bibfnamefont {Y.~M.}\ \bibnamefont {Poon}}, \
+  and\ \bibinfo {author} {\bibfnamefont {F.~G.}\ \bibnamefont {Shin}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Explicit formulas for
+  effective piezoelectric coefficients of ferroelectric 0-3 composites},}\
+  }\href {\doibase 10.1063/1.1408595} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of Applied Physics}\ }\textbf {\bibinfo {volume} {90}},\
+  \bibinfo {pages} {4690--4700} (\bibinfo {year} {2001})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Stanculescu}\ \emph {et~al.}(2015)\citenamefont
+  {Stanculescu}, \citenamefont {Ciomaga}, \citenamefont {Padurariu},
+  \citenamefont {Galizia}, \citenamefont {Horchidan}, \citenamefont {Capiani},
+  \citenamefont {Galassi},\ and\ \citenamefont
+  {Mitoseriu}}]{stanculescu_study_2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Stanculescu}}, \bibinfo {author} {\bibfnamefont {C.~E.}\ \bibnamefont
+  {Ciomaga}}, \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Padurariu}},
+  \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont {Galizia}}, \bibinfo
+  {author} {\bibfnamefont {N.}~\bibnamefont {Horchidan}}, \bibinfo {author}
+  {\bibfnamefont {C.}~\bibnamefont {Capiani}}, \bibinfo {author} {\bibfnamefont
+  {C.}~\bibnamefont {Galassi}}, \ and\ \bibinfo {author} {\bibfnamefont
+  {L.}~\bibnamefont {Mitoseriu}},\ }\bibfield  {title} {\enquote {\bibinfo
+  {title} {Study of the role of porosity on the functional properties of
+  ({Ba},{Sr}){TiO}3 ceramics},}\ }\href {\doibase
+  10.1016/j.jallcom.2015.03.252} {\bibfield  {journal} {\bibinfo  {journal}
+  {Journal of Alloys and Compounds}\ }\textbf {\bibinfo {volume} {643}},\
+  \bibinfo {pages} {79--87} (\bibinfo {year} {2015})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zimmermann}\ \emph {et~al.}(2004)\citenamefont
+  {Zimmermann}, \citenamefont {Voigts}, \citenamefont {Menesklou},\ and\
+  \citenamefont {Ivers-Tiffée}}]{zimmermann_ba0.6sr0.4tio3_2004}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {F.}~\bibnamefont
+  {Zimmermann}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Voigts}},
+  \bibinfo {author} {\bibfnamefont {W.}~\bibnamefont {Menesklou}}, \ and\
+  \bibinfo {author} {\bibfnamefont {E.}~\bibnamefont {Ivers-Tiffée}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Ba0.6sr0.4tio3 and
+  {BaZr}0.3ti0.7o3 thick films as tunable microwave dielectrics},}\ }\href
+  {\doibase 10.1016/S0955-2219(03)00481-3} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of the European Ceramic Society}\ }\bibinfo {series}
+  {Electroceramics {VIII}},\ \textbf {\bibinfo {volume} {24}},\ \bibinfo
+  {pages} {1729--1733} (\bibinfo {year} {2004})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Cazacu}\ \emph {et~al.}(2013)\citenamefont {Cazacu},
+  \citenamefont {Curecheriu}, \citenamefont {Neagu}, \citenamefont {Padurariu},
+  \citenamefont {Cernescu}, \citenamefont {Lisiecki},\ and\ \citenamefont
+  {Mitoseriu}}]{cazacu_tunable_2013}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Cazacu}}, \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Curecheriu}},
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Neagu}}, \bibinfo
+  {author} {\bibfnamefont {L.}~\bibnamefont {Padurariu}}, \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Cernescu}}, \bibinfo {author}
+  {\bibfnamefont {I.}~\bibnamefont {Lisiecki}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {L.}~\bibnamefont {Mitoseriu}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {Tunable gold-chitosan nanocomposites by local field
+  engineering},}\ }\href {\doibase 10.1063/1.4809673} {\bibfield  {journal}
+  {\bibinfo  {journal} {Appl. Phys. Lett.}\ }\textbf {\bibinfo {volume}
+  {102}},\ \bibinfo {pages} {222903} (\bibinfo {year} {2013})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Padurariu}\ \emph
+  {et~al.}(2012{\natexlab{b}})\citenamefont {Padurariu}, \citenamefont
+  {Curecheriu}, \citenamefont {Buscaglia},\ and\ \citenamefont
+  {Mitoseriu}}]{padurariu_field-dependent_2012}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
+  {Padurariu}}, \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
+  {Curecheriu}}, \bibinfo {author} {\bibfnamefont {V.}~\bibnamefont
+  {Buscaglia}}, \ and\ \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
+  {Mitoseriu}},\ }\bibfield  {title} {\enquote {\bibinfo {title}
+  {Field-dependent permittivity in nanostructured {BaTiO}\$\{\}\_\{3\}\$
+  ceramics: {Modeling} and experimental verification},}\ }\href {\doibase
+  10.1103/PhysRevB.85.224111} {\bibfield  {journal} {\bibinfo  {journal} {Phys.
+  Rev. B}\ }\textbf {\bibinfo {volume} {85}},\ \bibinfo {pages} {224111}
+  (\bibinfo {year} {2012}{\natexlab{b}})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Geuzaine}\ and\ \citenamefont
+  {Remacle}(2009)}]{geuzaine_gmsh:_2009}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
+  {Geuzaine}}\ and\ \bibinfo {author} {\bibfnamefont {J.-F.}\ \bibnamefont
+  {Remacle}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Gmsh: {A} 3-{D}
+  finite element mesh generator with built-in pre- and post-processing
+  facilities},}\ }\href {\doibase 10.1002/nme.2579} {\bibfield  {journal}
+  {\bibinfo  {journal} {International Journal for Numerical Methods in
+  Engineering}\ }\textbf {\bibinfo {volume} {79}},\ \bibinfo {pages}
+  {1309--1331} (\bibinfo {year} {2009})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Tagantsev}\ \emph {et~al.}(2003)\citenamefont
+  {Tagantsev}, \citenamefont {Sherman}, \citenamefont {Astafiev}, \citenamefont
+  {Venkatesh},\ and\ \citenamefont {Setter}}]{tagantsev_ferroelectric_2003}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Tagantsev}}, \bibinfo {author} {\bibfnamefont {V.}~\bibnamefont {Sherman}},
+  \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Astafiev}}, \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Venkatesh}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {N.}~\bibnamefont {Setter}},\ }\bibfield  {title}
+  {{\selectlanguage {en}\enquote {\bibinfo {title} {Ferroelectric {Materials}
+  for {Microwave} {Tunable} {Applications}},}\ }}\href {\doibase
+  10.1023/B:JECR.0000015661.81386.e6} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of Electroceramics}\ }\textbf {\bibinfo {volume} {11}},\
+  \bibinfo {pages} {5--66} (\bibinfo {year} {2003})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {de~los Santos~Guerra}\ \emph
+  {et~al.}(2005)\citenamefont {de~los Santos~Guerra}, \citenamefont {Garcia},
+  \citenamefont {Eiras}, \citenamefont {Somiya}, \citenamefont {Cross},\ and\
+  \citenamefont {Bhalla}}]{de_los_santos_guerra_microwave_2005}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {de~los Santos~Guerra}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
+  {Garcia}}, \bibinfo {author} {\bibfnamefont {J.~A.}\ \bibnamefont {Eiras}},
+  \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont {Somiya}}, \bibinfo
+  {author} {\bibfnamefont {L.~E.}\ \bibnamefont {Cross}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {A.~S.}\ \bibnamefont {Bhalla}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Microwave dielectric response of
+  ({Sr}0.80pb0.20){TiO}3 based ferroelectric composites},}\ }\href {\doibase
+  10.1016/j.jeurceramsoc.2005.03.014} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of the European Ceramic Society}\ }\bibinfo {series}
+  {Elecroceramics {IX}},\ \textbf {\bibinfo {volume} {25}},\ \bibinfo {pages}
+  {2089--2092} (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Sengupta}\ and\ \citenamefont
+  {Sengupta}(1999)}]{sengupta_breakthrough_1999}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.~C.}\ \bibnamefont
+  {Sengupta}}\ and\ \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Sengupta}},\ }\bibfield  {title} {{\selectlanguage {en}\enquote {\bibinfo
+  {title} {Breakthrough advances in low loss, tunable dielectric materials},}\
+  }}\href {\doibase 10.1007/s100190050098} {\bibfield  {journal} {\bibinfo
+  {journal} {Mat Res Innovat}\ }\textbf {\bibinfo {volume} {2}},\ \bibinfo
+  {pages} {278--282} (\bibinfo {year} {1999})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hu}\ \emph {et~al.}(2015)\citenamefont {Hu},
+  \citenamefont {Gao}, \citenamefont {Kong}, \citenamefont {Yang},
+  \citenamefont {Zhang}, \citenamefont {Liu}, \citenamefont {Zhang},\ and\
+  \citenamefont {Sun}}]{hu_preparation_2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Hu}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Gao}}, \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Kong}}, \bibinfo {author}
+  {\bibfnamefont {S.}~\bibnamefont {Yang}}, \bibinfo {author} {\bibfnamefont
+  {Q.}~\bibnamefont {Zhang}}, \bibinfo {author} {\bibfnamefont
+  {Z.}~\bibnamefont {Liu}}, \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Zhang}}, \ and\ \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Sun}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Preparation and dielectric
+  properties of poly(vinylidene fluoride)/{Ba}0.6sr0.4tio3 composites},}\
+  }\href {\doibase 10.1016/j.jallcom.2014.09.005} {\bibfield  {journal}
+  {\bibinfo  {journal} {Journal of Alloys and Compounds}\ }\textbf {\bibinfo
+  {volume} {619}},\ \bibinfo {pages} {686--692} (\bibinfo {year}
+  {2015})}\BibitemShut {NoStop}%
+\bibitem [{noa()}]{noauthor_tunable_nodate}%
+  \BibitemOpen
+  \href {https://www.tandfonline.com/doi/full/10.1080/00150190490460803}
+  {\enquote {\bibinfo {title} {Tunable {BST}:{MgO} {Dielectric} {Composite} by
+  {Microwave} {Sintering}: {Ferroelectrics}: {Vol} 306, {No} 1},}\
+  }\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Ansari}, \citenamefont {Jha},\ and\ \citenamefont
+  {Akhtar}(2015)}]{ansari_design_2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.~A.~H.}\
+  \bibnamefont {Ansari}}, \bibinfo {author} {\bibfnamefont {A.~K.}\
+  \bibnamefont {Jha}}, \ and\ \bibinfo {author} {\bibfnamefont {M.~J.}\
+  \bibnamefont {Akhtar}},\ }\bibfield  {title} {\enquote {\bibinfo {title}
+  {Design and {Application} of the {CSRR}-{Based} {Planar} {Sensor} for
+  {Noninvasive} {Measurement} of {Complex} {Permittivity}},}\ }\href {\doibase
+  10.1109/JSEN.2015.2469683} {\bibfield  {journal} {\bibinfo  {journal} {IEEE
+  Sensors Journal}\ }\textbf {\bibinfo {volume} {15}},\ \bibinfo {pages}
+  {7181--7189} (\bibinfo {year} {2015})}\BibitemShut {NoStop}%
 \end{thebibliography}%
