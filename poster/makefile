@@ -1,4 +1,4 @@
-all: pdf clean
+all: clean pdf
 
 
 pdf:
@@ -9,4 +9,8 @@ pdf:
 
 
 clean:
-	find . \( -name "*.fls" -o -name "*.out" -o -name "*.log" -o -name "*.xdv" -o -name "*.bbl" -o -name "*.blg" -o -name "*.fdb_latexmk" -o -name "*.synctex.gz" -o -name "*.bak" -o -name "*.aux" -o -name "*.xml" -o -name "*.bcf" \) -exec rm {} \;
+		find . \( -name "*.fls" -o -name "*.out" -o -name "*.log" -o -name "*.xdv" \
+		-o -name "*.bbl" -o -name "*.blg" -o -name "*.fdb_latexmk" -o -name "*.synctex.gz"\
+		-o -name "*.bak" -o -name "*.aux" -o -name "*.xml" -o -name "*.bcf" \
+	 	-o -name "*.toc" -o -name "*.nav" -o -name "*.snm" \
+		-o -name "*Notes.bib"  -o -name "*.out"  -o -name "*.fls" \) -exec rm {} \;

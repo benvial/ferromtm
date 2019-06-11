@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ferromtm.visualization.postpro2D &#8212; ferromtm 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_pygments.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+<p></p>
+
+
+
+
+
+
+  <div id="navbar" class="navbar navbar-default navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          ferromtm</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../.././reference.html">Documentation</a></li>
+                <li><a href="../../.././auto_examples/index.html">Examples</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Links <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html#indices-and-search">Indices and search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for ferromtm.visualization.postpro2D</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ferromtm.models.coupled2D</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ferromtm.visualization.plots</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<span class="n">n_bulk</span> <span class="o">=</span> <span class="n">tunability</span><span class="p">(</span><span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">Ebias</span><span class="p">),</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">K_bulk</span> <span class="o">=</span> <span class="n">cqf</span><span class="p">(</span><span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">Ebias</span><span class="p">),</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">eps_00</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+<span class="n">tandelta_00</span> <span class="o">=</span> <span class="o">-</span><span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">imag</span> <span class="o">/</span> <span class="n">epsilonr_ferroelectric</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+
+
+<div class="viewcode-block" id="load_arch"><a class="viewcode-back" href="../../../ferromtm.visualization.html#ferromtm.visualization.postpro2D.load_arch">[docs]</a><span class="k">def</span> <span class="nf">load_arch</span><span class="p">(</span><span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;circle_f_</span><span class="si">{:.2f}</span><span class="s2">_E_</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">E_bias</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">coupling</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">+=</span> <span class="s2">&quot;_uncoupled&quot;</span>
+    <span class="n">saveddir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="s2">&quot;circ_rods&quot;</span><span class="p">)</span>
+    <span class="c1"># saveddir = os.path.join(data_folder, &quot;circ_rods_pattern&quot;)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">saveddir</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.npz&quot;</span><span class="p">)</span>
+    <span class="n">arch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">eps_hom</span> <span class="o">=</span> <span class="n">arch</span><span class="p">[</span><span class="s2">&quot;eps_hom&quot;</span><span class="p">]</span>
+    <span class="n">epsi</span> <span class="o">=</span> <span class="n">arch</span><span class="p">[</span><span class="s2">&quot;epsi&quot;</span><span class="p">]</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">arch</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">eps_hom</span></div>
+
+
+<span class="n">iplot</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="load_results"><a class="viewcode-back" href="../../../ferromtm.visualization.html#ferromtm.visualization.postpro2D.load_results">[docs]</a><span class="k">def</span> <span class="nf">load_results</span><span class="p">():</span>
+    <span class="n">Eps_eff_lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nE</span><span class="p">,</span> <span class="n">nF</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">Eps_eff_nl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nE</span><span class="p">,</span> <span class="n">nF</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">Aniso_factor_lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nE</span><span class="p">,</span> <span class="n">nF</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">Aniso_factor_nl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nE</span><span class="p">,</span> <span class="n">nF</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="c1">#</span>
+
+    <span class="k">for</span> <span class="n">iR</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Fincl</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">iE</span><span class="p">,</span> <span class="n">E_bias</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Ebias</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">eps_hom</span> <span class="o">=</span> <span class="n">load_arch</span><span class="p">(</span><span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">eps_eff_nl</span> <span class="o">=</span> <span class="n">eps_hom</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">Eps_eff_nl</span><span class="p">[</span><span class="n">iE</span><span class="p">,</span> <span class="n">iR</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_eff_nl</span>
+            <span class="n">Aniso_factor_nl</span><span class="p">[</span><span class="n">iE</span><span class="p">,</span> <span class="n">iR</span><span class="p">]</span> <span class="o">=</span> <span class="n">aniso_factor</span><span class="p">(</span><span class="n">eps_hom</span><span class="p">)</span>
+
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">eps_hom_lin</span> <span class="o">=</span> <span class="n">load_arch</span><span class="p">(</span><span class="n">E_bias</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">coupling</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">eps_eff_lin</span> <span class="o">=</span> <span class="n">eps_hom_lin</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">Eps_eff_lin</span><span class="p">[</span><span class="n">iE</span><span class="p">,</span> <span class="n">iR</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps_eff_lin</span>
+            <span class="n">Aniso_factor_lin</span><span class="p">[</span><span class="n">iE</span><span class="p">,</span> <span class="n">iR</span><span class="p">]</span> <span class="o">=</span> <span class="n">aniso_factor</span><span class="p">(</span><span class="n">eps_hom_lin</span><span class="p">)</span>
+
+    <span class="n">Eps_eff_lin</span> <span class="o">=</span> <span class="n">Eps_eff_lin</span><span class="p">[:,</span> <span class="n">iplot</span><span class="p">]</span>
+    <span class="n">Eps_eff_nl</span> <span class="o">=</span> <span class="n">Eps_eff_nl</span><span class="p">[:,</span> <span class="n">iplot</span><span class="p">]</span>
+    <span class="n">Aniso_factor_lin</span> <span class="o">=</span> <span class="n">Aniso_factor_lin</span><span class="p">[:,</span> <span class="n">iplot</span><span class="p">]</span>
+    <span class="n">Aniso_factor_nl</span> <span class="o">=</span> <span class="n">Aniso_factor_nl</span><span class="p">[:,</span> <span class="n">iplot</span><span class="p">]</span>
+
+    <span class="n">norm_eps</span> <span class="o">=</span> <span class="n">Eps_eff_lin</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">eps_00</span>
+    <span class="n">norm_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">Eps_eff_lin</span><span class="o">.</span><span class="n">imag</span> <span class="o">/</span> <span class="n">Eps_eff_lin</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">tandelta_00</span>
+    <span class="n">norm_eps_nl</span> <span class="o">=</span> <span class="n">Eps_eff_nl</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">eps_00</span>
+    <span class="n">norm_loss_nl</span> <span class="o">=</span> <span class="o">-</span><span class="n">Eps_eff_nl</span><span class="o">.</span><span class="n">imag</span> <span class="o">/</span> <span class="n">Eps_eff_nl</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">tandelta_00</span>
+    <span class="n">n_lin</span> <span class="o">=</span> <span class="n">tunability</span><span class="p">(</span><span class="n">Eps_eff_lin</span><span class="p">,</span> <span class="n">Eps_eff_lin</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">n_nl</span> <span class="o">=</span> <span class="n">tunability</span><span class="p">(</span><span class="n">Eps_eff_nl</span><span class="p">,</span> <span class="n">Eps_eff_nl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">n_norm_lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">n</span> <span class="o">/</span> <span class="n">n_bulk</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_lin</span><span class="o">.</span><span class="n">T</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">n_norm_nl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">n</span> <span class="o">/</span> <span class="n">n_bulk</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_nl</span><span class="o">.</span><span class="n">T</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">K_lin</span> <span class="o">=</span> <span class="n">cqf</span><span class="p">(</span><span class="n">Eps_eff_lin</span><span class="p">,</span> <span class="n">Eps_eff_lin</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">K_nl</span> <span class="o">=</span> <span class="n">cqf</span><span class="p">(</span><span class="n">Eps_eff_nl</span><span class="p">,</span> <span class="n">Eps_eff_nl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+
+    <span class="n">Knorm_lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">K_lin</span><span class="o">.</span><span class="n">T</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">Knorm_nl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">K_nl</span><span class="o">.</span><span class="n">T</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+    <span class="c1"># K_nl[K_nl==0]=1e-12</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">norm_eps</span><span class="p">,</span>
+        <span class="n">norm_eps_nl</span><span class="p">,</span>
+        <span class="n">norm_loss</span><span class="p">,</span>
+        <span class="n">norm_loss_nl</span><span class="p">,</span>
+        <span class="n">n_norm_lin</span><span class="p">,</span>
+        <span class="n">n_norm_nl</span><span class="p">,</span>
+        <span class="n">Aniso_factor_lin</span><span class="p">,</span>
+        <span class="n">Aniso_factor_nl</span><span class="p">,</span>
+        <span class="n">Knorm_lin</span><span class="p">,</span>
+        <span class="n">Knorm_nl</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_eff_par"><a class="viewcode-back" href="../../../ferromtm.visualization.html#ferromtm.visualization.postpro2D.plot_eff_par">[docs]</a><span class="k">def</span> <span class="nf">plot_eff_par</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">norm_eps</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">norm_eps_nl</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">norm_loss</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">norm_loss_nl</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;bias electric field (MV/m)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="c1"># ax[0][0].set_ylabel(</span>
+    <span class="c1">#     r&quot;${\rm Re\,}\tilde{\varepsilon}_{xx}/{\rm Re\,}{\varepsilon^f_{xx}(0)}$&quot;</span>
+    <span class="c1"># )</span>
+    <span class="c1"># ax[1][0].set_ylabel(r&quot;$\tan \tilde{\delta}_{xx}/ \tan {\delta^f_{xx}} (0)$&quot;)</span>
+    <span class="c1">#</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;normalized permittivity&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;normalized loss tangent&quot;</span><span class="p">)</span>
+
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;axes.prop_cycle&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">by_key</span><span class="p">()[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span>
+
+    <span class="n">custom_lines0</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+    <span class="p">]</span>
+    <span class="n">custom_lines1</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">custom_lines1</span><span class="p">,</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;uncoupled&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;coupled&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">leg</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$f=</span><span class="si">{:.1f}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">Fincl</span><span class="p">[</span><span class="n">iplot</span><span class="p">]]</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">custom_lines0</span><span class="p">,</span> <span class="n">leg</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">n_norm_lin</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">n_norm_nl</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="c1"># ax[0][1].set_xlabel(&quot;electric field (MV/m)&quot;)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="c1"># ax[0][1].set_ylabel(r&quot;$\tilde{n}/n^{\rm f}$&quot;)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;normalized tunability&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">Aniso_factor_lin</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">Aniso_factor_nl</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;bias electric field (MV/m)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ax[1][1].set_ylabel(</span>
+    <span class="c1">#     r&quot;$\tilde{\rho} = \tilde{\varepsilon}_{xx}/\tilde{\varepsilon}_{yy}$&quot;</span>
+    <span class="c1"># )</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;anisotropy factor&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">))</span>
+    <span class="n">subplot_id</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">))</span>
+    <span class="n">subplot_id</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.41</span><span class="p">))</span>
+    <span class="n">subplot_id</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.37</span><span class="p">,</span> <span class="mf">1.03</span><span class="p">))</span>
+    <span class="n">subplot_id</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">)</span></div>
+    <span class="c1"># for a1 in [0,1]:</span>
+    <span class="c1">#     for a2 in [0,1]:</span>
+    <span class="c1">#         ax[a1][a2].set_xlim((0, 2))</span>
+
+
+<div class="viewcode-block" id="plot_eff_cqf"><a class="viewcode-back" href="../../../ferromtm.visualization.html#ferromtm.visualization.postpro2D.plot_eff_cqf">[docs]</a><span class="k">def</span> <span class="nf">plot_eff_cqf</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">Knorm_lin</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">K_bulk</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bulk&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ebias</span><span class="p">,</span> <span class="n">Knorm_nl</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="c1"># ax.set_yscale(&quot;log&quot;)</span>
+    <span class="c1"># ax.plot(Ebias, K_nl, ls=&quot;-&quot;)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;electric field (MV/m)&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;commutation quality factor&quot;</span><span class="p">)</span>
+    <span class="c1"># plt.plot(Ebias, K_bulk, &quot;--k&quot;)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;axes.prop_cycle&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">by_key</span><span class="p">()[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span>
+
+    <span class="n">custom_lines0</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+    <span class="p">]</span>
+    <span class="n">custom_lines1</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)]</span>
+
+    <span class="n">custom_lines</span> <span class="o">=</span> <span class="n">custom_lines1</span> <span class="o">+</span> <span class="n">custom_lines0</span>
+    <span class="n">leg</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;bulk&quot;</span><span class="p">]</span>
+    <span class="n">leg</span> <span class="o">+=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$f=</span><span class="si">{:.1f}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">Fincl</span><span class="p">[</span><span class="n">iplot</span><span class="p">]]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">custom_lines</span><span class="p">,</span> <span class="n">leg</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;solid: coupled, dashed: uncoupled&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">norm_eps</span><span class="p">,</span> <span class="n">norm_eps_nl</span><span class="p">,</span> <span class="n">norm_loss</span><span class="p">,</span> <span class="n">norm_loss_nl</span><span class="p">,</span> <span class="n">n_norm_lin</span><span class="p">,</span> <span class="n">n_norm_nl</span><span class="p">,</span> <span class="n">Aniso_factor_lin</span><span class="p">,</span> <span class="n">Aniso_factor_nl</span><span class="p">,</span> <span class="n">Knorm_lin</span><span class="p">,</span> <span class="n">Knorm_nl</span><span class="p">,</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">load_results</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.7</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+    <span class="n">plot_eff_par</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;figures&quot;</span><span class="p">,</span> <span class="s2">&quot;effective_params_per.eps&quot;</span><span class="p">))</span>
+    <span class="c1">#</span>
+    <span class="c1"># fig, ax = plt.subplots()</span>
+    <span class="c1"># plot_eff_cqf(fig, ax)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">plot_eff_cqf</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;figures&quot;</span><span class="p">,</span> <span class="s2">&quot;effective_cqf_per.eps&quot;</span><span class="p">))</span>
+    <span class="c1">#</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<div class="container">
+  <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</div>
+<footer class="footer">
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2 text-center">
+        <div class="foot-fa">
+          <a href=https://pypi.org/project/ferromtm>
+            <i class="fab fa-python"></i>
+            pip install me
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="foot-fa">
+            <a href=https://github.com/benvial/ferromtm>
+              <i class="fab fa-github fa-1x"></i>
+              fork me on github
+            </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="footer-copyright">
+    <p>
+      ferromtm version 0.0.1.
+      &copy; Copyright 2019, Benjamin Vial. 
+
+    </p>
+
+  </div>
+
+
+</footer>
+  </body>
+</html>

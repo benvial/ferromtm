@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ferromtm.models package &#8212; ferromtm 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom_styles.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom_pygments.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/js/custom.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ferromtm.tools package" href="ferromtm.tools.html" />
+    <link rel="prev" title="User guide" href="reference.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+<p></p>
+
+
+
+
+
+
+  <div id="navbar" class="navbar navbar-default navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          ferromtm</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="./reference.html">Documentation</a></li>
+                <li><a href="./auto_examples/index.html">Examples</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Links <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="reference.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html#indices-and-search">Indices and search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">ferromtm.models package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.bst">ferromtm.models.bst module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.circle_maps">ferromtm.models.circle_maps module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.coupled2D">ferromtm.models.coupled2D module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.coupled3D">ferromtm.models.coupled3D module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.nonper">ferromtm.models.nonper module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.optim">ferromtm.models.optim module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.optim_para">ferromtm.models.optim_para module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.optim_test_mean">ferromtm.models.optim_test_mean module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.run_circ">ferromtm.models.run_circ module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.run_convergence">ferromtm.models.run_convergence module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.run_rand">ferromtm.models.run_rand module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.slab">ferromtm.models.slab module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.slab_angle">ferromtm.models.slab_angle module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.slab_freq">ferromtm.models.slab_freq module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.slab_modes">ferromtm.models.slab_modes module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models.theo">ferromtm.models.theo module</a></li>
+<li><a class="reference internal" href="#module-ferromtm.models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="ferromtm-models-package">
+<h1>ferromtm.models package<a class="headerlink" href="#ferromtm-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ferromtm.models.bst">
+<span id="ferromtm-models-bst-module"></span><h2>ferromtm.models.bst module<a class="headerlink" href="#module-ferromtm.models.bst" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.bst.eps_norma_model">
+<code class="descclassname">ferromtm.models.bst.</code><code class="descname">eps_norma_model</code><span class="sig-paren">(</span><em>E0</em>, <em>alpha</em>, <em>beta</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/bst.html#eps_norma_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.bst.eps_norma_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.bst.epsf_real">
+<code class="descclassname">ferromtm.models.bst.</code><code class="descname">epsf_real</code><span class="sig-paren">(</span><em>E_applied</em>, <em>dc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/bst.html#epsf_real"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.bst.epsf_real" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.bst.epsilonr_ferroelectric">
+<code class="descclassname">ferromtm.models.bst.</code><code class="descname">epsilonr_ferroelectric</code><span class="sig-paren">(</span><em>E_applied</em>, <em>tandelta=0.01</em>, <em>dc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/bst.html#epsilonr_ferroelectric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.bst.epsilonr_ferroelectric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.bst.fit">
+<code class="descclassname">ferromtm.models.bst.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>filename</em>, <em>fitname</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/bst.html#fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.bst.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.bst.fun_fit">
+<code class="descclassname">ferromtm.models.bst.</code><code class="descname">fun_fit</code><span class="sig-paren">(</span><em>par</em>, <em>E</em>, <em>eps_meas_n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/bst.html#fun_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.bst.fun_fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.bst.retrieve_params">
+<code class="descclassname">ferromtm.models.bst.</code><code class="descname">retrieve_params</code><span class="sig-paren">(</span><em>E</em>, <em>eps_meas_n</em>, <em>par0=(1</em>, <em>1)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/bst.html#retrieve_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.bst.retrieve_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.circle_maps">
+<span id="ferromtm-models-circle-maps-module"></span><h2>ferromtm.models.circle_maps module<a class="headerlink" href="#module-ferromtm.models.circle_maps" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.circle_maps.main_circle">
+<code class="descclassname">ferromtm.models.circle_maps.</code><code class="descname">main_circle</code><span class="sig-paren">(</span><em>params</em>, <em>save=False</em>, <em>coupling=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/circle_maps.html#main_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.circle_maps.main_circle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.circle_maps.main_per_coupled">
+<code class="descclassname">ferromtm.models.circle_maps.</code><code class="descname">main_per_coupled</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/circle_maps.html#main_per_coupled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.circle_maps.main_per_coupled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.circle_maps.main_per_uncoupled">
+<code class="descclassname">ferromtm.models.circle_maps.</code><code class="descname">main_per_uncoupled</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/circle_maps.html#main_per_uncoupled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.circle_maps.main_per_uncoupled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.coupled2D">
+<span id="ferromtm-models-coupled2d-module"></span><h2>ferromtm.models.coupled2D module<a class="headerlink" href="#module-ferromtm.models.coupled2D" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.build_incl">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">build_incl</code><span class="sig-paren">(</span><em>fem</em>, <em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#build_incl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.build_incl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.circle">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">circle</code><span class="sig-paren">(</span><em>R</em>, <em>x0</em>, <em>y0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.circle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.compute_elstat_pb">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">compute_elstat_pb</code><span class="sig-paren">(</span><em>fem_es</em>, <em>epsi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#compute_elstat_pb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.compute_elstat_pb" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.compute_hom_pb">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">compute_hom_pb</code><span class="sig-paren">(</span><em>fem_hom</em>, <em>epsi</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#compute_hom_pb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.compute_hom_pb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the homogenization problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fem_hom</strong> (<em>instance of TwoScale2D class</em>) – The two-scale FEM problem</li>
+<li><strong>epsi</strong> (<em>array-like</em>) – The permittivity tensor diagonal elements, (xx, yy and zz components).
+Size is (3*nvar) where nvar is the number of points where the permittivity
+is defined in the FEM model (ie len(fem_hom.des[0])).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">eps_hom: the permittivity tensor (3*3 numpy array)
+fem_hom: instance of TwoScale2D class</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a> (eps_hom, fem_hom)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.coupling_loop">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">coupling_loop</code><span class="sig-paren">(</span><em>fem_es</em>, <em>epsi</em>, <em>tol=0.01</em>, <em>max_iter=100</em>, <em>verbose=False</em>, <em>record_cv=False</em>, <em>cv_dir_=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#coupling_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.coupling_loop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.ellipse">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">ellipse</code><span class="sig-paren">(</span><em>Rinclx</em>, <em>Rincly</em>, <em>rot_incl</em>, <em>x0</em>, <em>y0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#ellipse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.ellipse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.init_es">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">init_es</code><span class="sig-paren">(</span><em>f</em>, <em>E_bias</em>, <em>incl=True</em>, <em>mat=None</em>, <em>parmesh=20</em>, <em>mesh_refine=True</em>, <em>tmp_dir=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#init_es"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.init_es" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.init_hom">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">init_hom</code><span class="sig-paren">(</span><em>fem_es</em>, <em>tmp_dir=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#init_hom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.init_hom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.init_pattern">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">init_pattern</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#init_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.init_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.main">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">main</code><span class="sig-paren">(</span><em>f</em>, <em>E_bias</em>, <em>coupling=True</em>, <em>incl=True</em>, <em>mat=None</em>, <em>record_cv=False</em>, <em>postmaps=False</em>, <em>verbose=True</em>, <em>rmtmpdir=True</em>, <em>parmesh=20</em>, <em>cv_dir_=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.main_circle">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">main_circle</code><span class="sig-paren">(</span><em>params</em>, <em>save=False</em>, <em>coupling=True</em>, <em>rmtmpdir=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#main_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.main_circle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.main_circle_conv">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">main_circle_conv</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#main_circle_conv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.main_circle_conv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.main_circle_pattern">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">main_circle_pattern</code><span class="sig-paren">(</span><em>params</em>, <em>save=False</em>, <em>coupling=True</em>, <em>rmtmpdir=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#main_circle_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.main_circle_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.main_rand">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">main_rand</code><span class="sig-paren">(</span><em>params</em>, <em>save=False</em>, <em>coupling=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#main_rand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.main_rand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.main_random_conv">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">main_random_conv</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#main_random_conv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.main_random_conv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.make_pattern">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">make_pattern</code><span class="sig-paren">(</span><em>f</em>, <em>choice='rand'</em>, <em>isample=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#make_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.make_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.mat2des">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">mat2des</code><span class="sig-paren">(</span><em>fem</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#mat2des"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.mat2des" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.matprint">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">matprint</code><span class="sig-paren">(</span><em>mat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#matprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.matprint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.normvec">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">normvec</code><span class="sig-paren">(</span><em>E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#normvec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.normvec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.ppEmap">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">ppEmap</code><span class="sig-paren">(</span><em>fem</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#ppEmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.ppEmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.ppEpsimap">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">ppEpsimap</code><span class="sig-paren">(</span><em>fem</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#ppEpsimap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.ppEpsimap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.ppVmap">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">ppVmap</code><span class="sig-paren">(</span><em>fem</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#ppVmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.ppVmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled2D.ref_mesh">
+<code class="descclassname">ferromtm.models.coupled2D.</code><code class="descname">ref_mesh</code><span class="sig-paren">(</span><em>fem</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled2D.html#ref_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled2D.ref_mesh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.coupled3D">
+<span id="ferromtm-models-coupled3d-module"></span><h2>ferromtm.models.coupled3D module<a class="headerlink" href="#module-ferromtm.models.coupled3D" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.coupled3D.compute_elstat_pb">
+<code class="descclassname">ferromtm.models.coupled3D.</code><code class="descname">compute_elstat_pb</code><span class="sig-paren">(</span><em>fem_es</em>, <em>epsi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled3D.html#compute_elstat_pb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled3D.compute_elstat_pb" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled3D.compute_hom_pb">
+<code class="descclassname">ferromtm.models.coupled3D.</code><code class="descname">compute_hom_pb</code><span class="sig-paren">(</span><em>fem_hom</em>, <em>epsi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled3D.html#compute_hom_pb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled3D.compute_hom_pb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the homogenization problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fem_hom</strong> (<em>instance of pytheas.homogenization.twoscale3D.femmodel.TwoScale3D class</em>) – The two-scale FEM problem</li>
+<li><strong>epsi</strong> (<em>array-like</em>) – The permittivity tensor diagonal elements, (xx, yy and zz components).
+Size is (3*nvar) where nvar is the number of points where the permittivity
+is defined in the FEM model (ie len(fem_hom.des[0])).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">eps_hom: the permittivity tensor (3*3 numpy array)
+fem_hom: instance of pytheas.homogenization.twoscale3D.femmodel.TwoScale3D class</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a> (eps_hom, fem_hom)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled3D.coupling_loop">
+<code class="descclassname">ferromtm.models.coupled3D.</code><code class="descname">coupling_loop</code><span class="sig-paren">(</span><em>fem_es</em>, <em>epsi</em>, <em>tol=0.01</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled3D.html#coupling_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled3D.coupling_loop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled3D.coupling_loop_analytical">
+<code class="descclassname">ferromtm.models.coupled3D.</code><code class="descname">coupling_loop_analytical</code><span class="sig-paren">(</span><em>E</em>, <em>f</em>, <em>eps_incl</em>, <em>eps_f</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled3D.html#coupling_loop_analytical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled3D.coupling_loop_analytical" title="Permalink to this definition">¶</a></dt>
+<dd><p>mean_field(E, epsilon)  &lt;—&gt; epsilon(E)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled3D.efield_mean_mg">
+<code class="descclassname">ferromtm.models.coupled3D.</code><code class="descname">efield_mean_mg</code><span class="sig-paren">(</span><em>E0</em>, <em>f</em>, <em>epsi</em>, <em>epsh</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled3D.html#efield_mean_mg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled3D.efield_mean_mg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean E field in the background for an isolated sphere</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled3D.init_es">
+<code class="descclassname">ferromtm.models.coupled3D.</code><code class="descname">init_es</code><span class="sig-paren">(</span><em>f</em>, <em>E_bias</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled3D.html#init_es"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled3D.init_es" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled3D.init_hom">
+<code class="descclassname">ferromtm.models.coupled3D.</code><code class="descname">init_hom</code><span class="sig-paren">(</span><em>fem_es</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled3D.html#init_hom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled3D.init_hom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.coupled3D.main">
+<code class="descclassname">ferromtm.models.coupled3D.</code><code class="descname">main</code><span class="sig-paren">(</span><em>f</em>, <em>E_bias</em>, <em>coupling=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/coupled3D.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.coupled3D.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.nonper">
+<span id="ferromtm-models-nonper-module"></span><h2>ferromtm.models.nonper module<a class="headerlink" href="#module-ferromtm.models.nonper" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ferromtm.models.optim">
+<span id="ferromtm-models-optim-module"></span><h2>ferromtm.models.optim module<a class="headerlink" href="#module-ferromtm.models.optim" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.optim.compute_hom_pb_y">
+<code class="descclassname">ferromtm.models.optim.</code><code class="descname">compute_hom_pb_y</code><span class="sig-paren">(</span><em>fem_hom</em>, <em>epsi</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim.html#compute_hom_pb_y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim.compute_hom_pb_y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim.f_obj">
+<code class="descclassname">ferromtm.models.optim.</code><code class="descname">f_obj</code><span class="sig-paren">(</span><em>p</em>, <em>grad</em>, <em>coupling=True</em>, <em>mat=&lt;pytheas.material.genmat.MaterialDensity object&gt;</em>, <em>record_cv=False</em>, <em>verbose=False</em>, <em>rmtmpdir=False</em>, <em>parmesh=21</em>, <em>sens_ana=False</em>, <em>filt=True</em>, <em>proj=True</em>, <em>fem_es=&lt;ferromtm.models.electrostatics.per2D.femmodel.FemModel object&gt;</em>, <em>fem_hom=&lt;pytheas.homogenization.twoscale2D.femmodel.TwoScale2D object&gt;</em>, <em>retgrad=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim.html#f_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim.f_obj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim.get_deq_deps">
+<code class="descclassname">ferromtm.models.optim.</code><code class="descname">get_deq_deps</code><span class="sig-paren">(</span><em>self</em>, <em>interp_method='nearest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim.html#get_deq_deps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim.get_deq_deps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim.get_sensitivity">
+<code class="descclassname">ferromtm.models.optim.</code><code class="descname">get_sensitivity</code><span class="sig-paren">(</span><em>to</em>, <em>p</em>, <em>filt=True</em>, <em>proj=True</em>, <em>interp_method='cubic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim.html#get_sensitivity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim.get_sensitivity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim.init_pattern">
+<code class="descclassname">ferromtm.models.optim.</code><code class="descname">init_pattern</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim.html#init_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim.init_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim.main_opt">
+<code class="descclassname">ferromtm.models.optim.</code><code class="descname">main_opt</code><span class="sig-paren">(</span><em>p0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim.html#main_opt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim.main_opt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim.make_plots">
+<code class="descclassname">ferromtm.models.optim.</code><code class="descname">make_plots</code><span class="sig-paren">(</span><em>to</em>, <em>p</em>, <em>filt=True</em>, <em>proj=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim.html#make_plots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim.make_plots" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim.plt_field">
+<code class="descclassname">ferromtm.models.optim.</code><code class="descname">plt_field</code><span class="sig-paren">(</span><em>a</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim.html#plt_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim.plt_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.optim_para">
+<span id="ferromtm-models-optim-para-module"></span><h2>ferromtm.models.optim_para module<a class="headerlink" href="#module-ferromtm.models.optim_para" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.optim_para.compute_hom_pb_y">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">compute_hom_pb_y</code><span class="sig-paren">(</span><em>fem_hom</em>, <em>epsi</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#compute_hom_pb_y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.compute_hom_pb_y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_para.f_obj">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">f_obj</code><span class="sig-paren">(</span><em>p</em>, <em>grad</em>, <em>verbose=False</em>, <em>rmtmpdir=False</em>, <em>filt=True</em>, <em>proj=True</em>, <em>fem_hom=&lt;pytheas.homogenization.twoscale2D.femmodel.TwoScale2D object&gt;</em>, <em>retgrad=False</em>, <em>fd=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#f_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.f_obj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_para.get_grad_fd">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">get_grad_fd</code><span class="sig-paren">(</span><em>p0</em>, <em>para=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#get_grad_fd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.get_grad_fd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_para.get_sensitivity">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">get_sensitivity</code><span class="sig-paren">(</span><em>to</em>, <em>p</em>, <em>filt=True</em>, <em>proj=True</em>, <em>interp_method='cubic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#get_sensitivity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.get_sensitivity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_para.init_pattern">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">init_pattern</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#init_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.init_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_para.main_opt">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">main_opt</code><span class="sig-paren">(</span><em>p0</em>, <em>fd=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#main_opt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.main_opt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_para.make_plots">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">make_plots</code><span class="sig-paren">(</span><em>to</em>, <em>p</em>, <em>filt=True</em>, <em>proj=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#make_plots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.make_plots" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_para.objectivefunc">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">objectivefunc</code><span class="sig-paren">(</span><em>p</em>, <em>fem_hom=&lt;pytheas.homogenization.twoscale2D.femmodel.TwoScale2D object&gt;</em>, <em>filt=True</em>, <em>proj=True</em>, <em>verbose=False</em>, <em>init=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#objectivefunc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.objectivefunc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_para.plt_field">
+<code class="descclassname">ferromtm.models.optim_para.</code><code class="descname">plt_field</code><span class="sig-paren">(</span><em>a</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_para.html#plt_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_para.plt_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.optim_test_mean">
+<span id="ferromtm-models-optim-test-mean-module"></span><h2>ferromtm.models.optim_test_mean module<a class="headerlink" href="#module-ferromtm.models.optim_test_mean" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.optim_test_mean.compute_hom_pb_y">
+<code class="descclassname">ferromtm.models.optim_test_mean.</code><code class="descname">compute_hom_pb_y</code><span class="sig-paren">(</span><em>fem_hom</em>, <em>epsi</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_test_mean.html#compute_hom_pb_y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_test_mean.compute_hom_pb_y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_test_mean.f_obj">
+<code class="descclassname">ferromtm.models.optim_test_mean.</code><code class="descname">f_obj</code><span class="sig-paren">(</span><em>p</em>, <em>grad</em>, <em>coupling=True</em>, <em>mat=&lt;pytheas.material.genmat.MaterialDensity object&gt;</em>, <em>record_cv=False</em>, <em>verbose=False</em>, <em>rmtmpdir=False</em>, <em>parmesh=30</em>, <em>sens_ana=False</em>, <em>filt=True</em>, <em>proj=True</em>, <em>fem_es=&lt;ferromtm.models.electrostatics.per2D.femmodel.FemModel object&gt;</em>, <em>fem_hom=&lt;pytheas.homogenization.twoscale2D.femmodel.TwoScale2D object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_test_mean.html#f_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_test_mean.f_obj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_test_mean.init_pattern">
+<code class="descclassname">ferromtm.models.optim_test_mean.</code><code class="descname">init_pattern</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_test_mean.html#init_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_test_mean.init_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_test_mean.main_opt">
+<code class="descclassname">ferromtm.models.optim_test_mean.</code><code class="descname">main_opt</code><span class="sig-paren">(</span><em>p0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_test_mean.html#main_opt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_test_mean.main_opt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.optim_test_mean.make_plots">
+<code class="descclassname">ferromtm.models.optim_test_mean.</code><code class="descname">make_plots</code><span class="sig-paren">(</span><em>to</em>, <em>p</em>, <em>filt=True</em>, <em>proj=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/optim_test_mean.html#make_plots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.optim_test_mean.make_plots" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.run_circ">
+<span id="ferromtm-models-run-circ-module"></span><h2>ferromtm.models.run_circ module<a class="headerlink" href="#module-ferromtm.models.run_circ" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.run_circ.main_per_coupled">
+<code class="descclassname">ferromtm.models.run_circ.</code><code class="descname">main_per_coupled</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/run_circ.html#main_per_coupled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.run_circ.main_per_coupled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.run_circ.main_per_uncoupled">
+<code class="descclassname">ferromtm.models.run_circ.</code><code class="descname">main_per_uncoupled</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/run_circ.html#main_per_uncoupled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.run_circ.main_per_uncoupled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.run_circ.test">
+<code class="descclassname">ferromtm.models.run_circ.</code><code class="descname">test</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/run_circ.html#test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.run_circ.test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.run_convergence">
+<span id="ferromtm-models-run-convergence-module"></span><h2>ferromtm.models.run_convergence module<a class="headerlink" href="#module-ferromtm.models.run_convergence" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ferromtm.models.run_rand">
+<span id="ferromtm-models-run-rand-module"></span><h2>ferromtm.models.run_rand module<a class="headerlink" href="#module-ferromtm.models.run_rand" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.run_rand.main_rand_coupled">
+<code class="descclassname">ferromtm.models.run_rand.</code><code class="descname">main_rand_coupled</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/run_rand.html#main_rand_coupled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.run_rand.main_rand_coupled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.run_rand.main_rand_uncoupled">
+<code class="descclassname">ferromtm.models.run_rand.</code><code class="descname">main_rand_uncoupled</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/run_rand.html#main_rand_uncoupled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.run_rand.main_rand_uncoupled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.slab">
+<span id="ferromtm-models-slab-module"></span><h2>ferromtm.models.slab module<a class="headerlink" href="#module-ferromtm.models.slab" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.slab.extract_effs">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">extract_effs</code><span class="sig-paren">(</span><em>out</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#extract_effs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.extract_effs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab.get_key">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">get_key</code><span class="sig-paren">(</span><em>out</em>, <em>k</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#get_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.get_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab.load_arch">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">load_arch</code><span class="sig-paren">(</span><em>iter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#load_arch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.load_arch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab.main_angle">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">main_angle</code><span class="sig-paren">(</span><em>t</em>, <em>coupled=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#main_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.main_angle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab.main_hom">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">main_hom</code><span class="sig-paren">(</span><em>angle</em>, <em>coupled=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#main_hom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.main_hom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab.main_meta">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">main_meta</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#main_meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.main_meta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab.main_meta_uncpl">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">main_meta_uncpl</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#main_meta_uncpl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.main_meta_uncpl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab.make_epsi">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">make_epsi</code><span class="sig-paren">(</span><em>fem</em>, <em>epsi_map</em>, <em>nincly</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#make_epsi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.make_epsi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab.rslab">
+<code class="descclassname">ferromtm.models.slab.</code><code class="descname">rslab</code><span class="sig-paren">(</span><em>h</em>, <em>lambda0</em>, <em>theta</em>, <em>epsxx</em>, <em>epsyy</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab.html#rslab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab.rslab" title="Permalink to this definition">¶</a></dt>
+<dd><p>reflection coefficient for TM polarization of a
+slab with diagonal permittivity in vacuum</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.slab_angle">
+<span id="ferromtm-models-slab-angle-module"></span><h2>ferromtm.models.slab_angle module<a class="headerlink" href="#module-ferromtm.models.slab_angle" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ferromtm.models.slab_freq">
+<span id="ferromtm-models-slab-freq-module"></span><h2>ferromtm.models.slab_freq module<a class="headerlink" href="#module-ferromtm.models.slab_freq" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.slab_freq.main_frequency">
+<code class="descclassname">ferromtm.models.slab_freq.</code><code class="descname">main_frequency</code><span class="sig-paren">(</span><em>fnorm</em>, <em>coupled=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_freq.html#main_frequency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_freq.main_frequency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab_freq.main_hom">
+<code class="descclassname">ferromtm.models.slab_freq.</code><code class="descname">main_hom</code><span class="sig-paren">(</span><em>fnorm</em>, <em>coupled=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_freq.html#main_hom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_freq.main_hom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab_freq.main_meta">
+<code class="descclassname">ferromtm.models.slab_freq.</code><code class="descname">main_meta</code><span class="sig-paren">(</span><em>fnorm</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_freq.html#main_meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_freq.main_meta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab_freq.main_meta_uncpl">
+<code class="descclassname">ferromtm.models.slab_freq.</code><code class="descname">main_meta_uncpl</code><span class="sig-paren">(</span><em>fnorm</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_freq.html#main_meta_uncpl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_freq.main_meta_uncpl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.slab_modes">
+<span id="ferromtm-models-slab-modes-module"></span><h2>ferromtm.models.slab_modes module<a class="headerlink" href="#module-ferromtm.models.slab_modes" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ferromtm.models.slab_modes.load_arch">
+<code class="descclassname">ferromtm.models.slab_modes.</code><code class="descname">load_arch</code><span class="sig-paren">(</span><em>E_bias</em>, <em>coupling=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_modes.html#load_arch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_modes.load_arch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab_modes.main_meta">
+<code class="descclassname">ferromtm.models.slab_modes.</code><code class="descname">main_meta</code><span class="sig-paren">(</span><em>E_bias</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_modes.html#main_meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_modes.main_meta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab_modes.main_meta_uncpl">
+<code class="descclassname">ferromtm.models.slab_modes.</code><code class="descname">main_meta_uncpl</code><span class="sig-paren">(</span><em>E_bias</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_modes.html#main_meta_uncpl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_modes.main_meta_uncpl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab_modes.main_modes">
+<code class="descclassname">ferromtm.models.slab_modes.</code><code class="descname">main_modes</code><span class="sig-paren">(</span><em>E_bias</em>, <em>coupled=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_modes.html#main_modes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_modes.main_modes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ferromtm.models.slab_modes.main_modes_analytical">
+<code class="descclassname">ferromtm.models.slab_modes.</code><code class="descname">main_modes_analytical</code><span class="sig-paren">(</span><em>E_bias</em>, <em>coupled=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ferromtm/models/slab_modes.html#main_modes_analytical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ferromtm.models.slab_modes.main_modes_analytical" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ferromtm.models.theo">
+<span id="ferromtm-models-theo-module"></span><h2>ferromtm.models.theo module<a class="headerlink" href="#module-ferromtm.models.theo" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ferromtm.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ferromtm.models" title="Permalink to this headline">¶</a></h2>
+<p>Description of the module</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<div class="container">
+  <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</div>
+<footer class="footer">
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2 text-center">
+        <div class="foot-fa">
+          <a href=https://pypi.org/project/ferromtm>
+            <i class="fab fa-python"></i>
+            pip install me
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="foot-fa">
+            <a href=https://github.com/benvial/ferromtm>
+              <i class="fab fa-github fa-1x"></i>
+              fork me on github
+            </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="footer-copyright">
+    <p>
+      ferromtm version 0.0.1.
+      &copy; Copyright 2019, Benjamin Vial. 
+
+    </p>
+
+  </div>
+
+
+</footer>
+  </body>
+</html>

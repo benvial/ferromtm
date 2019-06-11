@@ -6,7 +6,7 @@
 %Control: page (1) range
 %Control: year (1) truncated
 %Control: production of eprint (0) enabled
-\begin{thebibliography}{29}%
+\begin{thebibliography}{36}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \@ifx{#1\undefined}
@@ -129,6 +129,81 @@
   {\bibfield  {journal} {\bibinfo  {journal} {Appl. Phys. Lett.}\ }\textbf
   {\bibinfo {volume} {93}},\ \bibinfo {pages} {201106} (\bibinfo {year}
   {2008})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Irvin}\ \emph {et~al.}(2005)\citenamefont {Irvin},
+  \citenamefont {Levy}, \citenamefont {Guo},\ and\ \citenamefont
+  {Bhalla}}]{irvin_three-dimensional_2005}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
+  {Irvin}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Levy}},
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Guo}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {A.}~\bibnamefont {Bhalla}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Three-dimensional polarization imaging of
+  ({Ba},{Sr}){TiO}3:{MgO} composites},}\ }\href {\doibase 10.1063/1.1854722}
+  {\bibfield  {journal} {\bibinfo  {journal} {Appl. Phys. Lett.}\ }\textbf
+  {\bibinfo {volume} {86}},\ \bibinfo {pages} {042903} (\bibinfo {year}
+  {2005})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Chung}\ \emph {et~al.}(2008)\citenamefont {Chung},
+  \citenamefont {Elissalde}, \citenamefont {Maglione}, \citenamefont
+  {Estournès}, \citenamefont {Paté},\ and\ \citenamefont
+  {Ganne}}]{chung_low-losses_2008}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {U.-C.}\ \bibnamefont
+  {Chung}}, \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont {Elissalde}},
+  \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Maglione}}, \bibinfo
+  {author} {\bibfnamefont {C.}~\bibnamefont {Estournès}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Paté}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {J.~P.}\ \bibnamefont {Ganne}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {Low-losses, highly tunable {Ba}0.6sr0.4tio3 / {MgO}
+  composite},}\ }\href {\doibase 10.1063/1.2837621} {\bibfield  {journal}
+  {\bibinfo  {journal} {Appl. Phys. Lett.}\ }\textbf {\bibinfo {volume} {92}},\
+  \bibinfo {pages} {042902} (\bibinfo {year} {2008})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Wang}\ \emph {et~al.}(2012)\citenamefont {Wang},
+  \citenamefont {Luo}, \citenamefont {Ni}, \citenamefont {Du}, \citenamefont
+  {Li},\ and\ \citenamefont {Chen}}]{wang_piezoelectric_2012}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {B.}~\bibnamefont
+  {Wang}}, \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Luo}}, \bibinfo
+  {author} {\bibfnamefont {F.}~\bibnamefont {Ni}}, \bibinfo {author}
+  {\bibfnamefont {P.}~\bibnamefont {Du}}, \bibinfo {author} {\bibfnamefont
+  {W.}~\bibnamefont {Li}}, \ and\ \bibinfo {author} {\bibfnamefont
+  {H.}~\bibnamefont {Chen}},\ }\bibfield  {title} {\enquote {\bibinfo {title}
+  {Piezoelectric and ferroelectric properties of ({Bi}1- {xNa}0. 8k0. 2lax) 0.5
+  {TiO}3 lead-free ceramics},}\ }\href {\doibase 10.1016/j.jallcom.2012.02.114}
+  {\bibfield  {journal} {\bibinfo  {journal} {Journal of Alloys and Compounds}\
+  }\textbf {\bibinfo {volume} {526}},\ \bibinfo {pages} {79--84} (\bibinfo
+  {year} {2012})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Li}\ \emph {et~al.}(2013)\citenamefont {Li},
+  \citenamefont {Lim}, \citenamefont {Yao}, \citenamefont {Tay},\ and\
+  \citenamefont {Seah}}]{li_ferroelectric_2013}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {X.}~\bibnamefont
+  {Li}}, \bibinfo {author} {\bibfnamefont {Y.-F.}\ \bibnamefont {Lim}},
+  \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Yao}}, \bibinfo {author}
+  {\bibfnamefont {F.~E.~H.}\ \bibnamefont {Tay}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {K.~H.}\ \bibnamefont {Seah}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {Ferroelectric {Poly}(vinylidene fluoride) {Homopolymer}
+  {Nanotubes} {Derived} from {Solution} in {Anodic} {Alumina} {Membrane}
+  {Template}},}\ }\href {\doibase 10.1021/cm3028466} {\bibfield  {journal}
+  {\bibinfo  {journal} {Chem. Mater.}\ }\textbf {\bibinfo {volume} {25}},\
+  \bibinfo {pages} {524--529} (\bibinfo {year} {2013})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Hu}\ \emph {et~al.}(2015)\citenamefont {Hu},
+  \citenamefont {Gao}, \citenamefont {Kong}, \citenamefont {Yang},
+  \citenamefont {Zhang}, \citenamefont {Liu}, \citenamefont {Zhang},\ and\
+  \citenamefont {Sun}}]{hu_preparation_2015}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Hu}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Gao}}, \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Kong}}, \bibinfo {author}
+  {\bibfnamefont {S.}~\bibnamefont {Yang}}, \bibinfo {author} {\bibfnamefont
+  {Q.}~\bibnamefont {Zhang}}, \bibinfo {author} {\bibfnamefont
+  {Z.}~\bibnamefont {Liu}}, \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Zhang}}, \ and\ \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Sun}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Preparation and dielectric
+  properties of poly(vinylidene fluoride)/{Ba}0.6sr0.4tio3 composites},}\
+  }\href {\doibase 10.1016/j.jallcom.2014.09.005} {\bibfield  {journal}
+  {\bibinfo  {journal} {Journal of Alloys and Compounds}\ }\textbf {\bibinfo
+  {volume} {619}},\ \bibinfo {pages} {686--692} (\bibinfo {year}
+  {2015})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Sherman}\ \emph {et~al.}(2006)\citenamefont
   {Sherman}, \citenamefont {Tagantsev}, \citenamefont {Setter}, \citenamefont
   {Iddles},\ and\ \citenamefont
@@ -253,6 +328,63 @@
   engineering},}\ }\href {\doibase 10.1063/1.4809673} {\bibfield  {journal}
   {\bibinfo  {journal} {Appl Phys Lett}\ }\textbf {\bibinfo {volume} {102}},\
   \bibinfo {pages} {222903} (\bibinfo {year} {2013})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Carignan}\ \emph {et~al.}(2011)\citenamefont
+  {Carignan}, \citenamefont {Yelon}, \citenamefont {Menard},\ and\
+  \citenamefont {Caloz}}]{carignan_ferromagnetic_2011}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
+  {Carignan}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Yelon}},
+  \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Menard}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {C.}~\bibnamefont {Caloz}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Ferromagnetic {Nanowire} {Metamaterials}:
+  {Theory} and {Applications}},}\ }\href {\doibase 10.1109/TMTT.2011.2163202}
+  {\bibfield  {journal} {\bibinfo  {journal} {IEEE Trans. Microw. Theory
+  Tech.}\ }\textbf {\bibinfo {volume} {59}},\ \bibinfo {pages} {2568--2586}
+  (\bibinfo {year} {2011})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Werner}\ \emph {et~al.}(2007)\citenamefont {Werner},
+  \citenamefont {Kwon}, \citenamefont {Khoo}, \citenamefont {Kildishev},\ and\
+  \citenamefont {Shalaev}}]{werner_liquid_2007}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.~H.}\ \bibnamefont
+  {Werner}}, \bibinfo {author} {\bibfnamefont {D.-H.}\ \bibnamefont {Kwon}},
+  \bibinfo {author} {\bibfnamefont {I.-C.}\ \bibnamefont {Khoo}}, \bibinfo
+  {author} {\bibfnamefont {A.~V.}\ \bibnamefont {Kildishev}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {V.~M.}\ \bibnamefont {Shalaev}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Liquid crystal clad near-infrared
+  metamaterials with tunable negative-zero-positive refractive indices},}\
+  }\href {\doibase 10.1364/OE.15.003342} {\bibfield  {journal} {\bibinfo
+  {journal} {Opt. Express, OE}\ }\textbf {\bibinfo {volume} {15}},\ \bibinfo
+  {pages} {3342--3347} (\bibinfo {year} {2007})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Keiser}\ and\ \citenamefont
+  {Klarskov}(2019)}]{keiser_terahertz_2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.~R.}\ \bibnamefont
+  {Keiser}}\ and\ \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
+  {Klarskov}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Terahertz
+  {Field} {Confinement} in {Nonlinear} {Metamaterials} and {Near}-{Field}
+  {Imaging}},}\ }\href {\doibase 10.3390/photonics6010022} {\bibfield
+  {journal} {\bibinfo  {journal} {Photonics}\ }\textbf {\bibinfo {volume}
+  {6}},\ \bibinfo {pages} {22} (\bibinfo {year} {2019})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Fan}\ \emph {et~al.}(2013)\citenamefont {Fan},
+  \citenamefont {Hwang}, \citenamefont {Liu}, \citenamefont {Strikwerda},
+  \citenamefont {Sternbach}, \citenamefont {Zhang}, \citenamefont {Zhao},
+  \citenamefont {Zhang}, \citenamefont {Nelson},\ and\ \citenamefont
+  {Averitt}}]{fan_nonlinear_2013}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Fan}}, \bibinfo {author} {\bibfnamefont {H.~Y.}\ \bibnamefont {Hwang}},
+  \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Liu}}, \bibinfo {author}
+  {\bibfnamefont {A.~C.}\ \bibnamefont {Strikwerda}}, \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {Sternbach}}, \bibinfo {author}
+  {\bibfnamefont {J.}~\bibnamefont {Zhang}}, \bibinfo {author} {\bibfnamefont
+  {X.}~\bibnamefont {Zhao}}, \bibinfo {author} {\bibfnamefont {X.}~\bibnamefont
+  {Zhang}}, \bibinfo {author} {\bibfnamefont {K.~A.}\ \bibnamefont {Nelson}}, \
+  and\ \bibinfo {author} {\bibfnamefont {R.~D.}\ \bibnamefont {Averitt}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Nonlinear {Terahertz}
+  {Metamaterials} via {Field}-{Enhanced} {Carrier} {Dynamics} in {GaAs}},}\
+  }\href {\doibase 10.1103/PhysRevLett.110.217404} {\bibfield  {journal}
+  {\bibinfo  {journal} {Phys. Rev. Lett.}\ }\textbf {\bibinfo {volume} {110}},\
+  \bibinfo {pages} {217404} (\bibinfo {year} {2013})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Allaire}(1992)}]{allaire_homogenization_1992}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
@@ -284,24 +416,6 @@
   10.1080/00150190490460803} {\bibfield  {journal} {\bibinfo  {journal}
   {Ferroelectrics}\ }\textbf {\bibinfo {volume} {306}},\ \bibinfo {pages}
   {155--163} (\bibinfo {year} {2004})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Hu}\ \emph {et~al.}(2015)\citenamefont {Hu},
-  \citenamefont {Gao}, \citenamefont {Kong}, \citenamefont {Yang},
-  \citenamefont {Zhang}, \citenamefont {Liu}, \citenamefont {Zhang},\ and\
-  \citenamefont {Sun}}]{hu_preparation_2015}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
-  {Hu}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Gao}}, \bibinfo
-  {author} {\bibfnamefont {J.}~\bibnamefont {Kong}}, \bibinfo {author}
-  {\bibfnamefont {S.}~\bibnamefont {Yang}}, \bibinfo {author} {\bibfnamefont
-  {Q.}~\bibnamefont {Zhang}}, \bibinfo {author} {\bibfnamefont
-  {Z.}~\bibnamefont {Liu}}, \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
-  {Zhang}}, \ and\ \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont {Sun}},\
-  }\bibfield  {title} {\enquote {\bibinfo {title} {Preparation and dielectric
-  properties of poly(vinylidene fluoride)/{Ba}0.6sr0.4tio3 composites},}\
-  }\href {\doibase 10.1016/j.jallcom.2014.09.005} {\bibfield  {journal}
-  {\bibinfo  {journal} {Journal of Alloys and Compounds}\ }\textbf {\bibinfo
-  {volume} {619}},\ \bibinfo {pages} {686--692} (\bibinfo {year}
-  {2015})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Ansari}, \citenamefont {Jha},\ and\ \citenamefont
   {Akhtar}(2015)}]{ansari_design_2015}%
   \BibitemOpen
@@ -356,6 +470,17 @@
   devices},}\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {IEEE
   Trans. Microw. Theory Tech.}\ }\textbf {\bibinfo {volume} {50}},\ \bibinfo
   {pages} {537--548} (\bibinfo {year} {2002})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Geuzaine}\ and\ \citenamefont
+  {Remacle}(2009)}]{geuzaine_gmsh_2009}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
+  {Geuzaine}}\ and\ \bibinfo {author} {\bibfnamefont {J.-F.}\ \bibnamefont
+  {Remacle}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Gmsh: {A} 3-{D}
+  finite element mesh generator with built-in pre- and post-processing
+  facilities},}\ }\href {\doibase 10.1002/nme.2579} {\bibfield  {journal}
+  {\bibinfo  {journal} {Int. J. Numer. Methods Eng.}\ }\textbf {\bibinfo
+  {volume} {79}},\ \bibinfo {pages} {1309--1331} (\bibinfo {year}
+  {2009})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Dular}\ \emph {et~al.}(1998)\citenamefont {Dular},
   \citenamefont {Geuzaine}, \citenamefont {Henrotte},\ and\ \citenamefont
   {Legros}}]{dular_general_1998}%
@@ -402,34 +527,4 @@
   {\bibfield  {journal} {\bibinfo  {journal} {Mathematika}\ }\textbf {\bibinfo
   {volume} {61}},\ \bibinfo {pages} {475--500} (\bibinfo {year}
   {2015})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Keiser}\ and\ \citenamefont
-  {Klarskov}(2019)}]{keiser_terahertz_2019}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.~R.}\ \bibnamefont
-  {Keiser}}\ and\ \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
-  {Klarskov}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Terahertz
-  {Field} {Confinement} in {Nonlinear} {Metamaterials} and {Near}-{Field}
-  {Imaging}},}\ }\href {\doibase 10.3390/photonics6010022} {\bibfield
-  {journal} {\bibinfo  {journal} {Photonics}\ }\textbf {\bibinfo {volume}
-  {6}},\ \bibinfo {pages} {22} (\bibinfo {year} {2019})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Fan}\ \emph {et~al.}(2013)\citenamefont {Fan},
-  \citenamefont {Hwang}, \citenamefont {Liu}, \citenamefont {Strikwerda},
-  \citenamefont {Sternbach}, \citenamefont {Zhang}, \citenamefont {Zhao},
-  \citenamefont {Zhang}, \citenamefont {Nelson},\ and\ \citenamefont
-  {Averitt}}]{fan_nonlinear_2013}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
-  {Fan}}, \bibinfo {author} {\bibfnamefont {H.~Y.}\ \bibnamefont {Hwang}},
-  \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Liu}}, \bibinfo {author}
-  {\bibfnamefont {A.~C.}\ \bibnamefont {Strikwerda}}, \bibinfo {author}
-  {\bibfnamefont {A.}~\bibnamefont {Sternbach}}, \bibinfo {author}
-  {\bibfnamefont {J.}~\bibnamefont {Zhang}}, \bibinfo {author} {\bibfnamefont
-  {X.}~\bibnamefont {Zhao}}, \bibinfo {author} {\bibfnamefont {X.}~\bibnamefont
-  {Zhang}}, \bibinfo {author} {\bibfnamefont {K.~A.}\ \bibnamefont {Nelson}}, \
-  and\ \bibinfo {author} {\bibfnamefont {R.~D.}\ \bibnamefont {Averitt}},\
-  }\bibfield  {title} {\enquote {\bibinfo {title} {Nonlinear {Terahertz}
-  {Metamaterials} via {Field}-{Enhanced} {Carrier} {Dynamics} in {GaAs}},}\
-  }\href {\doibase 10.1103/PhysRevLett.110.217404} {\bibfield  {journal}
-  {\bibinfo  {journal} {Phys. Rev. Lett.}\ }\textbf {\bibinfo {volume} {110}},\
-  \bibinfo {pages} {217404} (\bibinfo {year} {2013})}\BibitemShut {NoStop}%
 \end{thebibliography}%

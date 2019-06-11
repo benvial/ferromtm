@@ -102,7 +102,7 @@ linenumbers
 
 %%%% Abstract text to be placed here %%%%%%%%%%%%
 \begin{abstract}
- We investigate \co{numerically} the homogenized permittivities of metamaterials made of low index dielectric inclusions in a ferroelectric matrix under
+ We investigate \co{numerically} the homogenized permittivities of \co{composites} made of low index dielectric inclusions in a ferroelectric matrix under
  a static electric field. A refined model is used to take into account the coupling
  between the electrostatic problem and the electric field dependent permittivity of the
  ferroelectric material, leading to a local field enhancement and permittivity change in the ferroelectric.
@@ -130,12 +130,17 @@ linenumbers
  The key requirements for antenna and microwave applications are large tunability and low losses.
  These two characteristics are correlated and one has to find a trade-off for optimal
   device performance, which can be quantified by the so called commutation quality factor
- $K = (n -1)^2/(n\, \tan\delta(0)\,\tan\delta(E))$, where $\tan\delta$ is the loss tangent.\\
+ $K = (n -1)^2/(n\, \tan\delta(0)\,\tan\delta(E))$, where $\tan\delta$ is the loss tangent. 
  These materials have usually high permittivity values even at microwave frequencies,
  often leading to slow response time and impedance mismatch, which can be an issue in some practical
  applications. Thus it has been considered to mix ferroelectric \co{ceramics with} low-index and
  low-loss non-tunable dielectrics in order to reduce both permittivity values and losses, or to
- use porous ceramics to achieve the same goals without unwanted chemical reactions at the boundaries between dissimilar materials.
+ use porous ceramics to achieve the same goals without unwanted chemical reactions at the boundaries between dissimilar materials. \co{In particular, the addition of magnesium oxide in barium strontium titanate (BST) ceramics have been shown to decrease the losses while keeping good tunability \cite{irvin_three-dimensional_2005,chung_low-losses_2008}. Ceramics
+ such as $\rm Pb(Zr,Ti)O_3$ (PZT) and $\rm BaTiO_3$ (BT) have been used as fillers in polymer
+ based composites with high dielectric constant \cite{wang_piezoelectric_2012}. Other mixtures include metal–polymer composites \cite{li_ferroelectric_2013}
+ and electroactive polymers such as poly(vinylidene fluoride) (PVDF) with high index dielectric inclusions \cite{hu_preparation_2015}.
+ }
+
 The effective parameters of those composites have been investigated
 \cite{sherman_ferroelectric-dielectric_2006, jylha_tunability_2008, sherman_tunability_2004, astafiev_can_2003}
 and it has been found that the permittivity can be greatly reduced while losses are much less
@@ -156,7 +161,11 @@ ceramics was studied using a model taking the field enhancement into account at
 the grain boundaries, and the predicted behaviour successfully compared to experimental data \cite{padurariu_field-dependent_2012}.
 Generally, there is a need for refined theoretical and numerical models to explain and design
 tunable materials and composites with tailored nonlinear properties.
-\\
+\co{Note that the general method followed by our coupled model could be applied to other type of tunable
+systems where local field enhancement and amplification is relevant, including for example ferromagnetic metamaterials \cite{carignan_ferromagnetic_2011}, liquid crystals based devices \cite{werner_liquid_2007}, or field-enhanced carrier dynamics in doped semiconductors at other frequency ranges, particularly in the THz and near-infrared
+\cite{keiser_terahertz_2019, fan_nonlinear_2013}.
+}
+
 This study investigates \co{numerically} the effective permittivity of composites made of
  dielectric inclusions in a ferroelectric matrix
 by using a two-scale convergence method \cite{allaire_homogenization_1992,
@@ -167,7 +176,7 @@ applied on the structures, which will result in a local modification of the perm
 in the ferroelectric phase due to the microstructure. As compared to a simple uncoupled model where the
 ferroelectric phase is only modified through the biasing field,
 the resulting effective permittivity, dielectric losses, tunability and
-anisotropy significantly differ. \co{In contrast with} earlier sudies in the
+anisotropy significantly differ. \co{In contrast with} earlier studies in the
 \co{literature} \cite{padurariu_tailoring_2012,padurariu_field-dependent_2012}, we account for
 the non-linear coupling beyond the first iteration and use two-scale
 convergence homogenization analysis to obtain the effective parameters at
@@ -378,7 +387,7 @@ lossless and non dispersive with $\epsd = 3$ while the ferroelectric material fo
 permittivity described in section~\ref{permmodel} and has a constant loss
 tangent $\tan \delta^{\rm f} = 10^{-2}$.
 Equations~(\ref{eq_elstat}) and (\ref{eq_hom_annex}) are solved with a Finite Element
-Method using the open source packages Gmsh \cite{geuzaine_gmsh:_2009} and GetDP \cite{dular_general_1998}.
+Method using the open source packages Gmsh \cite{geuzaine_gmsh_2009} and GetDP \cite{dular_general_1998}.
 In both cases we use a square unit cell $\Omega$ of length $d$ with periodic boundary
 conditions along $x$ and $y$. Second order Lagrange elements are used and the
 solution is computed with a direct solver (MUMPS \cite{amestoy_fully_2001}).
@@ -558,18 +567,13 @@ it would be of great interest to use high contrast homogenization theory
 study this kind of mixtures.
 This would reveal the frequency dependant artificial magnetism due to "micro-resonances"
 in the high index phase and potentially lead to composites with tunable effective permeability.\\
-To finish, the general method followed by this model could be applied to other type of tunable
-systems including for example ferromagnetic materials, liquid crystals, or
- field-enhanced carrier dynamics in doped semiconductors
-\cite{keiser_terahertz_2019}
-\cite{fan_nonlinear_2013}
 
 
 \begin{acknowledgments}
 This work was funded by the Engineering and Physical Sciences Research
-Council (EPSRC), UK, under a grant (EP/P005578/1) 'Adaptive Tools for
+Council (EPSRC), UK, under a grant (EP/P005578/1) "Adaptive Tools for
 Electromagnetics and Materials Modelling to Bridge the Gap between
-Design and Manufacturing (AOTOMAT)'.\\
+Design and Manufacturing (AOTOMAT)".\\
 The authors would like to thanks Henry Giddens for performing the
 measurements of ferroelectric permittivity used in this paper.\\
 %

@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ferromtm.models.bst &#8212; ferromtm 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_pygments.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+<p></p>
+
+
+
+
+
+
+  <div id="navbar" class="navbar navbar-default navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          ferromtm</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../.././reference.html">Documentation</a></li>
+                <li><a href="../../.././auto_examples/index.html">Examples</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Links <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html#indices-and-search">Indices and search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for ferromtm.models.bst</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span>
+<span class="kn">from</span> <span class="nn">ferromtm</span> <span class="k">import</span> <span class="n">rootdir</span>
+
+
+<div class="viewcode-block" id="eps_norma_model"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.bst.eps_norma_model">[docs]</a><span class="k">def</span> <span class="nf">eps_norma_model</span><span class="p">(</span><span class="n">E0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+    <span class="n">E0_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">E0</span><span class="p">)</span>
+    <span class="n">E_</span> <span class="o">=</span> <span class="n">E0_</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">E_</span><span class="p">:</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="n">alpha</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">E</span><span class="p">]</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="n">beta</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">E</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+        <span class="n">P0</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isreal</span><span class="p">(</span><span class="n">x</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">P0</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">P0</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">P0</span> <span class="o">**</span> <span class="mi">4</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">D</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">0</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">E0_</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></div>
+
+
+<span class="c1"># def fun_fit(alpha, E, eps_meas_n):</span>
+<span class="c1">#     eps_model = eps_norma_model(E, alpha)</span>
+<span class="c1">#     err = np.abs(eps_model - eps_meas_n) ** 2</span>
+<span class="c1">#     return np.mean(err) ** 0.5</span>
+
+
+<div class="viewcode-block" id="fun_fit"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.bst.fun_fit">[docs]</a><span class="k">def</span> <span class="nf">fun_fit</span><span class="p">(</span><span class="n">par</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">eps_meas_n</span><span class="p">):</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">par</span>
+    <span class="n">eps_model</span> <span class="o">=</span> <span class="n">eps_norma_model</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">eps_model</span> <span class="o">-</span> <span class="n">eps_meas_n</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span></div>
+
+
+<div class="viewcode-block" id="retrieve_params"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.bst.retrieve_params">[docs]</a><span class="k">def</span> <span class="nf">retrieve_params</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">eps_meas_n</span><span class="p">,</span> <span class="n">par0</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+    <span class="n">cons</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ineq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])}</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span>
+        <span class="n">fun_fit</span><span class="p">,</span> <span class="n">par0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">eps_meas_n</span><span class="p">),</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;disp&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span>
+    <span class="p">)</span>
+    <span class="n">xopt</span> <span class="o">=</span> <span class="n">opt</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;xopt = &quot;</span><span class="p">,</span> <span class="n">xopt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xopt</span></div>
+
+
+<div class="viewcode-block" id="fit"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.bst.fit">[docs]</a><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">fitname</span><span class="p">):</span>
+    <span class="n">meas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+    <span class="n">E_exp</span> <span class="o">=</span> <span class="n">meas</span><span class="p">[</span><span class="s2">&quot;E_exp&quot;</span><span class="p">]</span>
+    <span class="n">eps_norm_exp</span> <span class="o">=</span> <span class="n">meas</span><span class="p">[</span><span class="s2">&quot;eps_norm_exp&quot;</span><span class="p">]</span>
+    <span class="n">eps_exp_0</span> <span class="o">=</span> <span class="n">meas</span><span class="p">[</span><span class="s2">&quot;eps_exp_0&quot;</span><span class="p">]</span>
+    <span class="n">fit_params</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">alpha_opt</span> <span class="o">=</span> <span class="n">retrieve_params</span><span class="p">(</span><span class="n">E_exp</span><span class="p">,</span> <span class="n">eps_norm_exp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">fit_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alpha_opt</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">fitname</span><span class="p">),</span> <span class="n">fit_params</span><span class="o">=</span><span class="n">fit_params</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fit_params</span></div>
+
+
+<div class="viewcode-block" id="epsf_real"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.bst.epsf_real">[docs]</a><span class="k">def</span> <span class="nf">epsf_real</span><span class="p">(</span><span class="n">E_applied</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dc</span><span class="p">:</span>
+        <span class="n">eps00</span> <span class="o">=</span> <span class="mi">3050</span>
+        <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.11957429</span><span class="p">,</span> <span class="mf">0.02415848</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">eps00</span> <span class="o">=</span> <span class="mi">165</span>
+        <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.2403613</span><span class="p">,</span> <span class="mf">0.07910162</span>
+    <span class="k">return</span> <span class="n">eps_norma_model</span><span class="p">(</span><span class="n">E_applied</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">eps00</span></div>
+
+
+<span class="n">E_applied_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+<span class="n">epsilonr_ferroelectric_i</span> <span class="o">=</span> <span class="n">epsf_real</span><span class="p">(</span><span class="n">E_applied_i</span><span class="p">)</span>
+<span class="n">epsilonr_ferroelectric_i_dc</span> <span class="o">=</span> <span class="n">epsf_real</span><span class="p">(</span><span class="n">E_applied_i</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="epsilonr_ferroelectric"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.bst.epsilonr_ferroelectric">[docs]</a><span class="k">def</span> <span class="nf">epsilonr_ferroelectric</span><span class="p">(</span><span class="n">E_applied</span><span class="p">,</span> <span class="n">tandelta</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dc</span><span class="p">:</span>
+        <span class="n">epsi</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric_i_dc</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">epsi</span> <span class="o">=</span> <span class="n">epsilonr_ferroelectric_i</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">E_applied</span><span class="p">,</span> <span class="n">E_applied_i</span><span class="p">,</span> <span class="n">epsi</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">tandelta</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">fit</span><span class="p">(</span><span class="s2">&quot;measurements.npz&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_params.npz&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<div class="container">
+  <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</div>
+<footer class="footer">
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2 text-center">
+        <div class="foot-fa">
+          <a href=https://pypi.org/project/ferromtm>
+            <i class="fab fa-python"></i>
+            pip install me
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="foot-fa">
+            <a href=https://github.com/benvial/ferromtm>
+              <i class="fab fa-github fa-1x"></i>
+              fork me on github
+            </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="footer-copyright">
+    <p>
+      ferromtm version 0.0.1.
+      &copy; Copyright 2019, Benjamin Vial. 
+
+    </p>
+
+  </div>
+
+
+</footer>
+  </body>
+</html>

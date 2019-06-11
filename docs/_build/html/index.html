@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home &#8212; ferromtm 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom_styles.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom_pygments.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/js/custom.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User guide" href="reference.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+<section class="color-header">
+  <div class="container">
+    
+
+    <h1>ferromtm</h1>
+    <h4>Coupled model for ferroelectric dielectric metamaterials</h4>
+  </div>
+</section>
+
+
+
+
+
+  <div id="navbar" class="navbar navbar-default navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          ferromtm</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="./reference.html">Documentation</a></li>
+                <li><a href="./auto_examples/index.html">Examples</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Links <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html#indices-and-search">Indices and search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="project-description"><div class="section" id="coupled-model-and-homogenization-of-ferroelectric-dielectric-metamaterials">
+<h1>Coupled model and homogenization of ferroelectric-dielectric metamaterials.<a class="headerlink" href="#coupled-model-and-homogenization-of-ferroelectric-dielectric-metamaterials" title="Permalink to this headline">¶</a></h1>
+<p>This repository provides the codes to run, postprocess the results and compile the
+article related to this research project.</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Python 3</li>
+<li><a class="reference external" href="http://www.gmsh.info/">Gmsh</a></li>
+<li><a class="reference external" href="http://www.getdp.info/">GetDP</a></li>
+<li>make</li>
+<li>pdflatex and bibtex (for the paper)</li>
+<li>xelatex and biblatex/biber (for the poster)</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>First clone this repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/benvial/ferromtm.git
+</pre></div>
+</div>
+<p>Then create, activate the environment and test it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ferromtm
+make env
+<span class="nb">source</span> activate ferromtm
+make testenv
+</pre></div>
+</div>
+<p>Finally install the required packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make req
+</pre></div>
+</div>
+<p>Alternatively, one can use this docker <a class="reference external" href="https://hub.docker.com/r/benvial/ferromtm">recipe</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -t --rm benvial/ferromtm:latest
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-code">
+<h2>Running the code<a class="headerlink" href="#running-the-code" title="Permalink to this headline">¶</a></h2>
+<p>Make the data (this will take a while, if you have access to a cluster with
+Sun Grid Engine this should be parallelized automatically)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make results
+</pre></div>
+</div>
+</div>
+<div class="section" id="postprocessing-and-plots">
+<h2>Postprocessing and plots<a class="headerlink" href="#postprocessing-and-plots" title="Permalink to this headline">¶</a></h2>
+<p>This will postprocess some of the data</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make postpro
+</pre></div>
+</div>
+</div>
+<div class="section" id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
+<p>Generate plots with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make plots
+</pre></div>
+</div>
+</div>
+<div class="section" id="article">
+<h2>Article<a class="headerlink" href="#article" title="Permalink to this headline">¶</a></h2>
+<p>Run pdflatex and generate the pdf paper</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make paper
+</pre></div>
+</div>
+</div>
+<div class="section" id="poster">
+<h2>Poster<a class="headerlink" href="#poster" title="Permalink to this headline">¶</a></h2>
+<p>Run xelatex and generate the pdf poster</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make poster
+</pre></div>
+</div>
+</div><div class="clearer">
+  <div class="row">
+    <div class="col-md-6">
+      <p class="button">
+        <a type="button" class="btn btn-primary" href="reference.html">
+          Read the doc
+        </a>
+        </p>
+        </div>
+        <div class="col-md-6">
+        <p class="button">
+        <a type="button" class="btn btn-primary" href="auto_examples/index.html">
+          Browse examples
+        </a>
+        </p>
+      </div>
+  </div>
+</div><div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<div class="container">
+  <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</div>
+<footer class="footer">
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2 text-center">
+        <div class="foot-fa">
+          <a href=https://pypi.org/project/ferromtm>
+            <i class="fab fa-python"></i>
+            pip install me
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="foot-fa">
+            <a href=https://github.com/benvial/ferromtm>
+              <i class="fab fa-github fa-1x"></i>
+              fork me on github
+            </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="footer-copyright">
+    <p>
+      ferromtm version 0.0.1.
+      &copy; Copyright 2019, Benjamin Vial. 
+
+    </p>
+
+  </div>
+
+
+</footer>
+  </body>
+</html>

@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex marked_manuscript"] 1560186498 "marked_manuscript.aux" "marked_manuscript.bbl" "marked_manuscript" 1560186499
-  "../biblio.bib" 1560186416 44797 44df2feaa96f9cdf48a2fe861c18b576 ""
+["bibtex marked_manuscript"] 1560269694 "marked_manuscript.aux" "marked_manuscript.bbl" "marked_manuscript" 1560270083
+  "../biblio.bib" 1560269692 59451 dd422fe40dd40a58866b9c84efffec15 ""
   "/usr/share/texmf-dist/bibtex/bst/revtex/aipnum4-1.bst" 1550406587 71946 e545479b1bc8cbb9ec432bb3b5f0199e ""
-  "marked_manuscript.aux" 1560186499 14853 8bed6375cc23e3dddeece4e2f8b9db5d ""
-  "marked_manuscriptNotes.bib" 1560186499 69 7fe5a2a5b0ca4322ba6c6ddff14c7fd3 ""
+  "marked_manuscript.aux" 1560270082 15844 ef14f60fe0ed3ae2d9b7ddb3f9421515 ""
+  "marked_manuscriptNotes.bib" 1560270082 69 7fe5a2a5b0ca4322ba6c6ddff14c7fd3 ""
   (generated)
-  "marked_manuscript.bbl"
   "marked_manuscript.blg"
-["pdflatex"] 1560186498 "marked_manuscript.tex" "marked_manuscript.pdf" "marked_manuscript" 1560186499
+  "marked_manuscript.bbl"
+["pdflatex"] 1560270081 "marked_manuscript.tex" "marked_manuscript.pdf" "marked_manuscript" 1560270083
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1550406775 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1550406775 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1550406775 3332 103109f5612ad95229751940c61aada0 ""
@@ -142,14 +142,14 @@
   "effpar_rand_cpl.png" 1553878912 115286 aaefa7dc4c049fd9056911dc2a0e80f0 ""
   "effpar_rand_uncpl.png" 1553878964 97085 ac7b41e0c8a8b9ad5b772188d29f2553 ""
   "epsilon_fit.pdf" 1554722047 25831 b487ef8c36b6420d42e87ea02ccd9b55 ""
-  "marked_manuscript.aux" 1560186499 14853 8bed6375cc23e3dddeece4e2f8b9db5d ""
-  "marked_manuscript.bbl" 1560186498 26885 bdf8171c037a44928655312154a766b7 "bibtex marked_manuscript"
-  "marked_manuscript.out" 1560186499 848 740e65a8577de2417362116354a8a358 ""
-  "marked_manuscript.tex" 1560186494 33940 6ae24d7e09964281ba8d560b913de15f ""
+  "marked_manuscript.aux" 1560270082 15844 ef14f60fe0ed3ae2d9b7ddb3f9421515 ""
+  "marked_manuscript.bbl" 1560269694 33214 b75a1d01254135a140e222d24065c00d "bibtex marked_manuscript"
+  "marked_manuscript.out" 1560270082 848 740e65a8577de2417362116354a8a358 ""
+  "marked_manuscript.tex" 1560270080 35014 718041e73dae3e2b9765d0d3f01c33ae ""
   "random_samples_f_50percent.pdf" 1554722047 35544 4577c8a592e5dae4a16ec7c4aaddc19e ""
   (generated)
-  "marked_manuscript.log"
+  "marked_manuscriptNotes.bib"
+  "marked_manuscript.aux"
   "marked_manuscript.out"
   "marked_manuscript.pdf"
-  "marked_manuscript.aux"
-  "marked_manuscriptNotes.bib"
+  "marked_manuscript.log"

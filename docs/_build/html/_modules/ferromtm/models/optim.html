@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ferromtm.models.optim &#8212; ferromtm 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom_pygments.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/js/custom.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+<p></p>
+
+
+
+
+
+
+  <div id="navbar" class="navbar navbar-default navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          ferromtm</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../.././reference.html">Documentation</a></li>
+                <li><a href="../../.././auto_examples/index.html">Examples</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Links <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html#indices-and-search">Indices and search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for ferromtm.models.optim</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ferromtm.models.coupled2D</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pytheas.optim</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pytheas</span> <span class="k">import</span> <span class="n">femio</span>
+<span class="kn">from</span> <span class="nn">pytheas.optim</span> <span class="k">import</span> <span class="n">topopt</span>
+<span class="kn">from</span> <span class="nn">pytheas.optim</span> <span class="k">import</span> <span class="n">TopOpt</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">aotomat.tools.plottools</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1"># plt.close(&quot;all&quot;)</span>
+
+<span class="n">eps_interp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+
+
+<span class="c1"># import autograd.numpy as np  # Thinly-wrapped version of Numpy</span>
+<span class="c1"># from autograd import grad as grad_auto</span>
+<span class="c1"># def taylor_sine(x):  # Taylor approximation to sine function</span>
+<span class="c1">#     ca = np.mean(x)</span>
+<span class="c1">#     return ca</span>
+<span class="c1">#</span>
+<span class="c1"># grad_sine = grad(taylor_sine)</span>
+<span class="c1"># print( &quot;Gradient of sin(pi) is&quot;, grad_sine(np.linspace(0,1,100)))</span>
+
+
+<div class="viewcode-block" id="init_pattern"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.optim.init_pattern">[docs]</a><span class="k">def</span> <span class="nf">init_pattern</span><span class="p">():</span>
+    <span class="c1"># # material pattern</span>
+    <span class="n">nmatx</span><span class="p">,</span> <span class="n">nmaty</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">8</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">genmat</span><span class="o">.</span><span class="n">MaterialDensity</span><span class="p">()</span>
+    <span class="n">mat</span><span class="o">.</span><span class="n">xsym</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">mat</span><span class="o">.</span><span class="n">n_x</span><span class="p">,</span> <span class="n">mat</span><span class="o">.</span><span class="n">n_y</span><span class="p">,</span> <span class="n">mat</span><span class="o">.</span><span class="n">n_z</span> <span class="o">=</span> <span class="n">nmatx</span><span class="p">,</span> <span class="n">nmaty</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="n">mat</span><span class="o">.</span><span class="n">p_seed</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">mat_rand</span>
+    <span class="n">mat</span><span class="o">.</span><span class="n">nb_threshold</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># mat.sym8 = True</span>
+    <span class="n">sigma_pat</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">mat</span><span class="o">.</span><span class="n">ratio_filter</span> <span class="o">=</span> <span class="p">[</span><span class="n">sigma_pat</span><span class="p">,</span> <span class="n">sigma_pat</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">mat</span></div>
+
+
+<span class="n">mat</span> <span class="o">=</span> <span class="n">init_pattern</span><span class="p">()</span>
+<span class="n">mat</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">normalized_pattern</span>
+
+<span class="n">parmesh</span> <span class="o">=</span> <span class="mi">21</span>
+
+<span class="n">fem_es</span> <span class="o">=</span> <span class="n">init_es</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">incl</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="n">mat</span><span class="p">,</span> <span class="n">parmesh</span><span class="o">=</span><span class="n">parmesh</span><span class="p">,</span> <span class="n">mesh_refine</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+    <span class="n">fem_es</span><span class="o">.</span><span class="n">getdp_verbose</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">fem_es</span><span class="o">.</span><span class="n">gmsh_verbose</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">fem_es</span><span class="o">.</span><span class="n">python_verbose</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+<span class="n">fem_es</span><span class="o">.</span><span class="n">quad_mesh_flag</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># fem_es.gmsh_verbose = 4</span>
+<span class="n">fem_hom</span> <span class="o">=</span> <span class="n">init_hom</span><span class="p">(</span><span class="n">fem_es</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="o">=</span><span class="s2">&quot;./tmp/test0&quot;</span><span class="p">)</span>
+<span class="n">fem_hom</span><span class="o">.</span><span class="n">pola</span> <span class="o">=</span> <span class="s2">&quot;TM&quot;</span>
+
+<span class="c1"># fem_hom.open_gmsh_gui()</span>
+
+
+<span class="c1"># ##########################################</span>
+<span class="c1"># #########  OPTIMIZATION PARAMETERS  ######</span>
+<span class="c1"># ##########################################</span>
+<span class="n">to</span> <span class="o">=</span> <span class="n">TopOpt</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">)</span>
+<span class="n">to</span><span class="o">.</span><span class="n">type_des</span> <span class="o">=</span> <span class="n">fem_hom</span><span class="o">.</span><span class="n">type_des</span>
+<span class="n">to</span><span class="o">.</span><span class="n">algorithm</span> <span class="o">=</span> <span class="n">topopt</span><span class="o">.</span><span class="n">nlopt</span><span class="o">.</span><span class="n">LD_MMA</span>
+<span class="c1"># to.algorithm = topopt.nlopt.GN_DIRECT_L</span>
+
+<span class="n">to</span><span class="o">.</span><span class="n">typeopt</span> <span class="o">=</span> <span class="s2">&quot;min&quot;</span>  <span class="c1"># type of optimization &quot;min&quot; or &quot;max&quot;</span>
+<span class="n">to</span><span class="o">.</span><span class="n">pmin</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># minimum value</span>
+<span class="n">to</span><span class="o">.</span><span class="n">pmax</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># maximum value</span>
+<span class="n">to</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># interpolation order eps=(eps_min-eps_max)*x^m-eps_min</span>
+<span class="n">to</span><span class="o">.</span><span class="n">ptol_rel</span> <span class="o">=</span> <span class="mf">1.0e-10</span>
+<span class="n">to</span><span class="o">.</span><span class="n">ftol_rel</span> <span class="o">=</span> <span class="mf">1.0e-5</span>
+<span class="n">to</span><span class="o">.</span><span class="n">stopval</span> <span class="o">=</span> <span class="mf">1e-12</span>
+<span class="n">to</span><span class="o">.</span><span class="n">maxeval</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># maximum of function evaluation</span>
+<span class="n">to</span><span class="o">.</span><span class="n">Nitmax</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># maximum number of global iterations</span>
+<span class="n">to</span><span class="o">.</span><span class="n">N0</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># initial global iterations</span>
+<span class="c1"># to.beta = 1  # projection parameter</span>
+<span class="n">lmin</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">to</span><span class="o">.</span><span class="n">rfilt</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">lmin</span>  <span class="c1"># filter radius</span>
+<span class="n">to</span><span class="o">.</span><span class="n">filt_weight</span> <span class="o">=</span> <span class="s2">&quot;gaussian&quot;</span>
+<span class="n">to</span><span class="o">.</span><span class="n">dg_dp</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">to</span><span class="o">.</span><span class="n">eps_interp</span> <span class="o">=</span> <span class="n">eps_interp</span>
+<span class="n">to</span><span class="o">.</span><span class="n">log_opt</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">to</span><span class="o">.</span><span class="n">plotconv</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">to</span><span class="o">.</span><span class="n">force_xsym</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">to</span><span class="o">.</span><span class="n">dp</span> <span class="o">=</span> <span class="mf">1e-7</span>
+<span class="n">to</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">ratio_hdes</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">n_x</span> <span class="o">=</span> <span class="mi">37</span>
+<span class="n">n_y</span> <span class="o">=</span> <span class="mi">36</span>  <span class="c1"># int(n_x * ratio_hdes) +1</span>
+<span class="n">n_z</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">to</span><span class="o">.</span><span class="n">n_x</span><span class="p">,</span> <span class="n">to</span><span class="o">.</span><span class="n">n_y</span><span class="p">,</span> <span class="n">to</span><span class="o">.</span><span class="n">n_z</span> <span class="o">=</span> <span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">,</span> <span class="n">n_z</span>
+
+
+<div class="viewcode-block" id="compute_hom_pb_y"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.optim.compute_hom_pb_y">[docs]</a><span class="k">def</span> <span class="nf">compute_hom_pb_y</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">interp</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">fem_hom</span><span class="o">.</span><span class="n">inclusion_flag</span>
+    <span class="n">interp</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">make_pos_tensor_eps</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="n">interp</span><span class="p">)</span>
+    <span class="n">fem_hom</span><span class="o">.</span><span class="n">y_flag</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># fem_hom.path_pos += &quot; ./tmp/test0/source_adj.pos&quot;</span>
+    <span class="c1"># print(fem_hom.path_pos)</span>
+    <span class="n">fem_hom</span><span class="o">.</span><span class="n">compute_solution</span><span class="p">()</span>
+    <span class="n">fem_hom</span><span class="o">.</span><span class="n">postprocessing</span><span class="p">()</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">fem_hom</span><span class="o">.</span><span class="n">get_vol</span><span class="p">()</span>
+    <span class="n">phi_yy</span> <span class="o">=</span> <span class="n">femio</span><span class="o">.</span><span class="n">load_table</span><span class="p">(</span><span class="n">fem_hom</span><span class="o">.</span><span class="n">tmppath</span><span class="p">(</span><span class="s2">&quot;Phiyy.txt&quot;</span><span class="p">))</span> <span class="o">/</span> <span class="n">V</span>
+    <span class="n">int_inveps_yy</span> <span class="o">=</span> <span class="n">femio</span><span class="o">.</span><span class="n">load_table</span><span class="p">(</span><span class="n">fem_hom</span><span class="o">.</span><span class="n">tmppath</span><span class="p">(</span><span class="s2">&quot;I_inveps_yy.txt&quot;</span><span class="p">))</span> <span class="o">/</span> <span class="n">V</span>
+    <span class="n">eps_hom_xx</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">int_inveps_yy</span> <span class="o">+</span> <span class="n">phi_yy</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;int_inveps_yy = &quot;</span><span class="p">,</span> <span class="n">int_inveps_yy</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;phi_yy = &quot;</span><span class="p">,</span> <span class="n">phi_yy</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">eps_hom_xx</span><span class="p">,</span> <span class="n">fem_hom</span></div>
+
+
+<div class="viewcode-block" id="get_deq_deps"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.optim.get_deq_deps">[docs]</a><span class="k">def</span> <span class="nf">get_deq_deps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interp_method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">):</span>
+    <span class="n">deq_deps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">get_deq_deps</span><span class="p">()</span>
+    <span class="n">x_grid</span><span class="p">,</span> <span class="n">y_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span>
+
+    <span class="n">deq_deps_x</span><span class="p">,</span> <span class="n">deq_deps_y</span> <span class="o">=</span> <span class="n">deq_deps</span>
+    <span class="n">deq_deps_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh2grid</span><span class="p">(</span><span class="n">deq_deps_x</span><span class="p">,</span> <span class="n">interp_method</span><span class="o">=</span><span class="n">interp_method</span><span class="p">)</span>
+    <span class="n">deq_deps_x_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">deq_deps_x</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">x_grid</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">deq_deps_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh2grid</span><span class="p">(</span><span class="n">deq_deps_y</span><span class="p">,</span> <span class="n">interp_method</span><span class="o">=</span><span class="n">interp_method</span><span class="p">)</span>
+    <span class="n">deq_deps_y_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">deq_deps_y</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y_grid</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">deq_deps</span> <span class="o">=</span> <span class="n">deq_deps_x_x</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">deq_deps_y_y</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># deq_deps = deq_deps_y_y.T</span>
+
+    <span class="n">deq_deps_re</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid2mesh</span><span class="p">(</span><span class="n">deq_deps</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+    <span class="n">deq_deps_im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid2mesh</span><span class="p">(</span><span class="n">deq_deps</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+    <span class="n">deq_deps</span> <span class="o">=</span> <span class="n">deq_deps_re</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">deq_deps_im</span>
+    <span class="k">return</span> <span class="n">deq_deps</span></div>
+
+
+<div class="viewcode-block" id="get_sensitivity"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.optim.get_sensitivity">[docs]</a><span class="k">def</span> <span class="nf">get_sensitivity</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">interp_method</span><span class="o">=</span><span class="s2">&quot;cubic&quot;</span><span class="p">):</span>
+    <span class="n">to</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">print_progress</span><span class="p">(</span><span class="s2">&quot;Retrieving sensitivity&quot;</span><span class="p">)</span>
+    <span class="n">adjoint</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">get_adjoint</span><span class="p">()</span>
+    <span class="n">epsilon</span><span class="p">,</span> <span class="n">depsilon_dp</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">make_epsilon</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">deq_deps</span> <span class="o">=</span> <span class="n">get_deq_deps</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">interp_method</span><span class="o">=</span><span class="n">interp_method</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="n">epsilon</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># deq_deps = to.get_deq_deps(interp_method=interp_method) * (-1 / epsilon ** 2)</span>
+    <span class="n">deq_deps</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">sens</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">dg_dp</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">adjoint</span> <span class="o">*</span> <span class="n">deq_deps</span> <span class="o">*</span> <span class="n">depsilon_dp</span><span class="p">)</span>
+    <span class="c1"># plt_field(depsilon_dp, title=&quot;depsilon_dp&quot;)</span>
+    <span class="c1"># plt_field(adjoint, title=&quot;adjoint&quot;)</span>
+    <span class="c1"># plt_field(deq_deps, title=&quot;deq_deps&quot;)</span>
+    <span class="c1"># plt_field(sens, title=&quot;sensitivities&quot;)</span>
+    <span class="k">return</span> <span class="n">sens</span></div>
+
+
+<div class="viewcode-block" id="plt_field"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.optim.plt_field">[docs]</a><span class="k">def</span> <span class="nf">plt_field</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">mesh2grid</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">interp_method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="f_obj"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.optim.f_obj">[docs]</a><span class="k">def</span> <span class="nf">f_obj</span><span class="p">(</span>
+    <span class="n">p</span><span class="p">,</span>
+    <span class="n">grad</span><span class="p">,</span>
+    <span class="n">coupling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">mat</span><span class="o">=</span><span class="n">mat</span><span class="p">,</span>
+    <span class="n">record_cv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">rmtmpdir</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">parmesh</span><span class="o">=</span><span class="n">parmesh</span><span class="p">,</span>
+    <span class="n">sens_ana</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">filt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">proj</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fem_es</span><span class="o">=</span><span class="n">fem_es</span><span class="p">,</span>
+    <span class="n">fem_hom</span><span class="o">=</span><span class="n">fem_hom</span><span class="p">,</span>
+    <span class="n">retgrad</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">sens_ana</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">fem_hom</span><span class="o">.</span><span class="n">adjoint</span> <span class="o">=</span> <span class="n">sens_ana</span>
+    <span class="n">epsilon</span><span class="p">,</span> <span class="n">depsilon_dp</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">make_epsilon</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">epsi</span> <span class="o">=</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">epsilon</span>
+    <span class="n">eps_hom_xx</span><span class="p">,</span> <span class="n">fem_hom</span> <span class="o">=</span> <span class="n">compute_hom_pb_y</span><span class="p">(</span><span class="n">fem_hom</span><span class="p">,</span> <span class="n">epsi</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eps_hom_xx = &quot;</span><span class="p">,</span> <span class="n">eps_hom_xx</span><span class="p">)</span>
+    <span class="c1"># obj0 = to.get_objective()</span>
+    <span class="n">eps_obj</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">eps_obj</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">eps_hom_xx</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eps_obj</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="n">sens_ana</span><span class="p">:</span>
+        <span class="n">sens</span> <span class="o">=</span> <span class="n">get_sensitivity</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sens</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># #</span>
+    <span class="c1"># fem_hom.postpro_fields(filetype=&quot;pos&quot;)</span>
+    <span class="c1"># fem_hom.open_gmsh_gui()</span>
+
+    <span class="c1"># adj = to.get_adjoint()</span>
+    <span class="c1"># plt_field(adj)</span>
+
+    <span class="k">if</span> <span class="n">rmtmpdir</span><span class="p">:</span>
+        <span class="n">fem_hom</span><span class="o">.</span><span class="n">rm_tmp_dir</span><span class="p">()</span>
+        <span class="n">fem_es</span><span class="o">.</span><span class="n">rm_tmp_dir</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">((</span><span class="s2">&quot;   objective =  </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">44</span><span class="p">)</span>
+
+    <span class="n">to</span><span class="o">.</span><span class="n">param_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">to</span><span class="o">.</span><span class="n">tot_obj_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="n">to</span><span class="o">.</span><span class="n">Nit_tot</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">to</span><span class="o">.</span><span class="n">Nit_loc</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">to</span><span class="o">.</span><span class="n">plotconv</span><span class="p">:</span>
+        <span class="n">make_plots</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+
+    <span class="n">grad</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">sens</span>
+    <span class="k">if</span> <span class="n">retgrad</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="p">,</span> <span class="n">grad</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+
+<div class="viewcode-block" id="main_opt"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.optim.main_opt">[docs]</a><span class="k">def</span> <span class="nf">main_opt</span><span class="p">(</span><span class="n">p0</span><span class="p">):</span>
+
+    <span class="c1"># ##### MAIN OPTIMIZATION LOOP ############</span>
+    <span class="n">popt</span><span class="p">,</span> <span class="n">opt_f</span><span class="p">,</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">main_loop_topopt</span><span class="p">(</span><span class="n">f_obj</span><span class="p">,</span> <span class="n">p0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;optimum at &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;with value  = &quot;</span><span class="p">,</span> <span class="n">opt_f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">popt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">to</span><span class="o">.</span><span class="n">threshold_final</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final design&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">to</span><span class="o">.</span><span class="n">force_xsym</span><span class="p">:</span>
+            <span class="n">popt</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">make_xsym</span><span class="p">(</span><span class="n">popt</span><span class="p">)</span>
+        <span class="n">popt_filt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">filter_param</span><span class="p">(</span><span class="n">popt</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">popt</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">get_threshold_design</span><span class="p">(</span><span class="n">popt_filt</span><span class="p">)</span>
+        <span class="n">opt_f</span> <span class="o">=</span> <span class="n">f_obj</span><span class="p">(</span><span class="n">popt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">filt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;optimum at &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;with value  = &quot;</span><span class="p">,</span> <span class="n">opt_f</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">popt</span><span class="p">,</span> <span class="n">opt_f</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">fem_hom</span></div>
+
+
+<div class="viewcode-block" id="make_plots"><a class="viewcode-back" href="../../../ferromtm.models.html#ferromtm.models.optim.make_plots">[docs]</a><span class="k">def</span> <span class="nf">make_plots</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># print(&quot;Plotting&quot;)</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">make_epsilon</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">filt</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+    <span class="n">qtplot</span> <span class="o">=</span> <span class="n">epsilon</span><span class="o">.</span><span class="n">real</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;permittivity&quot;</span>
+    <span class="n">to</span><span class="o">.</span><span class="n">plot_while_solving</span><span class="p">(</span>
+        <span class="n">qtplot</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+        <span class="n">typeplot</span><span class="o">=</span><span class="s2">&quot;interp&quot;</span><span class="p">,</span>
+        <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">interp_method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># define initial density p0</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+    <span class="n">mat</span><span class="o">.</span><span class="n">p_seed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">pattern</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">random_pattern</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p0</span><span class="p">))</span>
+
+    <span class="c1"># out = main_opt(p0)</span>
+
+    <span class="n">fd</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">fd</span><span class="p">:</span>
+        <span class="n">grad_fd</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">f_obj</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]))</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="mf">1e-3</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p0</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iteration </span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p0</span><span class="p">)))</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+            <span class="n">p1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dp</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">f_obj</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]))</span>
+            <span class="n">fd</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">f</span><span class="p">)</span> <span class="o">/</span> <span class="n">dp</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+            <span class="n">grad_fd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+        <span class="n">grad_fd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grad_fd</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s2">&quot;test_grad_fd.npz&quot;</span><span class="p">,</span> <span class="n">grad_fd</span><span class="o">=</span><span class="n">grad_fd</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">grad_fd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;test_grad_fd.npz&quot;</span><span class="p">)[</span><span class="s2">&quot;grad_fd&quot;</span><span class="p">]</span>
+
+    <span class="n">f</span><span class="p">,</span> <span class="n">grad_adj</span> <span class="o">=</span> <span class="n">f_obj</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p0</span><span class="p">)),</span> <span class="n">retgrad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">plt_field</span><span class="p">(</span><span class="n">grad_fd</span><span class="p">,</span> <span class="s2">&quot;sens fd&quot;</span><span class="p">)</span>
+
+    <span class="c1"># plt_field(grad_adj, &quot;sens adj&quot;)</span>
+
+    <span class="n">adjoint</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">get_adjoint</span><span class="p">()</span>
+    <span class="n">epsilon</span><span class="p">,</span> <span class="n">depsilon_dp</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">make_epsilon</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">deq_deps</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">get_deq_deps</span><span class="p">(</span><span class="n">interp_method</span><span class="o">=</span><span class="s2">&quot;cubic&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="n">epsilon</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># deq_deps = get_deq_deps(to, interp_method=&quot;cubic&quot;)* (epsilon )</span>
+    <span class="n">deq_deps</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">sens</span> <span class="o">=</span> <span class="n">to</span><span class="o">.</span><span class="n">dg_dp</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">adjoint</span> <span class="o">*</span> <span class="n">deq_deps</span> <span class="o">*</span> <span class="n">depsilon_dp</span><span class="p">)</span>
+    <span class="c1"># plt_field(depsilon_dp, title=&quot;depsilon_dp&quot;)</span>
+    <span class="n">plt_field</span><span class="p">(</span><span class="n">adjoint</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;adjoint&quot;</span><span class="p">)</span>
+    <span class="c1"># plt_field(deq_deps, title=&quot;deq_deps&quot;)</span>
+    <span class="n">plt_field</span><span class="p">(</span><span class="n">sens</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;sens adj&quot;</span><span class="p">)</span>
+    <span class="c1"># plt_field(epsilon, title=&quot;epsilon&quot;)</span>
+    <span class="n">plt_field</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="n">epsilon</span> <span class="o">**</span> <span class="mi">2</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;(-1/epsilon ** 2)&quot;</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># test =  adjoint * deq_deps</span>
+    <span class="c1"># plt_field(test, title=&quot;sensitivities&quot;)</span>
+
+    <span class="c1"># p0 = 0.5*np.ones_like(p0)</span>
+    <span class="c1"># p0=np.random.random(len(p0))</span>
+    <span class="c1"># Ebias = 0</span>
+    <span class="c1"># c = f_obj(p0, f_obj,coupling=True, rmtmpdir=False)</span>
+    <span class="c1"># out = main_opt(p0)</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<div class="container">
+  <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</div>
+<footer class="footer">
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2 text-center">
+        <div class="foot-fa">
+          <a href=https://pypi.org/project/ferromtm>
+            <i class="fab fa-python"></i>
+            pip install me
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="foot-fa">
+            <a href=https://github.com/benvial/ferromtm>
+              <i class="fab fa-github fa-1x"></i>
+              fork me on github
+            </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="footer-copyright">
+    <p>
+      ferromtm version 0.0.1.
+      &copy; Copyright 2019, Benjamin Vial. 
+
+    </p>
+
+  </div>
+
+
+</footer>
+  </body>
+</html>

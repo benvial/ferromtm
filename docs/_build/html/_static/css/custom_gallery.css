@@ -1,0 +1,115 @@
+@import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Dosis Regular'), local('Dosis-Regular'), url(https://fonts.gstatic.com/s/dosis/v7/HhyaU5sn9vOmLzloC_A.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inconsolata Regular'), local('Inconsolata-Regular'), url(https://fonts.gstatic.com/s/inconsolata/v16/QldKNThLqRwH-OJ1UHjlKGlZ5q0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Staatliches';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Staatliches Regular'), local('Staatliches-Regular'), url(https://fonts.gstatic.com/s/staatliches/v2/HI_OiY8KO6hCsQSoAPmtMYebvpU.ttf) format('truetype');
+}
+div.sphx-glr-download a {
+  background-color: #443c3e;
+  background-image: none;
+  border-radius: 0px;
+  border: 0px solid #443c3e;
+  color: #ededed;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0.8em;
+  text-align: center;
+  font-size: 11pt;
+  max-width: 400px;
+}
+div.sphx-glr-download a:hover {
+  box-shadow: none;
+  text-decoration: none;
+  background-image: none;
+  background-color: #312b2d;
+  max-width: 400px;
+}
+div.sphx-glr-download code.download {
+  display: inline-block;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  border: none;
+  background: none;
+  color: #ffffff;
+  max-width: 400px;
+  font-family: "Dosis", Helvetica, Arial, sans-serif;
+  font-size: 12pt;
+}
+.sphx-glr-thumbcontainer {
+  background: #ffffff;
+  border: solid #ededed 1px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 0px;
+  box-shadow: none;
+  float: left;
+  margin: 5px;
+  min-height: 230px;
+  padding-top: 5px;
+  position: relative;
+}
+/*.sphx-glr-thumbcontainer {
+    border-radius: 0px;
+}*/
+div.sphx-glr-footer {
+  text-align: center;
+}
+.sphx-glr-script-out .highlight pre {
+  background-color: #ededed;
+  border: 0;
+  max-height: 30em;
+  overflow: auto;
+  padding-left: 1ex;
+  margin: 0px;
+  word-break: break-word;
+}
+.sphx-glr-signature {
+  visibility: hidden;
+}
+.sphx-glr-thumbcontainer:hover {
+  opacity: 1;
+  transition: 0.5s ease;
+  border: none;
+  box-shadow: 0 0 15px rgba(113, 113, 113, 0.5);
+}
+.rst-content .section > img,
+.rst-content .section > a > img {
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: solid #ededed 1px;
+}
+.alert-info {
+  background-image: none;
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: #443c3e;
+  border-radius: 0px;
+  border: 0px;
+  border-left: 4px solid #4f687d;
+  border-right: none;
+  padding-left: -4px;
+  box-shadow: none;
+  text-decoration: italic;
+}
+.sphx-glr-thumbcontainer[tooltip]:hover::before,
+.sphx-glr-thumbcontainer[tooltip]:hover::after {
+  background-color: #443c3e;
+  border: none;
+}
+.sphx-glr-script-out .highlight pre {
+  background-color: #ededed;
+}

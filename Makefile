@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: clean lint req data paper
+.PHONY: clean lint req data paper poster
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -107,7 +107,7 @@ less:
 
 ## Make html doc with Sphinx
 doc: cleandoc
-	cd docs && sphinx-apidoc -f -o . ../$(PROJECT_NAME) && make html
+	source activate $(PROJECT_NAME) && cd docs && sphinx-apidoc -f -o . ../$(PROJECT_NAME) && make html
 
 ## Clean html doc with Sphinx
 cleandoc:
@@ -196,7 +196,11 @@ plots: figbst effparper plotconvper plotconvrand epsrand effparrand
 
 ## Make the paper
 paper:
-	cd ./paper && make
+	cd ./paper/arxiv && make pdf file=marked_manuscript && make clean
+
+## Make the poster
+poster:
+	cd ./poster && make pdf && make clean
 
 ## Build the docker container
 dockbuild:

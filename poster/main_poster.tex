@@ -39,7 +39,7 @@ School of Electronic Engineering \& Computer Science, Queen Mary, University of 
 
   \begin{column}{.48\columnwidth}
     Metamaterials consisting of periodic and random arrays of rods
-      are considered for transverse electric polarization case
+      are considered for the transverse electric polarization case
       and we study their effective permittivity, losses, electrically induced anisotropy
       and tunability by a two scale convergence homogenization method.
   \end{column}
@@ -68,7 +68,7 @@ School of Electronic Engineering \& Computer Science, Queen Mary, University of 
     phase shifters, tunable power splitters, filters, voltage controlled oscillators and
     matching networks \cite{tagantsev_ferroelectric_2018}, and the key requirements are large tunability and low losses.
      These materials have high permittivity values even at microwave frequencies, which can be an issue in some practical
-     applications. Thus it has been considered to mix ferroelectrics to low-index and
+     applications. Thus it has been considered to mix ferroelectrics with low-index and
      low-loss non-tunable dielectrics in order to reduce both permittivity values and losses, or to
      use porous ceramics \cite{sherman_ferroelectric-dielectric_2006,padurariu_tailoring_2012}.
 
@@ -155,13 +155,12 @@ itself depends on the electric field through \equ{eq_epsf}.
 \begin{column}{.64\columnwidth}
   \mysubtitle{Homogenization}
   Two scale convergence homogenization \cite{allaire_homogenization_1992, guenneau_homogenization_2000}, TE case:
-  solutions $\psi_j$ of two annex problems
-  % $\mathcal P_j$, $j=\{1, 2\}$:
+  solutions $\psi_j$ of two annex problems $\mathcal P_j$, $j=\{1, 2\}$:
   \begin{equation}
    \div \left[ \xitens \grad(\psi_j + r_j) \right] = 0,
    \label{eq_hom_annex}
   \end{equation}
-  where $\B r = (x, y)^{\rm T}$ and $\xitens=\epstens^{\rm T}/ {\rm det }(\epstens)$.
+  where $\B r = (x, y)^{\rm T}$ and $\xitens=\epstens^{\rm T}/ {\rm det }(\epstens)$.\\
   The homogenized tensor $\xihom$ is obtained with:
   \begin{equation}
    \xihom = \langle \xitens \rangle + \B \phi,
@@ -192,7 +191,7 @@ itself depends on the electric field through \equ{eq_epsf}.
 
 \mysubtitle{Open source numerical implementation}
 Equations~(\ref{eq_elstat}) and (\ref{eq_hom_annex}) are solved with a Finite Element
-Method using the freewares Gmsh \cite{geuzaine_gmsh:_2009} and GetDP \cite{dular_general_1998} driven by a Python package.
+Method using the libre software Gmsh \cite{geuzaine_gmsh_2009} and GetDP \cite{dular_general_1998} driven by a Python package.
 
 \end{posterblock}
 \end{textblock*}
@@ -281,9 +280,9 @@ $a = \varepsilon_{xx}(E)/\varepsilon_{yy}(E)$
 \myblocktitle{Acknowledgments}{fresnelgreenblue}
 \color{fresnelblack}
 This work was funded by the Engineering and Physical Sciences Research
-Council (EPSRC), UK, under a grant (EP/P005578/1) 'Adaptive Tools for
+Council (EPSRC), UK, under a grant (EP/P005578/1) \textit{"Adaptive Tools for
 Electromagnetics and Materials Modelling to Bridge the Gap between
-Design and Manufacturing (AOTOMAT)'
+Design and Manufacturing (AOTOMAT)"}
 \end{textblock*}
 %
 

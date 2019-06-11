@@ -16,7 +16,8 @@ Requirements
 - Gmsh_
 - GetDP_
 - make
-- pdflatex
+- pdflatex and bibtex (for the paper)
+- xelatex and biblatex/biber (for the poster)
 
 Installation
 ++++++++++++
@@ -59,8 +60,8 @@ Alternatively, one can use this docker recipe_:
 Running the code
 ++++++++++++++++
 
-Make the data (this will take a while, if you have acces to a cluster with
-SGE this would be parallelized automatically)
+Make the data (this will take a while, if you have access to a cluster with
+Sun Grid Engine this should be parallelized automatically)
 
 .. code-block:: bash
 
@@ -91,8 +92,18 @@ Generate plots with:
 Article
 +++++++
 
-Run latex and generate the pdf paper
+Run pdflatex and generate the pdf paper
 
 .. code-block:: bash
 
   make paper
+
+
+Poster
++++++++
+
+Run xelatex and generate the pdf poster
+
+.. code-block:: bash
+
+  make poster
