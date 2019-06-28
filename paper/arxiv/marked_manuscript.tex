@@ -73,17 +73,21 @@ linenumbers
 
 
 %
-% \usepackage[outdir=./]{epstopdf}
-% \graphicspath{{./}{../../data/figures/}}
+\usepackage[outdir=./]{epstopdf}
+\graphicspath{{./}{../../data/figures/}}
 
 \begin{document}
 
 %%%% Article title to be placed here
 \title{\co{Enhanced tunability in ferroelectric composites through local field enhancement and the effect of disorder}}
-\author{Benjamin Vial and Yang Hao}
+\author{Benjamin Vial}
+\email{b.vial@qmul.ac.uk}
+\author{Yang Hao}
+\email{y.hao@qmul.ac.uk}
 
 %%%%%%%%% Insert author address here
 \affiliation{School of Engineering and Computer Science, Queen Mary, University of London, London, E1 4NS, United Kingdom}
+\date{\today}
 
 % %%%% Subject entries to be placed here %%%%
 % \subject{Electromagnetism, Computer modelling and simulation, Applied mathematics}
@@ -130,7 +134,7 @@ linenumbers
  The key requirements for antenna and microwave applications are large tunability and low losses.
  These two characteristics are correlated and one has to find a trade-off for optimal
   device performance, which can be quantified by the so called commutation quality factor
- $K = (n -1)^2/(n\, \tan\delta(0)\,\tan\delta(E))$, where $\tan\delta$ is the loss tangent. 
+ $K = (n -1)^2/(n\, \tan\delta(0)\,\tan\delta(E))$, where $\tan\delta$ is the loss tangent.
  These materials have usually high permittivity values even at microwave frequencies,
  often leading to slow response time and impedance mismatch, which can be an issue in some practical
  applications. Thus it has been considered to mix ferroelectric \co{ceramics with} low-index and
@@ -180,7 +184,14 @@ anisotropy significantly differ. \co{In contrast with} earlier studies in the
 \co{literature} \cite{padurariu_tailoring_2012,padurariu_field-dependent_2012}, we account for
 the non-linear coupling beyond the first iteration and use two-scale
 convergence homogenization analysis to obtain the effective parameters at
-higher frequencies, instead of a capacitance-based model.
+higher frequencies, instead of a capacitance-based model \co{valid in the static regime.
+This is an important point, as contrarily to most homogenization procedures that are based on a
+quasi-static approximation, the two scale convergence method fixes the frequency and lets the characteristic
+size of the system (the periodicity of the composites) tend to zero \cite{guenneau_homogenization_2000}. This asymptotic analysis allows one to study the frequency dependence of the effective parameters.
+In addition, analytical models for the effective permittivity routinely employed in the literature
+such as Maxwell-Garnett or Bruggeman theories are limited to a few canonical shapes of the inclusions, and
+cannot handle arbitrary geometries and media with spatially varying properties. This last point is
+of particular importance in the context of this study since we have to account for the field induced local permittivity change.}\\
 \co{The model we developed has been implemented with the finite element method (FEM)
 and we realise a systematic computational study of ferroelecric-dielectric mixtures.
 First, we consider} metamaterials consisting of a square array of parallel
@@ -274,12 +285,14 @@ of permittivity at microwaves.\\
  \caption{Fitting parameters to model (\ref{eq_epsf}) for the measured permittivity values as a function
   of applied electric field shown on \fig{fig1}. }
  \label{table_params_fit}
+ \begin{ruledtabular}
  \begin{tabular}{llll}
+  case        & $\epsf(0)$ & $\alpha$ ($\rm \mu m^2/V^2$) & $\beta$ ($\rm \mu m^4/V^4$) \\
   \hline
-  case        & $\epsf(0)$ & $\alpha$ ($\rm \mu m^2/V^2$) & $\beta$ ($\rm \mu m^4/V^4$) \\ \hline
   static      & 3050       & 0.120                        & 0.024                       \\
-  $f=3.8$ GHz & 165        & 0.240                        & 0.079                       \\\hline
+  $f=3.8$ GHz & 165        & 0.240                        & 0.079                       \\
  \end{tabular}
+ \end{ruledtabular}
 \end{table}
 
 
@@ -397,7 +410,7 @@ solution is computed with a direct solver (MUMPS \cite{amestoy_fully_2001}).
 
 \begin{figure*}[!t]
  \centering
- \includegraphics[width=0.75\textwidth]{effpar_rand_cpl.png}
+ \includegraphics[width=0.75\textwidth]{effpar_rand_cpl}
  \caption{Effective parameters of the pseudo-random composites as a function of the
   applied electric field for various filling fraction of dielectric, when the
   coupling is taken into account.
@@ -445,7 +458,8 @@ the rearrangement of the electrostatic field surrounding the inclusion and its
 concentration in some region will cause a higher permittivity change locally.
 The relative strength of those phenomena is governed by the shape of the inclusion and its permittivity
 and so it is envisioned that the performance of the composites might be enhanced by engineering
-their microstructure.
+their microstructure. \co{Those observations are consistent with previously published numerical and experimental results \cite{padurariu_tailoring_2012}
+ where the local field enhancement in porous ferroelectrics has been shown to possibly increase tunability with reducing permittivity for small porosity levels. Our appraoch also agrees with an analytical spherical inclusion model predicting an increase of the tunability with the dilution of the ferroelectric \cite{sherman_ferroelectric-dielectric_2006}.}\\
 The geometry of the unit cell is symmetric so the homogenized material is
 isotropic when no field is applied.
 But when the sample is biased, the permittivity distribution becomes asymmetric due
@@ -526,7 +540,7 @@ decreases with increasing dielectric concentration.
 
 \begin{figure*}[h!]
  \centering
- \includegraphics[width=0.8\textwidth]{effpar_rand_uncpl.png}
+ \includegraphics[width=0.8\textwidth]{effpar_rand_uncpl}
  \caption{Effective parameters of the random 2D mixtures as a function of the
   applied electric field for various filling fraction of dielectric, when the
   coupling is neglected.

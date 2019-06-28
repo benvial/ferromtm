@@ -29,7 +29,7 @@ def init_pattern():
 mat = init_pattern()
 mat.pattern = mat.normalized_pattern
 
-parmesh = 21
+parmesh = 6
 
 fem_es = init_es(0, 0, incl=False, mat=mat, parmesh=parmesh, mesh_refine=False)
 
@@ -60,12 +60,12 @@ to.m = 1  # interpolation order eps=(eps_min-eps_max)*x^m-eps_min
 to.ptol_rel = 1.0e-10
 to.ftol_rel = 1.0e-5
 to.stopval = 1e-6
-to.maxeval = 3  # maximum of function evaluation
+to.maxeval = 22  # maximum of function evaluation
 to.Nitmax = 1  # maximum number of global iterations
 to.N0 = 0  # initial global iterations
 # to.beta = 1  # projection parameter
 lmin = 1
-to.rfilt = 0.0 * lmin  # filter radius
+to.rfilt = 0.05 * lmin  # filter radius
 to.filt_weight = "gaussian"
 to.dg_dp = 0
 to.eps_interp = eps_interp
@@ -254,6 +254,7 @@ def make_plots(to, p, filt=True, proj=True):
 
 
 def get_grad_fd(p0, para=False):
+    print("computing gradient with finite differences")
     f, _ = objectivefunc(p0)
     dp = 1e-6
     nvar = len(p0)
@@ -276,7 +277,7 @@ def get_grad_fd(p0, para=False):
 
 
 if __name__ == "__main__":
-    fd = False
+    fd = True
     partype = "gridmap"
     # partype = "multiprocessing"
     objectivefuncpara = parallel(objectivefunc, partype=partype)
@@ -286,7 +287,7 @@ if __name__ == "__main__":
     p0 = to.random_pattern(mat)
     print(len(p0))
 
-    # out = main_opt(p0, fd=fd)
+    out = main_opt(p0, fd=fd)
 
     # dasda
 

@@ -119,7 +119,16 @@ def ref_mesh(fem):
     return fem
 
 
-def init_es(f, E_bias, incl=True, mat=None, parmesh=20, mesh_refine=True, tmp_dir=None):
+def init_es(
+    f,
+    E_bias,
+    incl=True,
+    mat=None,
+    parmesh=20,
+    mesh_refine=True,
+    tmp_dir=None,
+    quad=False,
+):
     r = (f / pi) ** (1 / 2)
     #####################################
     # # electrostatics
@@ -135,7 +144,7 @@ def init_es(f, E_bias, incl=True, mat=None, parmesh=20, mesh_refine=True, tmp_di
     fem_es.type_des = "elements"
     fem_es.inclusion_flag = incl
     # if not incl:
-    # fem_es.quad_mesh_flag=True
+    fem_es.quad_mesh_flag = quad
     fem_es.dx = 1
     fem_es.dy = 1
     fem_es.dz = 1
@@ -402,7 +411,6 @@ def main(
     id = np.ones(nvar)
     if incl:
         epsi = id * eps_f, id * eps_f0, id * eps_f0
-
     else:
         id = mat2des(fem_es)
         epsi_xx = np.ones_like(id, dtype=complex) * eps_incl

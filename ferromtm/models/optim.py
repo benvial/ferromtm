@@ -6,7 +6,7 @@ from pytheas.optim import TopOpt
 import tempfile
 from aotomat.tools.plottools import *
 
-# plt.close("all")
+plt.close("all")
 
 eps_interp = [1, 21]
 
@@ -38,12 +38,12 @@ def init_pattern():
 mat = init_pattern()
 mat.pattern = mat.normalized_pattern
 
-parmesh = 21
+parmesh = 4
 
 fem_es = init_es(0, 0, incl=False, mat=mat, parmesh=parmesh, mesh_refine=False)
+fem_es.rm_tmp_dir()
 
-
-debug = False
+debug = True
 if debug:
     fem_es.getdp_verbose = 4
     fem_es.gmsh_verbose = 4
@@ -51,9 +51,15 @@ if debug:
 
 
 fem_es.quad_mesh_flag = True
+# fem_es.ignore_periodicity = True
 # fem_es.gmsh_verbose = 4
 fem_hom = init_hom(fem_es, tmp_dir="./tmp/test0")
+
+#
 fem_hom.pola = "TM"
+# fem_hom.ignore_periodicity = True
+# fem_hom.make_mesh(other_option="-tol 1e-6")
+# fem_hom.initialize()
 
 # fem_hom.open_gmsh_gui()
 
@@ -106,6 +112,7 @@ def compute_hom_pb_y(fem_hom, epsi, verbose=False):
     # fem_hom.path_pos += " ./tmp/test0/source_adj.pos"
     # print(fem_hom.path_pos)
     fem_hom.compute_solution()
+
     fem_hom.postprocessing()
     V = fem_hom.get_vol()
     phi_yy = femio.load_table(fem_hom.tmppath("Phiyy.txt")) / V
@@ -144,7 +151,7 @@ def get_sensitivity(to, p, filt=True, proj=True, interp_method="cubic"):
     epsilon, depsilon_dp = to.make_epsilon(p, filt=filt, proj=proj, grad=True)
     deq_deps = get_deq_deps(to, interp_method=interp_method) * (-1 / epsilon ** 2)
     # deq_deps = to.get_deq_deps(interp_method=interp_method) * (-1 / epsilon ** 2)
-    deq_deps = 1
+    # deq_deps = 1
     sens = to.dg_dp + np.real(adjoint * deq_deps * depsilon_dp)
     # plt_field(depsilon_dp, title="depsilon_dp")
     # plt_field(adjoint, title="adjoint")
@@ -186,6 +193,7 @@ def f_obj(
     epsi = epsilon, epsilon, epsilon
     eps_hom_xx, fem_hom = compute_hom_pb_y(fem_hom, epsi, verbose=verbose)
     print("eps_hom_xx = ", eps_hom_xx)
+
     # obj0 = to.get_objective()
     eps_obj = 7
     obj = np.abs(1 / eps_obj - 1 / eps_hom_xx) ** 2 * eps_obj ** 2
@@ -197,6 +205,7 @@ def f_obj(
     # #
     # fem_hom.postpro_fields(filetype="pos")
     # fem_hom.open_gmsh_gui()
+    # csc
 
     # adj = to.get_adjoint()
     # plt_field(adj)
@@ -298,11 +307,11 @@ if __name__ == "__main__":
     epsilon, depsilon_dp = to.make_epsilon(p0, filt=True, proj=True, grad=True)
     deq_deps = to.get_deq_deps(interp_method="cubic") * (-1 / epsilon ** 2)
     # deq_deps = get_deq_deps(to, interp_method="cubic")* (epsilon )
-    deq_deps = 1
+    deq_deps = -1 / epsilon ** 2
     sens = to.dg_dp + np.real(adjoint * deq_deps * depsilon_dp)
-    # plt_field(depsilon_dp, title="depsilon_dp")
+    plt_field(depsilon_dp, title="depsilon_dp")
     plt_field(adjoint, title="adjoint")
-    # plt_field(deq_deps, title="deq_deps")
+    plt_field(deq_deps, title="deq_deps")
     plt_field(sens, title="sens adj")
     # plt_field(epsilon, title="epsilon")
     plt_field((-1 / epsilon ** 2), title="(-1/epsilon ** 2)")
