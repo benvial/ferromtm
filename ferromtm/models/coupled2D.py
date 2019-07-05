@@ -37,10 +37,9 @@ data_folder = os.path.join(rootdir, "data", "results")
 mat_folder = os.path.join(rootdir, "data", "mat")
 
 
-def ellipse(Rinclx, Rincly, rot_incl, x0, y0):
+def ellipse(Rinclx, Rincly, rot_incl, x0, y0, nt=360):
     c, s = np.cos(rot_incl), np.sin(rot_incl)
     Rot = np.array([[c, -s], [s, c]])
-    nt = 360
     theta = np.linspace(-pi, pi, nt)
     x = Rinclx * np.sin(theta)
     y = Rincly * np.cos(theta)
@@ -49,8 +48,8 @@ def ellipse(Rinclx, Rincly, rot_incl, x0, y0):
     return points
 
 
-def circle(R, x0, y0):
-    return ellipse(R, R, 0, x0, y0)
+def circle(R, x0, y0, nt=360):
+    return ellipse(R, R, 0, x0, y0, nt=nt)
 
 
 def build_incl(fem, r):
@@ -575,8 +574,12 @@ if __name__ == "__main__":
     # main_circle_conv(params[104])
     f = 0.5  # pi * 0.4 ** 2
     Ebias = 1
-    eps_hom, epsi, E, fem_hom, fem_es = main_circle_pattern(
-        [Ebias, f], coupling=True, rmtmpdir=False
+    # eps_hom, epsi, E, fem_hom, fem_es = main_circle_pattern(
+    #     [Ebias, f], coupling=True, rmtmpdir=False
+    # )
+
+    eps_hom, epsi, E, fem_hom, fem_es = main(
+        0.3, 1, coupling=False, incl=True, rmtmpdir=False
     )
 
     # main_circle(params[2], save=False, coupling=True)
