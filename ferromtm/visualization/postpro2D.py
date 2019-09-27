@@ -78,6 +78,11 @@ def load_results():
     )
 
 
+norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl, Knorm_lin, Knorm_nl, = (
+    load_results()
+)
+
+
 def plot_eff_par(fig, ax):
     ax[0][0].plot(Ebias, norm_eps, ls="--")
     ax[0][0].set_prop_cycle(None)
@@ -178,9 +183,6 @@ def plot_eff_cqf(fig, ax):
 
 if __name__ == "__main__":
 
-    norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl, Knorm_lin, Knorm_nl, = (
-        load_results()
-    )
     plt.close("all")
     fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(6.7, 3.8))
     plot_eff_par(fig, ax)
