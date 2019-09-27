@@ -1,0 +1,7 @@
+thicknes of sample 0.6mm
+
+electrode wide 4.4mm
+gap 3.2 
+
+for software thickness is 3.2 
+area 4.4x0.6 equivelent diameter 1.83

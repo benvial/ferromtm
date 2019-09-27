@@ -90,7 +90,9 @@ Function{
     /* E_bias[Omega_source] = E_static * edir[]; */
     /* E_bias[Omega_nosource]  = 0 * edir[]; */
 
-    E_bias[] = E_static * edir[];
+    lx = space2pml_L + space2pml_R + hx_des + 2*h_pml;
+
+    E_bias[] = 0*E_static * edir[];
     /* E_bias[]  = Vector[ScalarField[XYZ[], 0, 1 ]{4}, ScalarField[XYZ[], 0, 1 ]{6}, 0]; */
     /* xsi[Omega] = TensorDiag[1/CompYY[epsilonr[]], 1/CompXX[epsilonr[]],1]; */
 
@@ -118,8 +120,9 @@ Function{
 Constraint {
   { Name Dirichlet; Type Assign;
     Case {
-      { Region SurfBlochLeft; Value 0.; }
       { Region SurfBlochRight; Value 0.; }
+      { Region SurfBlochLeft; Value E_static*lx; }
+      /* { Region SurfBlochLeft; Value 1; } */
       /* { Region Box_L; Value -1.; } */
     }
   }
@@ -182,12 +185,12 @@ FunctionSpace {
   { Name Hgrad; Type Form0;
     BasisFunction {
       { Name sn;  NameOfCoef un;  Function BF_Node;    Support Region[Omega]; Entity NodesOf[Omega]; }
-      { Name sn2; NameOfCoef un2; Function BF_Node_2E; Support Region[Omega]; Entity EdgesOf[Omega]; }
+      /* { Name sn2; NameOfCoef un2; Function BF_Node_2E; Support Region[Omega]; Entity EdgesOf[Omega]; } */
      }
     Constraint {
       { NameOfCoef un;  EntityType NodesOf ; NameOfConstraint Dirichlet; }
       /* { NameOfCoef un;  EntityType NodesOf ; NameOfConstraint Bloch; } */
-      { NameOfCoef un2; EntityType EdgesOf ; NameOfConstraint Dirichlet; }
+      /* { NameOfCoef un2; EntityType EdgesOf ; NameOfConstraint Dirichlet; } */
       /* { NameOfCoef un2; EntityType EdgesOf ; NameOfConstraint Bloch; } */
    }
   }

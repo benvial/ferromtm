@@ -99,9 +99,9 @@ class FemModel(BaseFEM):
             argstr=argstr,
         )
 
-    def postpro_fields(self, filetype="txt"):
-        self.print_progress("Postprocessing fields")
-        self.postpro_choice("postop_fields", filetype)
+    # def postpro_fields(self, filetype="txt"):
+    #     self.print_progress("Postprocessing fields")
+    #     self.postpro_choice("postop_fields", filetype)
 
     def postpro_electrostatic_field(self):
         self.print_progress("Postprocessing electrostatic field")
@@ -119,7 +119,3 @@ class FemModel(BaseFEM):
         E = femio.load_table_vect(self.tmp_dir + "/" + "int_Efield.txt")
         P = femio.load_table_vect(self.tmp_dir + "/" + "int_polarization.txt")
         return np.array(E), np.array(P)
-
-
-if __name__ == "__main__":
-    print("This is the femmodel module")

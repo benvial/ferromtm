@@ -196,7 +196,7 @@ plots: figbst effparper plotconvper plotconvrand epsrand effparrand
 
 ## Make the paper
 paper:
-	cd ./paper/arxiv && make pdf file=marked_manuscript && make clean
+	cd ./paper && make pdf file=manuscript && make clean
 
 ## Make the poster
 poster:

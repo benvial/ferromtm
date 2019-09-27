@@ -14,6 +14,7 @@ from ferromtm.tools.utils import *
 from ferromtm.models.theo import *
 
 from pytheas.homogenization import *
+from theo import *
 
 if __name__ == "__main__":
 
@@ -27,7 +28,6 @@ if __name__ == "__main__":
 
     fem.parmesh = 11
     fem.parmesh_des = 11
-
     fem.parmesh_incl = 11
 
     fem.E_static = 1
@@ -49,15 +49,16 @@ if __name__ == "__main__":
 
     fem.inclusion_flag = True
 
-    dx, dy = 1.6, 1.6
+    r = 0.5 * 1.3
+    dholes = 0.6
+
+    dx, dy = 2 * r + dholes, 2 * r + dholes
     nb_inclx, nb_incly = 2, 3
 
     fem.hx_des = nb_inclx * dx
     fem.hy_des = nb_incly * dy
     nb_incl = nb_inclx * nb_incly
     fem.nb_incl = nb_incl
-
-    r = 0.5 * 1.1
 
     # Rx = (0.1 + np.random.random(nb_incl) * 0.3) * dx
     # Ry = (0.1 + np.random.random(nb_incl) * 0.3) * dy
@@ -81,6 +82,8 @@ if __name__ == "__main__":
     if fem.inclusion_flag:
         i = 0
         for Rinclx, Rincly, rot_incl, x0, y0 in zip(Rx, Ry, rot_, X0, Y0):
+            # x0 += (1 - 2 * np.random.rand()) * Rinclx / 3
+            # y0 += (1 - 2 * np.random.rand()) * Rincly / 3
             points = ellipse(Rinclx, Rincly, rot_incl, x0, y0)
             fem.inclusion_filename_ = "ellipse{0}.geo".format(i)
             fem.make_inclusion(points, startpoint=1000 * (i + 1))
@@ -104,6 +107,8 @@ if __name__ == "__main__":
             epsiyy = epsilonr_ferroelectric(E[1].real)
             epsizz = epsilonr_ferroelectric(E[2].real)
             epsi = epsixx, epsiyy, epsizz
+            # e = np.ones_like(epsixx) * fem.eps_incl
+            # epsi = e, e, e
 
             make_pos_tensor_eps(fem, epsi, interp=False)
             fem.compute_solution()
@@ -128,21 +133,23 @@ if __name__ == "__main__":
     eps_hom_xx = []
     eps_hom_xx_no_coupling = []
 
-    Ebias = np.linspace(1e-5, 2, 22)
+    Ebias = np.linspace(1e-5, 2, 11)
+    # Ebias = np.linspace(2, 2, 1)
 
-    s = fem.space2pml_L
-    desltaS = 2 * (fem.h_pml + s) * (fem.hx_des + fem.hy_des + 2 * fem.h_pml + 2 * s)
+    S = (2 * fem.h_pml + fem.space2pml_T + fem.space2pml_B + fem.hy_des) * (
+        fem.hx_des + 2 * fem.h_pml + fem.space2pml_L + fem.space2pml_R
+    )
 
-    f = nb_incl * pi * r ** 2 / (nb_incl * dx ** 2 + desltaS)
+    f = nb_incl * pi * r ** 2 / (S)
     eps_host = epsilonr_ferroelectric(Ebias)
-    eps_host = eps_Theo_0
-    epsmg = maxwell_garnett(f, fem.eps_incl, eps_host, dim=2)
+    # eps_host = eps_Theo_0
+    epsmg = maxwell_garnett(f, fem.eps_incl, eps_Theo_0, dim=2)
 
     print("Maxwell-Garnett = ", epsmg)
-
-    cds
+    print("eps_Theo_h_0 = ", eps_Theo_h_0)
 
     run = True
+    save = False
     if run:
         for fem.E_static in Ebias:
             E = np.ones(nvar) * fem.E_static, np.ones(nvar) * 0, np.ones(nvar) * 0
@@ -150,12 +157,13 @@ if __name__ == "__main__":
             eps = couple(E)
             eps_hom_xx.append(eps[0])
             eps_hom_xx_no_coupling.append(eps[1])
-        np.savez(
-            "test_theo.npz",
-            Ebias=Ebias,
-            eps_hom_xx=eps_hom_xx,
-            eps_hom_xx_no_coupling=eps_hom_xx_no_coupling,
-        )
+        if save:
+            np.savez(
+                "test_theo.npz",
+                Ebias=Ebias,
+                eps_hom_xx=eps_hom_xx,
+                eps_hom_xx_no_coupling=eps_hom_xx_no_coupling,
+            )
 
     else:
         arch = np.load("test_theo.npz")
@@ -167,6 +175,8 @@ if __name__ == "__main__":
     # fem.open_gmsh_gui()
 
     from aotomat.tools.plottools import *
+
+    plt.close("all")
 
     col1 = "#6078cf"
     col2 = "#c13f3f"

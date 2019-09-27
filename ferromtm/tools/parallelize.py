@@ -1,6 +1,6 @@
 from multiprocessing import Pool
 from functools import partial
-from gridmap import grid_map
+
 import subprocess
 
 
@@ -31,11 +31,12 @@ def parallel(function, partype="gridmap"):
     FUNCTION.
 
     """
-    if partype == "gridmap":
-        if not is_sge():
-            partype = "serial"
+    # if partype == "gridmap":
+    #     if not is_sge():
+    #         partype = "serial"
 
     if partype == "gridmap":
+        from gridmap import grid_map
 
         def par(iterable_values):
             result = grid_map(
