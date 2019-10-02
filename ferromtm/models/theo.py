@@ -8,7 +8,11 @@ from ferromtm.models.bst import *
 epsilon0 = 8.8541878128e-12
 
 # fname = "drilled vs undrilled"
-fname = "/home/ben/Documents/projects/animate/results/theo/drilled bst/drilled vs undrilled simalr feild pe"
+from ferromtm import rootdir
+
+fname = os.path.join(
+    rootdir, "data/theo/drilled bst/drilled vs undrilled simalr feild pe"
+)
 f_ = np.loadtxt(fname)
 
 ind0 = 180

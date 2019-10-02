@@ -5,3 +5,17 @@ gap 3.8
 
 for software thickness is 3.8 
 area 4.4x0.6 equivelent diameter 1.83
+
+
+# I am think this is the oil we use
+# https://www.fishersci.co.uk/shop/products/fisher-scientific-isotemp-bath-circulator-fluids-6/11641091
+# , no dielectric properties on their site but it should be the same as 
+# the attached medium viscosity silicone oil data sheet 
+# (relative permitivity about 2.4 and very low loss
+#
+# it was a 2x3 array and the diameter of the holes was about 1.1mm  
+# with some variation in diameter due to the way it was drilled, 
+# the separation was a bit more varied from 0.2 to 0.4mm (between holes) 
+# i have attached a scan (so scale is correct) if you need the exact 
+# the exact dimensions/layout its a bit blury as the scanner is not too good here.
+#

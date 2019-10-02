@@ -3,8 +3,8 @@
 import numpy as np
 
 
-def make_pos_tensor_eps(fem, epsi, interp=False):
-    fem.path_pos = ""
+def make_pos_tensor_eps(fem, epsi, interp=False, basename="eps_des_"):
+    # fem.path_pos = ""
     for epsi_comp, comp in zip(epsi, ["xx", "yy", "zz"]):
         if interp:
             feps = fem.make_fdens(epsi_comp)
@@ -12,7 +12,7 @@ def make_pos_tensor_eps(fem, epsi, interp=False):
         else:
             eps_des = epsi_comp
         fem.path_pos += " " + fem.make_eps_pos(
-            fem.des[0], eps_des, posname="eps_des_" + comp
+            fem.des[0], eps_des, posname=basename + comp
         )
 
 
