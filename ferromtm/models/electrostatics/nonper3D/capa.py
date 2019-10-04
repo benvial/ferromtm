@@ -23,63 +23,62 @@ fem = Estat3D()
 fem.rm_tmp_dir()
 
 
-fem.debug = False
+fem.debug = True
 
 fem.eps_des = 1
 fem.eps_electrode = 1 - 1e10j
 fem.eps_incl = 2.4
-fem.parmesh_des = 3
-fem.parmesh_host = 3
-fem.parmesh_incl = 3
-fem.parmesh_gap = 3
-fem.parmesh_electrodes = 3
+fem.parmesh_des = 1
+fem.parmesh_host = 1
+fem.parmesh_incl = 1
+fem.parmesh_gap = 1
+fem.parmesh_electrodes = 5
 
-fem.lx_el = 6
-fem.ly_el = 4.4
-fem.lz_el = 0.1
+fem.lx_el = 0.1
+fem.ly_el = 6
+fem.lz_el = 6
 fem.gap = 3.8
 
 
-fem.hx_des = fem.lx_el * 2 + fem.gap + 3
-fem.hy_des = fem.ly_el + 3
+fem.hx_des = fem.lx_el * 2 + fem.gap + 1
+fem.hy_des = fem.ly_el + 1
 fem.hz_des = 0.6
 
-fem.hx_box = fem.hx_des + 4
-fem.hy_box = fem.hy_des + 4
-fem.hz_box = fem.hz_des + fem.lz_el + 3
+fem.hx_box = fem.hx_des + 1
+fem.hy_box = fem.hy_des + 1
+fem.hz_box = fem.hz_des + 2 * fem.lz_el + 1
 
 
-fem.R_hole = 1.1 / 2
+fem.R_hole = 0.1 / 2
 fem.d_hole = 0.3 + fem.R_hole * 2
 
 
 fem.Ebias = 2
 fem.el_order = 1
 
-#
-# epsixx = epsilonr_ferroelectric(0)
-# fem.eps_des = 1
-# fem.eps_incl = 1
+
+epsixx = epsilonr_ferroelectric(0)
+fem.eps_des = 1
+fem.eps_incl = 1
 
 fem.initialize()
 #
 # fem.open_gmsh_gui()
-# cds
 
 fem.make_mesh()
 nvar = len(fem.des[0])
 
-#
-# fem.compute_solution()
-# E, P = fem.postpro_mean_fields()
-# eps_eff = P / E
-# print("effective permittivity = {}".format(eps_eff))
-#
-#
-# fem.postpro_fields_pos()
-# # os.system("cp ./base/geometry.geo.opt ./tmp/geometry.geo.opt")
-# fem.open_gmsh_gui(pos_list=pos_list)
-#
+
+fem.compute_solution()
+E, P = fem.postpro_mean_fields()
+eps_eff = P / E
+print("effective permittivity = {}".format(eps_eff))
+
+
+fem.postpro_fields_pos()
+# os.system("cp ./base/geometry.geo.opt ./tmp/geometry.geo.opt")
+fem.open_gmsh_gui(pos_list=pos_list)
+cds
 
 #
 # eps_new = eps / 2
@@ -109,25 +108,17 @@ name = "eps_des_", "eps_gap_"
 def couple(Ebias):
     # fem.eps_des = epsilonr_ferroelectric(fem.Ebias)
     # dom_des
-    #
-    # epsixx = epsilonr_ferroelectric(0)
-    # fem.eps_des = epsixx
-    # fem.eps_incl = epsixx
+
+    epsixx = epsilonr_ferroelectric(0)
+    fem.eps_des = epsixx
+    fem.eps_incl = epsixx
 
     i = 0
     fem.coupling_flag = True
     while True:
         if i == 0:
-            Edes = (
-                np.ones(nvar_des) * Ebias,
-                np.ones(nvar_des) * 0,
-                np.ones(nvar_des) * 0,
-            )
-            Egap = (
-                np.ones(nvar_gap) * Ebias,
-                np.ones(nvar_gap) * 0,
-                np.ones(nvar_gap) * 0,
-            )
+            Edes = (np.ones(nvar_des) * 0, np.ones(nvar_des) * 0, np.ones(nvar_des) * 0)
+            Egap = (np.ones(nvar_gap) * 0, np.ones(nvar_gap) * 0, np.ones(nvar_gap) * 0)
             E = Edes, Egap
         for j in range(2):
             epsixx = epsilonr_ferroelectric(E[j][0].real)
@@ -139,12 +130,11 @@ def couple(Ebias):
             fem.des = info[j][2]
             make_pos_tensor_eps(fem, epsi, interp=False, basename=name[j])
 
-        #
-        # if i!=0:
-        #     # epsixx = epsilonr_ferroelectric(Emean[0].real)
-        #     epsixx = epsilonr_ferroelectric(Ebias)
-        #     fem.eps_des = epsixx
-        #     fem.eps_incl = epsixx
+        if i != 0:
+            # epsixx = epsilonr_ferroelectric(Emean[0].real)
+            epsixx = epsilonr_ferroelectric(Ebias)
+            fem.eps_des = epsixx
+            fem.eps_incl = epsixx
 
         fem.compute_solution()
 
@@ -170,7 +160,7 @@ def couple(Ebias):
     return eps_hom_xx, eps_hom_xx_no_coupling
 
 
-Ebias = np.linspace(1e-5, 2, 11)
+Ebias = np.linspace(2, 2, 1)
 eps_hom_xx = []
 eps_hom_xx_no_coupling = []
 for fem.Ebias in Ebias:
@@ -199,8 +189,6 @@ plt.xlabel("$E$ (kV/mm)")
 plt.ylabel("relative permittivity")
 plt.legend()
 
-# np.savez("3D.npz", Ebias=Ebias,eps_hom_xx=eps_hom_xx,eps_hom_xx_no_coupling=eps_hom_xx_no_coupling)
 
-
-# fem.postpro_fields_pos()
-# fem.open_gmsh_gui(pos_list=pos_list)
+fem.postpro_fields_pos()
+fem.open_gmsh_gui(pos_list=pos_list)
