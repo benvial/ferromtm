@@ -9,11 +9,11 @@ Group {
     /* pmlC           = Region[1]; */
   	/* pmlTB          = Region[2]; */
   	/* pmlLR          = Region[3]; */
-  	/* host           = Region[4]; */
+  	host           = Region[9];
   	/* design         = Region[5]; */
 
     /* Omega_pml = Region[{pmlC,pmlTB,pmlLR}]; */
-    design         = Region[9];
+    design         = Region[10];
     If (inclusion_flag)
       incl          = Region[6];
       Omega_source    = Region[{incl,design}];
@@ -21,7 +21,9 @@ Group {
       Omega_source    = Region[{design}];
     EndIf
     /* Omega_nosource  = Region[{host,pmlC,pmlTB,pmlLR}]; */
-    Omega           = Region[{design,incl}];
+    Omega           = Region[{design,incl,host}];
+
+    Omega_gap   = Region[{design,incl}];
 
     Box_B = Region[100];
     Box_R = Region[200];
@@ -62,6 +64,7 @@ Function{
 
     If (inclusion_flag)
       epsilonr[incl]           = Complex[eps_incl_re,eps_incl_im] * TensorDiag[1,1,1];
+      epsilonr[host]           = Complex[eps_host_re,eps_host_im] * TensorDiag[1,1,1];
       If (coupling_flag)
         eps_xx[] = Complex[ScalarField[XYZ[], 0, 1]{0}  ,ScalarField[XYZ[], 0, 1 ]{1} ];
         eps_yy[] = Complex[ScalarField[XYZ[], 0, 1]{2}  ,ScalarField[XYZ[], 0, 1 ]{3} ];
@@ -120,8 +123,8 @@ Function{
 Constraint {
   { Name Dirichlet; Type Assign;
     Case {
-      { Region SurfBlochRight; Value 0.; }
-      { Region SurfBlochLeft; Value E_static*lx; }
+      { Region Box_R; Value 0.; }
+      { Region Box_L ; Value E_static*hx_des; }
       /* { Region SurfBlochLeft; Value 1; } */
       /* { Region Box_L; Value -1.; } */
     }
@@ -263,8 +266,8 @@ PostOperation {
 
     { Name postop_mean; NameOfPostProcessing postpro ;
   	Operation {
-      Print [ int_polarization[Omega], OnElementsOf PrintPoint, Format SimpleTable, File "int_polarization.txt"];
-      Print [ int_Efield[Omega], OnElementsOf PrintPoint, Format SimpleTable, File "int_Efield.txt"];
+      Print [ int_polarization[Omega_gap], OnElementsOf PrintPoint, Format SimpleTable, File "int_polarization.txt"];
+      Print [ int_Efield[Omega_gap], OnElementsOf PrintPoint, Format SimpleTable, File "int_Efield.txt"];
       }
   	}
 

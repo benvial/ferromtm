@@ -21,7 +21,7 @@ if __name__ == "__main__":
     fem = femmodel.FemModel()
     fem.rm_tmp_dir()
 
-    fem.dom_des = 9
+    fem.dom_des = 10
 
     # fem.gmsh_verbose=4
     # fem.getdp_verbose=4
@@ -35,36 +35,39 @@ if __name__ == "__main__":
     epsi0 = epsilonr_ferroelectric(0)
     epsiE = epsilonr_ferroelectric(fem.E_static)
 
-    fem.eps_host = epsiE
+    fem.eps_host = 1
 
     fem.eps_incl = 2.4
 
     fem.b_pml = 0
-    fem.h_pml = 0.1
+    fem.h_pml = 1
 
-    fem.space2pml_L = 0.1
-    fem.space2pml_R = 0.1
-    fem.space2pml_B = 0.1
-    fem.space2pml_T = 0.1
+    fem.space2pml_L = 1
+    fem.space2pml_R = 1
+    fem.space2pml_B = 1
+    fem.space2pml_T = 1
 
     fem.inclusion_flag = True
 
-    r = 0.5 * 1.3
-    dholes = 0.6
+    r = 0.5 * 1.1
+    dholes = 0.3 + r * 2
 
     dx, dy = 2 * r + dholes, 2 * r + dholes
     nb_inclx, nb_incly = 2, 3
 
-    fem.hx_des = nb_inclx * dx
-    fem.hy_des = nb_incly * dy
+    fem.hx_des = 3.8
+    fem.hy_des = 4.4
     nb_incl = nb_inclx * nb_incly
     fem.nb_incl = nb_incl
+
+    lboxx = fem.hx_des + fem.space2pml_L + fem.space2pml_R + 2 * fem.h_pml
+    lboxy = fem.hy_des + fem.space2pml_T + fem.space2pml_B + 2 * fem.h_pml
 
     # Rx = (0.1 + np.random.random(nb_incl) * 0.3) * dx
     # Ry = (0.1 + np.random.random(nb_incl) * 0.3) * dy
     # rot_ = np.random.random(nb_incl) * 2 * pi
-    x00 = fem.hx_des / 2 - dx / 2
-    y00 = fem.hy_des / 2 - dy / 2
+    x00 = -dholes / 2
+    y00 = -dholes
     X0 = np.linspace(-x00, x00, nb_inclx)
     Y0 = np.linspace(-y00, y00, nb_incly)
     X0, Y0 = np.meshgrid(X0, Y0)
@@ -136,9 +139,7 @@ if __name__ == "__main__":
     Ebias = np.linspace(1e-5, 2, 11)
     # Ebias = np.linspace(2, 2, 1)
 
-    S = (2 * fem.h_pml + fem.space2pml_T + fem.space2pml_B + fem.hy_des) * (
-        fem.hx_des + 2 * fem.h_pml + fem.space2pml_L + fem.space2pml_R
-    )
+    S = fem.hx_des * fem.hy_des
 
     f = nb_incl * pi * r ** 2 / (S)
     eps_host = epsilonr_ferroelectric(Ebias)

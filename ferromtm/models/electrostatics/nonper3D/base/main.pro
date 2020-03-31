@@ -14,7 +14,7 @@ Group {
 	// Domains
 	Omega_design   = Region[{gap}];
 	/* Omega_design   = Region[{deswithgap}]; */
-	
+
 	Omega_gap   = Region[{holes,gap}];
 	electrodes   = Region[{electrode_left,electrode_right}];
 	Omega          = Region[{host, gap,des, holes, electrodes}];
@@ -40,9 +40,11 @@ Function{
 		/* epsilon[des]    = Complex[eps_incl_re, eps_incl_im] * I3[]; */
 		/* epsilon[des]    = TensorDiag[eps_xx[],eps_yy[],eps_zz[]]; */
 	Else
-		epsilon[Omega_design]  = Complex[eps_des_re , eps_des_im] * I3[];
+		epsilon[gap]  = Complex[eps_des_re , eps_des_im] * I3[];
+		epsilon[des]  = Complex[eps_des_re , eps_des_im] * I3[];
+
   EndIf
-	epsilon[host]  = Complex[eps_host_re , eps_host_im] * I3[];	
+	epsilon[host]  = Complex[eps_host_re , eps_host_im] * I3[];
 	epsilon[holes]  = Complex[eps_incl_re, eps_incl_im] * I3[];
 	epsilon[electrodes]  = Complex[eps_electrode_re , eps_electrode_im] * I3[];
 	/* epsilon[Omega_design]    = Complex[ScalarField[XYZ[], 0, 1]{0}  ,ScalarField[XYZ[], 0, 1 ]{1} ]  * TensorDiag[1,1,1]; */
@@ -167,7 +169,7 @@ PostProcessing {
 PostOperation {
 	{ Name postop_fields_pos; NameOfPostProcessing postpro ;
 			Operation {
-				
+
 		Print[ potential , OnElementsOf Omega, File "potential.pos"];
 		Print[ E , OnElementsOf Omega, File "E.pos"];
 		Print[ Ex , OnElementsOf Omega, File "Ex.pos"];

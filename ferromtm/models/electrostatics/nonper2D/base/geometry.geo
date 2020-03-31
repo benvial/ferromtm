@@ -138,10 +138,17 @@ Line Loop(600) = {9,10,11};
 Line Loop(700) = {12,13,14};
 Line Loop(800) = {15,16,5};
 
-Physical Line(100) = {25};  //box bot
+/* Physical Line(100) = {25};  //box bot
 Physical Line(200) = {26};  //box right
 Physical Line(300) = {27};  //box top
+Physical Line(400) = {28};  //box left */
+
+
+Physical Line(100) = {47};  //box bot
+Physical Line(200) = {45};  //box right
+Physical Line(300) = {46};  //box top
 Physical Line(400) = {28};  //box left
+
 Physical Line(500) = {6,7,8};   //pmlleft
 Physical Line(600) = {9,10,11};   //pmltop
 Physical Line(700) = {12,13,14};  //pmlright
@@ -150,8 +157,8 @@ Physical Line(800) = {15,16,5};  //pmlbot
 /* Physical Line(999) = {6,7,8};   //pmlbot */
 Physical Point(10000) = {1};        // PrintPoint
 
-Physical Surface(9) = {30,34,38,42,32,40,44,36,47,tag_des+1};
-
+Physical Surface(9) = {30,34,38,42,32,40,44,36,47};
+Physical Surface(10) = {tag_des+1};  //box */
 
 Coherence;Coherence;Coherence;Coherence;Coherence;
 /* Coherence; */
