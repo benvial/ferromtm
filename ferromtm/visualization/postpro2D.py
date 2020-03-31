@@ -78,9 +78,18 @@ def load_results():
     )
 
 
-norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl, Knorm_lin, Knorm_nl, = (
-    load_results()
-)
+(
+    norm_eps,
+    norm_eps_nl,
+    norm_loss,
+    norm_loss_nl,
+    n_norm_lin,
+    n_norm_nl,
+    Aniso_factor_lin,
+    Aniso_factor_nl,
+    Knorm_lin,
+    Knorm_nl,
+) = load_results()
 
 
 def plot_eff_par(fig, ax):

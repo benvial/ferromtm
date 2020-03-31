@@ -237,9 +237,16 @@ if __name__ == "__main__":
     else:
         retrieve = False
 
-    norm_eps, norm_eps_nl, norm_loss, norm_loss_nl, n_norm_lin, n_norm_nl, Aniso_factor_lin, Aniso_factor_nl = load_results(
-        retrieve=retrieve
-    )
+    (
+        norm_eps,
+        norm_eps_nl,
+        norm_loss,
+        norm_loss_nl,
+        n_norm_lin,
+        n_norm_nl,
+        Aniso_factor_lin,
+        Aniso_factor_nl,
+    ) = load_results(retrieve=retrieve)
 
     if retrieve is False:
 

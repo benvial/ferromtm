@@ -188,9 +188,15 @@ def plot_tand_conv(axtmp):
 
 if __name__ == "__main__":
 
-    norm_eps_xx, norm_loss_xx, norm_eps_yy, norm_loss_yy, E_cv, v_cv, epsi_cv = (
-        load_results()
-    )
+    (
+        norm_eps_xx,
+        norm_loss_xx,
+        norm_eps_yy,
+        norm_loss_yy,
+        E_cv,
+        v_cv,
+        epsi_cv,
+    ) = load_results()
     plt.close("all")
     fig, ax = plt.subplots(ncols=3, nrows=2, figsize=(7, 4))
     plot_eps_conv(ax[0, 0])
