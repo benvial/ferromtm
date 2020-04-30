@@ -6,10 +6,20 @@ Include "parameters.dat";
 
 Group {
     // Domains
-    host         = Region[1000];
+    host         = Region[2000];
+    
+    If (switch) 
+      host         = Region[2000];
+    Else
+      host         = Region[1000];
+    EndIf
 
     If (inclusion_flag)
-      incl          = Region[2000];
+        If (switch) 
+          incl         = Region[1000];
+        Else
+          incl         = Region[2000];
+        EndIf
       Omega          = Region[{host, incl}];
     Else
       Omega          = Region[{host}];

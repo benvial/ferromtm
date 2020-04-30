@@ -44,7 +44,6 @@ class FemModel(BaseFEM):
         self.eps_host = 1 - 0j  #: flt: permittivity host
         self.eps_des = 1 - 0j  #: flt: permittivity scattering box
         self.eps_incl = 1 - 0j  #: flt: permittivity inclusion
-        self.dom_des = 5  #: design domain number (check .geo/.pro files)
 
         # postprocessing -------------------------------------------------
         #: coords of point for PostProcessing
@@ -55,6 +54,19 @@ class FemModel(BaseFEM):
         #: int: number of x points for postprocessing field maps
         self.Nix = 100
         self.Niy = 100
+
+        self.switch = False
+
+    @property
+    def dom_des(self):
+        if self.switch:
+            return 2000
+        else:
+            return 1000
+
+    @dom_des.setter
+    def dom_des(self, dom_des):
+        pass
 
     @property
     def corners_des(self):
@@ -86,7 +98,7 @@ class FemModel(BaseFEM):
         if self.pattern:
             self.update_epsilon_value()
         self.update_params()
-        self.print_progress("Computing solution: electrostatic problem")
+        self._print_progress("Computing solution: electrostatic problem")
         argstr = "-petsc_prealloc 1500 -ksp_type preonly \
                  -pc_type lu -pc_factor_mat_solver_type mumps"
         resolution = "electrostat_scalar"
@@ -104,8 +116,8 @@ class FemModel(BaseFEM):
     #     self.postpro_choice("postop_fields", filetype)
 
     def postpro_electrostatic_field(self):
-        self.print_progress("Postprocessing electrostatic field")
-        subprocess.call(self.ppcmd("postop_E"))
+        self._print_progress("Postprocessing electrostatic field")
+        subprocess.call(self._ppcmd("postop_E"))
         vect = femio.load_element_table_vect(self.tmp_dir + "/" + "Etot.txt")
         return np.array(vect)
 
@@ -114,8 +126,8 @@ class FemModel(BaseFEM):
         return np.flipud(field.reshape((self.Niy, self.Nix))).T
 
     def postpro_mean_fields(self):
-        self.print_progress("Postprocessing mean fields")
-        subprocess.call(self.ppcmd("postop_mean"))
+        self._print_progress("Postprocessing mean fields")
+        subprocess.call(self._ppcmd("postop_mean"))
         E = femio.load_table_vect(self.tmp_dir + "/" + "int_Efield.txt")
         P = femio.load_table_vect(self.tmp_dir + "/" + "int_polarization.txt")
         return np.array(E), np.array(P)

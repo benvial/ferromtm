@@ -40,7 +40,19 @@ class FemModel(BaseFEM):
         # opto-geometric parameters  -------------------------------------------
         self.dx = 1  #: flt: period x
         self.dy = 1  #: flt: period y
-        self.dom_des = 1000  #: design domain number (check .geo/.pro files)
+
+        self.switch = False
+
+    @property
+    def dom_des(self):
+        if self.switch:
+            return 2000
+        else:
+            return 1000
+
+    @dom_des.setter
+    def dom_des(self, dom_des):
+        pass
 
     @property
     def corners_des(self):
@@ -73,7 +85,7 @@ class FemModel(BaseFEM):
         if self.pattern:
             self.update_epsilon_value()
         self.update_params()
-        self.print_progress("Computing solution: electrostatic problem")
+        self._print_progress("Computing solution: electrostatic problem")
         argstr = "-petsc_prealloc 1500 -ksp_type preonly \
                  -pc_type lu -pc_factor_mat_solver_type mumps"
         resolution = "electrostat_scalar"
@@ -87,12 +99,12 @@ class FemModel(BaseFEM):
         )
 
     def postpro_fields(self, filetype="txt"):
-        self.print_progress("Postprocessing fields")
-        self.postpro_choice("postop_fields", filetype)
+        self._print_progress("Postprocessing fields")
+        self._postpro_choice("postop_fields", filetype)
 
     def postpro_electrostatic_field(self):
-        self.print_progress("Postprocessing electrostatic field")
-        subprocess.call(self.ppcmd("postop_E"))
+        self._print_progress("Postprocessing electrostatic field")
+        subprocess.call(self._ppcmd("postop_E"))
         vect = femio.load_element_table_vect(self.tmp_dir + "/" + "Etot.txt")
         return np.array(vect)
 

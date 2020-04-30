@@ -21,8 +21,6 @@ if __name__ == "__main__":
     fem = femmodel.FemModel()
     fem.rm_tmp_dir()
 
-    fem.dom_des = 10
-
     # fem.gmsh_verbose=4
     # fem.getdp_verbose=4
 
@@ -75,7 +73,7 @@ if __name__ == "__main__":
     Y0 = Y0.ravel()
     # Y0 = np.ones(nb_incl) * 0
     # Y0 = (-0.5 + np.random.random(nb_incl) * 1) * dy
-    Rx = np.ones(nb_incl) * r
+    Rx = np.ones(nb_incl) * r * 0.5
     Ry = np.ones(nb_incl) * r
     rot_ = np.linspace(-pi / 2, pi / 2, nb_incl)
     # rot_ = np.ones(nb_incl) * 0
@@ -136,7 +134,7 @@ if __name__ == "__main__":
     eps_hom_xx = []
     eps_hom_xx_no_coupling = []
 
-    Ebias = np.linspace(1e-5, 2, 11)
+    Ebias = np.linspace(2, 2, 1)
     # Ebias = np.linspace(2, 2, 1)
 
     S = fem.hx_des * fem.hy_des

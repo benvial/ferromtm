@@ -12,7 +12,7 @@ import time
 
 from pytheas.homogenization import *
 from ferromtm.models.electrostatics.per2D import femmodel as model_es
-from pytheas.homogenization.twoscale2D import femmodel as model_hom
+from ferromtm.models.homogenization.twoscale2D import femmodel as model_hom
 import importlib
 from ferromtm.tools.utils import *
 from pytheas.material import genmat
@@ -32,7 +32,7 @@ from pytheas.tools.utils import refine_mesh
 
 
 pi = np.pi
-eps_incl = 3
+# eps_incl = 3
 data_folder = os.path.join(rootdir, "data", "results")
 mat_folder = os.path.join(rootdir, "data", "mat")
 
@@ -124,9 +124,11 @@ def init_es(
     incl=True,
     mat=None,
     parmesh=20,
+    parmesh_incl=20,
     mesh_refine=True,
     tmp_dir=None,
     quad=False,
+    eps_incl=3,
 ):
     r = (f / pi) ** (1 / 2)
     #####################################
@@ -139,11 +141,12 @@ def init_es(
     fem_es.python_verbose = 0
     #: str: GetDP verbose (int between 0 and 1)
     fem_es.parmesh = parmesh
-    fem_es.parmesh_incl = parmesh
+    fem_es.parmesh_incl = parmesh_incl
     fem_es.type_des = "elements"
     fem_es.inclusion_flag = incl
     # if not incl:
     fem_es.quad_mesh_flag = quad
+    fem_es.switch = False
     fem_es.dx = 1
     fem_es.dy = 1
     fem_es.dz = 1
@@ -200,6 +203,7 @@ def init_hom(fem_es, tmp_dir=None):
     fem_hom.Niy = fem_es.Niy
     fem_hom.eps_incl = fem_es.eps_incl
     fem_hom.eps_host = fem_es.eps_host
+    fem_hom.switch = fem_es.switch
     if tmp_dir:
         fem_hom.tmp_dir = tmp_dir
     else:
@@ -307,9 +311,9 @@ def coupling_loop(
 
         if not fem_es.inclusion_flag:
             id = mat2des(fem_es)
-            epsi_rf[0, id == 1] = eps_incl
-            epsi_rf[1, id == 1] = eps_incl
-            epsi_rf[2, id == 1] = eps_incl
+            epsi_rf[0, id == 1] = fem_es.eps_incl
+            epsi_rf[1, id == 1] = fem_es.eps_incl
+            epsi_rf[2, id == 1] = fem_es.eps_incl
         eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi_rf, verbose=verbose)
 
         fname = "cv_iter_{}.npz".format(iter)
@@ -342,7 +346,7 @@ def coupling_loop(
         if not fem_es.inclusion_flag:
             id = mat2des(fem_es)
             epsi_ = np.ones_like(E.real, dtype=complex)
-            epsi_[:, id == 1] = eps_incl
+            epsi_[:, id == 1] = fem_es.eps_incl
             epsi_[:, id == 0] = epsi[:, id == 0]
             epsi = epsi_
 
@@ -357,9 +361,9 @@ def coupling_loop(
             fem_hom = init_hom(fem_es)
             epsi_rf = epsilonr_ferroelectric(E)
             if not fem_es.inclusion_flag:
-                epsi_rf[0, id == 1] = eps_incl
-                epsi_rf[1, id == 1] = eps_incl
-                epsi_rf[2, id == 1] = eps_incl
+                epsi_rf[0, id == 1] = fem_es.eps_incl
+                epsi_rf[1, id == 1] = fem_es.eps_incl
+                epsi_rf[2, id == 1] = fem_es.eps_incl
             eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi_rf, verbose=verbose)
             fname = fname = "cv_iter_{}.npz".format(iter)
             epsi_map = ppEpsimap(fem_hom)
@@ -401,9 +405,19 @@ def main(
     verbose=True,
     rmtmpdir=True,
     parmesh=20,
+    parmesh_incl=20,
     cv_dir_=None,
+    eps_incl=3,
 ):
-    fem_es = init_es(f, E_bias, incl=incl, mat=mat, parmesh=parmesh)
+    fem_es = init_es(
+        f,
+        E_bias,
+        incl=incl,
+        mat=mat,
+        parmesh=parmesh,
+        parmesh_incl=parmesh_incl,
+        eps_incl=eps_incl,
+    )
     nvar = len(fem_es.des[0])
     eps_f = epsilonr_ferroelectric(E_bias, dc=True)
     eps_f0 = epsilonr_ferroelectric(0, dc=True)
@@ -412,9 +426,9 @@ def main(
         epsi = id * eps_f, id * eps_f0, id * eps_f0
     else:
         id = mat2des(fem_es)
-        epsi_xx = np.ones_like(id, dtype=complex) * eps_incl
-        epsi_yy = np.ones_like(id, dtype=complex) * eps_incl
-        epsi_zz = np.ones_like(id, dtype=complex) * eps_incl
+        epsi_xx = np.ones_like(id, dtype=complex) * fem_es.eps_incl
+        epsi_yy = np.ones_like(id, dtype=complex) * fem_es.eps_incl
+        epsi_zz = np.ones_like(id, dtype=complex) * fem_es.eps_incl
         epsi_xx[id == 0] = eps_f
         epsi_yy[id == 0] = eps_f0
         epsi_zz[id == 0] = eps_f0
@@ -428,9 +442,9 @@ def main(
     fem_hom = init_hom(fem_es)
     epsi = epsilonr_ferroelectric(E)
     if not incl:
-        epsi[0, id == 1] = eps_incl
-        epsi[1, id == 1] = eps_incl
-        epsi[2, id == 1] = eps_incl
+        epsi[0, id == 1] = fem_es.eps_incl
+        epsi[1, id == 1] = fem_es.eps_incl
+        epsi[2, id == 1] = fem_es.eps_incl
     eps_hom, fem_hom = compute_hom_pb(fem_hom, epsi, verbose=verbose)
 
     if postmaps:
@@ -476,7 +490,13 @@ def main_circle_conv(params):
     E_bias, f = params
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
     eps_hom, epsi, E, fem_hom, fem_es = main(
-        f, E_bias, coupling=True, record_cv=True, parmesh=33, cv_dir_="circ_rods"
+        f,
+        E_bias,
+        coupling=True,
+        record_cv=True,
+        parmesh=33,
+        parmesh_incl=33,
+        cv_dir_="circ_rods",
     )
     return eps_hom, epsi, E, fem_hom, fem_es
 
@@ -494,6 +514,7 @@ def main_random_conv(params):
         coupling=True,
         record_cv=True,
         parmesh=33,
+        parmesh_incl=33,
         cv_dir_="rand_circ_rods",
     )
     return eps_hom, epsi, E, fem_hom, fem_es
@@ -504,7 +525,14 @@ def main_circle_pattern(params, save=False, coupling=True, rmtmpdir=True):
     print("Parameters: E = {:.2f}MV/m - f = {:.2f} ".format(E_bias, f))
     mat = make_pattern(f, choice="circ")
     eps_hom, epsi, E, fem_hom, fem_es = main(
-        f, E_bias, incl=False, coupling=coupling, mat=mat, parmesh=33, rmtmpdir=rmtmpdir
+        f,
+        E_bias,
+        incl=False,
+        coupling=coupling,
+        mat=mat,
+        parmesh=33,
+        parmesh_incl=33,
+        rmtmpdir=rmtmpdir,
     )
     if save:
         fname = "circle_f_{:.2f}_E_{:.2f}".format(f, E_bias)

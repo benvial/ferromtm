@@ -13,9 +13,20 @@ Group {
   	/* design         = Region[5]; */
 
     /* Omega_pml = Region[{pmlC,pmlTB,pmlLR}]; */
-    design         = Region[10];
+    If (switch) 
+      design         = Region[6];
+    Else
+      design         = Region[10];
+      
+    EndIf
+    
     If (inclusion_flag)
-      incl          = Region[6];
+          If (switch) 
+            incl          = Region[10];
+          Else
+            incl          = Region[6];
+            
+          EndIf
       Omega_source    = Region[{incl,design}];
     Else
       Omega_source    = Region[{design}];
